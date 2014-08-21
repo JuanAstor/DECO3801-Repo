@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+    <title>Assignments</title>
         <link rel="stylesheet" type="text/css" href="main.css">
     </head>
     <body>
@@ -11,15 +12,15 @@
             </div>
             <div class="navbar">
                 <ul>
-                    <li><a href="#home">Assignments</a></li>
-                    <li><a href="#news">Code Review</a></li>
-                    <li><a href="#contact">Reviews Received</a></li>
+                    <li><a href="index.php">Assignments</a></li>
+                    <li><a href="CodeReview.php">Code Review</a></li>
+                    <li><a href="ReviewsReceived.php">Reviews Received</a></li>
                 </ul>
             </div>
         </div>
         <div>
             <h1>
-            Code Review
+            Assignments
             </h1>
         </div>
         
