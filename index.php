@@ -1,3 +1,7 @@
+<?php 
+include("resources/db.php")
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,5 +11,6 @@
 
 <body>
 <h1>It Works!</h1>
+<?php echo @mysql_ping() ? 'true' : 'false'; ?>
 </body>
 </html>
