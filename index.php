@@ -1,23 +1,11 @@
-<?php 
-include("resources/db.php")
+<?php
+require("lib/mysql.php");
+require("lib/queries.php");
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="/public_html/css/main.css">
-<script src="/public_html/js/jquery.min.2.1.1.js"></script>
-<script src="/public_html/js/view.js"></script>
-<title>Will Code Review</title>
-</head>
+<?php include("view/codereview/header.php"); ?>
+<!-- Body -->
+    <h1>Title of the Page</h1>
+<!-- TODO: Welcome message using OAUTH -->
 
-<body>
-    <header>
-    <h1>It Works!</h1>
-    </header>
-    <footer>
-    <?php echo @mysql_ping()?'':'Database Not Connected';?>
-    </footer>
-</body>
-</html>
+<?php include("view/codereview/footer.php"); ?>
