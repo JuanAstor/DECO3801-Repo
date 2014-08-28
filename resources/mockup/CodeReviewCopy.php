@@ -17,13 +17,7 @@
 		
 		<?php date_default_timezone_set('Australia/Brisbane'); ?>
 		
-		<script>
-			jQuery(function ($) {
-			$('#comments').annotator({
-			
-			});
-			});
-		</script>
+		
 		
     </head>
     <body>
