@@ -1,5 +1,5 @@
 body {
-    background-color: #FFFFFF;
+    background-color: #F2F2F2;
 }
 
 .topbox {
@@ -9,13 +9,69 @@ body {
     position:relative;
 }
 
+.time {
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica,Arial,      "Lucida Grande", sans-serif; 
+	font-weight: 300;
+	color:#6fa1c7;
+	padding-left:25px;
+	margin-top:-8px;
+	float:left;
+}
+
+.commenth{
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica,Arial,      "Lucida Grande", sans-serif; 
+	font-weight: 300;
+	color:#6fa1c7;
+	padding-left:70px;
+	margin-top: -1px;
+}
+
+.title {
+	padding-top:25px;
+}
+
+.code {
+	margin-left:10px;
+	margin-top:10px;
+	float:left;
+	background-color:#FFFFFF;
+	width: 850px;
+
+
+}
+
+.comments {
+	float:left;
+	margin-left:10px;
+	margin-top:10px;
+
+}
+
+.time-display {
+	margin-top:-20px;
+	padding-left:3px;
+}
+
+.titlebox {
+	background-color:#FFFFFF;
+	height:100px;
+	margin-top:-21px;
+}
+
+.fileselect {
+	margin-top:10px;
+	margin-left:-133px;
+	float:left;
+	width:150px;
+	background-color:#82DAF5;
+}
 
 h1 {
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica,Arial,      "Lucida Grande", sans-serif; 
    font-weight: 300;
     color:#6fa1c7;
      padding-left:180px;
-     padding-top:50px;
+     /**padding-top:50px;**/
 }
 
 
