@@ -1,0 +1,1 @@
+<p> Welcome <?php echo $_POST["email"]; ?> </p>
