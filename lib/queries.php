@@ -1,15 +1,17 @@
 <?php
 
 /**
- * Returns the assignments assigned to the student for reviewing.
- * Accesses table Reviewer and selects all FileID's where the
- * UserID equals to the student ID.
+ * Returns the assignments assigned to the student as string data
+ * for reviewing. Using student ID, uses FileID's assigned to find 
+ * FileData in table Assignmentfile and converts FileData blobs to
+ * string. Returns as List of all FileData blob text as string.
  *
  * @param 	$student : UserID of student to review
- * @return 	List<String> : List of FileID's to mark.
+ * @return 	List<String> : List of FileData as string to mark.
  */
-function get_assigments_to_mark( $student ) {
-	$query = MySQL::getInstance()->query("SELECT * FROM `reviewer` WHERE `UserID`='$student'");
+function get_assigment_data_to_mark( $student ) {
+	$query = MySQL::getInstance()->query("SELECT CONVERT(`FileData` using utf8) FROM `reviewer`,`assignmentfile` 
+		WHERE reviewer.FileID = assignmentfile.FileID AND reviewer.UserID='$student'");
 	return $query->fetchALL();
 }
 
