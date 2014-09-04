@@ -31,7 +31,7 @@
 			
 			//set what the query will do
 			$query = "INSERT INTO `assignmentfile`(`AssignmentID`, `UserID`, `FileID`, `FileName`, `FileData`) VALUES 
-			('1','Bob','1','$fileName','$content')";
+			(54,'12121454',,'$fileName','$content')";
 			
 			//call the query
 			MySQL::getInstance()->query($query) or die('<br>Error, file upload failed '. mysql_error());
