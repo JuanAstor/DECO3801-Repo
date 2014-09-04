@@ -1,1 +1,1 @@
-<p> Welcome <?php echo $_POST["email"]; ?> </p>
+<p> Welcome <?php echo $_SESSION["email"]; ?> </p>

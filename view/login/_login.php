@@ -1,5 +1,5 @@
 <login>
-    <form action="index.php" method="POST">
+    <form action="" method="POST"> <!-- LEAVE ACTION BLANK -->
     <heading>Please sign in</heading>
     <input type="email" name="email" placeholder="Email address" required autofocus>
     <input type="password" name="password" placeholder="Password" required>

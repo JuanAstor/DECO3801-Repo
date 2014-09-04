@@ -6,8 +6,9 @@
  * FileData in table Assignmentfile and converts FileData blobs to
  * string. Returns as List of all FileData blob text as string.
  *
- * @param 	$student : UserID of student to review
- * @return 	List<String> : List of FileData as string to mark.
+ * @param	$student : UserID of student to review
+ * @return	List<String> : List of FileData as string to mark.
+ * @author	Lachlan du Preez
  */
 function get_assigment_data_to_mark( $student ) {
 	$query = MySQL::getInstance()->query("SELECT CONVERT(`FileData` using utf8) FROM `reviewer`,`assignmentfile` 
