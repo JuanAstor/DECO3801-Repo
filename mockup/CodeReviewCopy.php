@@ -3,25 +3,30 @@
     <head>
     <title>Code Review</title>
         <link rel="stylesheet" type="text/css" href="main.css">
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/ui-darkness/jquery-ui.css" rel="stylesheet">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+		<script src="js/addComment.js" type="text/javascript"></script>
 		
-		<script src="http://assets.annotateit.org/annotator/v1.2.5/annotator-full.min.js"></script>
-		<link rel="stylesheet" href="http://assets.annotateit.org/annotator/v1.2.5/annotator.min.css">
 		<script type="text/javascript" src="js/syntaxh/shCore.js"></script>
+		
 		
 		<!-- Only java brush enabled -->
 		<script type="text/javascript" src="js/syntaxh/shBrushJava.js"></script>
 		
 		<link href="css/syntaxh/shCore.css" rel="stylesheet" type="text/css" />
 		<link href="css/syntaxh/shThemeDefault.css" rel="stylesheet" type="text/css" />
+	
 		
 		<?php date_default_timezone_set('Australia/Brisbane'); ?>
 		
 		
 		
+		
+		
     </head>
     <body>
-
+		
         <div class="topbox">
             <div class="toplogo">
                 <img border="0" src="CPRS Logo.png" height="100px">
@@ -57,9 +62,11 @@
 			<a class="filelinks" href='?file=File4.txt'>File4.txt</a>
 			
 		</div>
+		
+		
         
         <div class="code">
-			<script type="syntaxhighlighter" class="brush: java"><![CDATA[
+			<script type="syntaxhighlighter" class="brush: java" id ="annotate"><![CDATA[
 			<?php
 				if (isset($_GET['file']) == NULL){
 					echo "No file selected.";
@@ -82,15 +89,33 @@
 				
 			?>
 			]]></script>
+			<button id="addButton" >Add Comment</button>
+			
 		</div>
 		
 		<div id="comments">
 			<h2 class="commenth"> Comments </h2>
+			<div id="comSec">
 			
-			<p > You can annotate stuff in here. </p>
+			</div>
+			
+			<div id="dialog" title="Dialog Form">
+			<form action="" method="post">
+			<label>Line Number:</label>
+			<input id="lineNum" name="lineNum" type="text"></br>
+			<label>Comment:</label>
+			<textarea name="comments" id="comSec" rows="8"></textarea>
+			</br>
+			</br>
+			</br>
+			<input id="submit" type="submit" value="Submit">
+			
+			</form>
+			</div>
+			
 			
 		</div>
-        
+		
 
     </body>
 	
@@ -98,5 +123,7 @@
 	<script type="text/javascript">
 		SyntaxHighlighter.all()
 	</script>
+	
+	
     
 </html>
