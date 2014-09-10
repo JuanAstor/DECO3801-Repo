@@ -16,7 +16,7 @@ USE `peerreview`;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-
+--
 -- Dumping data for table `assignment`
 --
 
@@ -26,7 +26,7 @@ INSERT INTO `assignment` VALUES (144,'bsht1350','20143'),(514635,'bsht1350','201
 /*!40000 ALTER TABLE `assignment` ENABLE KEYS */;
 UNLOCK TABLES;
 
--
+--
 -- Dumping data for table `assignmentfile`
 --
 
