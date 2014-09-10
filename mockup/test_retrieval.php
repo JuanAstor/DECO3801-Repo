@@ -25,7 +25,7 @@ $arr = array(); //an array to store all the filenames(paths) that are created
 
 $a = selectFile('11112222', 'file1'); 
 //echo $a['FileData']; //use $a['FileData'][0] to get the 1st file and so on if multiple files
-echo "<br>";
+//echo "<br>";
  
 //$fileName = "../mockup/files/tempfile.txt"; 
 //directory path where the temp files will be stored
@@ -49,9 +49,9 @@ while(check_if_file_exists($fileName) == 1){
 	fwrite($tmpFile, $txt);
 	fclose($tmpFile); 
 	
-	echo "<br>";
-	echo readfile($fileName); 
-	echo "<br>";
+	//echo "<br>";
+	//echo readfile($fileName); 
+	//echo "<br>";
 	
 	//delete the tempfile when finished with it
 	//if(!unlink($fileName)){
@@ -78,7 +78,7 @@ function check_if_file_exists($fileName){
 <?php 
 	//$var = check_if_file_exists("file.txt");
 	echo "<br>";
-	echo "values are: ". $_SESSION['array_name'][0]; //check that array holds a value
+	//echo "values are: ". $_SESSION['array_name'][0]; //check that array holds a value
 ?>
 
 <!DOCTYPE html>
