@@ -15,7 +15,37 @@
     	<heading>
     		Code Review
     	</heading>
+    	
+    	
+<table class="table table-bordered"> 
+  <tr>
+    <td class="field-label col-xs-3 active">
+      <label>Assignment #</label>
+    </td>
+    <td class="col-md-1">
+      	<button type="button" class="btn btn-default btn-lg">
+  		Start
+		</button>
+    </td>
+  </tr>
+  <tr>
+    <td class="field-label col-xs-3 active">
+      <label>Test Results</label>
+    </td>
+
+  </tr>
+  <tr>
+    <td class="field-label col-xs-3 active">
+      <label>Peer Review</label>
+    </td>
+
+  </tr>
+</table>
+    	
+    	
     </page>
+    
+    
     
     </body>
 </html>

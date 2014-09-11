@@ -12,7 +12,7 @@ if (!isset($_SESSION['email']) && isset($_POST['email'])) {
     include("view/home/header.php");
 
     if (isset($_SESSION["email"])) { 
-        include("view/codereview/_cbody.php");
+        include("view/codereview/_codereview.php");
     }
     else {
         include("view/login/_login.php"); 
