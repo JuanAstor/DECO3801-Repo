@@ -1,22 +1,8 @@
-<!DOCTYPE html>
-<html>
-    <head>
-    <title>Assignments</title>
-        <!-- CSS/LESS -->
-        <link rel="stylesheet/less" href="css/main.less">
-        <!-- JS -->
-        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-        <script src="js/less.js"></script>
-    </head>
-    
-    <body>
-    
-    <page>
-    	<heading>
-    		Assignments
-    	</heading>
-    	
-    	
+<page>
+    <heading>
+    	Assignments
+    </heading>
+
 <table class="table table-bordered"> 
   
   <tr>
@@ -56,9 +42,3 @@
   </tr>
   
 </table>
-    	
-    	
-    </page>
-    
-    </body>
-</html>

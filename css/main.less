@@ -1,16 +1,16 @@
 @import "../less/bootstrap";
 @winheight:`$(window).height()`;
 
-body {
+html, body {
+	height:100%;
     background-color: #F2F2F2;
 }
 
 h1 {
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica,Arial,      "Lucida Grande", sans-serif; 
-   font-weight: 300;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica,Arial,sans serif; 
+    font-weight: 300;
     color:#6fa1c7;
-     padding-left:180px;
-     /**padding-top:50px;**/
+    padding-left:180px;
 }
 
 
@@ -62,8 +62,6 @@ h1 {
 	float:left;
 	background-color:#FFFFFF;
 	width: 850px;
-
-
 }
 
 .comments {
@@ -106,16 +104,13 @@ table {
     font-size: 20px;
     font-weight: 300;
 	color:#6fa1c7;
-    text-align:center;
-   
-    
+    text-align:center;  
 }
 
 td {
     
     height:70px;
     width:500px;
-    
 }
 
 .navbar-cprs {
@@ -125,7 +120,6 @@ td {
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica,Arial,      "Lucida Grande", sans-serif; 
     font-weight: 300;
     padding-right: 100px;
-
 }
 
 ul {
@@ -149,6 +143,16 @@ a {
     width: 60px;
     color:white;
     text-decoration: none;
+}
+
+clearfix {
+	.clearfix;
+}
+
+header {
+	height:50px;
+	width:auto;
+    background-color:#6fa1c7;
 }
 
 /*  LOGIN STYLES
@@ -191,4 +195,26 @@ page heading {
 
 row {
 	.row;
+}
+
+/*  SIDEBAR & WIDGETS STYLES
+ *  @src view/codereview/_home.php
+ */
+
+sidebar {
+    .make-xs-column(12);
+    .make-sm-column(2);
+    height:100%;
+    background-color:darkgrey;
+}
+
+container {
+	.make-xs-column(12);
+	.make-sm-column(10);
+}
+
+widget {
+	.make-xs-column(4);
+	background-color:grey;
+	min-height:150px;
 }

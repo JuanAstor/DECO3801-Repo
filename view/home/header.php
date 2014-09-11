@@ -16,7 +16,7 @@
             </div>
             <div class="navbar-cprs">
                 <ul>
-                    <li><a href="index.php">Assignments</a></li>
+                    <li><a href="Assignments.php">Assignments</a></li>
                     <li><a href="CodeReview.php">Code Review</a></li>
                     <li><a href="ReviewsReceived.php">Reviews Received</a></li>
                 </ul>
