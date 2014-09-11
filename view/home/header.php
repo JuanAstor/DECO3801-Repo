@@ -12,13 +12,13 @@
     <header>
         <div class="topbox">
             <div class="toplogo">
-                <img border="0" src="img/CPRS-logo.png" height="100px">
+                <img border="0" src="img/CPRS-logo.png" height="110px">
             </div>
             <div class="navbar-cprs">
                 <ul>
-                    <li><a href="Assignments.php">Assignments</a></li>
-                    <li><a href="CodeReview.php">Code Review</a></li>
-                    <li><a href="ReviewsReceived.php">Reviews Received</a></li>
+                	<li><img border="0" src="img/doc_thumb.png" height="30px"></br><a href="index.php">Assignments</a></li>
+            		<li><img border="0" src="img/mail_thumb.png" height="30px"></br><a href="CodeReview.php">Code Review</a></li>
+            		<li><img border="0" src="img/read_thumb.png" height="30px"></br><a href="ReviewsReceived.php">Reviews Received</a></li>
                 </ul>
             </div>
         </div>

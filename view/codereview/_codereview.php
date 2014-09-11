@@ -1,26 +1,13 @@
-<!DOCTYPE html>
-<html>
-    <head>
-    <title>Code Review</title>
-        <!-- CSS/LESS -->
-        <link rel="stylesheet/less" href="css/main.less">
-        <!-- JS -->
-        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-        <script src="js/less.js"></script>
-    </head>
-    
-    <body>
-    
-    <page>
+<page>
     	<heading>
     		Code Review
     	</heading>
     	
     	
-<table class="table table-bordered"> 
+<table class="table"> 
   <tr>
-    <td class="field-label col-xs-3 active">
-      <label>Assignment #</label>
+    <td class="col-md-2">
+      <h4>Assignment #</h4>
     </td>
     <td class="col-md-1">
       	<button type="button" class="btn btn-default btn-lg">
@@ -29,23 +16,18 @@
     </td>
   </tr>
   <tr>
-    <td class="field-label col-xs-3 active">
-      <label>Test Results</label>
+    <td class="col-md-2">
+      <h4>Test Results</h4>
     </td>
 
   </tr>
   <tr>
-    <td class="field-label col-xs-3 active">
-      <label>Peer Review</label>
+    <td class="col-md-2">
+      <h4>Peer Review</h4>
     </td>
 
   </tr>
 </table>
     	
     	
-    </page>
-    
-    
-    
-    </body>
-</html>
+</page>
