@@ -1,64 +1,60 @@
-<!DOCTYPE html>
-<html>
-    <head>
-    <title>Assignments</title>
-        <!-- CSS/LESS -->
-        <link rel="stylesheet/less" href="css/main.less">
-        <!-- JS -->
-        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-        <script src="js/less.js"></script>
-    </head>
-    
-    <body>
-    
-    <page>
+<page>
     	<heading>
     		Assignments
     	</heading>
     	
     	
-<table class="table table-bordered"> 
-  
-  <tr>
-    <td class="field-label col-xs-3 active">
-      <label>Assignment 1</label>
+<table class="table"> 
+
+	<tr bgcolor="#A9D0F5">
+    <td class="col-md-2">
+      <h5>Name</h5>
     </td>
     <td class="col-md-2">
-	<label>10/10/2014</label>
+	<h5>Date</h5>
     </td>
     <td class="col-md-2">
-	<label>OPEN</label>
+	<h5>Open/Closed</h5>
     </td>
   </tr>
   
   <tr>
-    <td class="field-label col-xs-3 active">
-      <label>Assignment 2</label>
+    <td class="col-md-2">
+      <h4>Assignment 1</h4>
     </td>
     <td class="col-md-2">
-	<label>10/10/2014</label>
+	<h4>10/10/2014</h4>
     </td>
     <td class="col-md-2">
-	<label>CLOSED</label>
+	<h4>OPEN</h4>
     </td>
   </tr>
   
   <tr>
-    <td class="field-label col-xs-3 active">
-      <label>Assignment 3</label>
+    <td class="col-md-2">
+      <h4>Assignment 2</h4>
     </td>
     <td class="col-md-2">
-	<label>10/10/2014</label>
+	<h4>10/10/2014</h4>
     </td>
     <td class="col-md-2">
-	<label>CLOSED</label>
+	<h4>CLOSED</h4>
+    </td>
+  </tr>
+  
+  <tr>
+    <td class="col-md-2">
+      <h4>Assignment 3</h4>
+    </td>
+    <td class="col-md-2">
+	<h4>10/10/2014</h4>
+    </td>
+    <td class="col-md-2">
+	<h4>CLOSED</h4>
     </td>
   </tr>
   
 </table>
     	
     	
-    </page>
-    
-    </body>
-</html>
+</page>
