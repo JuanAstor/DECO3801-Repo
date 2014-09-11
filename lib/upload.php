@@ -17,7 +17,8 @@
 				
 		$fileName = $_FILES['userfile']['name'][$i]; //get the file name
 		$fileName = str_replace(' ', '', $fileName); //get rid of spaces
-		$fileName = pathinfo($fileName, PATHINFO_FILENAME); //get rid of the '.ext' at the end of the file
+		//code below can be used to remove the extension type of the file but we will keep the extension for clarity
+		//$fileName = pathinfo($fileName, PATHINFO_FILENAME);
 		
 		echo 'the file being uploaded is '.$fileName; echo '<br></br>';
 		

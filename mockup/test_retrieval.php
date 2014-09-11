@@ -6,62 +6,42 @@ require("../lib/queries.php");
 
 
 function selectFile($id, $file) {
-	//sql query to get the required file content
+	//sql query to get the required file content 
 	 $sql = "SELECT FileData
         FROM `assignmentfile`
         WHERE UserID = '". $id ."' AND FileName = '". $file ."'"; 
  
-    $stmt = MySQL::getInstance()->prepare($sql);
+    $stmt = MySQL::getInstance()->prepare($sql); //query
     $stmt->execute(array(":id" => $id));
-   // $stmt->bindColumn(1, $mime);
-    $stmt->bindColumn(1, $data, PDO::PARAM_LOB);
+    $stmt->bindColumn(1, $data, PDO::PARAM_LOB); //data from specific file
  
-    $stmt->fetch(PDO::FETCH_BOUND);
+    $stmt->fetch(PDO::FETCH_BOUND); //get the data
 	
-	return array('FileData' => $data);  
+	return array('FileData' => $data);  //return the data
  
 } 
-$arr = array(); //an array to store all the filenames(paths) that are created
-
-$a = selectFile('11112222', 'file1'); 
-//echo $a['FileData']; //use $a['FileData'][0] to get the 1st file and so on if multiple files
-//echo "<br>";
+$arr = array(); //create an array to store all the filenames(paths) that are created
+$a = selectFile('11112222', 'file1.txt'); //call the query method, (won't be hardcoded when the necessary values are available)
  
-//$fileName = "../mockup/files/tempfile.txt"; 
 //directory path where the temp files will be stored
 $dir = "files/";
 $fileName = "". $dir ."tempfile.txt"; //create a file name (will randomize the name later)
 
-//check if the file already exists 
+//check if the file already exists if it doesn't add it to an array, else generate a different filename and check again
 
 while(check_if_file_exists($fileName) == 1){
 	//file name exists so loop until it doesn't
-	echo "file name exists, in loop";
-	$fileName =  "". $dir ."tempfile1.txt";
+	echo "file name exists, in loop forever";
 }
 
-	//add file names to an array 
+	//add created file names to an array 
 	array_push($arr, $fileName);
-	$_SESSION['array_name'] = $arr;
+	$_SESSION['array_name'] = $arr; //store the array as a session variable
 	//open the temp file and get it's content
 	$tmpFile = fopen($fileName, "w") or die("unable to create a temp file"); 
 	$txt = $a['FileData']; 
 	fwrite($tmpFile, $txt);
 	fclose($tmpFile); 
-	
-	//echo "<br>";
-	//echo readfile($fileName); 
-	//echo "<br>";
-	
-	//delete the tempfile when finished with it
-	//if(!unlink($fileName)){
-		//error, unable to delete file
-		//echo "error deleting file";
-	//}else {
-		//file has been deleted
-		//echo "deleted";	
-	//}
-
 
 //checks the existance of a given file name
 function check_if_file_exists($fileName){
@@ -119,7 +99,7 @@ function check_if_file_exists($fileName){
         </div>
 		
 		<div class="titlebox">
-			<div class ="time">
+			<div class ="time"> <!-- get the current time of brisbane/Australia  -->
 				<h2> <?php echo date("l") ?> </h2>
 				<h4 class = "time-display"> <?php echo date("d/m/y"); ?> </h4>
 				<h4 class = "time-display"> <?php echo date("g:i:s A"); ?></h4>
@@ -135,14 +115,13 @@ function check_if_file_exists($fileName){
 		<div class = "fileselect">
         	<?php 
 				$fullDir = $_SESSION['array_name'][0]; // get the file path 
-				$strConts = explode("/", $fullDir); 
+				$strConts = explode("/", $fullDir); //break into sections
 				$fileVar = end($strConts); //get just the file name
 			?> 
 			
-			<a class="filelinks" href='?file=<?php echo $fileVar ?>'>Temp1.txt</a>			
+			<a class="filelinks" href='?file=<?php echo $fileVar ?>'>Temp1.txt</a>	
+            <br>		
 			<a class="filelinks" href='?file=File2.txt'>File2.txt</a>
-			<a class="filelinks" href='?file=File3.txt'>File3.txt</a>
-			<a class="filelinks" href='?file=File4.txt'>File4.txt</a>
 			
 		</div>
         
@@ -163,10 +142,7 @@ function check_if_file_exists($fileName){
 						fclose($fh);
 						echo $selectedFileData;
 					}
-				}
-				
-				
-				
+				}		
 				
 			?>
 			]]></script>
@@ -186,15 +162,16 @@ function check_if_file_exists($fileName){
 	<script type="text/javascript">
 		SyntaxHighlighter.all()
 	</script>
-    <?php 
-		//this will need to be a loop
-		$fileName = $_SESSION['array_name'][0];
+    <?php //run this to delete all the temp files created to view the displayed files
+		
+		$fileName = $_SESSION['array_name'][0]; //get the filenames generated above
+		//delete the file
 		if(!unlink($fileName)){
 			//error, unable to delete file
 			echo "error deleting file";
 		}else {
 			//file has been deleted
-			echo "deleted";	
+			//echo "deleted";	
 	}
 	?>
     
