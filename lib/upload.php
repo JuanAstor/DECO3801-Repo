@@ -1,6 +1,6 @@
 
 <?php
-	//NOTE: AssignmentID and UserID still need to be obtained, hard-coding it into the database at the moment
+	//NOTE: AssignmentID and UserID still need to be obtained (when other pages are complete), hard-coding it into the database at the moment
 ?>
 
 <?php //upload a file to the database
@@ -17,7 +17,7 @@
 				
 		$fileName = $_FILES['userfile']['name'][$i]; //get the file name
 		$fileName = str_replace(' ', '', $fileName); //get rid of spaces
-		$fileName = pathinfo($fileName, PATHINFO_FILENAME); //get rid of the '.ext' at the end of the file
+		//$fileName = pathinfo($fileName, PATHINFO_FILENAME); //get rid of the '.ext' at the end of the file
 		
 		echo 'the file being uploaded is '.$fileName; echo '<br></br>';
 		
@@ -51,15 +51,14 @@
 		} 
 		
 		//no files with the same user and filename have previously been uploaded
-		else { 
-			echo 'no previous version, uploading file'; echo '<br></br>';
-			
+		else { 			
 			//check if the uploaded file has size greater than 0 and is an allowed extension
 			if($_FILES["userfile"]["size"][$i] > 0 && in_array($extension, $allowedExts) ){
 				if($_FILES["userfile"]["error"][$i] > 0) { //check if any errors in the file
 					echo "Error: ". $_FILES["userfile"]["error"][$i]. "<br>";
 				}
 				else { //no errors
+					echo 'no previous version, uploading file'; echo '<br></br>';
 					//$fileName = $_FILES['userfile']['name']; //get the file name
 					$tmpName = $_FILES['userfile']['tmp_name'][$i]; 
 					$fileSize = $_FILES['userfile']['size'][$i]; //get the size of the file
@@ -75,7 +74,6 @@
 					//$fileName = pathinfo($fileName, PATHINFO_FILENAME); //get rid of the '.ext' at the end of the file
 					
 					$fileName = addslashes($fileName); //not sure what this does...
-					$increment = (1+$i); //to change - adds a value so different fileID
 					//set what the query will do
 					$query = "INSERT INTO `assignmentfile`(`AssignmentID`, `UserID`, `FileName`, `FileData`) VALUES 
 					(5,'11112222','$fileName','$content')";
@@ -86,7 +84,8 @@
 				}
 			
 			} else { //file has size 0 or not allowed extension
-				echo "the file is of size 0 or not of the allowed extension type <br></br>";
+				echo "WAIT the file is empty or not of the allowed extension type <br>";
+				echo "Upload has been cancelled <br>";
 				if($_FILES["userfile"]["error"][$i] > 0) {
 					echo "Error: ". $_FILES["userfile"]["error"][$i]. "<br>";
 				}
