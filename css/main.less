@@ -1,4 +1,5 @@
 @import "../less/bootstrap";
+@import "//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css";
 @winheight:`$(window).height()`;
 
 html, body {
@@ -10,24 +11,27 @@ clearfix {
     .clearfix;
 }
 
-h1 {
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica,Arial,sans serif; 
+.h1 {
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica,Arial,sans serif; 
     font-weight: 300;
     color:#6fa1c7;
-    padding-left:180px;
+    //padding-left:180px;   // DO NOT ALTER PRIMATIVE HTML TAGS
 }
 
 .h2 {
-    font: @font-family-sans-serif @font-size-h2;
-    line-height: @font-size-h2 + 20;
+    font:@font-family-sans-serif @font-size-h2;
+    line-height:@font-size-h2;
+    margin:0px;
 }
 
 .h3 {
     font: @font-family-sans-serif @font-size-h3;
-	color:#6fa1c7;
-	padding-left:25px;
-	top:20px;
-	float:left;
+    line-height:@font-size-h3;
+    margin:0px;
+    color:#6fa1c7;
+    //padding-left:25px;   // DO NOT ALTER PRIMATIVE HTML TAGS
+    //top:20px;
+    //float:left;
 }
 
 h4 {
@@ -38,8 +42,9 @@ h4 {
 }
 
 h5 {
-    font: @font-family-sans-serif @font-size-h3;
+    font: @font-family-sans-serif @font-size-h5;
     color:white;
+    padding-top:10px;
     font-size: 20px;
 }
 
@@ -51,71 +56,69 @@ h5 {
 }
 
 .time {
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica,Arial,      "Lucida Grande", sans-serif; 
-	font-weight: 300;
-	color:#6fa1c7;
-	padding-left:25px;
-	margin-top:-8px;
-	float:left;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica,Arial,      "Lucida Grande", sans-serif; 
+    font-weight: 300;
+    color:#6fa1c7;
+    padding-left:25px;
+    margin-top:-8px;
+    float:left;
 }
 
 .commenth{
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica,Arial,      "Lucida Grande", sans-serif; 
-	font-weight: 300;
-	color:#6fa1c7;
-	padding-left:70px;
-	margin-top: -1px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica,Arial,      "Lucida Grande", sans-serif; 
+    font-weight: 300;
+    color:#6fa1c7;
+    padding-left:70px;
+    margin-top: -1px;
 }
 
 .title {
-	padding-top:25px;
+    padding-top:25px;
 }
 
 .code {
-	margin-left:10px;
-	margin-top:10px;
-	float:left;
-	background-color:#FFFFFF;
-	width: 850px;
+    margin-left:10px;
+    margin-top:10px;
+    float:left;
+    background-color:#FFFFFF;
+    width: 850px;
 }
 
 .comments {
-	float:left;
-	margin-left:10px;
-	margin-top:10px;
+    float:left;
+    margin-left:10px;
+    margin-top:10px;
 
 }
 
 .time-display {
-	margin-top:-20px;
-	padding-left:3px;
+    margin-top:-20px;
+    padding-left:3px;
 }
 
 .titlebox {
-	background-color:#FFFFFF;
-	height:100px;
-	margin-top:-21px;
+    background-color:#FFFFFF;
+    height:100px;
+    margin-top:-21px;
 }
 
 .fileselect {
-	margin-top:10px;
-	margin-left:-133px;
-	float:left;
-	width:150px;
-	background-color:#82DAF5;
+    margin-top:10px;
+    margin-left:-133px;
+    float:left;
+    width:150px;
+    background-color:#82DAF5;
 }
 
 table {
-
     font: @font-family-sans-serif @font-size-h3;
     font-size: 20px;
     font-weight: 300;
-	color:#6fa1c7;
+    color:#6fa1c7;
     text-align:center;  
 }
 
 td {
-    
     height:70px;
     width:500px;
     text-align:center;
@@ -159,21 +162,62 @@ a {
 page heading {
     .h3;
 }
-
-/* Handheld devices (Phones, 768px and below) */
-@media (max-width: @screen-xs-max) {
+/* Handheld devices (Phones, 974px and below) */
+@media (max-width: @screen-sm-max) {
+    
     widget:nth-of-type(2), widget:nth-of-type(3) {
         margin-top:-26px;
     }
-    sidebar {
+    
+    widget-end {
+        display:none !important;
+    }
+    
+    sidebar nav {
         min-height:40px;
+    }
+    
+    panel {
+        margin-bottom:20px !important;
+        padding:0px !important;
+    }
+    
+    /* Widget Border Radius Fixes
+     */
+    
+    // WIDGET 1
+    widget:nth-of-type(1) panel, 
+    widget:nth-of-type(1) panel div[title="heading"] {
+        border-radius:4px 4px 0px 0px!important;
+    }
+    
+    // WIDGET 2
+    widget:nth-of-type(2) panel, 
+    widget:nth-of-type(2) panel div[title="heading"] {
+        border-radius:0px 0px 0px 0px!important;
+    }
+    
+    // WIDGET 3
+    widget:nth-of-type(3) panel {
+        border-radius:0px 0px 4px 4px!important;
+    }
+    widget:nth-of-type(3) panel div[title="heading"] {
+        border-radius:0px 0px 0px 0px!important;
     }
 }
 
-/* Small devices (tablets, 768px and up) */
-@media (min-width: @screen-sm-min) {
+/* Small devices (tablets, 975px and up) */
+@media (min-width: @screen-md-min) {
     sidebar {
         height:inherit;
+    }
+    widget-container {
+        padding-top:15px;
+        min-height:40% !important;
+        display: -webkit-flex;
+        -webkit-flex-direction: row;
+        display: flex;
+        flex-direction: row;
     }
 }
 
@@ -190,13 +234,19 @@ header {
 
 brand {
     font-size:16pt;
-    font-family: 'Patua One', cursive;
+    font-family:'Patua One', cursive;
     color:white;
     padding-left:15px;
 }
 
 brand span {
     color:#FFBF00;
+}
+
+sidebar {
+    .make-xs-column(12);
+    .make-md-column(2);
+    .navbar-inverse;
 }
 
 /*  LOGIN STYLES
@@ -233,43 +283,75 @@ login button {
     .btn-block;
 }
 
-/*  SIDEBAR & CONTAINER STYLES
- */
-
-sidebar {
-    .make-xs-column(12);
-    .make-sm-column(2);
-    .navbar-inverse;
-}
-
-container {
-    .make-xs-column(12);
-    .make-sm-column(10);
-    height:30%;
-    padding:15px;
-    background-color:red;
-}
-
 /*  WIDGET STYLES
  *  @src view/codereview/_home.php
  */
 
+widget-container, widget-end {
+    .make-xs-column(12);
+    .make-sm-column(12);
+    .make-md-column(10);
+}
+
+widget-end div {
+    .make-xs-column(12);
+    .make-sm-column(12);
+    .make-md-column(4);
+    padding:5px 10px 0px 10px;
+}
+
+panel-end{
+    .panel;
+    .panel-primary;
+    height:20px;
+    margin-top:-20px;
+    display:block;
+}
 widget {
     .make-xs-column(12);
-    .make-sm-column(4);
+    .make-sm-column(12);
+    .make-md-column(4);
+    z-index:10;                // Place over widget-end(s).
     padding:5px 10px 0px 10px;
+    overflow:hidden;
 }
 
 panel{
     .panel;
     .panel-primary;
+    margin-bottom:-99999px;
+    padding-bottom:99999px;
     display:block;
 }
 
-
-panel heading {
+panel div[title="heading"] {
     .panel-heading;
+    .h3;
     background-color:#6fa1c7;
     display:block;
     color:white;
+}
+
+panel div[title="heading"] i {
+    padding-right:10px;
+    font-size:110%;
+}
+
+panel div[title="body"] {
+    .panel-body;
+}
+
+/*  NAV STYLES
+ */
+ 
+ sidebar h3 {
+     color:white;
+ }
+ 
+ /* CONTENT STYLES
+  */
+
+.dashboard-content {
+    .make-xs-column(10);
+    padding:15px;
 }
