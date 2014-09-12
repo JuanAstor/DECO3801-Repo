@@ -1,21 +1,33 @@
-<!DOCTYPE html>
-<html>
-    <head>
-    <title>Code Review</title>
-        <!-- CSS/LESS -->
-        <link rel="stylesheet/less" href="css/main.less">
-        <!-- JS -->
-        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-        <script src="js/less.js"></script>
-    </head>
-    
-    <body>
-    
-    <page>
+<page>
     	<heading>
     		Code Review
     	</heading>
-    </page>
-    
-    </body>
-</html>
+    	
+    	
+<table class="table"> 
+  <tr>
+    <td class="col-md-2">
+      <h4>Assignment #</h4>
+    </td>
+    <td class="col-md-1">
+      	<button type="button" class="btn btn-default btn-lg">
+  		Start
+		</button>
+    </td>
+  </tr>
+  <tr>
+    <td class="col-md-2">
+      <h4>Test Results</h4>
+    </td>
+
+  </tr>
+  <tr>
+    <td class="col-md-2">
+      <h4>Peer Review</h4>
+    </td>
+
+  </tr>
+</table>
+    	
+    	
+</page>

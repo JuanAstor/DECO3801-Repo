@@ -9,10 +9,10 @@ if (!isset($_SESSION['email']) && isset($_POST['email'])) {
 
 ?>
 <?php 
-    include("view/home/header2.php");
+    include("view/home/header.php");
 
     if (isset($_SESSION["email"])) { 
-        include("view/home/_home.php");
+        include("view/assignments/_assignments.php");
     }
     else {
         include("view/login/_login.php"); 

@@ -17,7 +17,9 @@ $(document).ready(function(){
 		"<div id='comment'><p>Line " + lineNum + " - " + comment + 
 		"</p></div>";
 		
+		$("#dialog").dialog("close");
 		alert("Submitted");
+		
 		
 		return false;
 		

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <title>Code Review</title>
+    <title>Reviews Received</title>
         <!-- CSS/LESS -->
         <link rel="stylesheet/less" href="css/main.less">
         <!-- JS -->

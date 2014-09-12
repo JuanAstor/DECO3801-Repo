@@ -1,8 +1,20 @@
 @import "../less/bootstrap";
 @winheight:`$(window).height()`;
 
-body {
+html, body {
+    height:100%;
     background-color: #F2F2F2;
+}
+
+clearfix {
+    .clearfix;
+}
+
+h1 {
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica,Arial,sans serif; 
+    font-weight: 300;
+    color:#6fa1c7;
+    padding-left:180px;
 }
 
 .h2 {
@@ -18,10 +30,22 @@ body {
 	float:left;
 }
 
+h4 {
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica,Arial,      "Lucida Grande", sans-serif; 
+    font-weight: 300;
+    font-size: 25px;
+    padding:40px;
+}
+
+h5 {
+    font: @font-family-sans-serif @font-size-h3;
+    color:white;
+    font-size: 20px;
+}
 
 .topbox {
     background-color:#6fa1c7;
-    height:85px;
+    height:95px;
     width:auto;
     position:relative;
 }
@@ -53,8 +77,6 @@ body {
 	float:left;
 	background-color:#FFFFFF;
 	width: 850px;
-
-
 }
 
 .comments {
@@ -83,46 +105,31 @@ body {
 	background-color:#82DAF5;
 }
 
-h1 {
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica,Arial,      "Lucida Grande", sans-serif; 
-   font-weight: 300;
-    color:#6fa1c7;
-     padding-left:180px;
-     /**padding-top:50px;**/
-}
-
-
-
-.tablebox {
-    padding-left:180px;
-    margin:0px auto;
-    color:#6fa1c7;
-}
-
 table {
-    
-    border-collapse: collapse;
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica,Arial,      "Lucida Grande", sans-serif; 
+
+    font: @font-family-sans-serif @font-size-h3;
+    font-size: 20px;
     font-weight: 300;
-   
-    
+	color:#6fa1c7;
+    text-align:center;  
 }
 
 td {
     
     height:70px;
     width:500px;
-    
+    text-align:center;
+    padding: 20px;   
 }
 
 .navbar-cprs {
     position: fixed;
-    top: 30px;
+    top: 0px;
     right: 5px;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica,Arial,      "Lucida Grande", sans-serif; 
     font-weight: 300;
+    font-size: 18px;
     padding-right: 100px;
-
 }
 
 ul {
@@ -132,6 +139,7 @@ ul {
     overflow: hidden;
     color:white;
     text-decoration: none;
+    text-align: center;
 }
 
 li {
@@ -148,13 +156,56 @@ a {
     text-decoration: none;
 }
 
+page heading {
+    .h3;
+}
+
+/* Handheld devices (Phones, 768px and below) */
+@media (max-width: @screen-xs-max) {
+    widget:nth-of-type(2), widget:nth-of-type(3) {
+        margin-top:-26px;
+    }
+    sidebar {
+        min-height:40px;
+    }
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: @screen-sm-min) {
+    sidebar {
+        height:inherit;
+    }
+}
+
+/*  HEADER STYLES
+ *  @src view/home/_header.php
+ */ 
+
+header {
+    height:50px;
+    width:auto;
+    background-color:#6fa1c7;
+    line-height: 45px;
+}
+
+brand {
+    font-size:16pt;
+    font-family: 'Patua One', cursive;
+    color:white;
+    padding-left:15px;
+}
+
+brand span {
+    color:#FFBF00;
+}
+
 /*  LOGIN STYLES
  *  @src view/login/_login.php
  */ 
 
 login form, login {
     max-width:330px;
-    margin:~`($(window).height() / 5) + "px"` auto 0px auto;
+    margin:20% auto 0px auto;
 }
 
 login heading {
@@ -182,10 +233,43 @@ login button {
     .btn-block;
 }
 
-page heading {
-    .h3;
+/*  SIDEBAR & CONTAINER STYLES
+ */
+
+sidebar {
+    .make-xs-column(12);
+    .make-sm-column(2);
+    .navbar-inverse;
 }
 
-row {
-	.row;
+container {
+    .make-xs-column(12);
+    .make-sm-column(10);
+    height:30%;
+    padding:15px;
+    background-color:red;
+}
+
+/*  WIDGET STYLES
+ *  @src view/codereview/_home.php
+ */
+
+widget {
+    .make-xs-column(12);
+    .make-sm-column(4);
+    padding:5px 10px 0px 10px;
+}
+
+panel{
+    .panel;
+    .panel-primary;
+    display:block;
+}
+
+
+panel heading {
+    .panel-heading;
+    background-color:#6fa1c7;
+    display:block;
+    color:white;
 }
