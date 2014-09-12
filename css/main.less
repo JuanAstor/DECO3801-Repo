@@ -2,8 +2,12 @@
 @winheight:`$(window).height()`;
 
 html, body {
-	height:100%;
+    height:100%;
     background-color: #F2F2F2;
+}
+
+clearfix {
+    .clearfix;
 }
 
 h1 {
@@ -27,7 +31,7 @@ h1 {
 }
 
 h4 {
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica,Arial,      "Lucida Grande", sans-serif; 
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica,Arial,      "Lucida Grande", sans-serif; 
     font-weight: 300;
     font-size: 25px;
     padding:40px;
@@ -35,10 +39,9 @@ h4 {
 
 h5 {
     font: @font-family-sans-serif @font-size-h3;
-	color:white;
+    color:white;
     font-size: 20px;
 }
-
 
 .topbox {
     background-color:#6fa1c7;
@@ -102,8 +105,6 @@ h5 {
 	background-color:#82DAF5;
 }
 
-
-
 table {
 
     font: @font-family-sans-serif @font-size-h3;
@@ -155,14 +156,47 @@ a {
     text-decoration: none;
 }
 
-clearfix {
-	.clearfix;
+page heading {
+    .h3;
 }
 
+/* Handheld devices (Phones, 768px and below) */
+@media (max-width: @screen-xs-max) {
+    widget:nth-of-type(2), widget:nth-of-type(3) {
+        margin-top:-26px;
+    }
+    sidebar {
+        min-height:40px;
+    }
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: @screen-sm-min) {
+    sidebar {
+        height:inherit;
+    }
+}
+
+/*  HEADER STYLES
+ *  @src view/home/_header.php
+ */ 
+
 header {
-	height:50px;
-	width:auto;
+    height:50px;
+    width:auto;
     background-color:#6fa1c7;
+    line-height: 45px;
+}
+
+brand {
+    font-size:16pt;
+    font-family: 'Patua One', cursive;
+    color:white;
+    padding-left:15px;
+}
+
+brand span {
+    color:#FFBF00;
 }
 
 /*  LOGIN STYLES
@@ -171,7 +205,7 @@ header {
 
 login form, login {
     max-width:330px;
-    margin:~`($(window).height() / 5) + "px"` auto 0px auto;
+    margin:20% auto 0px auto;
 }
 
 login heading {
@@ -199,32 +233,43 @@ login button {
     .btn-block;
 }
 
-page heading {
-    .h3;
-}
-
-row {
-	.row;
-}
-
-/*  SIDEBAR & WIDGETS STYLES
- *  @src view/codereview/_home.php
+/*  SIDEBAR & CONTAINER STYLES
  */
 
 sidebar {
     .make-xs-column(12);
     .make-sm-column(2);
-    height:100%;
-    background-color:darkgrey;
+    .navbar-inverse;
 }
 
 container {
-	.make-xs-column(12);
-	.make-sm-column(10);
+    .make-xs-column(12);
+    .make-sm-column(10);
+    height:30%;
+    padding:15px;
+    background-color:red;
 }
 
+/*  WIDGET STYLES
+ *  @src view/codereview/_home.php
+ */
+
 widget {
-	.make-xs-column(4);
-	background-color:grey;
-	min-height:150px;
+    .make-xs-column(12);
+    .make-sm-column(4);
+    padding:5px 10px 0px 10px;
+}
+
+panel{
+    .panel;
+    .panel-primary;
+    display:block;
+}
+
+
+panel heading {
+    .panel-heading;
+    background-color:#6fa1c7;
+    display:block;
+    color:white;
 }
