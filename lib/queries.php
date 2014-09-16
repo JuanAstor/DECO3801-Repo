@@ -17,10 +17,10 @@ function get_assigment_data_to_mark( $student ) {
 	return $query->fetchALL();
 }
 
-function get_users_courses($id){
+function get_users_courses( $student ){
 	$query = MySQL::getInstance()->query("SELECT CourseID "
                                            . "FROM `courseenrolment` "
-                                           . "WHERE UserID = '".$id."'");
+                                           . "WHERE UserID = '".$student."'");
 	return $query->fetchALL();	
 }
 
