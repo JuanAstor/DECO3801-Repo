@@ -1,4 +1,9 @@
-
+<sidebar>
+    <nav>
+        <h5>Courses</h5>
+        <?php // Query db for courses assigned to user ?>
+    </nav>
+</sidebar>
 <widget-container>
     <widget title="Upcoming Assessments">
         <panel>

@@ -16,9 +16,3 @@
     <header>
         <brand>Peer <span>{</span>Code Review<span>}</span></brand>
     </header>
-    <sidebar>
-        <nav>
-        <h5>Courses</h5>
-            <?php // Query db for courses assigned to user ?>
-        </nav>
-    </sidebar>
