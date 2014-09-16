@@ -1,6 +1,6 @@
 <sidebar>
     <nav>
-        <h5>Courses</h5>
+        <h5>Courses <i class="fa fa-graduation-cap"></i></h5>
         <?php // Query db for courses assigned to user ?>
     </nav>
 </sidebar>

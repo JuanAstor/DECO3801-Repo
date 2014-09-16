@@ -12,15 +12,15 @@
  */
 function get_assigment_data_to_mark( $student ) {
 	$query = MySQL::getInstance()->query("SELECT CONVERT(`FileData` using utf8) "
-                                            . "FROM `reviewer`,`assignmentfile` "
-                                            . "WHERE reviewer.FileID = assignmentfile.FileID AND reviewer.UserID='.$student.'");
+                                            ."FROM `reviewer`,`assignmentfile` "
+                                            ."WHERE reviewer.FileID = assignmentfile.FileID AND reviewer.UserID='.$student.'");
 	return $query->fetchALL();
 }
 
 function get_users_courses( $student ){
 	$query = MySQL::getInstance()->query("SELECT CourseID "
-                                           . "FROM `courseenrolment` "
-                                           . "WHERE UserID = '".$student."'");
+                                            ."FROM `courseenrolment` "
+                                            ."WHERE UserID = '".$student."'");
 	return $query->fetchALL();	
 }
 
