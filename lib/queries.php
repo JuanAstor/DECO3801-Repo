@@ -11,17 +11,23 @@
  * @author	Lachlan du Preez
  */
 function get_assigment_data_to_mark( $student ) {
-	$query = MySQL::getInstance()->query("SELECT CONVERT(`FileData` using utf8) "
-                                            ."FROM `reviewer`,`assignmentfile` "
-                                            ."WHERE reviewer.FileID = assignmentfile.FileID AND reviewer.UserID='.$student.'");
-	return $query->fetchALL();
+    $query = MySQL::getInstance()->query("SELECT CONVERT(`FileData` using utf8) "
+                                        ."FROM `reviewer`,`assignmentfile` "
+                                        ."WHERE reviewer.FileID = assignmentfile.FileID AND reviewer.UserID='.$student.'");
+    return $query->fetchALL();
 }
 
-function get_users_courses( $student ){
-	$query = MySQL::getInstance()->query("SELECT CourseID "
-                                            ."FROM `courseenrolment` "
-                                            ."WHERE UserID = '".$student."'");
-	return $query->fetchAll();	
+function get_users_courses( $student ) {
+    $query = MySQL::getInstance()->query("SELECT CourseID "
+                                        ."FROM `courseenrolment` "
+                                        ."WHERE UserID = '".$student."'");
+    return $query->fetchAll();	
 }
 
+function get_users_assessments( $student ) {
+    $query = MySQL::getInstance()->query("SELECT * "
+                                        ."FROM `assignment`,`courseenrolment` "
+                                        ."WHERE courseenrolment.CourseID = assignment.CourseID AND courseenrolment.UserID='".$student."'");
+    return $query->fetchAll();
+}
 ?>

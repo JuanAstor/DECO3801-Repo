@@ -20,6 +20,7 @@ if (!isset($_SESSION['user']) && isset($_POST['user'])) {
         {
             $student = $_SESSION["user"];
             $courses = get_users_courses($student);
+            $assessments = get_users_assessments($student);
             // Show home dashboard
             include("view/home/_home.php");
         }
