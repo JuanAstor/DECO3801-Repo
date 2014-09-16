@@ -1,17 +1,13 @@
 <sidebar>
     <nav>
-        <h5>Courses <i class="fa fa-graduation-cap"></i></h5>
-        <?php // Query db for courses assigned to user ?>
-				//get the list of courses associated with the entered username
-				$content = get_users_courses($_SESSION['username']); 
-			?> 
-            <p> <?php 
-					//loop over all the found courses and display them
-					for($i = 0; $i < sizeof($content); $i++){
-						echo $content[$i][0];
-						echo "<br>";	
-					}
-			?> </p>
+        <h5><i class="fa fa-graduation-cap"></i> Courses</h5>
+        <?php // Loop through courses and display
+            foreach ($courses as $course) {
+                echo "<p><i class='fa fa-angle-right'></i> "
+                    . $course['CourseID'] 
+                    ."</p>";
+            }
+        ?>
     </nav>
 </sidebar>
 <widget-container>

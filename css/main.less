@@ -45,7 +45,7 @@ h5 {
     font: @font-family-sans-serif @font-size-h5;
     color:white;
     padding-top:10px;
-    font-size: 20px;
+    font-size:16px;
 }
 
 .topbox {
@@ -341,13 +341,25 @@ panel div[title="body"] {
 /*  NAV STYLES
  */
  
- sidebar h3 {
+ sidebar nav h5 {
      color:white;
+     vertical-align: middle;
  }
  
- sidebar h3 i {
-     box-shadow: -1px 0px 1px 1px black;
-     color:#1F1F1F;
+ sidebar nav .fa {
+     text-shadow: 0px -1px 0px black;
+     color:#555;
+     font-size:110%;
+     vertical-align: middle;
+ }
+ 
+ sidebar nav p {
+     color:#929292;
+     margin-left:30px;
+ }
+ 
+ sidebar nav p:hover {
+     color:#cfcfcf;
  }
  
  /* CONTENT STYLES

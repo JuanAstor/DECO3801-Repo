@@ -21,7 +21,7 @@ function get_users_courses( $student ){
 	$query = MySQL::getInstance()->query("SELECT CourseID "
                                             ."FROM `courseenrolment` "
                                             ."WHERE UserID = '".$student."'");
-	return $query->fetchALL();	
+	return $query->fetchAll();	
 }
 
 ?>
