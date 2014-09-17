@@ -50,6 +50,10 @@ CREATE TABLE IF NOT EXISTS `PeerReview`.`Assignment` (
   `AssignmentID` MEDIUMINT UNSIGNED NOT NULL,
   `CourseID` CHAR(8) NOT NULL,
   `Semester` CHAR(5) NOT NULL,
+  `AssignmentDescription` VARCHAR(45) NULL,
+  `AssignmentName` VARCHAR(45) NULL,
+  `DueDate` DATE NULL,
+  `DueTime` TIME NULL,
   PRIMARY KEY (`AssignmentID`),
   INDEX `CourseID_idx` (`CourseID` ASC, `Semester` ASC),
   CONSTRAINT `AssignmentCourseID`
@@ -70,7 +74,8 @@ CREATE TABLE IF NOT EXISTS `PeerReview`.`AssignmentFile` (
   `UserID` CHAR(8) NOT NULL,
   `FileID` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `FileName` TINYTEXT NOT NULL,
-  `FileData` BLOB NULL,
+  `FileData` BLOB NOT NULL,
+  `SubmissionTime` DATETIME NOT NULL,
   INDEX `UserID_idx` (`UserID` ASC),
   PRIMARY KEY (`FileID`),
   INDEX `AssignmentID_idx` (`AssignmentID` ASC),
@@ -118,14 +123,21 @@ DROP TABLE IF EXISTS `PeerReview`.`Comment` ;
 
 CREATE TABLE IF NOT EXISTS `PeerReview`.`Comment` (
   `FileID` MEDIUMINT UNSIGNED NOT NULL,
-  `CommentID` INT NOT NULL,
+  `UserID` CHAR(8) NOT NULL,
+  `LineNumber` INT NOT NULL,
   `JSONFile` MEDIUMTEXT NOT NULL,
-  PRIMARY KEY (`FileID`, `CommentID`),
+  PRIMARY KEY (`FileID`, `UserID`, `LineNumber`),
+  INDEX `CommentUserID_idx` (`UserID` ASC),
   CONSTRAINT `CommentFileID`
     FOREIGN KEY (`FileID`)
     REFERENCES `PeerReview`.`AssignmentFile` (`FileID`)
     ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    ON UPDATE CASCADE,
+  CONSTRAINT `CommentUserID`
+    FOREIGN KEY (`UserID`)
+    REFERENCES `PeerReview`.`User` (`UserID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
