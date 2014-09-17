@@ -19,11 +19,20 @@ if (!isset($_SESSION['user']) && isset($_POST['user'])) {
         if (isset($_SESSION["user"])) 
         {
             $student = $_SESSION["user"];
-            $courses = get_users_courses($student);
-            $assessments = get_users_assessments($student);
-			$fullName = get_user_name($student);
-            // Show home dashboard
-            include("view/home/_home.php");
+			//check the login priveleges of the user 
+			if(check_if_admin($student) == 0){ 
+				//user is a student
+				$courses = get_users_courses($student);
+				$assessments = get_users_assessments($student);
+				$fullName = get_user_name($student);
+				// Show home dashboard
+				include("view/home/_home.php");
+			} 
+			else { 
+				//user is an admin
+				echo "this is admin time";	
+			}
+            
         }
         else
         {

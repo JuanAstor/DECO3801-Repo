@@ -50,8 +50,7 @@
 </widget-end>
 
 <div class="dashboard-content">
-		<?php 
-			
+		<?php 			
 			foreach ($fullName as $name) {
 				echo "<p> Welcome "
 						. $name['FName']

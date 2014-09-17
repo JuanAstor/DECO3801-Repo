@@ -37,4 +37,18 @@ function get_user_name( $student ) {
 										WHERE UserID = '".$student."'") ;
 	return $query->fetchALL();
 }
+
+function check_if_admin( $id ) { //returns 1 if an admin, 0 if student
+	$query = MySQL::getInstance()->query("SELECT Priveleges 
+										FROM `user` 
+										WHERE UserID = '".$id."'");
+	$result = $query->fetchALL();	
+	foreach ($result as $permission) {
+		if(strcmp($permission['Priveleges'], "Admin") == 0){ //strcmp will return 0 if the strings are equal
+			return 1; //is an admin
+		} else {
+			return 0; //is a student
+		}
+	}
+}
 ?>
