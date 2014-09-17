@@ -21,7 +21,14 @@ function get_users_courses( $student ) {
     $query = MySQL::getInstance()->query("SELECT CourseID "
                                         ."FROM `courseenrolment` "
                                         ."WHERE UserID = '".$student."'");
-    return $query->fetchAll();	
+    return $query->fetchALL();	
+}
+
+function get_admin_courses( $id ) {
+	$query = MySQL::getInstance()->query("SELECT CourseID 
+										FROM `course` 
+										WHERE CourseCoordinator = '".$id."'");
+	return $query->fetchALL();
 }
 
 function get_users_assessments( $student ) {

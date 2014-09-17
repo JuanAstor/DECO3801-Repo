@@ -1,7 +1,7 @@
 <?php
 session_start();
 require("lib/mysql.php");
-require("lib/queries.php");
+require("lib/queries.php"); //query functions to get database results
 
 if (!isset($_SESSION['user']) && isset($_POST['user'])) {
     $_SESSION['user'] = $_POST['user'];
@@ -30,7 +30,9 @@ if (!isset($_SESSION['user']) && isset($_POST['user'])) {
 			} 
 			else { 
 				//user is an admin
-				echo "this is admin time";	
+				echo "this is admin time"; 
+				$fullName = get_user_name($student);
+				$courses = get_admin_courses($student); //will get the courses that an admin coordinates/tutes 	
 			}
             
         }
