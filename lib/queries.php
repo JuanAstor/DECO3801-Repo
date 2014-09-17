@@ -30,4 +30,11 @@ function get_users_assessments( $student ) {
                                         ."WHERE courseenrolment.CourseID = assignment.CourseID AND courseenrolment.UserID='".$student."'");
     return $query->fetchAll();
 }
+
+function get_user_name( $student ) {
+	$query = MySQL::getInstance()->query("SELECT * 
+										FROM `user` 
+										WHERE UserID = '".$student."'") ;
+	return $query->fetchALL();
+}
 ?>

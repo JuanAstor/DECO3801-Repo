@@ -50,5 +50,14 @@
 </widget-end>
 
 <div class="dashboard-content">
-        <p> Welcome <?php echo $student; ?> </p>
+		<?php 
+			
+			foreach ($fullName as $name) {
+				echo "<p> Welcome "
+						. $name['FName']
+						. " " 
+						. $name['SName']
+						. "</p>" ;
+			}
+		 ?>
 </div>
