@@ -14,5 +14,7 @@
     </head>
     <body>
     <header>
-        <brand>Peer <span>{</span>Code Review<span>}</span></brand>
+        <a href="index.php"><brand>Peer <span>{</span>Code Review<span>}</span></brand></a>
+        <logged><div title="heading"><h5><i class="fa fa-user"></i> Welcome <?php echo $_SESSION["user"];?></h5</div>                 </logged>
     </header>
+        
