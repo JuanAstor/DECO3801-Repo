@@ -1,6 +1,6 @@
 <sidebar>
     <nav>
-        <h5><i class="fa fa-graduation-cap"></i> Courses</h5>
+        <h4><i class="fa fa-graduation-cap"></i> Courses</h4>
         <?php // Loop through courses and display
             foreach ($courses as $course) {
                 echo "<p><i class='fa fa-angle-right'></i> "
