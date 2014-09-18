@@ -218,13 +218,33 @@ logged {
  *  @src view/login/_login.php
  */ 
 
-login form, login {
+login {
+ 	display:block;
+ 	height:100%;
+ 	width:100%;
+    background-color:#6fa1c7;
+}
+
+login brand {
+	display:table;
+	padding:5% 0;
+	margin:0 auto;
+	font-size:29pt;
+}
+
+login form {
     max-width:330px;
-    margin:20% auto 0px auto;
+    margin:0px auto 0px auto;
+    padding:25px;
+    background:white;
+    border-radius:4px;
 }
 
 login heading {
     .h2;
+    display:block;
+    margin:0px;
+    margin-bottom:8px;
 }
 
 login input[type=text] {
@@ -247,6 +267,7 @@ login button {
     .btn-primary;
     .btn-block;
 }
+
 
 /*  WIDGET STYLES
  *  @src view/codereview/_home.php

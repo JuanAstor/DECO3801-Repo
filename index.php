@@ -9,9 +9,6 @@ if (!isset($_SESSION['user']) && isset($_POST['user'])) {
 
 ?>
 <?php
-    // Header
-    include("view/home/header2.php");
-
         /**
          *  Show the home dashboard if student has authenticated.
          *  Otherwise show the login prompt.
@@ -26,6 +23,7 @@ if (!isset($_SESSION['user']) && isset($_POST['user'])) {
 				$assessments = get_users_assessments($student);
 				$fullName = get_user_name($student);
 				// Show home dashboard
+    			include("view/home/header2.php");
 				include("view/home/_home.php");
 			} 
 			else { 
