@@ -20,7 +20,7 @@
                 echo "<p>"
                     . $assessment['CourseID']
                     . ": "
-                    . $assessment['AssignmentID']
+                    . $assessment['AssignmentName']
                     ."</p>";
             }
             ?>
