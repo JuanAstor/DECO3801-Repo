@@ -2,9 +2,6 @@
 <html>
     <head>
     <title>Code Review</title>
-        <!-- Fonts -->
-        <link href='http://fonts.googleapis.com/css?family=Patua+One' rel='stylesheet' type='text/css'>
-        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <!-- CSS/LESS -->
         <link rel="stylesheet/less" href="css/main.less">
         <!-- JS -->
@@ -15,7 +12,7 @@
 <body>
     <login>
     <div>
-        <brand>Peer <span>{</span>Code Review<span>}</span></brand>
+        <logo>Peer <span>{</span>Code Review<span>}</span></logo>
     </div>
     <form action="" method="POST"> <!-- LEAVE ACTION BLANK -->
 	    <heading>Please sign in</heading>

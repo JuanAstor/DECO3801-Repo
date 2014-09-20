@@ -18,12 +18,14 @@ if (!isset($_SESSION['user']) && isset($_POST['user'])) {
             $student = $_SESSION["user"];
 			//check the login priveleges of the user 
 			if(check_if_admin($student) == 0){ 
+				
 				//user is a student
 				$courses = get_users_courses($student);
 				$assessments = get_users_assessments($student);
 				$fullName = get_user_name($student);
+
 				// Show home dashboard
-    			include("view/home/header2.php");
+    			include("view/home/header.php");
 				include("view/home/_home.php");
 			} 
 			else { 
