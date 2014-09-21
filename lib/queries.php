@@ -57,5 +57,25 @@ function check_if_admin( $id ) { //returns 1 if an admin, 0 if student
 			return 0; //is a student
 		}
 	}
+} 
+
+function check_if_file_exists($userID, $assignmentID, $filename){
+	$query = MySQL::getInstance()->query("SELECT count(1)
+										FROM `assignmentfile`
+										WHERE UserID = '".$userID."' AND AssignmentID = '".$assignmentID."' AND FileName = '".$filename."'");
+	return $query->fetchALL(); //return the count of the number of files matching the variables
 }
+
+function update_file_contents($userID, $assignmentID, $filename, $content){
+	$query = MySQL::getInstance()->query("UPDATE `assignmentfile`
+										SET FileData =	'".$content."' 
+										WHERE UserID = '".$userID."' AND AssignmentID = '".$assignmentID."' AND FileName = '".$filename."'");
+}
+
+function insert_file_data($userID, $assignmentID, $filename, $content){
+	$query = MySQL::getInstance()->query("INSERT INTO `assignmentfile`
+										(`AssignmentID`, `UserID`, `FileName`, `FileData`) VALUES
+										('".$assignmentID."', '".$userID."', '".$filename."', '".$content."')");
+}
+
 ?>
