@@ -66,16 +66,16 @@ function check_if_file_exists($userID, $assignmentID, $filename){
 	return $query->fetchALL(); //return the count of the number of files matching the variables
 }
 
-function update_file_contents($userID, $assignmentID, $filename, $content){
+function update_file_contents($userID, $assignmentID, $filename, $content, $dateTime){
 	$query = MySQL::getInstance()->query("UPDATE `assignmentfile`
-										SET FileData =	'".$content."' 
+										SET FileData =	'".$content."', SubmissionTime = '".$dateTime."' 
 										WHERE UserID = '".$userID."' AND AssignmentID = '".$assignmentID."' AND FileName = '".$filename."'");
 }
 
-function insert_file_data($userID, $assignmentID, $filename, $content){
+function insert_file_data($userID, $assignmentID, $filename, $content, $dateTime){
 	$query = MySQL::getInstance()->query("INSERT INTO `assignmentfile`
-										(`AssignmentID`, `UserID`, `FileName`, `FileData`) VALUES
-										('".$assignmentID."', '".$userID."', '".$filename."', '".$content."')");
+										(`AssignmentID`, `UserID`, `FileName`, `FileData`, `SubmissionTime`) VALUES
+										('".$assignmentID."', '".$userID."', '".$filename."', '".$content."', '".$dateTime."')");
 }
 
 ?>

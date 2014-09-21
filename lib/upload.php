@@ -1,13 +1,14 @@
 
 <?php
 	//NOTE: AssignmentID and UserID still need to be obtained (when other pages are complete), hard-coding it into the database at the moment
-	date_default_timezone_set('Australia/Brisbane');
 ?>
 
 <?php //upload a file to the database
 	require("mysql.php");
 	require("queries.php");
 	$allowedExts = array("txt", "php", "html", "java", "c", "py"); //the array holding all the allowed file extensions
+	date_default_timezone_set('Australia/Brisbane'); 
+	$dateTime = date('Y-m-d H:i:s');
 	echo "Number of files submitted: ".count($_FILES['userfile']['name']) . "<br>";
 	
 	//loop over each submitted file
@@ -41,7 +42,7 @@
 				fclose($fp);
 				
 				//update the table, add new file content
-				$update = update_file_contents('12123434','5',$fileName, $content);
+				$update = update_file_contents('12123434','5',$fileName, $content, $dateTime);
 				echo "<br>File <i>$fileName</i> updated!</br>";
 				
 			} 			
@@ -61,8 +62,7 @@
 					$content = fread($fp, filesize($tmpName));
 					$content = mysql_real_escape_string($content); 
 					fclose($fp); 
-					
-					insert_file_data('12123434','5', $fileName, $content);					
+					insert_file_data('12123434','5', $fileName, $content, $dateTime);					
 					echo "<br>File <i>$fileName</i> uploaded!</br>";
 				}
 				
