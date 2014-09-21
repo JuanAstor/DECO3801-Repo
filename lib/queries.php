@@ -78,4 +78,10 @@ function insert_file_data($userID, $assignmentID, $filename, $content, $dateTime
 										('".$assignmentID."', '".$userID."', '".$filename."', '".$content."', '".$dateTime."')");
 }
 
+function get_files_to_comment( $userID, $assignmentID ){
+	$query = MySQL::getInstance()->query("SELECT * 
+										FROM `assignmentfile` 
+										WHERE UserID = '".$userID."' AND AssignmentID = '".$assignmentID."'");
+	return $query->fetchALL();
+}
 ?>
