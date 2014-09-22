@@ -64,9 +64,13 @@ $assignID = '5';
         <?php
 				$data = array();
 				$files = get_files_to_comment($uID, $assignID); //query the database
-				foreach($files as $fileName){ 
-					$data[] = array($uID,$assignID,$fileName['FileName']); //multi-dem array to hold values needed to query the db
-					echo "<a class='filelinks'>".$fileName['FileName']. "</a><br>";//display all filenames
+				if(sizeof($files) == 0){
+					echo "No files found";	
+				} else {
+					foreach($files as $fileName){ 
+						$data[] = array($uID,$assignID,$fileName['FileName']); //multi-dem array to hold values needed to query the db
+						echo "<a class='filelinks'>".$fileName['FileName']. "</a><br>";//display all filenames
+					}
 				}
 				
 			
