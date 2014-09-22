@@ -1,7 +1,7 @@
 // JavaScript Document
 $(document).ready(function(){
 
-	$('navgroup:first').slideDown();
+	$('navgroup:not(:first)').slideUp();
 
 	$('nav h4').click(function () {
 		$(this).next().stop().slideToggle(400);
