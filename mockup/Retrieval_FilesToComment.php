@@ -75,57 +75,35 @@ $assignID = '5';
         </div>
 
         <div class="code">
-
-            <!-- IMPORTANT pre opening tag and php code must be next
-            to each other or unwanted indentation may happen. -->
-
-            <pre class="prettyprint"><?php
-            if (isset($_GET['file']) == NULL) {
-                echo "No file selected.";
-            } else {
-
-                if (!file_exists("files/" . $_GET['file'])) {
-                    echo("File not found");
-                } else {
-                    $fileToOpen = "files/" . $_GET['file'];
-                    $fh = fopen($fileToOpen, 'r');
-                    $selectedFileData = fread($fh, filesize($fileToOpen));
-                    fclose($fh);
-                    echo $selectedFileData;
-                }
-            }
-?>
-            </pre>
-
+            <pre class="prettyprint">No File Selected</pre>
         </div>
-
-        <div><p class="test">asdas</p></div><div><p class="test2">asdas</p></div>
     </div>
 
 
 </body>	
 
 <script>
-            jQuery(function ($) {
+jQuery(function ($) {
 
-            $(".filelinks").click(function() {
-            var file = $(this).text().toString();
-            $('.test2').text(file);
-                    // MAKE SURE THAT ASSIGNID AND USERID IS ALWAYS VALID.
-                    $.ajax({
-                            type:'POST',
-                            url:'retrieve.php',
-                            data: {filename : file,
-                                   user : '<?php echo $uID ?>',
-                                   assign : '<?php echo $assignID ?>' },
-                            cache: false,
-                            success: function(html){
-                            $(".test").html(html);
-                            }
-                    });
-            });
-                    $('#code').annotator();
-                    });
+    $(".filelinks").click(function() {
+    var file = $(this).text();
+        // MAKE SURE THAT ASSIGNID AND USERID IS ALWAYS VALID.
+        $.ajax({
+            type:'POST',
+            url:'retrieve.php',
+            data: {filename : file,
+                   user : '<?php echo $uID ?>',
+                   assign : '<?php echo $assignID ?>' },
+            success: function(data){
+                $("pre").text(data);
+                
+            }
+        });
+    });
+    $('#code').annotator();
+
+});
+                    
 </script>
 
 
