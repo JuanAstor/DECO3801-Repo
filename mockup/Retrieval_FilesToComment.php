@@ -116,7 +116,7 @@ $assignID = '5';
                             var file = $(this).html();
                             // MAKE SURE THAT ASSIGNID AND USERID IS ALWAYS VALID.
                             $.ajax( type:'POST',
-                                    url:'dothis.php',
+                                    url:'retrieve.php',
                                     data: {'filename' : file,
                                            'user' : <?php echo $uID ?>,
                                            'assign' : <?php echo $assignID ?> },
