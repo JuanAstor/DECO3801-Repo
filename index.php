@@ -40,6 +40,7 @@ if (!isset($_SESSION['user']) && isset($_POST['user'])) {
         }
         else
         {
+			//remove any set userID session variable on the login screen
 			if(isset($_SESSION["user"])){
 				unset($_SESSION["user"]);	
 			}
@@ -50,4 +51,3 @@ if (!isset($_SESSION['user']) && isset($_POST['user'])) {
     //Footer
     include("view/home/footer.php"); 
 ?>
-
