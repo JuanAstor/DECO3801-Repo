@@ -63,16 +63,17 @@ require("../lib/queries.php");
 		
 		<div class = "fileselect">
 			<?php 
-				$files = get_files_to_comment('12123434', '5');
-				foreach($files as $fileName){
-					echo "<a class='filelinks' href='?file=File1.txt'>".$fileName['FileName']."<br></a>";	
+				$data = array();
+				$files = get_files_to_comment('12123434', '5'); //query the database
+				foreach($files as $fileName){ 
+					$data[] = array('12123434','5',$fileName['FileName']); //multi-dem array to hold values needed to query the db
+					echo "<a class='filelinks' href='?file=File1.txt'>".$fileName['FileName']."<br></a>";//display all filenames
 				}
+				
 			?>
 						
 		</div>
-		
-		
-        
+               
         <div class="code">
 				
 			<!-- IMPORTANT: pre opening tag and php code must be next
