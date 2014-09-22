@@ -97,4 +97,11 @@ function get_login_status($userID) {
     }
 }
 
+function get_file_data($userID, $assignmentID, $filename){
+	$query = MySQL::getInstance()->query("SELECT *
+                                          FROM `assignmentfile`
+                                          WHERE UserID = '".$userID."' AND AssignmentID = '".$assignmentID."' AND FileName = '".$filename."'"); 
+    return $query->fetchALL();	
+}
+
 ?>
