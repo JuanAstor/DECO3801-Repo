@@ -83,5 +83,18 @@ function get_files_to_comment( $userID, $assignmentID ){
 										FROM `assignmentfile` 
 										WHERE UserID = '".$userID."' AND AssignmentID = '".$assignmentID."'");
 	return $query->fetchALL();
+} 
+
+function get_login_status($userID){
+	$query = MySQL::getInstance()->query("SELECT count(1)
+										FROM `user`
+										WHERE UserID = '".$userID."'");
+	$result = $query->fetchALL();
+	$count = $result[0];
+	if($count[0] > 0){
+		return true;
+	} else {
+		return false;	
+	}
 }
 ?>

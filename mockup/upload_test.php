@@ -10,10 +10,10 @@
 	<form method="post" action="../lib/upload.php" enctype="multipart/form-data">
     <table>
     	<tr>
-        	<td> Attach a File(s): Can select more than one </td> 
+        	<td> Attach a File(s): You can select more than one </td> 
             <td>
-            	<input type="hidden" name="MAX_FILE_SIZE" value="400000000" />
-                <input name="userfile[]" type="file" multiple />
+            	<input type="hidden" name="MAX_FILE_SIZE" value="100000000" />
+                <input name="userfile[]" type="file" multiple /> <!-- Need to include the '[]' at the end of name! -->
             </td>
         </tr>
         

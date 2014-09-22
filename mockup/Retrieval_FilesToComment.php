@@ -3,6 +3,8 @@ session_start();
 require("../lib/mysql.php");
 require("../lib/queries.php");
 //Need a session varibale containing the userID and the assignmentID
+$uID = '12123434';
+$assignID = '5';
 
 ?>
 <!DOCTYPE html>
@@ -64,10 +66,10 @@ require("../lib/queries.php");
 		<div class = "fileselect">
 			<?php 
 				$data = array();
-				$files = get_files_to_comment('12123434', '5'); //query the database
+				$files = get_files_to_comment($uID, $assignID); //query the database
 				foreach($files as $fileName){ 
-					$data[] = array('12123434','5',$fileName['FileName']); //multi-dem array to hold values needed to query the db
-					echo "<a class='filelinks' href='?file=File1.txt'>".$fileName['FileName']."<br></a>";//display all filenames
+					$data[] = array($uID,$assignID,$fileName['FileName']); //multi-dem array to hold values needed to query the db
+					echo "<a class='filelinks' href='?file=File1.txt'>".$fileName['FileName']. "</a><br>";//display all filenames
 				}
 				
 			?>

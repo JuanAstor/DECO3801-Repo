@@ -13,13 +13,15 @@ if (!isset($_SESSION['user']) && isset($_POST['user'])) {
          *  Show the home dashboard if student has authenticated.
          *  Otherwise show the login prompt.
          */
-        if (isset($_SESSION["user"])) 
+        if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) 
         {
             $student = $_SESSION["user"];
+			//$result = get_login_status($student);
+			//echo $result; 
 			//check the login priveleges of the user 
 			if(check_if_admin($student) == 0){ 
 				
-				//user is a student
+				//user is a student, get info on who they are and what courses they do
 				$courses = get_users_courses($student);
 				$assessments = get_users_assessments($student);
 				$fullName = get_user_name($student);
@@ -38,6 +40,9 @@ if (!isset($_SESSION['user']) && isset($_POST['user'])) {
         }
         else
         {
+			if(isset($_SESSION["user"])){
+				unset($_SESSION["user"]);	
+			}
             // Show login prompt
             include("view/login/_login.php"); 
         }
