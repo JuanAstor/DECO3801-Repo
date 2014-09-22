@@ -69,7 +69,7 @@ $assignID = '5';
 				$files = get_files_to_comment($uID, $assignID); //query the database
 				foreach($files as $fileName){ 
 					$data[] = array($uID,$assignID,$fileName['FileName']); //multi-dem array to hold values needed to query the db
-					echo "<a class='filelinks' href='?file=File1.txt'>".$fileName['FileName']. "</a><br>";//display all filenames
+					echo "<a class='filelinks'>".$fileName['FileName']. "</a><br>";//display all filenames
 				}
 				
 			?>
@@ -103,7 +103,7 @@ $assignID = '5';
 						
 		</div>
 		
-		
+        <div><p class="test"></p></div>
 		</div>
 		
 
@@ -111,6 +111,22 @@ $assignID = '5';
 	
 		<script>
 		jQuery(function ($) {
+                    
+                        $(".filelinks").click( function() {
+                            var file = $(this).html();
+                            // MAKE SURE THAT ASSIGNID AND USERID IS ALWAYS VALID.
+                            $.ajax( type:'POST',
+                                    url:'dothis.php',
+                                    data: {'filename' : file,
+                                           'user' : <?php echo $uID ?>,
+                                           'assign' : <?php echo $assignID ?> },
+                                    cache: false,
+                                    success: function(html){
+                                        $(".test").html(html);
+                                    }
+                                    );
+                        });
+                        
 			$('#code').annotator();
 		});
 		</script>
