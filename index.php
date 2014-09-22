@@ -51,4 +51,3 @@ if (!isset($_SESSION['user']) && isset($_POST['user'])) {
     //Footer
     include("view/home/footer.php"); 
 ?>
-

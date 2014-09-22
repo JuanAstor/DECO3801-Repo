@@ -13,7 +13,7 @@
 	$uID = '12123434'; //the userID, to be replaced with the session var 
 	$assignmentID = '5'; //the assignmentID, to be replaced with a session var
 	
-	echo "Number of files submitted: ".count($_FILES['userfile']['name']) . "<br>";
+	echo "Number of files submitted: ".count($_FILES['userfile']['name']). "<br>";
 	
 	//loop over each submitted file
 	for($i=0; $i < count($_FILES['userfile']['name']); $i++)
