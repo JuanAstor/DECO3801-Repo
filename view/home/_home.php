@@ -1,38 +1,3 @@
-<sidebar>
-    <nav>
-        <h4><i class="fa fa-graduation-cap"></i> Courses</h4>
-        <navgroup>
-        <?php // Loop through courses and display
-            foreach ($courses as $course) {
-                echo "<div><p><i class='fa fa-angle-right'></i> "
-                   . $course['CourseID']
-                   . "</p></div>";
-            }
-        ?>
-        </navgroup>
-        <h4><i class="fa fa-graduation-cap"></i> Courses</h4>
-        <navgroup>
-        <?php // Loop through courses and display
-            foreach ($courses as $course) {
-                echo "<div><p><i class='fa fa-angle-right'></i> "
-                   . $course['CourseID']
-                   . "</p></div>";
-            }
-        ?>
-        </navgroup>
-        <h4><i class="fa fa-graduation-cap"></i> Courses</h4>
-        <navgroup>
-        <?php // Loop through courses and display
-            foreach ($courses as $course) {
-                echo "<div><p><i class='fa fa-angle-right'></i> "
-                   . $course['CourseID']
-                   . "</p></div>";
-            }
-        ?>
-        </navgroup>
-    </nav>
-    <nav-handle><i class="fa fa-sort"></i></nav-handle>
-</sidebar>
 <widget-container>
     <widget title="Upcoming Assessments">
         <panel>
@@ -53,7 +18,7 @@
     <!-- End Upcoming Assessments -->
     <widget title="Tasks">
         <panel>
-            <div class="w-heading"><i class="fa fa-file-code-o"></i>Tasks</div>
+            <div class="w-heading"><i class="fa fa-list-ol"></i>Tasks</div>
             <div class="w-body">Panel content goes here..</div>
         </panel>
     </widget>

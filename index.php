@@ -34,6 +34,7 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
     }
 }
 else{
+    $_SESSION = array();
     session_destroy();
     
     // Show login
