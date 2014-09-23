@@ -11,6 +11,7 @@ sidebar, sidebar * {
     -moz-user-select: none; /* mozilla browsers */
     -khtml-user-select: none; /* webkit (konqueror) browsers */
     -ms-user-select: none; /* IE10+ */
+    cursor:default;
 }
 
 .time {
@@ -373,23 +374,45 @@ sidebar nav .fa {
 
 sidebar div {
     width: 100%;
-    padding:10px 0;
+}
+
+sidebar nav p {
+    padding-left:30px;
+    display:block;
+}
+
+sidebar nav .hascourse {
+    padding-left:8px !important;
+    text-transform:uppercase;
 }
  
-sidebar nav p {
+sidebar nav p a{
     margin:0;
     color:#929292;
-    padding-left:50px;
 }
  
-sidebar nav p:hover {
+sidebar nav p a:hover {
     color:#cfcfcf;
+    cursor:pointer;
+}
+
+sidebar nav p span {
+    width:65px;
+    color:#555;
 }
 
 sidebar navgroup {
     display: block;
     width: 100%;
     background-color: black;
+}
+
+sidebar navgroup div:first-child {
+    padding-top:5px;
+}
+
+sidebar navgroup div:last-child {
+    padding-bottom:5px;
 }
 
 sidebar nav-handle {

@@ -19,10 +19,19 @@
         <nav>
             <h4><i class="fa fa-pencil"></i><span>Assessment</span></h4>
             <navgroup>
+                <div>
+                    <p><a href='Assessment.php'>Show All</a></p>
+                </div>
             <?php // Loop through courses and display
-                foreach ($courses as $course) {
-                    echo "<div><p><i class='fa fa-angle-right'></i> "
-                       . $course['CourseID']
+                $course = "";
+                foreach ($assessments as $assessment) {
+                    echo "<div>";
+                    if ($course != $assessment['CourseID']) {
+                        echo "<p class='hascourse'><span>".$assessment['CourseID']."</span> ";
+                        $course = $assessment['CourseID'];
+                    }
+                    echo "<p><i class='fa fa-angle-right'></i> "
+                       . "<a href='Assessment.php?assessment=".$assessment['AssignmentID']."'>".$assessment['AssignmentName']."</a>"
                        . "</p></div>";
                 }
             ?>
@@ -30,10 +39,8 @@
             <h4><i class="fa fa-comments"></i><span>Review</span></h4>
             <navgroup>
             <?php // Loop through courses and display
-                foreach ($courses as $course) {
-                    echo "<div><p><i class='fa fa-angle-right'></i> "
-                       . $course['CourseID']
-                       . "</p></div>";
+                foreach ($assessments as $assessment) {
+                    echo "<div><p><i class='fa fa-angle-right'></i> <a>".$assessment['AssignmentID'] . "</a></p></div>";
                 }
             ?>
             </navgroup>
@@ -41,9 +48,7 @@
             <navgroup>
             <?php // Loop through courses and display
                 foreach ($courses as $course) {
-                    echo "<div><p><i class='fa fa-angle-right'></i> "
-                       . $course['CourseID']
-                       . "</p></div>";
+                    echo "<div><p><i class='fa fa-angle-right'></i> <a>". $course['CourseID'] . "</a></p></div>";
                 }
             ?>
             </navgroup>
