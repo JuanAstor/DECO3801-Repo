@@ -4,15 +4,14 @@
     </heading>
 
 <?php
-    if(isset($_GET['assessment'])) {
-        // Assessment GET retreives AssessmentID
-        foreach ($assessments as $row) {
-            if ($row['AssignmentID'] == $_GET['assessment']) {
-                echo "<p>Display Assignment from GET</p>";
-            }
-        }
+    
+    if (isset($_GET['assessment'])) {
+        $num = $_GET['assessment'] - 1;
+        echo "<p>Assignment: ".$assessments[$num]['AssignmentName']."</p>";
     }else{
-        echo "<p>Display all the assignments<p>";
+        foreach ($assessments as $row) {
+        echo "<p>Assignment: ".$row['AssignmentName']."<p>";
+        }
     } 
 ?>
 

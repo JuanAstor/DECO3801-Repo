@@ -25,14 +25,16 @@
                 </div>
             <?php // Loop through courses and display
                 $course = "";
+                $count = 0;
                 foreach ($assessments as $assessment) {
+                    $count++;
                     echo "<div>";
                     if ($course != $assessment['CourseID']) {
                         echo "<p class='hascourse'><span>".$assessment['CourseID']."</span> ";
                         $course = $assessment['CourseID'];
                     }
                     echo "<p><i class='fa fa-angle-right'></i> "
-                       . "<a href='Assessment.php?assessment=".$assessment['AssignmentID']."'>".$assessment['AssignmentName']."</a>"
+                       . "<a href='Assessment.php?assessment=".$count."'>".$assessment['AssignmentName']."</a>"
                        . "</p></div>";
                 }
             ?>
