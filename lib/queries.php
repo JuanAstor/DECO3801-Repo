@@ -36,8 +36,9 @@ function check_if_admin($user) { //returns 1 if an admin, 0 if student
     foreach ($result as $permission) {
         if (strcmp($permission['Priveleges'], "Admin") == 0) { //strcmp will return 0 if the strings are equal
             return true; //is an admin
+        } else {
+            return false; //is a student
         }
-        return false; //is a student
     }
 }
 

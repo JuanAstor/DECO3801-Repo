@@ -12,7 +12,7 @@
     <body>
     <header>
         <logo>Peer <span>{</span>Code Review<span>}</span></logo>
-        <p><span class="welcome"><i class="fa fa-user"></i> Welcome <?php echo $student;?></span>
+        <p><span class="welcome"><i class="fa fa-user"></i> Welcome <?php echo $user;?></span>
         <a href="view/logout/_logout.php">Log out</a></p>
     </header>
         
