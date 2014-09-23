@@ -80,4 +80,6 @@
 				}
 		}
 	} //end of for loop
+	//return to the previous page
+	header('Location: ../mockup/upload_test.php');
 ?>
