@@ -17,6 +17,7 @@
     </header>
     <sidebar>
         <nav>
+            <h4><i class="fa fa-tachometer"></i><span>Dashboard</span></h4>
             <h4><i class="fa fa-pencil"></i><span>Assessment</span></h4>
             <navgroup>
                 <div>
