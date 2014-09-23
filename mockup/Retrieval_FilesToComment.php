@@ -90,7 +90,7 @@ jQuery(function ($) {
         // MAKE SURE THAT ASSIGNID AND USERID IS ALWAYS VALID.
         $.ajax({
             type:'POST',
-            url:'retrieve.php',
+            url:'../lib/retrieve.php',
             data: {filename : file,
                    user : '<?php echo $uID ?>',
                    assign : '<?php echo $assignID ?>' },
