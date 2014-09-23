@@ -7,7 +7,11 @@
     
     if (isset($_GET['assessment'])) {
         $num = $_GET['assessment'] - 1;
-        echo "<p>Assignment: ".$assessments[$num]['AssignmentName']."</p>";
+        if (isset($assessments[$num]['AssignmentID'])) {
+            echo "<p>Assignment: ".$assessments[$num]['AssignmentName']."</p>";
+        }else{
+            header("Location: Assessment.php");
+        }
     }else{
         foreach ($assessments as $row) {
         echo "<p>Assignment: ".$row['AssignmentName']."<p>";
