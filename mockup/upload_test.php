@@ -5,6 +5,12 @@
 <title>Upload Test</title>
 </head>
 
+<?php
+	session_start();
+	$_SESSION["user"] = '12123434';
+	$_SESSION["assign"] = '5';
+?>
+
 <h1>Test File Upload</h1>
 <div>
 	<form method="post" action="../lib/upload.php" enctype="multipart/form-data">
@@ -29,7 +35,7 @@
         </tr>
     </table> 
     </form>
-</div>
+</div> 
 
 </body>
 </html>

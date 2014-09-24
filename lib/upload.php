@@ -4,14 +4,15 @@
 ?>
 
 <?php //upload a file to the database
+	session_start();
 	require("mysql.php");
 	require("queries.php");
 	$allowedExts = array("txt", "php", "html", "java", "c", "py"); //the array holding all the allowed file extensions
 	
 	date_default_timezone_set('Australia/Brisbane'); //time zone of the user
 	$dateTime = date('Y-m-d H:i:s'); //the current time and date
-	$uID = '12123434'; //the userID, to be replaced with the session var 
-	$assignmentID = '5'; //the assignmentID, to be replaced with a session var
+	$uID = $_SESSION["user"]; //the userID, to be replaced with the session var 
+	$assignmentID = $_SESSION["assign"]; //the assignmentID, to be replaced with a session var
 	
 	echo "Number of files submitted: ".count($_FILES['userfile']['name']). "<br>";
 	
@@ -80,6 +81,7 @@
 				}
 		}
 	} //end of for loop
+	
 	//return to the previous page
-	header('Location: ../mockup/upload_test.php');
+	header('Location: ../assessment.php');
 ?>
