@@ -1,24 +1,31 @@
 <?php
-
+//get all courses that a user is enrolled in
 function get_users_courses($user) {
     $query = MySQL::getInstance()->query("SELECT CourseID
                                           FROM `courseenrolment` 
                                           WHERE UserID = '" . $user . "'");
     return $query->fetchALL();
 }
-
+//get all courses that an admin is in charge of
 function get_admins_courses($user) {
     $query = MySQL::getInstance()->query("SELECT CourseID 
 					  FROM `course` 
 					  WHERE CourseCoordinator = '" . $user . "'");
     return $query->fetchALL();
 }
-
+//get all assessments that a 
 function get_users_assessments($user) {
     $query = MySQL::getInstance()->query("SELECT * 
                                           FROM `assignment`,`courseenrolment`
                                           WHERE courseenrolment.CourseID = assignment.CourseID AND courseenrolment.UserID='" . $user . "'");
     return $query->fetchAll();
+}
+
+function get_user_comments($user){
+	$query = MySQL::getInstance()->query("SELECT *
+										FROM `assignmentfile`, `comment`
+										WHERE assignmentfile.FileID = comment.FileID AND assignmentfile.UserID = '".$user."'");
+	return $query->fetchALL();
 }
 
 //get all file ids that the user has submitted
