@@ -9,8 +9,9 @@
         $num = $_GET['assessment'] - 1;
         if (isset($assessments[$num]['AssignmentID'])) {
             echo "<p>Assignment: ".$assessments[$num]['AssignmentName']."</p>";
-			$_SESSION["assign"] = $assessments[$num]['AssignmentID'];
-			echo $_SESSION["assign"];
+			
+			$_SESSION["assign"] = $assessments[$num]['AssignmentID']; //set the assignID to the id of the selected assessment
+			echo "Assignment ID is: ".$_SESSION["assign"]; //display the id
         }else{
             header("Location: Assessment.php");
         }
@@ -18,12 +19,16 @@
         foreach ($assessments as $row) {
         echo "<p>Assignment: ".$row['AssignmentName']."<p>";
         }
+		if(isset($_SESSION["assign"])){ //check if the session var is set
+				echo "Assignment ID is still: ".$_SESSION["assign"];
+		}
     } 
 ?>
 <html>
 
-<h1>Test File Upload</h1>
+<h2>File Upload</h2>
 <div>
+	<!-- On submit contact the upload.php file which will handle everything -->
 	<form method="post" action="../lib/upload.php" enctype="multipart/form-data">
     <table>
     	<tr>
@@ -48,7 +53,7 @@
     </form>
 </div> 
 
-</body>
+
 </html>
 
 </table>    	
