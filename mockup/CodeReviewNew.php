@@ -5,23 +5,17 @@
 	
         <link rel="stylesheet" type="text/css" href="main.css">
 					
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		
 		<!-- Load the Prettify script, to use in highlighting our code.-->
 		<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>	
 		
-		<!-- Load the Annotator script and css for commenting use on our code -->
-		<script src="http://assets.annotateit.org/annotator/v1.2.5/annotator-full.min.js"></script>
-		<link rel="stylesheet" href="http://assets.annotateit.org/annotator/v1.2.5/annotator.min.css">
-		
+	
 		<?php date_default_timezone_set('Australia/Brisbane'); ?>
 		
-		<script>
-		jQuery(function ($) {
-			$('.code').annotator();
-					
-		});
-		</script>
+	
+		
+		<script src="js/comment.js" type="text/javascript"></script>
 		
 		
 		
@@ -63,6 +57,7 @@
 			<a class="filelinks" href='?file=File2.txt'>File2.txt</a>
 			<a class="filelinks" href='?file=File3.txt'>File3.txt</a>
 			<a class="filelinks" href='?file=File4.txt'>File4.txt</a>
+			<button id="testButton" >Test</button>
 			
 		</div>
 		
@@ -72,6 +67,7 @@
 				
 			<!-- IMPORTANT: pre opening tag and php code must be next
 			to each other or unwanted indentation may happen. -->
+	
 			
 			<pre class="prettyprint"><?php
 				if (isset($_GET['file']) == NULL){
@@ -92,6 +88,10 @@
 				
 			?>
 			</pre>
+			
+			<div id="coms">
+				
+			</div>
 						
 		</div>
 		
@@ -101,11 +101,7 @@
 
     </body>	
 	
-		<script>
-		jQuery(function ($) {
-			$('#code').annotator();
-		});
-		</script>
+		
 
 	
     

@@ -1,0 +1,21 @@
+{
+"file1.txt" : [
+	{"linenum": "2", "comment": "Apples"},
+	{"linenum": "10", "comment": "Apples"},
+	{"linenum": "3", "comment": "Apples"},
+	{"linenum": "5", "comment": "Apples"},
+	{"linenum": "12", "comment": "Apples"},
+	{"linenum": "15", "comment": "Apples"},
+	{"linenum": "16", "comment": "Apples"}
+	],
+
+"file2.txt" : [
+	{"linenum": "2", "comment": "Apples"},
+	{"linenum": "4", "comment": "Banana"},
+	{"linenum": "5", "comment": "Sometimes"},
+	{"linenum": "6", "comment": "Something"},
+	{"linenum": "10", "comment": "Else"},
+	{"linenum": "12", "comment": "Apples"},
+	{"linenum": "15", "comment": "Apples"}
+	]
+}

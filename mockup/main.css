@@ -42,6 +42,10 @@ body {
 
 }
 
+.prettyprint{
+	float:left;
+}
+
 .comments {
 	float:left;
 	margin-left:10px;
@@ -68,6 +72,55 @@ body {
 	margin-top:-20px;
 	padding-left:3px;
 }
+
+#coms{
+	width:20px;
+	float:left;
+	margin-top:15px;
+	margin-left:3px;
+}
+
+
+.hcbutton:hover{
+	display:block;
+	float:left;
+	background-image:url('files/smalladd.gif');
+	margin-top:1px;
+	margin-bottom:1px;
+	width:20px;
+	height:20px;
+
+}
+.hcbutton{
+	display:block;
+	float:left;
+	background-image:url('files/small.gif');
+	margin-top:1px;
+	margin-bottom:1px;
+	width:20px;
+	height:20px;
+}
+
+.hccom:hover{
+	display:block;
+	float:left;
+	background-image:url('files/smallcomread.gif');
+	margin-top:1px;
+	margin-bottom:1px;
+	width:20px;
+	height:20px;
+}
+
+.hccom{
+	display:block;
+	float:left;
+	background-image:url('files/smallcom.gif');
+	margin-top:1px;
+	margin-bottom:1px;
+	width:20px;
+	height:20px;
+}
+
 
 .titlebox {
 	background-color:#FFFFFF;
