@@ -21,16 +21,31 @@ function get_users_assessments($user) {
     return $query->fetchAll();
 }
 
+//get all file ids that the user has submitted
+function get_users_files($user) {
+	$query = MySQL::getInstance()->query("SELECT *
+										FROM `assignmentfile`
+										WHERE UserID = '". $user ."'");
+	return $query->fetchALL();
+}
+//get the users who commented on your files
+function get_number_of_feedback($fileID) {
+	$query = MySQL::getInstance()->query("SELECT count(1)
+										FROM `comment`
+										WHERE FileID = '". $fileID ."'");
+	return $query->fetchALL();
+}
+
 function get_user_name($user) {
     $query = MySQL::getInstance()->query("SELECT * 
-					  FROM `user` 
-					  WHERE UserID = '" . $user . "'");
+					  					FROM `user` 
+					 	 				WHERE UserID = '" . $user . "'");
     return $query->fetchALL();
 }
 
 function check_if_admin($user) { //returns 1 if an admin, 0 if student
     $query = MySQL::getInstance()->query("SELECT Priveleges 
-					  FROM `user` 
+					  					  FROM `user` 
                                           WHERE UserID = '" . $user . "'");
     $result = $query->fetchALL();
     foreach ($result as $permission) {

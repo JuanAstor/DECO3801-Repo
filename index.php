@@ -21,6 +21,8 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
         $courses = get_users_courses($user);
         $assessments = get_users_assessments($user);
         $fullName = get_user_name($user);
+		$submitted = get_users_files($user);
+
 
         // Show home
         include("view/home/header.php");
