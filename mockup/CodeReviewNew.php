@@ -58,6 +58,7 @@
 			<a class="filelinks" href='?file=File3.txt'>File3.txt</a>
 			<a class="filelinks" href='?file=File4.txt'>File4.txt</a>
 			<button id="testButton" >Test</button>
+			<button id="user1JSON" >Test JSON Load</button>
 			
 		</div>
 		

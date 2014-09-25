@@ -45,6 +45,36 @@ $(document).ready(function(){
 		console.log(lineNum);
 	
 	});
+	
+	$("#user1JSON").click(function(){
+		var my_json;
+		$.getJSON('files/user1.json', function(json){
+			my_json = json;
+			console.log(my_json);
+			
+			$.each(my_json, function(file, comments){
+				if(file == 'file2.txt'){
+					$.each(comments, function(index, comInfo){
+						$('#coms').children().each(function(){
+							if ($(this).attr('line') == comInfo['linenum']){
+								$(this).addClass('hccom').removeClass('hcbutton');
+								
+							}
+						
+						});
+						console.log(comInfo['linenum'] + " " + comInfo['comment']);
+					
+					});
+				
+				}
+			
+			});
+			
+		});
+		
+		
+	
+	});
 		
 	$("#coms").on("click", ".hcbutton", 
 		function(){
