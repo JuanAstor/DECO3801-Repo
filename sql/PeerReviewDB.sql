@@ -47,7 +47,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `PeerReview`.`Assignment` ;
 
 CREATE TABLE IF NOT EXISTS `PeerReview`.`Assignment` (
-  `AssignmentID` MEDIUMINT UNSIGNED NOT NULL,
+  `AssignmentID` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CourseID` CHAR(8) NOT NULL,
   `Semester` CHAR(5) NOT NULL,
   `AssignmentDescription` VARCHAR(45) NULL,

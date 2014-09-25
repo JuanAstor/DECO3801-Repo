@@ -8,7 +8,7 @@ SET time_zone = "+00:00";
 
 
 CREATE TABLE IF NOT EXISTS `assignment` (
-  `AssignmentID` mediumint(8) unsigned NOT NULL,
+  `AssignmentID` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `CourseID` char(8) NOT NULL,
   `Semester` char(5) NOT NULL,
   `AssignmentDescription` varchar(45) DEFAULT NULL,
