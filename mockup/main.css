@@ -31,19 +31,22 @@ body {
 }
 
 .code {
-	margin-left:250px;
+	margin-left:50px;
 	padding: 0px 10px 10px;	
 	margin-top:10px;
 	float:left;
 	background-color:#FFFFFF;
 	width: 850px;
 	height: 550px;
+	overflow-y:scroll;
 	
 
 }
 
 .prettyprint{
 	float:left;
+	width:580px;
+	overflow-x:scroll;
 }
 
 .comments {
@@ -85,40 +88,40 @@ body {
 	display:block;
 	float:left;
 	background-image:url('files/smalladd.gif');
-	margin-top:1px;
-	margin-bottom:1px;
-	width:20px;
-	height:20px;
+	
+
+}
+
+.combox{
+	font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+	width:200px;
+	float:inherit;
+	word-wrap: break-word;
+	margin-left:29px;
 
 }
 .hcbutton{
 	display:block;
 	float:left;
 	background-image:url('files/small.gif');
-	margin-top:1px;
-	margin-bottom:1px;
-	width:20px;
-	height:20px;
+	
+	
 }
 
 .hccom:hover{
 	display:block;
 	float:left;
 	background-image:url('files/smallcomread.gif');
-	margin-top:1px;
-	margin-bottom:1px;
-	width:20px;
-	height:20px;
+	
+	
 }
 
 .hccom{
 	display:block;
 	float:left;
 	background-image:url('files/smallcom.gif');
-	margin-top:1px;
-	margin-bottom:1px;
-	width:20px;
-	height:20px;
+	
+	
 }
 
 
