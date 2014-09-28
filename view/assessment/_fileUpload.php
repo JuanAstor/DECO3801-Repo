@@ -34,4 +34,14 @@
     </form>
 </div> 
 
+<?php
+	//check for any submitted files, if result isn't null then display the submission time
+	$result = get_submitted_info($_SESSION["user"], $_SESSION["assign"]);
+	if( $result != NULL){
+		echo "<span>Files were previously submitted on '".$result[0]['SubmissionTime']."' </span>";
+	} else {
+		echo "<span>You have not made any submissions yet</span>";
+	}
+?>
+
 </html>

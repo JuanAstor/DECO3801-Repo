@@ -60,6 +60,22 @@ function check_if_file_exists($user, $assignmentID, $filename) {
     return $query->fetchALL(); //return the count of the number of files matching the variables
 }
 
+//check if a user has submitted files for an assignment
+function check_if_submitted($user, $assignmentID){
+	$query = MySQL::getInstance()->query("SELECT count(1)
+										FROM `assignmentfile`
+										WHERE UserID = '".$user."' AND AssignmentID = '".$assignmentID."'");
+	return $query->fetchALL(); //return the count of the number of files submitted on an assessment	
+} 
+
+//get all info on submitted assignment files
+function get_submitted_info($user, $assignmentID){
+	$query = MySQL::getInstance()->query("SELECT *
+										FROM `assignmentfile`
+										WHERE UserID = '".$user."' AND AssignmentID = '".$assignmentID."'");
+	return $query->fetchALL(); 
+}
+
 //update the 'assignmnetfile' table in the database
 function update_file_contents($user, $assignmentID, $filename, $content, $dateTime) {
     return MySQL::getInstance()->query("UPDATE `assignmentfile`
