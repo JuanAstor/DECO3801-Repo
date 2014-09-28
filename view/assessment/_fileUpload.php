@@ -2,6 +2,13 @@
 	//destroy the session variable on the start of a new upload
 	if(isset($_SESSION['submitted'])){
 		unset($_SESSION['submitted']);	
+	} 
+	//check if any submissions have been made for the current assignment
+	$result = get_submitted_info($_SESSION["user"], $_SESSION["assign"]);
+	if($result == NULL){
+		$submissionState = "Submit"; //no files have been submitted
+	} else{
+		$submissionState = "Resubmit"; //file(s) have been submitted
 	}
 ?>
 
@@ -26,7 +33,7 @@
             	</p>
             </td>
             <td>
-            	<input type="submit" value="Send"  />
+               	<input type="submit" value=<?php echo $submissionState ?>  />
                 <input type="reset" value="Reset"  />
             </td>
         </tr>
@@ -35,8 +42,7 @@
 </div> 
 
 <?php
-	//check for any submitted files, if result isn't null then display the submission time
-	$result = get_submitted_info($_SESSION["user"], $_SESSION["assign"]);
+	//if a submission has been made	
 	if( $result != NULL){
 		echo "<span>Files were previously submitted on '".$result[0]['SubmissionTime']."' </span>";
 	} else {
