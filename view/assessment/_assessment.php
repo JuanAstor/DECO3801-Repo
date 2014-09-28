@@ -2,7 +2,7 @@
     <heading>
     	Assignments
     </heading>
-
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 <?php
     
     if (isset($_GET['assessment'])) {

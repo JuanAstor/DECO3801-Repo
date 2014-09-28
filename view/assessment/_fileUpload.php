@@ -23,7 +23,7 @@
         	<td> Attach a File(s): You can select more than one </td> 
             <td>
             	<input type="hidden" name="MAX_FILE_SIZE" value="100000000" />
-                <input name="userfile[]" type="file" multiple /> <!-- Need to include the '[]' at the end of name! -->
+                <input name="userfile[]" type="file" id="files" multiple /> <!-- Need to include the '[]' at the end of name! -->
             </td>
         </tr>
         
@@ -47,7 +47,7 @@
 		echo "<span>Files were previously submitted on '".$result[0]['SubmissionTime']."' </span>";
 	} else {
 		echo "<span>You have not made any submissions yet</span>";
-	}
+	} 
 ?>
 
 </html>
