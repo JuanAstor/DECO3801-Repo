@@ -48,13 +48,14 @@
 				//update the table, add new file content
 				$update = update_file_contents($uID, $assignmentID, $fileName, $content, $dateTime);
 				echo "<br>File <i>$fileName</i> updated!</br>";
-				
+				$_SESSION['submitted'] = 'submitted';
 			} 			
 			//no files with the same user and filename have previously been uploaded
 			else { 	
 				//check if the uploaded file has size greater than 0 and is an allowed extension
 				if($_FILES["userfile"]["error"][$i] > 0) { //check if any errors in the file
 					echo "Error in submitted file: ". $_FILES["userfile"]["error"][$i]. "<br>";
+					$_SESSION['submitted'] = 'error';
 				}
 				else { //no errors
 					echo 'no previous version, uploading file'; echo '<br></br>';
@@ -69,6 +70,7 @@
 					//query the database and submit the necessary info
 					insert_file_data($uID, $assignmentID, $fileName, $content, $dateTime);					
 					echo "<br>File <i>$fileName</i> uploaded!</br>";
+					$_SESSION['submitted'] = 'submitted';
 				}
 				
 			} //end of else loop
@@ -79,6 +81,7 @@
 				if($_FILES["userfile"]["error"][$i] > 0) {
 					echo "Error: ". $_FILES["userfile"]["error"][$i]. "<br>";
 				}
+				$_SESSION['submitted'] = 'error';
 		}
 	} //end of for loop
 	

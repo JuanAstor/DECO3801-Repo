@@ -12,6 +12,9 @@
 			
 			$_SESSION["assign"] = $assessments[$num]['AssignmentID']; //set the assignID to the id of the selected assessment
 			echo "Assignment ID is: ".$_SESSION["assign"]; //display the id
+			
+			include("view/assessment/_fileUpload.php"); //display the file upload option
+			
         }else{
             header("Location: Assessment.php");
         }
@@ -24,37 +27,20 @@
 		}
     } 
 ?>
-<html>
 
-<h2>File Upload</h2>
 <div>
-	<!-- On submit contact the upload.php file which will handle everything -->
-	<form method="post" action="../lib/upload.php" enctype="multipart/form-data">
-    <table>
-    	<tr>
-        	<td> Attach a File(s): You can select more than one </td> 
-            <td>
-            	<input type="hidden" name="MAX_FILE_SIZE" value="100000000" />
-                <input name="userfile[]" type="file" multiple /> <!-- Need to include the '[]' at the end of name! -->
-            </td>
-        </tr>
-        
-        <tr>
-        	<td width="175">
-            	<p>
-            	</p>
-            </td>
-            <td>
-            	<input type="submit" value="Send"  />
-                <input type="reset" value="Reset"  />
-            </td>
-        </tr>
-    </table> 
-    </form>
-</div> 
+	<?php //let the user know what has happened to the files submitted
+		if(isset($_SESSION['submitted'])){
+			if(strcmp($_SESSION['submitted'], 'submitted') == 0){ //has been submitted
+				echo "<span> The Files have been submitted </span>";
+			}
+		 	else if(strcmp($_SESSION['submitted'], 'error') == 0){ //an error occured
+				echo "<span> Error uploading files </span>";	
+			}
+		} else {
+			echo "<span> Nothing has been submitted </span>"; //nothing has happened
+		}
+	?>
+</div>
 
-
-</html>
-
-</table>    	
 </page>
