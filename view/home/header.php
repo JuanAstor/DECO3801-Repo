@@ -30,7 +30,7 @@
                     $count++;
                     echo "<div>";
                     if ($course != $assessment['CourseID']) {
-                        echo "<p class='hascourse'><span>".$assessment['CourseID']."</span> ";
+                        echo "<p class='iscourse'><span>".$assessment['CourseID']."</span> ";
                         $course = $assessment['CourseID'];
                     }
                     echo "<p><i class='fa fa-angle-right'></i> "
