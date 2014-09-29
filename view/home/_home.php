@@ -1,6 +1,3 @@
-<?php
-
-?>
 <widget-container>
     <widget title="Upcoming Assessments">
         <panel>
@@ -8,11 +5,7 @@
             <div class="w-body">
             <?php // Loop through courses and display
             foreach ($assessments as $assessment) {
-                echo "<p>"
-                   . $assessment['CourseID']
-                   . ": "
-                   . $assessment['AssignmentName']
-                   . "</p>";
+                echo "<p>".$assessment['CourseID'].": ".$assessment['AssignmentName']."</p>";
             }
             ?>
             </div>
@@ -31,11 +24,11 @@
             <div class="w-heading"><i class="fa fa-comment"></i>Reviews Received</div>
             <div class="w-body">
             	<?php 
-					foreach($submitted as $file){
-						echo $file['AssignmentID']. " : '". $file['FileName'] ."' new feedback";
-						echo "<br>";
-					}
-				?>
+                    foreach($submitted as $file){
+                        echo $file['AssignmentID']. " : '". $file['FileName'] ."' new feedback";
+                        echo "<br>";
+                    }
+                ?>
             </div>
         </panel>
     </widget>
@@ -47,14 +40,10 @@
     <div><panel-end></panel-end></div>
 </widget-end>
 
-<div class="dashboard-content">
-		<?php 			
-			foreach ($fullName as $name) {
-				echo "<p> Welcome "
-				   . $name['FName']
-				   . " " 
-				   . $name['SName']
-				   . "</p>" ;
-			}
-		 ?>
-</div>
+<content>
+<?php 			
+    foreach ($fullName as $name) {
+        echo "<p> Welcome ".$name['FName']." ".$name['SName']."</p>" ;
+    }
+ ?>
+</content>

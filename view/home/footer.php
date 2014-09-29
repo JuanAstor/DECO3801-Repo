@@ -1,2 +1,3 @@
-	</body>
+</page>
+</body>
 </html>

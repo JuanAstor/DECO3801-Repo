@@ -11,9 +11,7 @@
 		$submissionState = "Resubmit"; //file(s) have been submitted
 	}
 ?>
-
-<html>
-
+<content>
 <h2>File Upload</h2>
 <div>
 	<!-- On submit contact the upload.php file which will handle everything -->
@@ -40,14 +38,12 @@
     </table> 
     </form>
 </div> 
-
 <?php
-	//if a submission has been made	
-	if( $result != NULL){
-		echo "<span>Files were previously submitted on '".$result[0]['SubmissionTime']."' </span>";
-	} else {
-		echo "<span>You have not made any submissions yet</span>";
-	} 
+    //if a submission has been made	
+    if( $result != NULL){
+        echo "<span>Files were previously submitted on '".$result[0]['SubmissionTime']."' </span>";
+    } else {
+        echo "<span>You have not made any submissions yet</span>";
+    } 
 ?>
-
-</html>
+</content>

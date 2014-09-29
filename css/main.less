@@ -47,7 +47,6 @@ sidebar, sidebar * {
     float:left;
     margin-left:10px;
     margin-top:10px;
-
 }
 
 .time-display {
@@ -115,7 +114,7 @@ a {
 */
 
 /* Remove welcome message on very small devices */
-@media (max-width: 435px) {
+@media (max-width: 448px) {
     .welcome {
         display:none;
     }
@@ -433,6 +432,53 @@ sidebar nav-handle {
  /* CONTENT STYLES
   */
 
-.dashboard-content {
-    .make-xs-column(10);
+heading {
+    padding:0 0 5px;
+    margin: 0 0 30px;
+    border-bottom:1px solid #DFDFDF;
+}
+
+page {
+    .make-xs-column(12);
+    .make-md-column(10);
+    min-height:100%;
+    padding:15px;
+    background-color: #F2F2F2;
+}
+
+content, heading {
+    .make-xs-column(12);
+}
+
+ /* ASSESSMENT */
+ 
+assessment {
+    .make-xs-column(12);
+    .panel;
+    .panel-default;
+    padding-left:0px;
+    padding-right:0px;
+}
+ 
+assessment .a-content {
+    .panel-body;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+assessment .a-content p {
+    display:inline;
+}
+assessment .a-content p:last-child,
+assessment .a-footer p:last-child{
+    float:right;
+}
+ 
+assessment .a-footer {
+    .panel-footer;
+    padding-bottom:26px;
+}
+
+assessment .a-footer a:last-child {
+    padding-left:15px;
 }

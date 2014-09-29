@@ -1,46 +1,59 @@
 <page>
     <heading>
-    	Assignments
+        <h1>Assessment</h1>
     </heading>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 <?php
     
     if (isset($_GET['assessment'])) {
         $num = $_GET['assessment'] - 1;
         if (isset($assessments[$num]['AssignmentID'])) {
-            echo "<p>Assignment: ".$assessments[$num]['AssignmentName']."</p>";
+            $row = $assessments[$num];
+            echo "<assessment>"
+            .    "<div class='a-content'>"
+            .        "<h4>".$row['AssignmentName']."</h4>"
+            .        "<p>".$row['CourseID'].", Semester ".substr($row['Semester'], -1)
+            .        "<p>Due ".date('g:ia, F jS', strtotime($row['DueTime']." ".$row['DueDate']))." ".substr($row['Semester'], 0, -1)."</p>"
+            .    "</div>"
+            .    "<div class='a-footer'"
+            .        "<p>".$row['AssignmentDescription']."</p>"
+            .        "<p><a>Submit</a><a>View Feedback</a></p>"
+            .    "</div>"
+            .    "</assessment>";
 			
-			$_SESSION["assign"] = $assessments[$num]['AssignmentID']; //set the assignID to the id of the selected assessment
-			echo "Assignment ID is: ".$_SESSION["assign"]; //display the id
-			
-			include("view/assessment/_fileUpload.php"); //display the file upload option
+            $_SESSION["assign"] = $assessments[$num]['AssignmentID']; //set the assignID to the id of the selected assessment
+            include("view/assessment/_fileUpload.php"); //display the file upload option
 			
         }else{
             header("Location: Assessment.php");
         }
     }else{
         foreach ($assessments as $row) {
-        echo "<p>Assignment: ".$row['AssignmentName']."<p>";
+            echo "<assessment>"
+            .    "<div class='a-content'>"
+            .        "<h4>".$row['AssignmentName']."</h4>"
+            .        "<p>".$row['CourseID'].", Semester ".substr($row['Semester'], -1)
+            .        "<p>Due ".date('g:ia, F jS', strtotime($row['DueTime']." ".$row['DueDate']))." ".substr($row['Semester'], 0, -1)."</p>"
+            .    "</div>"
+            .    "<div class='a-footer'"
+            .        "<p>".$row['AssignmentDescription']."</p>"
+            .        "<p><a>Submit</a><a>View Feedback</a></p>"
+            .    "</div>"
+            .    "</assessment>";
         }
-		if(isset($_SESSION["assign"])){ //check if the session var is set
-				echo "Assignment ID is still: ".$_SESSION["assign"];
-		}
     } 
 ?>
-
-<div>
-	<?php //let the user know what has happened to the files submitted
-		if(isset($_SESSION['submitted'])){
-			if(strcmp($_SESSION['submitted'], 'submitted') == 0){ //has been submitted
-				echo "<span> The Files have been submitted </span>";
-			}
-		 	else if(strcmp($_SESSION['submitted'], 'error') == 0){ //an error occured
-				echo "<span> Error uploading files </span>";	
-			}
-		} else {
-			echo "<span> Nothing has happened </span>"; //nothing has happened
-		}
-	?>
-</div>
-
+<content>
+<?php //let the user know what has happened to the files submitted
+    if(isset($_SESSION['submitted'])){
+        if(strcmp($_SESSION['submitted'], 'submitted') == 0){ //has been submitted
+            echo "<span> The Files have been submitted </span>";
+        }
+        else if(strcmp($_SESSION['submitted'], 'error') == 0){ //an error occured
+            echo "<span> Error uploading files </span>";	
+            }
+    } else {
+        echo "<span> Nothing has been submitted </span>"; //nothing has happened
+    }
+?>
+</content>
 </page>
