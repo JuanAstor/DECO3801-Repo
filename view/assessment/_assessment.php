@@ -52,7 +52,7 @@
             echo "<span> Error uploading files </span>";	
             }
     } else {
-        echo "<span> Nothing has been submitted </span>"; //nothing has happened
+        echo "<span> Nothing has been submitted this session</span>"; //nothing has happened
     }
 ?>
 </content>
