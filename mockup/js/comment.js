@@ -1,6 +1,7 @@
 $(document).ready(function(){
 
 	var commentArray = [];
+	var editPriv = true;
 	
 	function loadCommentSystem(){
 		//alert("works");
@@ -34,6 +35,8 @@ $(document).ready(function(){
 	
 	function loadComments(commentArray){
 		console.log(commentArray);
+		
+		
 		$.each(commentArray, function(index, comInfo){
 					
 			$('#coms').children().each(function(){
@@ -41,10 +44,21 @@ $(document).ready(function(){
 				if ($(this).attr('line') == comInfo['linenum']){
 							
 					$(this).addClass('hccom').removeClass('hcbutton');
-								
-					$(this).html("<span class=\"combox\">  Line " +
+					
+					
+					if (!editPriv){ 	
+					
+						$(this).html("<span class=\"combox\">  Line " +
 						comInfo['linenum'] + " - " + comInfo['comment'] + "</span>");
-								
+						
+					} else {
+
+						$(this).html("<span class=\"combox\">  Line " +
+						comInfo['linenum'] + " - " + comInfo['comment'] 
+						+ "<div class=\"editpriv\"><button id=\"editbut\" ></button>" +
+						"<button id=\"delbut\" ></button></div></span>");
+					
+					}
 					$(this).children().hide();
 				}						
 			});				
@@ -92,7 +106,7 @@ $(document).ready(function(){
 				$(this).html('<span class="combox">' +
 					'<form id="addComForm" action="#" method="post">' +
 					'<label> Add Comment </label>' +
-					'<textarea name="comments" rows="6"></textarea>' +		
+					'<textarea id="comtext" name="comments" rows="4"></textarea>' +		
 				'<input id="submit" type="submit" value="Submit"/></form>' +
 				'</span>');
 				$(this).attr('addCom', 'true');
@@ -110,10 +124,19 @@ $(document).ready(function(){
 		var comment;
 		
 		var lineNum = $($($(this).parent()).parent()).attr("line");
-		var comment = $("textarea").val();		
 		
-		var jsonStr = '{ "linenum" : "' + lineNum + '", "comment" : "' + comment +'" }'		
+		var comment = $("textarea").val().replace(/\r\n|\r|\n/g,"<br />");;
+		
+		console.log(comment);
+
+		
+		
+		
+		
+		var jsonStr = '{ "linenum" : "' + lineNum + '", "comment" : "' + comment +'" }'	
+		console.log(jsonStr);		
 		var jsonObject = JSON.parse(jsonStr);
+		console.log(jsonObject);
 		
 		commentArray.push(jsonObject);
 		
@@ -124,6 +147,15 @@ $(document).ready(function(){
 	});
 	
 	
+	$("#coms").on('click', '#delbut', function(){	
+		alert("DELETED");
+	
+	});
+	
+	$("#coms").on('click', '#editbut', function(){	
+		alert("EDITED");
+	
+	});
 
 
 

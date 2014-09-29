@@ -36,7 +36,7 @@ body {
 	margin-top:10px;
 	float:left;
 	background-color:#FFFFFF;
-	width: 850px;
+	width: 900px;
 	height: 550px;
 	overflow-y:scroll;
 	
@@ -95,11 +95,39 @@ body {
 .combox{
 	font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
 	width:200px;
-	float:inherit;
-	word-wrap: break-word;
-	margin-left:29px;
-
+	float:left;
+	position:relative;
+	background-color:#eee;
+	
+	
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	-webkit-box-shadow: 0px 0 3px rgba(0,0,0,0.25);
+	-moz-box-shadow: 0px 0 3px rgba(0,0,0,0.25);
+	box-shadow: 0px 0 3px rgba(0,0,0,0.25); 
+	margin-left:33px;
+	
+	
+	padding-left:7px;
+	padding-top:6px;
+	font-size:12px;
 }
+
+.combox:after {
+	content: "";
+	position: absolute;
+	top: -0.5px;
+	left: -15px;
+	border-style: solid;
+	border-width: 10px 15px 10px 0px;
+	border-color: transparent #EEE;
+	display: block;
+	width: 0px;
+	z-index: 1
+}
+
+
+
 .hcbutton{
 	display:block;
 	float:left;
@@ -124,6 +152,44 @@ body {
 	
 }
 
+#comtext {
+	resize: none;
+	overflow-y: auto;
+	font-size:10px;
+	outline:none;
+	width:186px;
+
+
+}
+
+.editpriv{
+	float:right;
+	margin-top:-5px;
+	padding-bottom:3px;
+	padding-right:4px;
+	display:inline;	
+	
+
+}
+
+#editbut{
+	background:none;
+	margin-right:2px;
+	border:none;
+	outline: 0;
+	background-image:url('files/smalledit.gif');
+	width:20px;
+	height:20px;
+}
+
+#delbut{
+	background:none;
+	border:none;
+	outline: 0;
+	background-image:url('files/smalldelete.gif');
+	width:20px;
+	height:20px;
+}
 
 .titlebox {
 	background-color:#FFFFFF;
