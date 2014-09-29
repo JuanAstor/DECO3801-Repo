@@ -20,7 +20,7 @@
     	<tr>
         	<td> Attach a File(s): You can select more than one </td> 
             <td>
-            	<input type="hidden" name="MAX_FILE_SIZE" value="100000000" />
+            	<input type="hidden" name="MAX_FILE_SIZE" value="4194304000" />
                 <input name="userfile[]" type="file" id="files" multiple /> <!-- Need to include the '[]' at the end of name! -->
             </td>
         </tr>

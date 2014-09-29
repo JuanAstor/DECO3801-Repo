@@ -44,13 +44,18 @@
 ?>
 <content>
 <?php //let the user know what has happened to the files submitted
-    if(isset($_SESSION['submitted'])){
-        if(strcmp($_SESSION['submitted'], 'submitted') == 0){ //has been submitted
-            echo "<span> The Files have been submitted </span>";
+    if(isset($_SESSION['submit'])){
+        if(strcmp($_SESSION['submit'], 'submitted') == 0){ //has been submitted
+            echo "<span> The file(s) have been submitted successfully </span>";
+        }		
+        else if(strcmp($_SESSION['submit'], 'error') == 0){ //file has size 0 or not allowed extension
+            echo "<span> Error uploading previous files: File type (extension) is not supported or the File size is zero </span>";
+			echo "<span> File upload has been canceled </span>";	
         }
-        else if(strcmp($_SESSION['submitted'], 'error') == 0){ //an error occured
-            echo "<span> Error uploading files </span>";	
-            }
+		else { //some other file error has occured so display the file 
+			echo "<span> Error uploading files: '".$_SESSION['submit']."' </span>";	
+			echo "<span> File upload has been canceled </span>";
+		}
     } else {
         echo "<span> Nothing has been submitted this session</span>"; //nothing has happened
     }
