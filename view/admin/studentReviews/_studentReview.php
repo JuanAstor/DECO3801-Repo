@@ -25,8 +25,8 @@ if(isset($_POST['search'])){
         <link rel="stylesheet/less" href="../css/main.less">
         <!-- JS -->
         <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-       <!-- <script src='../js/view.js'></script>
-        <script src="../js/less.js"></script> -->
+       <script src='../js/view.js'></script>
+        <script src="../js/less.js"></script>
     </head>
 	<body>
         <mcontain>
