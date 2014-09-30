@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+	$.ajaxSetup({ cache: false });
 	var commentArray = [];
 	var editPriv = true;
 	
@@ -31,7 +31,7 @@ $(document).ready(function(){
 		console.log(lineNum);
 	
 	}
-
+	
 	
 	function loadComments(commentArray){
 		console.log(commentArray);
@@ -69,22 +69,34 @@ $(document).ready(function(){
 	$(".fileselect").on("click", ".filelinks", loadCommentSystem());
 	
 	
-	$("#user1JSON").click(function(){
-		var my_json;
-		$.getJSON('files/user1.json', function(json){
+	$(".fileselect").on("click", "#user1JSONLoad", function(){	
 		
-			my_json = json;
-			console.log(my_json);
+		$.getJSON('files/user1.json', function(json){			
 			
-			$.each(my_json, function(key, comments){
+			$.each(json, function(key, comments){
 				if(key == 'comments'){
 				
-					commentArray = comments;
-					
+					commentArray = comments;					
 					loadComments(commentArray);
 				}			
 			});			
 		});	
+		
+		
+	});
+	
+	$(".fileselect").on("click", "#user1JSONSave", function(){		
+		$.ajax({
+			type: 'POST', 
+			url: 'saveJSON.php', 
+			data: {'mydata':commentArray},
+			success: function(data) { 
+             alert("COOL");
+			},
+		failure: function (data) {
+           alert('Please try again');
+       }
+    });
 	});
 		
 	$("#coms").on("click", ".hccom", 
@@ -106,7 +118,7 @@ $(document).ready(function(){
 				$(this).html('<span class="combox">' +
 					'<form id="addComForm" action="#" method="post">' +
 					'<label> Add Comment </label>' +
-					'<textarea id="comtext" name="comments" rows="4"></textarea>' +		
+					'<textarea id="comtext" name="comments" rows="8"></textarea>' +		
 				'<input id="submit" type="submit" value="Submit"/></form>' +
 				'</span>');
 				$(this).attr('addCom', 'true');
@@ -146,17 +158,81 @@ $(document).ready(function(){
 		return false;
 	});
 	
+	function deleteComment(commentArray, lineNum){
+		
+		$.each(commentArray, function(index, comInfo){			
+			
+			if (lineNum == comInfo['linenum']){		
+			
+				commentArray = jQuery.grep(commentArray, function(element, eleIndex){
+					
+					return (element != comInfo);
+
+
+				});
+				
+			}			
+			
+		});	
+		
+		return commentArray;
+		
+	}
 	
-	$("#coms").on('click', '#delbut', function(){	
-		alert("DELETED");
+	function editComment(commentArray, lineNum){
+	
+		var storedCI;
+		
+		$.each(commentArray, function(index, comInfo){			
+			
+			if (lineNum == comInfo['linenum']){		
+			
+				storedCI = comInfo['comment'];
+				
+			}		
+			
+		});		
+		
+		return storedCI;
+		
+	}
+	
+	$("#coms").on('click', '#delbut', function(){
+	
+		var parTag = $($($($(this).parent()).parent()).parent());
+		var lineNum = parTag.attr("line");	
+		console.log(lineNum);
+		
+		commentArray = deleteComment(commentArray, lineNum);
+		
+		$(parTag).addClass('hcbutton').removeClass('hccom');
+		$(parTag).html("");
+		$(parTag).attr("addcom", "false");
+		
+		loadComments(commentArray);
+		
 	
 	});
 	
-	$("#coms").on('click', '#editbut', function(){	
-		alert("EDITED");
+	$("#coms").on('click', '#editbut', function(){
+
+		var parTag = $($($($(this).parent()).parent()).parent());
+		var lineNum = parTag.attr("line");	
+		
+		var comInfo = editComment(commentArray, lineNum);
+		commentArray = deleteComment(commentArray, lineNum);
 	
+		$(parTag).html('<span class="combox">' +
+					'<form id="addComForm" action="#" method="post">' +
+					'<label> Edit Comment </label>' +
+					'<textarea id="comtext" name="comments" rows="8">'+ comInfo +'</textarea>' +		
+				'<input id="submit" type="submit" value="Submit"/></form>' +
+				'</span>');
+		
+		
 	});
-
-
-
+	
+	
+	
+	
 });
