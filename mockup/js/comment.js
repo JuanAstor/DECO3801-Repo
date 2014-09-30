@@ -1,7 +1,9 @@
 $(document).ready(function(){
+
 	$.ajaxSetup({ cache: false });
 	var commentArray = [];
 	var editPriv = true;
+	var fileURL = 'files/user1.json';
 	
 	function loadCommentSystem(){
 		//alert("works");
@@ -71,7 +73,7 @@ $(document).ready(function(){
 	
 	$(".fileselect").on("click", "#user1JSONLoad", function(){	
 		
-		$.getJSON('files/user1.json', function(json){			
+		$.getJSON(fileURL, function(json){			
 			
 			$.each(json, function(key, comments){
 				if(key == 'comments'){
@@ -89,7 +91,7 @@ $(document).ready(function(){
 		$.ajax({
 			type: 'POST', 
 			url: 'saveJSON.php', 
-			data: {'mydata':commentArray},
+			data: {'mydata':commentArray, 'url':fileURL},
 			success: function(data) { 
              alert("COOL");
 			},
