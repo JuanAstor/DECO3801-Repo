@@ -19,7 +19,7 @@
         <nav>
             <h4><i class="fa fa-tachometer"></i><span>Dashboard</span></h4>
             <h4><i class="fa fa-pencil"></i><span>Assessment</span></h4>
-            <navgroup>
+            <navgroup class="nav-assessment">
                 <div>
                     <p><a href='Assessment.php'>Show All</a></p>
                 </div>
@@ -40,7 +40,7 @@
             ?>
             </navgroup>
             <h4><i class="fa fa-comments"></i><span>Review</span></h4>
-            <navgroup>
+            <navgroup class="nav-review">
             <?php // Loop through courses and display
                 foreach ($assessments as $assessment) {
                     echo "<div><p><i class='fa fa-angle-right'></i> <a>".$assessment['AssignmentID'] . "</a></p></div>";
@@ -48,7 +48,7 @@
             ?>
             </navgroup>
             <h4><i class="fa fa-bullhorn"></i><span>Feedback</span></h4>
-            <navgroup>
+            <navgroup class="nav-feedback">
             <?php // Loop through courses and display
                 foreach ($courses as $course) {
                     echo "<div><p><i class='fa fa-angle-right'></i> <a>". $course['CourseID'] . "</a></p></div>";

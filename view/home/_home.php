@@ -47,3 +47,7 @@
     }
  ?>
 </content>
+
+<script>
+	$('navgroup').hide();
+</script>

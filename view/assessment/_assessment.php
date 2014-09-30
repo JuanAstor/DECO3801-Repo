@@ -62,3 +62,7 @@
 ?>
 </content>
 </page>
+
+<script>
+	$('navgroup:not(.nav-assessment)').hide();
+</script>

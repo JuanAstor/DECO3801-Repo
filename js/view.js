@@ -1,8 +1,6 @@
 // JavaScript Document
 $(document).ready(function(){
-
-	$('navgroup:not(:first)').hide();
-        
+     
         $('nav h4:first').click(function(){
             window.location.href = "index.php";
         });
