@@ -22,7 +22,16 @@
 		<widget title="Review Students">
 			<panel>
 				<div class="w-heading"><i class="fa fa-file-code-o"></i>Review Students</div>
-				<div class="w-body">DECO3500 <button onclick="location.href = '../StudentReviews.php';" id="Button1" class="btn btn-primary" submit-button">></button>
+    
+				<div class="w-body">
+                	<?php 
+						foreach($courses as $course){
+							//echo $course['CourseID']." <button onclick='location.href = ../studentReviews.php'; />";
+							echo "<span>".$course['CourseID']."</span>";
+							echo "<a href='../StudentReviews.php?course=".$course['CourseID']."'><input type='button' value='Go' /></a>";
+							echo "<br /> <br />";
+						}
+					?>
 				</div>
 			</panel>
 		</widget> 
@@ -34,6 +43,10 @@
 		<div><panel-end></panel-end></div>
 		<div><panel-end></panel-end></div>
     </widget-end>
+    
+    <div class="divC">    
+    </div>
 	
 	</body>
 </html>
+

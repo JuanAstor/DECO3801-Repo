@@ -112,4 +112,18 @@ function get_file_data($user, $assignmentID, $filename){
     return $query->fetchALL();	
 }
 
+//select course ID
+function select_courses($id){
+	$query = MySQL::getInstance()->query("SELECT CourseID
+										FROM `assignment`, `course`
+										WHERE course.CourseCoordinator = '".$id."' AND assignment.CourseID = course.CourseID");
+	return $query->fetchALL();	
+}
+
+function select_assignments($courseID, $userID){
+	$query = MySQL::getInstance()->query("SELECT *
+										FROM `assignment`, `assignmentfile`
+										WHERE assignment.CourseID = '".$courseID."' AND assignmentfile.UserID = '".$userID."' AND assignment.AssignmentID = assigmentfile.AssignmentID");
+	return $query->fetchALL();	
+}
 ?>
