@@ -8,7 +8,7 @@ if (!isset($_SESSION['user']) && isset($_POST['user'])) {
 }
 
 /**
- *  Show the home dashboard if student has authenticated.
+ *  Show the Assignment page if student has authenticated.
  *  Otherwise show the login prompt.
  */
 if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
@@ -18,15 +18,6 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
     if(!check_if_admin($user)){ 
 
         // Student:
-        $courses = get_users_courses($user);
-        $assessments = get_users_assessments($user);
-        $fullName = get_user_name($user);
-		$submitted = get_user_comments($user);
-
-
-        // Show home
-        include("view/home/header.php");
-        include("view/home/_home.php");
         
     }else{ 
         
@@ -35,7 +26,7 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
         $courses = get_admins_courses($user);
 		
 		include("view/home/header.php");
-		include("view/admin/home/_home.php");
+		include("view/admin/studentReviews/_studentReview.php");
     }
 }
 else{
