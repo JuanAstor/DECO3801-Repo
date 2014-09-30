@@ -26,9 +26,10 @@
 				<div class="w-body">
                 	<?php 
 						foreach($courses as $course){
-							//echo $course['CourseID']." <button onclick='location.href = ../studentReviews.php'; />";
-							echo "<span>".$course['CourseID']."</span>";
-							echo "<a href='../StudentReviews.php?course=".$course['CourseID']."'><input type='button' value='Go' /></a>";
+							//echo $course['CourseID']." <button onclick='location.href = /studentReviews.php'; />";
+							echo "<span>".$course['CourseID']."   |  </span>";
+							echo "<span>Sem ".substr($course['Semester'], -1)."    ".substr($course['Semester'],0,4)."      </span>";
+							echo "<a href='/StudentReviews.php?course=".$course['CourseID']."'><button type='button' class='btn btn-primary'>Go</button></a>";
 							echo "<br /> <br />";
 						}
 					?>
@@ -36,17 +37,14 @@
 			</panel>
 		</widget> 
         <!-- the create assessment image, on click it -->
-		<img src="../img/cass3.png" class="img-circle" onclick="location.href = '../Assessment.php'">
+		<img src="/img/cass3.png" class="img-circle" onclick="location.href = '/Assessment.php'">
 	</widget-container>
 	
 	<widget-end>
 		<div><panel-end></panel-end></div>
 		<div><panel-end></panel-end></div>
     </widget-end>
-    
-    <div class="divC">    
-    </div>
-	
+    	
 	</body>
 </html>
 

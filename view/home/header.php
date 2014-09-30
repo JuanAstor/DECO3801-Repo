@@ -24,6 +24,7 @@
                     <p><a href='Assessment.php'>Show All</a></p>
                 </div>
             <?php // Loop through courses and display
+			if(!check_if_admin($user)){//if not n admin
                 $course = "";
                 $count = 0;
                 foreach ($assessments as $assessment) {
@@ -37,22 +38,27 @@
                        . "<a href='Assessment.php?assessment=".$count."'>".$assessment['AssignmentName']."</a>"
                        . "</p></div>";
                 }
+			}
             ?>
             </navgroup>
             <h4><i class="fa fa-comments"></i><span>Review</span></h4>
             <navgroup class="nav-review">
             <?php // Loop through courses and display
+			if(!check_if_admin($user)){ //if not an admin
                 foreach ($assessments as $assessment) {
                     echo "<div><p><i class='fa fa-angle-right'></i> <a>".$assessment['AssignmentID'] . "</a></p></div>";
                 }
+			}
             ?>
             </navgroup>
             <h4><i class="fa fa-bullhorn"></i><span>Feedback</span></h4>
             <navgroup class="nav-feedback">
             <?php // Loop through courses and display
+			if(!check_if_admin($user)){ //if not an admin
                 foreach ($courses as $course) {
                     echo "<div><p><i class='fa fa-angle-right'></i> <a>". $course['CourseID'] . "</a></p></div>";
                 }
+			}
             ?>
             </navgroup>
         </nav>

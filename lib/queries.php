@@ -8,7 +8,7 @@ function get_users_courses($user) {
 }
 //get all courses that an admin is in charge of
 function get_admins_courses($user) {
-    $query = MySQL::getInstance()->query("SELECT CourseID 
+    $query = MySQL::getInstance()->query("SELECT * 
 					  FROM `course` 
 					  WHERE CourseCoordinator = '" . $user . "'");
     return $query->fetchALL();
@@ -113,17 +113,25 @@ function get_file_data($user, $assignmentID, $filename){
 }
 
 //select course ID
-function select_courses($id){
-	$query = MySQL::getInstance()->query("SELECT CourseID
-										FROM `assignment`, `course`
-										WHERE course.CourseCoordinator = '".$id."' AND assignment.CourseID = course.CourseID");
+//function select_courses($id){
+	//$query = MySQL::getInstance()->query("SELECT CourseID
+	//									FROM `assignment`, `course`
+	//									WHERE course.CourseCoordinator = '".$id."' AND assignment.CourseID = course.CourseID");
+	//return $query->fetchALL();	
+//}
+
+function get_assignID($name, $course){
+	$query = MySQL::getInstance()->query("SELECT *
+										FROM `assignment`
+										WHERE CourseID = '".$course."' AND AssignmentName = '".$name."'");
 	return $query->fetchALL();	
 }
 
-function select_assignments($courseID, $userID){
-	$query = MySQL::getInstance()->query("SELECT *
-										FROM `assignment`, `assignmentfile`
-										WHERE assignment.CourseID = '".$courseID."' AND assignmentfile.UserID = '".$userID."' AND assignment.AssignmentID = assigmentfile.AssignmentID");
-	return $query->fetchALL();	
+function get_course_assessments($courseID){
+	$query = MySQL::getInstance()->query("SELECT AssignmentName
+										FROM `assignment`
+										WHERE CourseID = '".$courseID."'");
+	return $query->fetchALL();
 }
+
 ?>
