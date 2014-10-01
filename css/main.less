@@ -148,6 +148,10 @@ a {
         padding:0px !important;
     }
     
+    page {
+        padding:2px !important;
+    }
+        
     /* Widget Border Radius Fixes
      */
     
@@ -174,9 +178,6 @@ a {
 
 /* Large devices (tablets, 975px and up) */
 @media (min-width: @screen-md-min) {
-    sidebar {
-        height:inherit;
-    }
 
     nav {
         display: block !important;
@@ -187,7 +188,7 @@ a {
     }
 
     widget-container {
-        padding-top:15px;
+        padding-top:15px !important;
         display:-webkit-flex;
         display:flex;
     }
@@ -210,6 +211,7 @@ logo span {
 header {
     overflow: hidden;
     height:50px;
+    width:100%;
     line-height:46px;
     background-color:#6fa1c7;
 }
@@ -294,8 +296,7 @@ login button {
 
 widget-container, widget-end {
     .make-xs-column(12);
-    .make-sm-column(12);
-    .make-md-column(10);
+    padding:0;
 }
 
 widget-end div {
@@ -316,7 +317,7 @@ widget {
     .make-xs-column(12);
     .make-sm-column(12);
     .make-md-column(4);
-    z-index:10;                // Place over widget-end(s).
+    z-index:1;                // Place over widget-end(s).
     padding:5px 10px 0px 10px;
     overflow:hidden;
 }
@@ -444,8 +445,6 @@ heading {
 page {
     .make-xs-column(12);
     .make-md-column(10);
-    min-height:100%;
-    padding:15px;
     background-color: #F2F2F2;
 }
 
