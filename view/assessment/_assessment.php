@@ -1,7 +1,6 @@
-<page>
-    <heading>
-        <h1>Assessment</h1>
-    </heading>
+<heading>
+    <h1>Assessment</h1>
+</heading>
 <?php
     
     if (isset($_GET['assessment'])) {
@@ -61,7 +60,6 @@
     }
 ?>
 </content>
-</page>
 
 <script>
 	$('navgroup:not(.nav-assessment)').hide();

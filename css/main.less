@@ -3,7 +3,7 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,400);
 @import url(http://fonts.googleapis.com/css?family=Patua+One);
 @import "primitive.less";
-@winheight:`$(window).height()`;
+@winheight:`Math.floor($(window).height() / 8)`;
 
 // Hide highlighting visual
 sidebar, sidebar * {
@@ -210,9 +210,9 @@ logo span {
 
 header {
     overflow: hidden;
-    height:50px;
+    height:40px;
     width:100%;
-    line-height:46px;
+    line-height:38px;
     background-color:#6fa1c7;
 }
 
@@ -225,7 +225,7 @@ header p {
     .p;
     color: white;
     float: right;
-    margin:32px 15px 0;
+    margin:22px 15px 0;
 }
 
 header p a {
@@ -443,19 +443,22 @@ heading {
 }
 
 page {
-    .make-xs-column(12);
-    .make-md-column(10);
     background-color: #F2F2F2;
+    padding-bottom:~"@{winheight}px";
 }
 
-content, heading {
+content,
+heading,
+page {
     .make-xs-column(12);
+    .make-sm-column(10);
 }
 
  /* ASSESSMENT */
  
 assessment {
     .make-xs-column(12);
+    .make-sm-column(10);
     .panel;
     .panel-default;
     padding-left:0px;
