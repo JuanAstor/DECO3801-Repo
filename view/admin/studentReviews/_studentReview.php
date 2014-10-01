@@ -6,16 +6,26 @@ $output = NULL;
 if(isset($_POST['search']) && isset($_POST['AssignName'])){
 	$search = $_POST['search'];
 	$name = $_POST['AssignName'];
-	echo $name;
-	//use student# plus courseID to return all students who've submitted. 
-	
-	echo "<br />";
+	 
+	//get the AssignmentID for the Selected Assignment
 	$ans = get_assignID($name, $courseID);
 	foreach($ans as $id){
-		echo $id['AssignmentID'];
-		echo "<br />";	
+		//only one assign id should ever be returned (since AssignID's are unique in the DB)
+		//now search for all submissions by a student for that assignmentid
+		$info = get_submitted_info($search, $id['AssignmentID']);
 	}
-	echo $ans[0]['AssignmentID'];
+	if($info != NULL){ //if a user has submitted a file for the assigment
+		$output = "File(s) submitted by ".$search.": <br />";
+		foreach($info as $files){
+			//add to the output string, the data you wish to display
+			$str = "'".$files['FileName']."'";
+			$str2 = "  was submitted at  ".$files['SubmissionTime'];
+			$str3 = "<br />";
+			$output.= $str.$str2.$str3;
+		}
+	} else { //no files submitted
+		$output = "No files have been submitted by ".$search;	
+	}
 }
 ?>
 <!DOCTYPE html>
@@ -57,7 +67,10 @@ if(isset($_POST['search']) && isset($_POST['AssignName'])){
             </form>
         
             <?php 
-            	print("$output");
+				//display the search results
+				if($output != NULL){
+            		print("$output"); 
+				}
             ?>
         </mcontain>
 	</body>
