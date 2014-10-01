@@ -23,12 +23,24 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
         
         // Admin:
         $fullName = get_user_name($user);
-        //$courses = get_admins_courses($user);
+        $courses = get_admins_courses($user);
+		$count = 0;
 		
 		if(isset($_GET['course'])){ //if the courseID has been passed through
-			$courseID = $_GET['course'];
-			include("view/home/header.php");
-			include("view/admin/studentReviews/_studentReview.php");	
+			//if the courseID is related to the admin logged in
+			foreach($courses as $list){
+				if($_GET['course'] == $list['CourseID']){
+					$count = 1; 
+				} 
+			}
+			if($count == 1){ //the courseID matches a courseID the admin is in charge of
+				$courseID = $_GET['course'];
+				include("view/home/header.php");
+				include("view/admin/studentReviews/_studentReview.php");	
+			} else {
+				header('Location: /index.php');	
+			}
+				
 		} 
 		else { //if no courseID is set, return the user back to the main page
 			header('Location: /index.php');	

@@ -1,3 +1,11 @@
+<?php
+	
+	//if all fields have been entered
+		//if the courseID + assignName do not already exist
+			//add to the db
+		//else return Assignment name error
+	//else error, not all fields were entered.
+?>
 <html>
     <head>
     <title>Code Review</title>
@@ -18,8 +26,24 @@
 			<form role="form">
 				<div class="form-group">
 					<label for="cID">Course ID</label>
-					<input class="form-control" id="cID" placeholder="Enter Course ID here">
+					<?php
+					echo "<select name='courseID' id='cID'>";
+					echo "<option value=''>Select...</option>";
+					foreach($courses as $course){
+						$name = $course['CourseID'];
+						echo "<option value='".$name."' >".$name."</option>";
+					}
+					echo "</select>";
+					?>
 				</div>
+                <div>
+                	<label for="sem">Select Semester</label>
+                    <select name="semester" id="sem">
+                    	<option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
 				<div class="form-group">
 					<label for="aName">Assignment Name</label>
 					<input class="form-control" id="aName" placeholder="Enter Assignment name here">
@@ -40,11 +64,8 @@
 					<label for="date">Date Due</label>
 					<input class="form-control" id="date" placeholder="Enter date here">
 				</div>
-							
-				<div class="form-group">
-					<label for="critAss">Number of critiques assigned per assignment</label>
-					<input class="form-control" id="critAss" placeholder="Enter # of critiques to be completed">
-				</div>
+				
+				<label>Please make sure that every field has been completed</label>
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>
 		</widget-container>

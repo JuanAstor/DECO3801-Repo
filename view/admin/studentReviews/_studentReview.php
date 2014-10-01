@@ -52,6 +52,7 @@ if(isset($_POST['search']) && isset($_POST['AssignName'])){
                 <!--<select name="AssignName"> -->
                 <?php 
 					echo "<select name='AssignName'>";
+					echo "<option value=''>Select...</option>";
 					foreach($result as $na) {
 						$name = $na['AssignmentName'];
 						echo "<option value='".$name."' >".$name."</option>"; //display all assignment options
