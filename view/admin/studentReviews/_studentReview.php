@@ -66,13 +66,14 @@ if(isset($_POST['search']) && isset($_POST['AssignName'])){
                 <input type="text" name="search" placeholder="Enter Student Number">
                 <input type="submit" value="submit" class="btn btn-primary">
             </form>
-        
-            <?php 
-				//display the search results
-				if($output != NULL){
-            		print("$output"); 
-				}
-            ?>
+        	<div>
+				<?php 
+                    //display the search results
+                    if($output != NULL){
+                        print("$output"); 
+                    }
+                ?>
+            </div>
         </mcontain>
 	</body>
 </html>

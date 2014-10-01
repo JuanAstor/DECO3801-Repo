@@ -134,4 +134,25 @@ function get_course_assessments($courseID){
 	return $query->fetchALL();
 }
 
+//find out if an assignment name already exists for a course 
+function find_assignmentName($courseID, $name, $semester){
+	$query = MySQL::getInstance()->query("SELECT count(1)
+										FROM `assignment`
+										WHERE CourseID = '".$courseID."' AND Semester = '".$semester."' AND AssignmentName = '".$name."'");
+	return $query->fetchALL();
+}
+
+//insert a new row into the assignment folder
+function create_assignment($num, $cID, $sem, $decript, $name, $date, $time){
+	 return MySQL::getInstance()->query("INSERT INTO `assignment`
+	(`AssignmentID`, `CourseID`, `Semester`, `AssignmentDescription`, `AssignmentName`, `DueDate`, `DueTime`) VALUES 								(	'".$num."','".$cID."','".$sem."','".$decript."','".$name."','".$date."','".$time."') ");
+}
+
+function check_semester($courseID, $semester){
+	$query = MySQL::getInstance()->query("SELECT count(1)
+										FROM `course`
+										WHERE CourseID = '".$courseID."' AND Semester = '".$semester."'");
+	return $query->fetchALL();	
+}
+
 ?>
