@@ -31,7 +31,7 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
 			include("view/admin/studentReviews/_studentReview.php");	
 		} 
 		else { //if no courseID is set, return the user back to the main page
-			header('Location: ../index.php');	
+			header('Location: /index.php');	
 		}
 
 		
