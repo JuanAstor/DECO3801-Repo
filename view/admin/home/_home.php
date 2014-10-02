@@ -17,7 +17,7 @@
 				<div class="w-heading"><i class="fa fa-clipboard"></i>Edit Assessment</div>
 				
 				<div class="w-body">
-                	<?php
+                	<?php 
 						foreach($courses as $course){
 							echo "<span>".$course['CourseID']."   |	   </span>";
 							echo "<span>Semester ".substr($course['Semester'],-1)." ".substr($course['Semester'],0,4)."    </span>";
