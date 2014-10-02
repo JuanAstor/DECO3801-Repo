@@ -29,8 +29,10 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
 		if(isset($_GET['course']) && isset($_GET['sem'])){ //if the courseID has been passed through
 			//if the courseID is related to the admin logged in
 			foreach($courses as $list){
-				if($_GET['course'] == $list['CourseID']){
-					$count = 1; 
+				if($_GET['course'] == $list['CourseID']){ //check that the admin is in charge of the specified course
+					if($_GET['sem'] == $list['Semester']){ //check that the Course's semester is also related
+						$count = 1; //if it is then the admin is authorised to view info on the course at that semester
+					}
 				} 
 			}
 			if($count == 1){ //the courseID matches a courseID the admin is in charge of
