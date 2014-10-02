@@ -22,7 +22,7 @@
 			if($newCount[0][0] > 0) {
 				//the assignment name for the courseID and semester is unique, so continue.
 				//add the values to the database return a success message
-				create_assignment('1', $courseID, $semester, $description, $name, $date, $time);
+				create_assignment($courseID, $semester, $description, $name, $date, $time);
 				$output = "The Assignment has successfully been created <br />";
 			} else {
 				$output = "Error: Semester value doesn't match the selected course";	
@@ -83,14 +83,14 @@
 				
 				<div class="form-group">
 					<label for="time">Time Due</label>
-					<input class="form-control" id="time" name="time" placeholder="Enter time here">
+					<input class="form-control" id="time" name="time" placeholder="Time Format: 24hour - HH:MM">
 				</div>
 				
 				
  
 				<div class="form-group">
 					<label for="date">Date Due</label>
-					<input class="form-control" id="date" name="date" placeholder="Enter date here">
+					<input class="form-control" id="date" name="date" placeholder="Format: YYYY/MM/DD">
 				</div>
 				
 				<label>Please make sure that every field has been completed</label>

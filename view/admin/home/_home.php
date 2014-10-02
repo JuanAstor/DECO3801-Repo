@@ -12,11 +12,27 @@
 	<body>
     	
 	<widget-container>
-		<widget title="Created Assessment">
+		<widget title="Edit Assessment">
 			<panel>
-				<div class="w-heading"><i class="fa fa-clipboard"></i>Created Assessment</div>
+				<div class="w-heading"><i class="fa fa-clipboard"></i>Edit Assessment</div>
 				
-				<div class="w-body">DECO3500 <button onclick="location.href = '';" id="Button1" class="btn btn-primary" submit-button">></button></div>
+				<div class="w-body">
+                	<?php
+						foreach($courses as $course){
+							echo "<span>".$course['CourseID']."   |	   </span>";
+							echo "<span>Semester ".substr($course['Semester'],-1)." ".substr($course['Semester'],0,4)."    </span>";
+							echo "<br />"; 
+							$result = get_course_assessments($course['CourseID']);
+							foreach($result as $name){	
+								echo "<span>--------------</span>";
+								echo $name['AssignmentName'];
+								echo "<a href=''><button type='button' class='btn btn-primary'>Go</button></a>";
+								echo "<br />";
+							}
+							echo "<br />";
+						}
+					?>
+                </div>
 			</panel>
 		</widget>
 		<widget title="Review Students">

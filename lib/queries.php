@@ -143,11 +143,12 @@ function find_assignmentName($courseID, $name, $semester){
 }
 
 //insert a new row into the assignment folder
-function create_assignment($num, $cID, $sem, $decript, $name, $date, $time){
+function create_assignment($cID, $sem, $decript, $name, $date, $time){
 	return MySQL::getInstance()->query("INSERT INTO `assignment`
-	(`AssignmentID`, `CourseID`, `Semester`, `AssignmentDescription`, `AssignmentName`, `DueDate`, `DueTime`) VALUES 								(	'".$num."','".$cID."','".$sem."','".$decript."','".$name."','".$date."','".$time."') ");
+	(`CourseID`, `Semester`, `AssignmentDescription`, `AssignmentName`, `DueDate`, `DueTime`) VALUES 								(	'".$cID."','".$sem."','".$decript."','".$name."','".$date."','".$time."') ");
 }
 
+//check that the semester value exists for the selected course
 function check_semester($courseID, $semester){
 	$query = MySQL::getInstance()->query("SELECT count(1)
 										FROM `course`
