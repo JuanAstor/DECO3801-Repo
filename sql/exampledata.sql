@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   KEY `CommentUserID_idx` (`UserID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `comment` (`FileID`, `UserID`, `LineNumber`, `JSONFile`) VALUES
+INSERT INTO `comment` (`FileID`, `UserID`, `LineNumber`, `LineComment`) VALUES
 (1, '11112222', 10, 'JSON FILE GOES HERE'),
 (1, '35421544', 1, 'JSON FILE GOES HERE'),
 (1, '44226945', 4, 'JSON FILE GOES HERE'),
