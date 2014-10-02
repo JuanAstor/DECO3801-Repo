@@ -447,18 +447,31 @@ page {
     padding-bottom:~"@{winheight}px";
 }
 
-content,
-heading,
-page {
+content
+{
     .make-xs-column(12);
     .make-sm-column(10);
+    .make-md-column(10);
+}
+
+heading {
+    .make-xs-column(12);
+    .make-sm-column(10);
+    .make-md-column(10);
+}
+
+page {
+    .make-xs-column(12);
+    .make-sm-column(12);
+    .make-md-column(10);
 }
 
  /* ASSESSMENT */
  
 assessment {
     .make-xs-column(12);
-    .make-sm-column(10);
+    .make-sm-column(12);
+    .make-md-column(10);
     .panel;
     .panel-default;
     padding-left:0px;
