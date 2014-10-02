@@ -26,7 +26,7 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
         $courses = get_admins_courses($user);
 		$count = 0;
 		
-		if(isset($_GET['course'])){ //if the courseID has been passed through
+		if(isset($_GET['course']) && isset($_GET['sem'])){ //if the courseID has been passed through
 			//if the courseID is related to the admin logged in
 			foreach($courses as $list){
 				if($_GET['course'] == $list['CourseID']){
@@ -35,6 +35,7 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
 			}
 			if($count == 1){ //the courseID matches a courseID the admin is in charge of
 				$courseID = $_GET['course'];
+				$semester = $_GET['sem'];
 				include("view/home/header.php");
 				include("view/admin/studentReviews/_studentReview.php");	
 			} else {

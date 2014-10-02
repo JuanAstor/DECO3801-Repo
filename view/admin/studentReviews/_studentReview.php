@@ -1,6 +1,6 @@
 <?php
 	//display all assignments available in the course
-	$result = get_course_assessments($courseID);
+	$result = get_course_assessments($courseID, $semester);
 	
 $output = NULL;
 if(isset($_POST['search']) && isset($_POST['AssignName'])){

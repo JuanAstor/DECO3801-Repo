@@ -127,10 +127,10 @@ function get_assignID($name, $course){
 	return $query->fetchALL();	
 }
 
-function get_course_assessments($courseID){
+function get_course_assessments($courseID, $semester){
 	$query = MySQL::getInstance()->query("SELECT AssignmentName
 										FROM `assignment`
-										WHERE CourseID = '".$courseID."'");
+										WHERE CourseID = '".$courseID."' AND Semester = '".$semester."'");
 	return $query->fetchALL();
 }
 

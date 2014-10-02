@@ -22,7 +22,7 @@
 							echo "<span>".$course['CourseID']."   |	   </span>";
 							echo "<span>Semester ".substr($course['Semester'],-1)." ".substr($course['Semester'],0,4)."    </span>";
 							echo "<br />"; 
-							$result = get_course_assessments($course['CourseID']);
+							$result = get_course_assessments($course['CourseID'], $course['Semester']);
 							foreach($result as $name){	
 								echo "<span>--------------</span>";
 								echo $name['AssignmentName'];
@@ -45,7 +45,7 @@
 							//echo $course['CourseID']." <button onclick='location.href = /studentReviews.php'; />";
 							echo "<span>".$course['CourseID']."   |  </span>";
 							echo "<span>Sem ".substr($course['Semester'], -1)."    ".substr($course['Semester'],0,4)."      </span>";
-							echo "<a href='/StudentReviews.php?course=".$course['CourseID']."'><button type='button' class='btn btn-primary'>Go</button></a>";
+							echo "<a href='/StudentReviews.php?course=".$course['CourseID']."&sem=".$course['Semester']."'><button type='button' class='btn btn-primary'>Go</button></a>";
 							echo "<br /> <br />";
 						}
 					?>
