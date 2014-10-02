@@ -10,7 +10,6 @@
 		$time = $_POST['time'];
 		$date = $_POST['date'];
 		//covert the semester to the yyyy-s format used in the database
-		//get current year then append the semester value to it
 		//check that the assigment name doesn't already exist for that courseID
 		$semester = date('Y').$sem; 
 		$result = find_assignmentName($courseID, $name, $semester);
@@ -99,8 +98,8 @@
 			</form>
 		</widget-container>
         
-        <div>
-        	<?php
+        <div> 
+        	<?php //display the error or success messages after form submit
 				if($output != NULL){
 					print($output);	
 				}
