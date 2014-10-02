@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `PeerReview`.`Comment` (
   `FileID` MEDIUMINT UNSIGNED NOT NULL,
   `UserID` CHAR(8) NOT NULL,
   `LineNumber` INT NOT NULL,
-  `LineComment` MEDIUMTEXT NOT NULL,
+  `JSONFile` MEDIUMTEXT NOT NULL,
   PRIMARY KEY (`FileID`, `UserID`, `LineNumber`),
   INDEX `CommentUserID_idx` (`UserID` ASC),
   CONSTRAINT `CommentFileID`
