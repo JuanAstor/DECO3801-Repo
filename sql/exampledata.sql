@@ -239,11 +239,11 @@ CREATE TABLE IF NOT EXISTS `user` (
   `UserID` char(8) NOT NULL,
   `FName` varchar(45) DEFAULT NULL,
   `SName` varchar(45) DEFAULT NULL,
-  `Priveleges` tinytext,
+  `Privileges` tinytext,
   PRIMARY KEY (`UserID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `user` (`UserID`, `FName`, `SName`, `Priveleges`) VALUES
+INSERT INTO `user` (`UserID`, `FName`, `SName`, `Privileges`) VALUES
 ('11112222', 'Joe', 'Bloggs', 'Admin'),
 ('12121454', 'Chris', 'Jordan', 'Student'),
 ('12123434', 'Frank', 'Goldberg', 'Student'),

@@ -39,12 +39,12 @@ function get_user_name($user) {
 
 //check if the user that has logged in is an admin
 function check_if_admin($user) { //returns 1 if an admin, 0 if student
-    $query = MySQL::getInstance()->query("SELECT Priveleges 
+    $query = MySQL::getInstance()->query("SELECT Privileges 
 					  					  FROM `user` 
                                           WHERE UserID = '" . $user . "'");
     $result = $query->fetchALL();
     foreach ($result as $permission) {
-        if (strcmp($permission['Priveleges'], "Admin") == 0) { //strcmp will return 0 if the strings are equal
+        if (strcmp($permission['Privileges'], "Admin") == 0) { //strcmp will return 0 if the strings are equal
             return true; //is an admin
         } else {
             return false; //is a student
@@ -144,7 +144,7 @@ function find_assignmentName($courseID, $name, $semester){
 
 //insert a new row into the assignment folder
 function create_assignment($num, $cID, $sem, $decript, $name, $date, $time){
-	 return MySQL::getInstance()->query("INSERT INTO `assignment`
+	return MySQL::getInstance()->query("INSERT INTO `assignment`
 	(`AssignmentID`, `CourseID`, `Semester`, `AssignmentDescription`, `AssignmentName`, `DueDate`, `DueTime`) VALUES 								(	'".$num."','".$cID."','".$sem."','".$decript."','".$name."','".$date."','".$time."') ");
 }
 
@@ -153,6 +153,21 @@ function check_semester($courseID, $semester){
 										FROM `course`
 										WHERE CourseID = '".$courseID."' AND Semester = '".$semester."'");
 	return $query->fetchALL();	
+}
+
+//adds a new user if none exists and then updates the details of that user
+function update_user($uID, $fName, $sName, $privileges){
+	MySQL::getInstance()->query("INSERT INTO `user` (`UserID`) 
+								VALUES ('".$uID."')");
+	return MySQL::getInstance()->query("UPDATE `user` 
+										SET `FName` = '".$fName."', `SName` = '".$sName."',`Privileges`='".$privileges."' 
+										WHERE `UserID` = '".$uID."'");
+}
+
+//adds an enrolment record for a specified user and course if it doesn't yet exist.
+function update_enrolment($uID, $cID, $semesterCode){
+	return MySQL::getInstance()->query("INSERT INTO `courseenrolment` (`UserID`, `CourseID, `Semester`) 
+										VALUES ('".$uID."','".$cID."','".$semesterCode."')");
 }
 
 ?>

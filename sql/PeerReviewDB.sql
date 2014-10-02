@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `PeerReview`.`User` (
   `UserID` CHAR(8) NOT NULL,
   `FName` VARCHAR(45) NULL,
   `SName` VARCHAR(45) NULL,
-  `Priveleges` TINYTEXT NULL,
+  `Privileges` TINYTEXT NULL,
   PRIMARY KEY (`UserID`))
 ENGINE = InnoDB;
 
