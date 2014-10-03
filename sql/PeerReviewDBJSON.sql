@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `PeerReview`.`Assignment` (
   `AssignmentID` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CourseID` CHAR(8) NOT NULL,
   `Semester` CHAR(5) NOT NULL,
-  `AssignmentDescription` VARCHAR(45) NULL,
+  `AssignmentDescription` VARCHAR(150) NULL,
   `AssignmentName` VARCHAR(45) NULL,
   `DueDate` DATE NULL,
   `DueTime` TIME NULL,

@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `assignment` (
   `AssignmentID` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `CourseID` char(8) NOT NULL,
   `Semester` char(5) NOT NULL,
-  `AssignmentDescription` varchar(45) DEFAULT NULL,
+  `AssignmentDescription` varchar(150) DEFAULT NULL,
   `AssignmentName` varchar(45) DEFAULT NULL,
   `DueDate` date DEFAULT NULL,
   `DueTime` time DEFAULT NULL,
