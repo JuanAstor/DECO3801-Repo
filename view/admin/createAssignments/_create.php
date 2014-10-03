@@ -1,6 +1,7 @@
 <?php
 
-	$output = NULL;
+	$output = NULL; //what is to be displayed to the admin on form submit
+	//if all the form values have been set, assign variables, error check and then send to database
 	if(isset($_POST['cID']) && isset($_POST['semester']) && isset($_POST['AName']) && isset($_POST['desc']) && 
 	isset($_POST['time']) && isset($_POST['date'])){
 		$courseID = $_POST['cID'];
@@ -49,21 +50,22 @@
 		<script src="../js/bootstrap-datetimepicker.min.js"></script> -->
     </head>
 	<body>
+    	<h2>Create Assessment</h2>
 		<widget-container>
 			<form action="/Assessment.php" method="post">
 				<div class="form-group">
 					<label for="cID">Course ID</label>
-					<?php
+					<?php //display all courseID's that an admin can create an assignment in
 					echo "<select name='cID' id='cID'>";
 					echo "<option value=''>Select...</option>";
 					foreach($courses as $course){
-						$name = $course['CourseID'];
-						echo "<option value='".$name."' >".$name."</option>";
+						$cID = $course['CourseID'];
+						echo "<option value='".$cID."' >".$cID."</option>";
 					}
 					echo "</select>";
 					?>
 				</div>
-                <div>
+                <div> <!-- display all semester choices -->
                 	<label for="sem">Select Semester</label>
                     <select name="semester" id="sem">
                     	<option value="">Select...</option>

@@ -134,6 +134,37 @@ function get_course_assessments($courseID, $semester){
 	return $query->fetchALL();
 }
 
+function get_assign_info($courseID, $semester, $name){
+	$query = MySQL::getInstance()->query("SELECT *
+										FROM `assignment`
+										WHERE CourseID = '".$courseID."' AND Semester = '".$semester."' AND AssignmentName = '".$name."'");
+	return $query->fetchALL();
+}
+
+//edit an assignment: update the assignment info
+function update_assign_info($assignID, $name, $description, $time, $date){
+	$query = MySQL::getInstance()->query("UPDATE `assignment` 
+				SET AssignmentDescription = '".$description."', AssignmentName = '".$name."', DueDate = '".$date."', 
+					DueTime = '".$time."'
+				WHERE AssignmentID = '".$assignID."'");
+	if(!$query) {
+		return 'error';
+	} else {
+		return 'success';	
+	}
+}
+
+//delete assignment from table
+function delete_assignment($assignID){
+	$query = MySQL::getInstance()->query("DELETE FROM `assignment`
+										WHERE AssignmentID = '".$assignID."'");
+	if(!$query) {
+		return 'error';	
+	} else {
+		return 'success';	
+	}
+}
+
 //find out if an assignment name already exists for a course 
 function find_assignmentName($courseID, $name, $semester){
 	$query = MySQL::getInstance()->query("SELECT count(1)
