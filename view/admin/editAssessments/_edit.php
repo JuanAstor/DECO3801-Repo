@@ -90,7 +90,10 @@ jQuery(function ($) {
 				data: {assignID : <?php echo $assignID ?>,
 					   del : "delete" },
 				success: function(data){
-					$(".delMessage").text(data);
+					//$(".delMessage").text(data);
+					alert(data);
+					var url = "/index.php";
+					$(location).attr('href',url);				
 					
 				}
 			});
