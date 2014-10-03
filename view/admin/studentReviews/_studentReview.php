@@ -47,7 +47,7 @@ if(isset($_POST['search']) && isset($_POST['AssignName'])){
             <button type="button" class="btn btn-primary">Clear</button>
             <br></br>
             
-            <form action="/StudentReviews.php?course=<?php echo $courseID ?>" method="post" >
+            <form action="/StudentReviews.php?course=<?php echo $courseID ?>&sem=<?php echo $semester ?>" method="post" >
             	<label>Select Assignment</label>
                 <!--<select name="AssignName"> -->
                 <?php 
