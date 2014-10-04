@@ -15,8 +15,7 @@
 		
 	
 		
-		<script src="js/comment.js" type="text/javascript"></script>
-		
+		<script src="js/commentDB.js" type="text/javascript"></script>
 		
 		
 		
@@ -58,8 +57,7 @@
 			<a class="filelinks" href='?file=File3.txt'>File3.txt</a>
 			<a class="filelinks" href='?file=File4.txt'>File4.txt</a>
 			
-			<button id="user1JSONLoad" >Load JSON</button>
-			<button id="user1JSONSave" >Save JSON</button>
+					
 			
 		</div>
 		
@@ -69,7 +67,12 @@
 				
 			<!-- IMPORTANT: pre opening tag and php code must be next
 			to each other or unwanted indentation may happen. -->
-	
+			
+			<div id="revSelect">
+				<ul id="tabs">
+					
+				</ul>
+			</div>
 			
 			<pre class="prettyprint"><?php
 				if (isset($_GET['file']) == NULL){
