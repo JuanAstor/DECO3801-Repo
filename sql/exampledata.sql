@@ -86,12 +86,12 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `FileID` mediumint(8) unsigned NOT NULL,
   `UserID` char(8) NOT NULL,
   `LineNumber` int(11) NOT NULL,
-  `JSONFile` mediumtext NOT NULL,
+  `LineComment` mediumtext NOT NULL,
   PRIMARY KEY (`FileID`,`UserID`,`LineNumber`),
   KEY `CommentUserID_idx` (`UserID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `comment` (`FileID`, `UserID`, `LineNumber`, `JSONFile`) VALUES
+INSERT INTO `comment` (`FileID`, `UserID`, `LineNumber`, `LineComment`) VALUES
 (1, '11112222', 10, 'JSON FILE GOES HERE'),
 (1, '35421544', 1, 'JSON FILE GOES HERE'),
 (1, '44226945', 4, 'JSON FILE GOES HERE'),
