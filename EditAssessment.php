@@ -8,8 +8,8 @@ if (!isset($_SESSION['user']) && isset($_POST['user'])) {
 }
 
 /**
- *  Show the Assignment page if student has authenticated.
- *  Otherwise show the login prompt.
+ *  Show the edit assessment page to an admin, return to the homepage if a student somehow accesses this page
+ * 
  */
 if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
     
@@ -18,20 +18,37 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
     if(!check_if_admin($user)){ 
 
         // Student:
+		//students shouldn't have access to this page, is they somehow do then return them to the homepage
 		header('Location: /index.php');
         
     }else{ 
-        if(isset($_GET['course']) && isset($_GET['sem'])){
-			// Admin:
-			$fullName = get_user_name($user);
-			$courses = get_admins_courses($user);
-			
-			$courseID = $_GET['course'];
-			$semester = $_GET['sem'];
-			$name = $_GET['name'];
-			
-			include("view/home/header.php");
-			include("view/admin/editAssessments/_edit.php");
+		// Admin:
+		$fullName = get_user_name($user);
+		$courses = get_admins_courses($user);
+		$count = 0; 
+		//check that the entered href info is correct and that the admin is allowed to be
+		//accessing this assignment info
+        if(isset($_GET['course']) && isset($_GET['sem']) && isset($_GET['name'])){	
+			foreach($courses as $list){
+				if($_GET['course'] == $list['CourseID'] && $_GET['sem'] == $list['Semester']){
+					//check if the name relates to these in the database
+					$result = get_course_assessments($_GET['course'], $_GET['sem']);
+					if($_GET['name'] == $result[0][0]){
+						$count = 1; //admin can access this info
+					}
+				}
+			}
+			if($count == 1){ //if they can access this info then display it to them
+				$courseID = $_GET['course'];
+				$semester = $_GET['sem'];
+				$name = $_GET['name'];
+				
+				include("view/home/header.php");
+				include("view/admin/editAssessments/_edit.php"); 
+				
+			} else { //they are not allowed to access this info so return to the homepage
+				header('Location: /index.php');	
+			}
 		}
     }
 }

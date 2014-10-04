@@ -17,7 +17,7 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
     
     if(!check_if_admin($user)){ 
 
-        // Student:
+        // Student: allow students to submit assessments
         $courses = get_users_courses($user);
         $assessments = get_users_assessments($user);
         $fullName = get_user_name($user);
@@ -28,7 +28,7 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
         
     }else{ 
         
-        // Admin:
+        // Admin: allow an admin to create an assignment
         $fullName = get_user_name($user);
         $courses = get_admins_courses($user);
 		

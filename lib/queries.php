@@ -104,6 +104,28 @@ function get_login_status($user) {
     }
 }
 
+//if any files have been submitted for a certain courseID, delete them
+function delete_submissions($assignID){
+	$query1 = MySQL::getInstance()->query("SELECT count(1)
+											FROM `assignmentfile`
+											WHERE AssignmentID = '".$assignID."'");
+											
+	$result = $query1->fetchALL();
+	$count = $result[0];
+	if($count[0] > 0){ 
+		//if any assignment files have been submitted 
+		//first delete any possible reviews on these files (so no violations in the db)
+		MySQL::getInstance()->query("DELETE FROM `reviewer`
+												WHERE FileID IN (SELECT FileID 
+																FROM `assignmentfile`
+																WHERE AssignmentID = '".$assignID."')");
+		//finally delete any file submissions made
+		return MySQL::getInstance()->query("DELETE FROM `assignmentfile`
+											WHERE AssignmentID = '".$assignID."'");	
+		
+	}
+}
+
 //retrieve the file data that has been submitted by a user
 function get_file_data($user, $assignmentID, $filename){
     $query = MySQL::getInstance()->query("SELECT *
