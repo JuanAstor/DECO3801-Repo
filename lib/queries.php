@@ -116,14 +116,24 @@ function delete_submissions($assignID){
 		//if any assignment files have been submitted 
 		//first delete any possible reviews on these files (so no violations in the db)
 		MySQL::getInstance()->query("DELETE FROM `reviewer`
-												WHERE FileID IN (SELECT FileID 
-																FROM `assignmentfile`
-																WHERE AssignmentID = '".$assignID."')");
+									WHERE FileID IN (SELECT FileID 
+														FROM `assignmentfile`
+														WHERE AssignmentID = '".$assignID."')");
 		//finally delete any file submissions made
 		return MySQL::getInstance()->query("DELETE FROM `assignmentfile`
 											WHERE AssignmentID = '".$assignID."'");	
 		
 	}
+}
+
+//find out if a user has commented on any files for an assignment
+function find_user_comments($userID, $assignID){
+	$query = MySQL::getInstance()->query("SELECT * 
+										FROM `comment`
+										WHERE UserID = '".$userID."' AND FileID IN (SELECT FileID
+																					FROM `assignmentfile`
+																			WHERE AssignmentID = '".$assignID."')");
+	return $query->fetchALL();
 }
 
 //retrieve the file data that has been submitted by a user
@@ -133,14 +143,6 @@ function get_file_data($user, $assignmentID, $filename){
                                           WHERE UserID = '".$user."' AND AssignmentID = '".$assignmentID."' AND FileName = '".$filename."'"); 
     return $query->fetchALL();	
 }
-
-//select course ID
-//function select_courses($id){
-	//$query = MySQL::getInstance()->query("SELECT CourseID
-	//									FROM `assignment`, `course`
-	//									WHERE course.CourseCoordinator = '".$id."' AND assignment.CourseID = course.CourseID");
-	//return $query->fetchALL();	
-//}
 
 function get_assignID($name, $course){
 	$query = MySQL::getInstance()->query("SELECT *
