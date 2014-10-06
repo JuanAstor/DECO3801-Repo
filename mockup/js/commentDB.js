@@ -2,6 +2,7 @@ $(document).ready(function(){
 
 	$.ajaxSetup({ cache: false });
 	
+	
 	// array to hold all comments "locally"
 	var commentArray = [];
 	
@@ -112,7 +113,7 @@ $(document).ready(function(){
 			for (var i = 1; i <= lineNum; i++){
 			
 				document.getElementById("coms").innerHTML +=
-				"<span line=\"" + i + "\" addCom=\"false\" class = \"hcbutton\" ></span>";		
+				"<span line=\"" + i + "\" hasCom=\"false\" class = \"hcbutton\" ></span>";		
 		
 			}
 		
@@ -121,7 +122,7 @@ $(document).ready(function(){
 			for (var i = 1; i <= lineNum; i++){
 			
 				document.getElementById("coms").innerHTML +=
-				"<span line=\"" + i + "\" addCom=\"false\" class = \"hcbuttonown\" ></span>";		
+				"<span line=\"" + i + "\" hasCom=\"false\" class = \"hcbuttonown\" ></span>";		
 		
 			}
 			
@@ -172,30 +173,38 @@ $(document).ready(function(){
 	
 		console.log(editPriv);
 		
-		
+	
 		$.each(commentArray, function(index, comInfo){
 					
 			$('#coms').children().each(function(){
 						
 				if ($(this).attr('line') == comInfo['LineNumber']){
-							
-					if(!isOwner){$(this).addClass('hccom').removeClass('hcbutton');}
+				
+					var lineNum = comInfo['LineNumber'];
+					var lineCom = comInfo['LineComment'];
+						
+				
+					if(!isOwner){$(this).addClass('hccom').removeClass('hcbutton');
+								 $(this).attr('hascom', 'true');}
 					else { $(this).addClass('hccom').removeClass('hcbuttonown'); }
 					
 					
 					if (!editPriv){ 	
 					
-						$(this).html("<span class=\"combox\">  Line " +
-						comInfo['LineNumber'] + " - " + comInfo['LineComment'] + "</span>");
+						$(this).html("<span class=\"combox\"> <b> Line " +
+						lineNum + "</b> <br />" + lineCom + "</span>");
 						
 					} else {
 
-						$(this).html("<span class=\"combox\">  Line " +
-						comInfo['LineNumber'] + " - " + comInfo['LineComment'] 
-						+ "<div class=\"editpriv\"><button id=\"editbut\" ></button>" +
+						$(this).html("<span class=\"combox\">  <b>Line " +
+						lineNum + "</b> <br /><textarea class=\"trans\" readonly>" + lineCom
+						+ "</textarea ><div class=\"editpriv\"><button id=\"editbut\" ></button>" +
 						"<button id=\"delbut\" ></button></div></span>");
 					
 					}
+					var txtArea = $(this).find(".trans");
+					txtArea.css("height", 'auto');
+					txtArea.css("height", (txtArea[0].scrollHeight + 'px'));
 					$(this).children().hide();
 				}						
 			});				
@@ -238,7 +247,21 @@ $(document).ready(function(){
 		
 	}
 	
-	
+	function replaceSpecialChars(string){
+		
+		var comment = string.replace(/[\\]/g, '\\\\')
+							.replace(/[\/]/g, '\\/')
+							.replace(/[\b]/g, '\\b')
+							.replace(/[\f]/g, '\\f')
+							.replace(/[\n]/g, '\\n')
+							.replace(/[\r]/g, '\\r')
+							.replace(/[\t]/g, '\\t')
+							.replace(/\r\'|\r|\'/g,"&#38;")
+							.replace(/\r\"|\r|\"/g,"&quot;");
+				
+		return comment;
+	}
+
 	//-------------------------------------------------------
 	
 	$(".fileselect").on("click", ".filelinks", runAll());
@@ -257,6 +280,7 @@ $(document).ready(function(){
 		function(){
 			$(".hccom").children().hide();
 			$(".hcbutton").children().hide();
+			
 			$(this).children().toggle();
 			
 	});
@@ -268,28 +292,31 @@ $(document).ready(function(){
 			$(".hcbutton").children().hide();
 			$(this).children().toggle();
 			
-			if($(this).attr('addCom') == 'false'){
+			if($(this).attr('hasCom') == 'false'){
+				$(".hcbutton").html("");
 				$(this).html('<span class="combox">' +
 					'<form id="addComForm" action="#" method="post">' +
 					'<label> Add Comment </label>' +
 					'<textarea id="comtext" name="comments" rows="8"></textarea>' +		
 				'<input id="submit" type="submit" value="Submit"/></form>' +
 				'</span>');
-				$(this).attr('addCom', 'true');
+				
 			} else {
 				
 			}
-			
+			$(".hcbutton").attr('hasCom', 'false');
+			$(this).attr('hasCom', 'true');
 	});
 		
 		
 	// Code for adding comments
 	$("#coms").on('submit', '#addComForm', function(){		
 		
+		var parTag = $($($(this).parent()).parent());
 		var lineNum = $($($(this).parent()).parent()).attr("line");
 		
-		var comment = $("textarea").val().replace(/\r\n|\r|\n/g,"<br />");;
-				
+		var comment = replaceSpecialChars($("#comtext").val());
+		
 		var jsonStr = '{ "LineNumber" : "' + lineNum + '", "LineComment" : "' + comment +'" }'	
 		console.log(jsonStr);		
 		var jsonObject = JSON.parse(jsonStr);
@@ -318,8 +345,8 @@ $(document).ready(function(){
 	$("#coms").on('submit', '#editComForm', function(){		
 		
 		var lineNum = $($($(this).parent()).parent()).attr("line");		
-		var comment = $("textarea").val().replace(/\r\n|\r|\n/g,"<br />");
-		
+		var comment = replaceSpecialChars($("#comtext").val());
+	
 		
 		var jsonStr = '{ "LineNumber" : "' + lineNum + '", "LineComment" : "' + comment +'" }'	
 		console.log(jsonStr);		
@@ -367,7 +394,7 @@ $(document).ready(function(){
 				
 					$(parTag).addClass('hcbutton').removeClass('hccom');
 					$(parTag).html("");
-					$(parTag).attr("addcom", "false");
+					$(parTag).attr("hasCom", "false");
 			
 					loadComments(commentArray, false, true);		
 				}		
@@ -382,12 +409,15 @@ $(document).ready(function(){
 
 		var parTag = $($($($(this).parent()).parent()).parent());
 		var lineNum = parTag.attr("line");			
-		var comInfo = editComment(commentArray, lineNum);		
+		var comInfo = editComment(commentArray, lineNum);
+
+		$("#editComForm").remove();
+		loadComments(commentArray,false,true);
 	
 		$(parTag).html('<span class="combox">' +
 					'<form id="editComForm" action="#" method="post">' +
 					'<label> Edit Comment </label>' +
-					'<textarea id="comtext" name="comments" rows="8">'+ comInfo +'</textarea>' +		
+					'<textarea id="comtext" name="comments" rows="8" >'+ comInfo +'</textarea>' +		
 				'<input id="submit" type="submit" value="Submit"/></form>' +
 				'</span>');
 		
