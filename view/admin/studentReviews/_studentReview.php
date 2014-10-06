@@ -124,8 +124,10 @@ if(isset($_POST['btnFile'])){ //search for files submitted
 						echo "No Files Found";
 					} else {
 						echo $output;
-						foreach($info as $fileName){
-							echo "<a class='filelist'>".$fileName['FileName']. "</a><br>";	
+						if($info != NULL){
+							foreach($info as $fileName){
+								echo "<a class='filelist'>".$fileName['FileName']. "</a><br>";	
+							}
 						}
 					}
 					
