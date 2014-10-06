@@ -31,7 +31,7 @@
 		}		
 		
 	} else {
-		$output = "Error: One or more fields were not completed";
+		//$output = "Error: One or more fields were not completed";
 	}
 ?>
 <html>
@@ -66,7 +66,7 @@
 					?>
 				</div>
                 <div> <!-- display all semester choices -->
-                	<label for="sem">Select Semester</label>
+                	<label for="sem">Semester</label>
                     <select name="semester" id="sem">
                     	<option value="">Select...</option>
                     	<option value="1">1</option>

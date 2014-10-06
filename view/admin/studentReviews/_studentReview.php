@@ -3,7 +3,7 @@
 	$result = get_course_assessments($courseID, $semester);
 	
 $output = NULL; //the message to be displayed upon form submission
-
+$assignID = NULL; // to hold the assignment ID
 if(isset($_POST['btnFile'])){ //search for files submitted
 	if(isset($_POST['search']) && isset($_POST['AssignName'])){
 		$search = $_POST['search'];
@@ -14,17 +14,12 @@ if(isset($_POST['btnFile'])){ //search for files submitted
 		foreach($ans as $id){
 			//only one assign id should ever be returned (since AssignID's are unique in the DB)
 			//now search for all submissions by a student for that assignmentid
+			$assignID = $id['AssignmentID'];
 			$info = get_submitted_info($search, $id['AssignmentID']);
 		}
 		if($info != NULL){ //if a user has submitted a file for the assigment
 			$output = "File(s) submitted by ".$search.": <br />";
-			foreach($info as $files){
-				//add to the output string, the data you wish to display
-				$str = "'".$files['FileName']."'";
-				$str2 = "  was submitted at  ".$files['SubmissionTime'];
-				$str3 = "<br />";
-				$output.= $str.$str2.$str3;
-			}
+			
 		} else { //no files submitted
 			$output = "No files have been submitted by ".$search;	
 		}
@@ -69,14 +64,31 @@ if(isset($_POST['btnFile'])){ //search for files submitted
     <head>
     <title>Code Review</title>
         <!-- CSS/LESS -->
-        <link rel="stylesheet/less" href="/css/main.less">
+        <!-- <link rel="stylesheet/less" href="/css/main.less">
+        <link rel="stylesheet" type="text/css" href="/mockup/main.css">
         <!-- JS -->
-        <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-       <script src='/js/view.js'></script>
+      
+      <title>Code Review</title>
+		<link rel="stylesheet/less" href="/css/main.less">
+        <!--<link rel="stylesheet" type="text/css" href="../mockup/main.css">-->
+		
+       
+        
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+        
+         <script src='/js/view.js'></script>
         <script src="/js/less.js"></script>
+
+        <!-- Load the Prettify script, to use in highlighting our code.-->
+        <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>	
+
+        <?php date_default_timezone_set('Australia/Brisbane'); ?>
+       
+       		
+
     </head>
 	<body>
-        <mcontain>
+       
             <h2>Review Student Submissions for <?php echo $courseID?></h2>
         
             <br />
@@ -104,14 +116,47 @@ if(isset($_POST['btnFile'])){ //search for files submitted
                 <input type="submit" name="btnFile" value="Files Submitted" class="btn btn-primary" />
                 <input type="submit" name="btnComment" value="Comments Made" class="btn btn-primary" />
             </form>
-        	<div>
+        
+                
+        <div>
 				<?php 
-                    //display the search results
-                    if($output != NULL){
-                        print("$output"); 
-                    }
+					if($output == NULL){
+						echo "No Files Found";
+					} else {
+						echo $output;
+						foreach($info as $fileName){
+							echo "<a class='filelist'>".$fileName['FileName']. "</a><br>";	
+						}
+					}
+					
                 ?>
-            </div>
-        </mcontain>
+        </div>
+        <div >
+            <pre class="prettyprint">Nothing selected</pre>
+        </div>
 	</body>
+	<script>
+			
+		jQuery(function ($) {
+						
+			$(".filelist").click(function() {
+				
+				var file = $(this).text();
+				//alert(file);
+				$.ajax({
+					type: 'POST', 
+					url: '../lib/retrieve.php', 
+					data: {filename: file, 
+							user: '<?php echo $search ?>', 
+							assign: '<?php echo $assignID ?>'},
+					success: function(data){
+						$("pre").text(data);
+						$("head")
+					}
+				});
+			});
+		});
+	</script>
+    
+
 </html>

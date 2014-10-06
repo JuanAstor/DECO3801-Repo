@@ -4,7 +4,7 @@ require("../lib/mysql.php");
 require("../lib/queries.php");
 //Need a session varibale containing the userID and the assignmentID
 $uID = '12123434'; //userID
-$assignID = '5'; //assignmentID
+$assignID = '514636'; //assignmentID
 ?>
 <!DOCTYPE html>
 <html>
@@ -76,7 +76,7 @@ $assignID = '5'; //assignmentID
 
         <div class="code">
             <pre class="prettyprint">No File Selected</pre>
-        </div>
+        </div>        
     </div>
 
 
@@ -84,7 +84,6 @@ $assignID = '5'; //assignmentID
 
 <script>
 jQuery(function ($) {
-
     $(".filelinks").click(function() {
     var file = $(this).text();
         // MAKE SURE THAT ASSIGNID AND USERID IS ALWAYS VALID.
