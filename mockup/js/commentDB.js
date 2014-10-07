@@ -277,35 +277,48 @@ $(document).ready(function(){
 	
 		
 	$("#coms").on("click", ".hccom", 
-		function(){
-			$(".hccom").children().hide();
-			$(".hcbutton").children().hide();
+		function(){		
+	
 			
-			$(this).children().toggle();
+			if($(this).children().css("display") == "none"){
+			
+				$(".hcbutton").children().hide();
+				$(".hccom").children().hide();
+				$(this).children().toggle(300);		
+				
+			} else {
+			
+				//$(this).children().toggle(300);
+			
+			}
 			
 	});
 	
 	$("#coms").on("click", ".hcbutton", 
-		function(){
-			//Fix current submit button
-			$(".hccom").children().hide();
-			$(".hcbutton").children().hide();
-			$(this).children().toggle();
+		function(){		
 			
 			if($(this).attr('hasCom') == 'false'){
+			
+				$(".hccom").children().hide();
+				$(".hcbutton").children().hide();			
 				$(".hcbutton").html("");
 				$(this).html('<span class="combox">' +
 					'<form id="addComForm" action="#" method="post">' +
-					'<label> Add Comment </label>' +
+					'<label><b> Add Comment </b></label>' +
 					'<textarea id="comtext" name="comments" rows="8"></textarea>' +		
 				'<input id="submit" type="submit" value="Submit"/></form>' +
 				'</span>');
 				
-			} else {
+				$(this).children().hide();
+				$(this).children().toggle(300);
+				$(".hcbutton").attr('hasCom', 'false');
+				$(this).attr('hasCom', 'true');
 				
+				
+			} else {
+			//	$(this).children().toggle(300);
 			}
-			$(".hcbutton").attr('hasCom', 'false');
-			$(this).attr('hasCom', 'true');
+			
 	});
 		
 		
@@ -416,7 +429,7 @@ $(document).ready(function(){
 	
 		$(parTag).html('<span class="combox">' +
 					'<form id="editComForm" action="#" method="post">' +
-					'<label> Edit Comment </label>' +
+					'<label> <b>Edit Comment</b> </label>' +
 					'<textarea id="comtext" name="comments" rows="8" >'+ comInfo +'</textarea>' +		
 				'<input id="submit" type="submit" value="Submit"/></form>' +
 				'</span>');
