@@ -26,12 +26,11 @@
 		if($_FILES["userfile"]["size"][$i] > 0 && in_array($extension, $allowedExts) ){
 			//echo 'Upload start <br>';			
 			//check if a file is already in the database
-			$result =  check_if_file_exists($uID, $assignmentID, $fileName);
-			$count = $result[0]; //get the value of the 'count(1)' query		
+			$count =  check_if_file_exists($uID, $assignmentID, $fileName); //returns the count		
 			
 			//if the count is greater than 0, then that file has already been uploaded
-			if($count[0] > 0){
-				//echo 'file has previously been uploaded, updating file';
+			if($count > 0){
+				//echo 'file has previously been uploaded, updating file <br />';
 				$tmpName = $_FILES['userfile']['tmp_name'][$i]; 
 				
 				//open the file and put the contents into '$content'
@@ -47,6 +46,7 @@
 			} 			
 			//no files with the same user and filename have previously been uploaded
 			else { 	
+				//echo "new file being uploaded <br />";
 				//check if the uploaded file has size greater than 0 and is an allowed extension
 				if($_FILES["userfile"]["error"][$i] > 0) { //check if any errors in the file
 					$_SESSION['submit'] = $_FILES["userfile"]["error"][$i];

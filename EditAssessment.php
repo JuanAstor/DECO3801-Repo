@@ -33,8 +33,10 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
 				if($_GET['course'] == $list['CourseID'] && $_GET['sem'] == $list['Semester']){
 					//check if the name relates to these in the database
 					$result = get_course_assessments($_GET['course'], $_GET['sem']);
-					if($_GET['name'] == $result[0][0]){
-						$count = 1; //admin can access this info
+					foreach($result as $assignName){
+						if($_GET['name'] == $assignName['AssignmentName']){
+							$count = 1;	
+						}
 					}
 				}
 			}

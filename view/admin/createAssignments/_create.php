@@ -13,14 +13,14 @@
 		//covert the semester to the yyyy-s format used in the database
 		//check that the assigment name doesn't already exist for that courseID
 		$semester = date('Y').$sem; 
-		$result = find_assignmentName($courseID, $name, $semester);
-		$count = $result[0];
-		if($count[0] > 0){
+		$count = find_assignmentName($courseID, $name, $semester);
+		
+		if($count > 0){
 			//then an assigment name already exists for this courseID and semester
 			$output = "Error: The assignment name entered already exists for this course and semester";	
 		} else { 
-			$newCount = check_semester($courseID, $semester); //check that the semester value is correct
-			if($newCount[0][0] > 0) {
+			$semCount = check_semester($courseID, $semester); //check that the semester value is correct
+			if($semCount > 0) {
 				//the assignment name for the courseID and semester is unique, so continue.
 				//add the values to the database return a success message
 				create_assignment($courseID, $semester, $description, $name, $date, $time);
@@ -50,7 +50,7 @@
 		<script src="../js/bootstrap-datetimepicker.min.js"></script> -->
     </head>
 	<body>
-    <h4>Create Assessment</h4>
+    	<h4>Create Assessment</h4>
 		<widget-container>
 			<form action="/Assessment.php" method="post">
 				<div class="form-group">

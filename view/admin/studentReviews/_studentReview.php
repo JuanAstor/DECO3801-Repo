@@ -18,10 +18,10 @@ if(isset($_POST['btnFile'])){ //search for files submitted
 			$info = get_submitted_info($search, $id['AssignmentID']);
 		}
 		if($info != NULL){ //if a user has submitted a file for the assigment
-			$output = "File(s) submitted by ".$search.": <br />";
+			$output = "File(s) submitted by student ".$search.": <br />";
 			
 		} else { //no files submitted
-			$output = "No files have been submitted by ".$search;	
+			$output = "No files have been submitted by student ".$search;	
 		}
 	} else { //not all fields were filled in
 		$output = "All fields must be filled out first";	
@@ -39,17 +39,17 @@ if(isset($_POST['btnFile'])){ //search for files submitted
 			//only one AssignID should be returned, now search for any
 			//comments made by the searched user on the assignmentID
 			
-			$info = find_user_comments($search, $id['AssignmentID']);
+			$comment = find_user_comments($search, $id['AssignmentID']);
 			
 			//if a comment was made
-			if($info != NULL){
-				$output = "Comments made by ".$search.": <br />";
-				foreach($info as $comments){
+			if($comment != NULL){
+				$output = "Comments made by student ".$search.": <br />";
+				foreach($comment as $comments){
 					$output.= "A comment was made on File ".$comments['FileID']."<br />";
 				}
 			//no comments found
 			} else {
-				$output = "No comments have been made by ".$search." for the '".$name."' Assignment"; 	
+				$output = "No comments have been made by student ".$search." for the '".$name."' Assignment"; 	
 			}
 		}
 		
@@ -124,7 +124,7 @@ if(isset($_POST['btnFile'])){ //search for files submitted
 						echo "No Files Found";
 					} else {
 						echo $output;
-						if($info != NULL){
+						if(isset($info)){
 							foreach($info as $fileName){
 								echo "<a class='filelist'>".$fileName['FileName']. "</a><br>";	
 							}

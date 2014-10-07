@@ -9,22 +9,42 @@
 		$aName = $_POST['AName'];
 		$desc = $_POST['desc'];
 		$time = $_POST['time'];
-		$date = $_POST['date']; 
+		$date = $_POST['date'];
+		//hidden variables that will always be sent with the form
+		$cID = $_POST['cID'];//courseID 
+		$sem = $_POST['sem'];//semester 
 		
-		//since this is an edit, we know that the assignment already exists so just update the db
-		//find out if it was a success or failure
-		$result = update_assign_info($assignID, $aName, $desc, $time, $date);
-		 if($result == 'success'){
-			 $_SESSION['message'] = 'completed';
-		 } else {
-			$_SESSION['message'] = 'error'; 
-		 }
+		//first check that the update assignment name doesn't already exist
+		$count = find_assignmentName($cID, $aName, $sem); 
+		$previous = get_previous_assign_info($assignID);
+		echo $count;
+		if(($count > 0) && ($aName != $previous[0]['AssignmentName'])){
+			//assignment name exists and isn't the same as the orignal name		
+			
+			//set a message to display			
+			$_SESSION['message'] = 'name error';
+			
+			
+			header('Location: /EditAssessment.php?course='.$previous[0]['CourseID'].'&sem='.$previous[0]['Semester'].'&name='.$previous[0]['AssignmentName']);
 		
-		$cID = $_POST['cID'];//courseID
-		$sem = $_POST['sem'];//semester
+		} else { //assignment name doesn't exist or is the same name as the origial
+		
+			//since this is an edit, we know that the assignment already exists so just update the db
+			//find out if it was a success or failure
+			$result = update_assign_info($assignID, $aName, $desc, $time, $date);
+			 if($result == 'success'){
+				 $_SESSION['message'] = 'completed';
+			 } else {
+				$_SESSION['message'] = 'error'; 
+			 }
+			 //return to the page with the updated information
+			header('Location: /EditAssessment.php?course='.$cID.'&sem='.$sem.'&name='.$aName);
+		}
+		
+		
 		
 		//return to the page with the updated information
-		header('Location: /EditAssessment.php?course='.$cID.'&sem='.$sem.'&name='.$aName);
+		//header('Location: /EditAssessment.php?course='.$cID.'&sem='.$sem.'&name='.$aName);
 	} 
 	//else if the reset button was pressed
 	else if (isset($_POST['assignID']) && isset($_POST['del'])){		
