@@ -51,9 +51,17 @@
 					?>
 				</div>
 			</panel>
-		</widget> 
-        <!-- the create assessment image, on click it -->
-		<img src="/img/cass3.png" class="img-circle" onclick="location.href = '/Assessment.php'">
+		</widget>
+        <widget title="Tools">
+			<panel>
+				<div class="w-heading"><i class="fa fa-wrench"></i>Tools</div>
+
+				<div class="w-body">
+                    <img src="img/cass2.png" class="img-circle" width="50px" height="auto" onclick="location.href = 'Assessment.php'">
+                    <h3>Create Assignment</h3>
+				</div>
+			</panel>
+		</widget>
 	</widget-container>
 	
 	<widget-end>
