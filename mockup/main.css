@@ -9,6 +9,18 @@ body {
     position:relative;
 }
 
+.trans{
+	width:inherit;
+	font-size:inherit;
+	font-family:inherit;
+	overflow-y:hidden;
+	resize:none;
+	background:transparent;
+	border:none;
+	
+
+}
+
 .time {
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica,Arial,      "Lucida Grande", sans-serif; 
 	font-weight: 300;
