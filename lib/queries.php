@@ -198,6 +198,7 @@ function delete_assignment($assignID){
 	}
 }
 
+//get the info of the assignment before it is updated
 function get_previous_assign_info($assignID){
 	$sql = "SELECT * FROM `assignment` WHERE AssignmentID=?";
 	$query = MySQL::getInstance()->prepare($sql);
