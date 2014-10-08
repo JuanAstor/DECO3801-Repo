@@ -4,8 +4,10 @@
             <div class="w-heading"><i class="fa fa-clipboard"></i>Upcoming Assessments</div>
             <div class="w-body">
             <?php // Loop through courses and display
+			$count=0;
             foreach ($assessments as $assessment) {
-                echo "<p>".$assessment['CourseID'].": ".$assessment['AssignmentName']."</p>";
+				$count++;
+                echo "<p><a href='Assessment.php?assessment=".$count."'><b>".strtoupper($assessment['CourseID'])."</b>: ".$assessment['AssignmentName']."</a></p>";
             }
             ?>
             </div>
