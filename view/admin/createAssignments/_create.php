@@ -9,32 +9,53 @@
 		$name = $_POST['AName'];
 		$description = $_POST['desc'];
 		$time = $_POST['time'];
-		//convert the date into the format stored in the database
 		$dateFormat = $_POST['date'];
-		$newdate = DateTime::createFromFormat('d/m/Y', $dateFormat);
-		$finalDate = $newdate->format('Y-m-d');
-		//covert the semester to the yyyy-s format used in the database
-		//check that the assigment name doesn't already exist for that courseID
-		$semester = date('Y').$sem; 
-		$count = find_assignmentName($courseID, $name, $semester);
-		
-		if($count > 0){
-			//then an assigment name already exists for this courseID and semester
-			$output = "Error: The assignment name entered already exists for this course and semester";	
-		} else { 
-			$semCount = check_semester($courseID, $semester); //check that the semester value is correct
-			if($semCount > 0) {
-				//the assignment name for the courseID and semester is unique, so continue.
-				//add the values to the database return a success message
-				create_assignment($courseID, $semester, $description, $name, $finalDate, $time);
-				$output = "The Assignment has successfully been created <br />";
-			} else {
-				$output = "Error: Semester value doesn't match the selected course";	
+		//check if the date is valid
+		if(!check_valid_date($dateFormat)){
+			$output = "Error: The date was invalid or not of the correct format (dd/mm/yyyy)";
+		} else {
+			//convert the date into the format stored in the database
+			$newdate = DateTime::createFromFormat('d/m/Y', $dateFormat);
+			$finalDate = $newdate->format('Y-m-d');
+			//covert the semester to the yyyy-s format used in the database
+			//check that the assigment name doesn't already exist for that courseID
+			$semester = date('Y').$sem; 
+			$count = find_assignmentName($courseID, $name, $semester);
+			
+			if($count > 0){
+				//then an assigment name already exists for this courseID and semester
+				$output = "Error: The assignment name entered already exists for this course and semester";	
+			} else { 
+				$semCount = check_semester($courseID, $semester); //check that the semester value is correct
+				if($semCount > 0) {
+					//the assignment name for the courseID and semester is unique, so continue.
+					//add the values to the database return a success message
+					create_assignment($courseID, $semester, $description, $name, $finalDate, $time);
+					$output = "The Assignment has successfully been created <br />";
+				} else {
+					$output = "Error: Semester value doesn't match the selected course";	
+				}
 			}
-		}		
+		}
 		
 	} else {
-		//$output = "Error: One or more fields were not completed";
+		$output = "Error: One or more fields were not completed";
+	}
+	
+	//check the validity of the entered date
+	function check_valid_date($date){
+		$str = strtotime($date);
+		if(!is_numeric($str) ){
+			return false;	
+		} 
+		//an issue with strtotime is that dd/mm/yyyy becomes mm/dd/yyyy, so switch the day and month values
+		$month = date('d', $str); //is d because of issue with strtotime()
+		$day = date('m', $str); //is m because of issue with strtotime()
+		$year = date('Y', $str);
+		if(checkdate($month, $day, $year)){
+			return true;	
+		} 
+		return false;
 	}
 ?>
 <html>
@@ -59,13 +80,21 @@
 				<div class="form-group">
 					<label for="cID">Course ID</label>
 					<?php //display all courseID's that an admin can create an assignment in
+					$arr = array();
 					echo "<select name='cID' id='cID'>";
 					echo "<option value=''>Select...</option>";
 					foreach($courses as $course){
+						//check that the course to be displayed doesn't already exist
 						$cID = $course['CourseID'];
-						echo "<option value='".$cID."' >".$cID."</option>";
+						if(!in_array($cID, $arr)){
+							array_push($arr, $cID); 
+							echo "<option value='".$cID."' >".strtoupper($cID)."</option>";
+						} else {
+							//value already in the array so do nothing	
+						}
 					}
 					echo "</select>";
+					$arr = NULL;
 					?>
 				</div>
                 <div> <!-- display all semester choices -->

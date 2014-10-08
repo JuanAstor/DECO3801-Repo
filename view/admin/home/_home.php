@@ -19,7 +19,7 @@
 				<div class="w-body">
                 	<?php 
 						foreach($courses as $course){
-							echo "<span>".$course['CourseID']."   |	   </span>";
+							echo "<span>".strtoupper($course['CourseID'])."   |	   </span>";
 							echo "<span>Semester ".substr($course['Semester'],-1)." ".substr($course['Semester'],0,4)."    </span>";
 							echo "<br />"; 
 							$result = get_course_assessments($course['CourseID'], $course['Semester']);
@@ -42,8 +42,8 @@
 				<div class="w-body">
                 	<?php 
 						foreach($courses as $course){
-							//echo $course['CourseID']." <button onclick='location.href = /studentReviews.php'; />";
-							echo "<span>".$course['CourseID']."   |  </span>";
+							//display all courses that the admin is in charge of
+							echo "<span>".strtoupper($course['CourseID'])."   |  </span>";
 							echo "<span>Sem ".substr($course['Semester'], -1)."    ".substr($course['Semester'],0,4)."      </span>";
 							echo "<a href='/StudentReviews.php?course=".$course['CourseID']."&sem=".$course['Semester']."'><button type='button' class='btn btn-primary'>Go</button></a>";
 							echo "<br /> <br />";
