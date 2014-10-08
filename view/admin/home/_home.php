@@ -24,7 +24,7 @@
 							echo "<br />"; 
 							$result = get_course_assessments($course['CourseID'], $course['Semester']);
 							foreach($result as $name){	
-								echo "<span>--------------</span>";
+								//echo "<span>--------------</span>";
 								echo $name['AssignmentName'];
 								echo "<a href='/EditAssessment.php?course=".$course['CourseID']."&sem=".$course['Semester']."&name=".$name['AssignmentName']."'><button type='button' class='btn btn-primary'>Go</button></a>";
 								echo "<br />";

@@ -41,9 +41,18 @@
 <?php
     //if a submission has been made	
     if( $result != NULL){
-        echo "<span>Files were previously submitted on '".$result[0]['SubmissionTime']."' </span>";
+		echo "<span>File(s) submitted: </span>";
+		foreach($result as $file){
+			$val = $file['SubmissionTime'];
+			$dateTime = new DateTime($val);
+			$date = $dateTime->format('d/m/Y');
+			$time = $dateTime->format('H:i:s');
+			echo "<br /><span>------".$file['FileName']." submitted on ".$date." at ".$time."</span>";	
+			echo "<a><span>____(delete?)____</span></a>";
+		}
     } else {
         echo "<span>You have not made any submissions yet</span>";
     } 
 ?>
+
 </content>
