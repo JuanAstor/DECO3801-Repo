@@ -1,4 +1,4 @@
-<?php
+<?php 
 session_start();
 require("lib/mysql.php");
 require("lib/queries.php"); //query functions to get database results

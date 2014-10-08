@@ -55,8 +55,9 @@
 			echo "<span> Error uploading files: '".$_SESSION['submit']."' </span>";	
 			echo "<span> File upload has been canceled </span>";
 		}
+		unset($_SESSION['submit']); //unset so the message doesn't reappear
     } else {
-        echo "<span> Nothing has been submitted this session</span>"; //nothing has happened
+        //no files have been submitted this session
     }
 ?>
 </content>

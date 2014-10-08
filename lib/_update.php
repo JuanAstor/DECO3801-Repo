@@ -64,4 +64,17 @@
 			}
 		}
 	}
+	
+	//if the delete button was pressed by a student
+	else if(isset($_POST['fileID'])){
+		//delete any potential comments
+		$result = delete_student_files($_POST['fileID']);
+		if($result){
+			//file was deleted
+			echo "Assignment file successfully deleted";
+		} else {
+			//error
+			echo "Error: file was unable to be deleted";	
+		}
+	}
 ?>

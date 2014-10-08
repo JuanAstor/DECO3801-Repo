@@ -41,9 +41,38 @@
 <?php
     //if a submission has been made	
     if( $result != NULL){
-        echo "<span>Files were previously submitted on '".$result[0]['SubmissionTime']."' </span>";
+		echo "<span>File(s) submitted: </span>";
+		foreach($result as $file){
+			$val = $file['SubmissionTime'];
+			$dateTime = new DateTime($val);
+			$date = $dateTime->format('d/m/Y');
+			$time = $dateTime->format('H:i:s');
+			echo "<br /><span>------<i>".$file['FileName']."</i> submitted on ".$date." at ".$time."</span>";	
+			echo "<a href='#' data-value=".$file['FileID']."><span>____(delete?)____</span></a>";
+		}
     } else {
         echo "<span>You have not made any submissions yet</span>";
     } 
 ?>
+
 </content>
+
+<script>
+jQuery(function ($) {
+    $("a").click(function() {
+		var id = $(this).data("value");
+		if(confirm("Are you sure you want to delete this file?")){ 
+			$.ajax({
+				type:'POST',
+				url: '../lib/_update.php',
+				data:{fileID : id }, 
+				success: function(data){
+					//display the message from the delete query then reload the page
+					alert(data);
+					window.location.reload();	
+				}
+			});
+		}
+	});
+});
+</script>

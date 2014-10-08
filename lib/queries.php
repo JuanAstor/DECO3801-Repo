@@ -198,6 +198,7 @@ function delete_assignment($assignID){
 	}
 }
 
+//get the info of the assignment before it is updated
 function get_previous_assign_info($assignID){
 	$sql = "SELECT * FROM `assignment` WHERE AssignmentID=?";
 	$query = MySQL::getInstance()->prepare($sql);
@@ -233,6 +234,17 @@ function check_semester($courseID, $semester){
 										FROM `course`
 										WHERE CourseID = '".$courseID."' AND Semester = '".$semester."'");
 	return $query->fetchALL();	
+}
+
+//deletes any files selected by a user (and comments attached to the file)
+function delete_student_files($fileID){
+	$sql = "DELETE FROM `comment` WHERE FileID=?";
+	$query = MySQL::getInstance()->prepare($sql);
+	$query->execute(array($fileID));
+	
+	$sql2 = "DELETE FROM `assignmentfile` WHERE FileID=?";
+	$query2 = MySQL::getInstance()->prepare($sql2);
+	return $query2->execute(array($fileID));	
 }
 
 //adds a new user if none exists and then updates the details of that user
