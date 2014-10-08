@@ -6,7 +6,10 @@
 		$assignID = $info['AssignmentID']; //need this to update or delete table entries
 		$assDesc = $info['AssignmentDescription'];
 		$dueTime = $info['DueTime'];
-		$dueDate = $info['DueDate'];
+		//get the date and convert into the usual dd/mm/YYYY format
+		$Date = $info['DueDate'];
+		$dueDate = date('d/m/Y', strtotime($Date));
+		
 	}
 	//session will be set on update 
 	if(isset($_SESSION['message'])){
@@ -16,6 +19,9 @@
 		} else if($_SESSION['message'] == 'name error'){
 			$output = 'Error: The name entered already exists, please choose a different name';	
 			unset($_SESSION['message']);//unset so the message will dissapear on page return
+		} else if($_SESSION['message'] == 'date error'){
+			$output = 'Error: the entered date was invalid, please re-enter it';
+			unset($_SESSION['message']);	
 		}
 	}
 ?>

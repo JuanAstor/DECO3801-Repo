@@ -9,7 +9,10 @@
 		$name = $_POST['AName'];
 		$description = $_POST['desc'];
 		$time = $_POST['time'];
-		$date = $_POST['date'];
+		//convert the date into the format stored in the database
+		$dateFormat = $_POST['date'];
+		$newdate = DateTime::createFromFormat('d/m/Y', $dateFormat);
+		$finalDate = $newdate->format('Y-m-d');
 		//covert the semester to the yyyy-s format used in the database
 		//check that the assigment name doesn't already exist for that courseID
 		$semester = date('Y').$sem; 
@@ -23,7 +26,7 @@
 			if($semCount > 0) {
 				//the assignment name for the courseID and semester is unique, so continue.
 				//add the values to the database return a success message
-				create_assignment($courseID, $semester, $description, $name, $date, $time);
+				create_assignment($courseID, $semester, $description, $name, $finalDate, $time);
 				$output = "The Assignment has successfully been created <br />";
 			} else {
 				$output = "Error: Semester value doesn't match the selected course";	
@@ -92,7 +95,7 @@
  
 				<div class="form-group">
 					<label for="date">Date Due</label>
-					<input class="form-control" id="date" name="date" placeholder="Format: YYYY/MM/DD">
+					<input class="form-control" id="date" name="date" placeholder="Format: DD/MM/YYYY">
 				</div>
 				
 				<label>Please make sure that every field has been completed</label>
