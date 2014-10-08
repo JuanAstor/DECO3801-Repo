@@ -47,8 +47,13 @@
 			$dateTime = new DateTime($val);
 			$date = $dateTime->format('d/m/Y');
 			$time = $dateTime->format('H:i:s');
+<<<<<<< HEAD
 			echo "<br /><span>------<i>".$file['FileName']."</i> submitted on ".$date." at ".$time."</span>";	
 			echo "<a href='#' data-value=".$file['FileID']."><span>____(delete?)____</span></a>";
+=======
+			echo "<br /><span>------".$file['FileName']." submitted on ".$date." at ".$time."</span>";	
+			echo "<a><span>____(delete?)____</span></a>";
+>>>>>>> origin/master
 		}
     } else {
         echo "<span>You have not made any submissions yet</span>";
