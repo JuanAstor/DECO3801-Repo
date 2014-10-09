@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-$(document).ajaxComplete(function(){
->>>>>>> origin/master
 
 
 function loadCommentSystem(){
@@ -274,10 +270,7 @@ function loadCommentSystem(){
 	
 	//$(".fileselect").ajaxComplete(runAll());
 	
-<<<<<<< HEAD
 	$("#tabs").unbind();
-=======
->>>>>>> origin/master
 	
 	$("#tabs").on("click", ".tabSpan", function(){
 		
