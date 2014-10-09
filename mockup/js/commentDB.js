@@ -7,6 +7,7 @@ function loadCommentSystem(){
 	// array to hold all comments "locally"
 	var commentArray = [];
 	
+		
 	// User ID of person browsing
 	var userID = '12123434';
 	//var userID = $_SESSION["user"];
@@ -265,6 +266,8 @@ function loadCommentSystem(){
 	}
 
 	//-------------------------------------------------------
+	
+	
 	
 	runAll();
 	

@@ -14,15 +14,14 @@ $assignID = '514636'; //assignmentID
 
         <link rel="stylesheet" type="text/css" href="main.css">
         <link rel="stylesheet" type="text/css" href="comments.css">
-        <link href="/mockup/css/prettyprint/prettify.css" type="text/css" rel="stylesheet" />
-
+        
+        <link rel="stylesheet" type="text/css" href="../mockup/css/prettyprint/prettify.css" />
+		<script type="text/javascript" src="../mockup/css/prettyprint/prettify.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
         <!-- Load the Prettify script, to use in highlighting our code.-->
-        <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>	
-
-        <!-- Load the Annotator script and css for commenting use on our code -->
        
+       <!-- <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>	-->
 
         <?php date_default_timezone_set('Australia/Brisbane'); ?>
         
@@ -65,7 +64,8 @@ $assignID = '514636'; //assignmentID
 					echo "No files found";	
 				} else {
 					foreach($files as $fileName){ 
-						echo "<a class='filelinks' >".$fileName['FileName']. "</a><br>";//display all filenames as an anchor
+						//display all filenames as an anchor
+						echo "<a class='filelinks' data-fileID=".$fileName['FileID']." data-user=".$uID.">".$fileName['FileName']. "</a><br>";
 					}
 				}		
         ?>
@@ -79,7 +79,7 @@ $assignID = '514636'; //assignmentID
 					
 				</ul>
 			</div>
-            <!-- code added here -->
+            <!-- file data code added here -->
             <?prettify?>
             <pre class="prettyprint">Nothing Selected</pre>
             
@@ -96,8 +96,9 @@ $assignID = '514636'; //assignmentID
 <script>
 jQuery(function ($) {
     $(".filelinks").click(function() {
-    var file = $(this).text();
-        // MAKE SURE THAT ASSIGNID AND USERID IS ALWAYS VALID.
+    //get the filename from the anchor tag clicked
+	var file = $(this).text(); //filename
+	var fID = $(this).data("value"); //fileID
         $.ajax({
             type:'POST',
             url:'../lib/retrieve.php',
@@ -105,15 +106,12 @@ jQuery(function ($) {
                    user : '<?php echo $uID ?>',
                    assign : '<?php echo $assignID ?>' },
 				   success: function(data){
-                $("pre").text(data);
-				//prettyPrint();
-				//re run comments
-				//alert("this message");
-				loadCommentSystem();
-				
-				
-				
-                
+					   //dump the file data into the pre tag
+						$("pre").text(data);
+						//load google prettify to style text
+						prettyPrint();
+						//load the comment system from commentDB.js
+						loadCommentSystem();			                
             }
         });
     });
