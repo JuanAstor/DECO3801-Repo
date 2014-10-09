@@ -12,22 +12,19 @@ $assignID = '514636'; //assignmentID
         <title>Code Review</title>
 
         <link rel="stylesheet" type="text/css" href="main.css">
+        <link rel="stylesheet" type="text/css" href="comments.css">
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
         <!-- Load the Prettify script, to use in highlighting our code.-->
         <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>	
 
         <!-- Load the Annotator script and css for commenting use on our code -->
-        <script src="http://assets.annotateit.org/annotator/v1.2.5/annotator-full.min.js"></script>
-        <link rel="stylesheet" href="http://assets.annotateit.org/annotator/v1.2.5/annotator.min.css">
+       
 
         <?php date_default_timezone_set('Australia/Brisbane'); ?>
-
-        <script>
-                    jQuery(function ($) {
-                    $('.code').annotator();
-                    });        </script>		
+        
+		<script src="js/commentDB.js" type="text/javascript"></script>	
 
 
     </head>
@@ -59,7 +56,6 @@ $assignID = '514636'; //assignmentID
                 </h1>
             </div>
         </div>
-
         <div class = "fileselect">
         <?php
 				$files = get_files_to_comment($uID, $assignID); //query the database
@@ -67,7 +63,7 @@ $assignID = '514636'; //assignmentID
 					echo "No files found";	
 				} else {
 					foreach($files as $fileName){ 
-						echo "<a class='filelinks'>".$fileName['FileName']. "</a><br>";//display all filenames as an anchor
+						echo "<a class='filelinks' data-value=".$fileName['FileID'].">".$fileName['FileName']. "</a><br>";//display all filenames as an anchor
 					}
 				}		
         ?>
@@ -75,7 +71,19 @@ $assignID = '514636'; //assignmentID
         </div>
 
         <div class="code">
-            <pre class="prettyprint">No File Selected</pre>
+        
+        	<div id="revSelect">
+				<ul id="tabs">
+					
+				</ul>
+			</div>
+            <!-- code added here -->
+            <pre class="prettyprint">Nothing Selected</pre>
+            
+            <div id="coms">
+				
+			</div>
+            
         </div>        
     </div>
 
@@ -95,11 +103,16 @@ jQuery(function ($) {
                    assign : '<?php echo $assignID ?>' },
             success: function(data){
                 $("pre").text(data);
+				//re run comments
+				
+				
+				
                 
             }
         });
     });
-    $('#code').annotator();
+	
+  
 
 });
                     

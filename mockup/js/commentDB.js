@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ajaxComplete(function(){
 
 	$.ajaxSetup({ cache: false });
 	
@@ -16,6 +16,7 @@ $(document).ready(function(){
 	
 	function runAll(){
 		
+		console.log("called here");
 			
 		$.ajax({
 		
@@ -264,7 +265,10 @@ $(document).ready(function(){
 
 	//-------------------------------------------------------
 	
-	$(".fileselect").on("click", ".filelinks", runAll());
+	runAll();
+	
+	//$(".fileselect").ajaxComplete(runAll());
+	
 	
 	$("#tabs").on("click", ".tabSpan", function(){
 		
