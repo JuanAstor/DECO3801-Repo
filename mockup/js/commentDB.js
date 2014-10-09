@@ -1,5 +1,6 @@
-$(document).ready(function(){
 
+
+function loadCommentSystem(){
 	$.ajaxSetup({ cache: false });
 	
 	
@@ -16,6 +17,7 @@ $(document).ready(function(){
 	
 	function runAll(){
 		
+		console.log("called here");
 			
 		$.ajax({
 		
@@ -264,7 +266,11 @@ $(document).ready(function(){
 
 	//-------------------------------------------------------
 	
-	$(".fileselect").on("click", ".filelinks", runAll());
+	runAll();
+	
+	//$(".fileselect").ajaxComplete(runAll());
+	
+	$("#tabs").unbind();
 	
 	$("#tabs").on("click", ".tabSpan", function(){
 		
@@ -274,7 +280,9 @@ $(document).ready(function(){
 		
 	
 	});
-	
+
+
+	$("#coms").unbind();
 		
 	$("#coms").on("click", ".hccom", 
 		function(){		
@@ -439,5 +447,4 @@ $(document).ready(function(){
 	
 	
 	
-	
-});
+}

@@ -48,7 +48,7 @@
 			$date = $dateTime->format('d/m/Y');
 			$time = $dateTime->format('H:i:s');
 			echo "<br /><span>------<i>".$file['FileName']."</i> submitted on ".$date." at ".$time."</span>";	
-			echo "<a href='#' data-value=".$file['FileID']."><span>____(delete?)____</span></a>";
+			echo "<a class='del' href='#' data-value=".$file['FileID']."><span>____(delete?)____</span></a>";
 		}
     } else {
         echo "<span>You have not made any submissions yet</span>";
@@ -59,7 +59,7 @@
 
 <script>
 jQuery(function ($) {
-    $("a").click(function() {
+    $("a.del").click(function() {
 		var id = $(this).data("value");
 		if(confirm("Are you sure you want to delete this file?")){ 
 			$.ajax({
