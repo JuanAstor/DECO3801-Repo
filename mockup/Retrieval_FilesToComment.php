@@ -4,7 +4,7 @@ require("../lib/mysql.php");
 require("../lib/queries.php");
 //Need a session varibale containing the userID and the assignmentID
 $uID = '12123434'; //userID
-$assignID = '514636'; //assignmentID
+$assignID = '514638'; //assignmentID
 
 ?>
 <!DOCTYPE html>
@@ -98,7 +98,12 @@ jQuery(function ($) {
     $(".filelinks").click(function() {
     //get the filename from the anchor tag clicked
 	var file = $(this).text(); //filename
-	var fID = $(this).data("value"); //fileID
+	var fID = $(this).data("fileid"); //fileID
+	var uID = $(this).data("user"); //userID
+	//var uID = "15478782"; 
+	
+	console.log(uID);
+	console.log(fID);
         $.ajax({
             type:'POST',
             url:'../lib/retrieve.php',
@@ -106,12 +111,17 @@ jQuery(function ($) {
                    user : '<?php echo $uID ?>',
                    assign : '<?php echo $assignID ?>' },
 				   success: function(data){
+				   
+						$("ul#tabs").html("");
 					   //dump the file data into the pre tag
-						$("pre").text(data);
+						$("pre.prettyprint").text(data);
 						//load google prettify to style text
 						prettyPrint();
 						//load the comment system from commentDB.js
-						loadCommentSystem();			                
+						
+						
+						
+						loadCommentSystem(uID, fID);			                
             }
         });
     });

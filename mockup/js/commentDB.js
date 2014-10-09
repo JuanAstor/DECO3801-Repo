@@ -1,6 +1,6 @@
 
 
-function loadCommentSystem(){
+function loadCommentSystem(uid, fid){
 	$.ajaxSetup({ cache: false });
 	
 	
@@ -9,9 +9,9 @@ function loadCommentSystem(){
 	
 		
 	// User ID of person browsing
-	var userID = '12123434';
+	var userID = uid;
 	//var userID = $_SESSION["user"];
-	var fileID = '1';
+	var fileID = fid;
 	// User ID of reviewer
 	
 		
@@ -194,8 +194,9 @@ function loadCommentSystem(){
 					
 					if (!editPriv){ 	
 					
-						$(this).html("<span class=\"combox\"> <b> Line " +
-						lineNum + "</b> <br />" + lineCom + "</span>");
+						$(this).html("<span class=\"combox\">  <b>Line " +
+						lineNum + "</b> <br /><textarea class=\"trans\" readonly>" + lineCom
+						+ "</textarea >");
 						
 					} else {
 
