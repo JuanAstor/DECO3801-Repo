@@ -14,7 +14,10 @@ $assignID = '514636'; //assignmentID
 
         <link rel="stylesheet" type="text/css" href="main.css">
         <link rel="stylesheet" type="text/css" href="comments.css">
+<<<<<<< HEAD
         <link href="/mockup/css/prettyprint/prettify.css" type="text/css" rel="stylesheet" />
+=======
+>>>>>>> origin/master
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
@@ -65,7 +68,11 @@ $assignID = '514636'; //assignmentID
 					echo "No files found";	
 				} else {
 					foreach($files as $fileName){ 
+<<<<<<< HEAD
 						echo "<a class='filelinks' >".$fileName['FileName']. "</a><br>";//display all filenames as an anchor
+=======
+						echo "<a class='filelinks' data-value=".$fileName['FileID'].">".$fileName['FileName']. "</a><br>";//display all filenames as an anchor
+>>>>>>> origin/master
 					}
 				}		
         ?>
@@ -80,7 +87,10 @@ $assignID = '514636'; //assignmentID
 				</ul>
 			</div>
             <!-- code added here -->
+<<<<<<< HEAD
             <?prettify?>
+=======
+>>>>>>> origin/master
             <pre class="prettyprint">Nothing Selected</pre>
             
             <div id="coms">
@@ -106,10 +116,14 @@ jQuery(function ($) {
                    assign : '<?php echo $assignID ?>' },
 				   success: function(data){
                 $("pre").text(data);
+<<<<<<< HEAD
 				//prettyPrint();
 				//re run comments
 				//alert("this message");
 				loadCommentSystem();
+=======
+				//re run comments
+>>>>>>> origin/master
 				
 				
 				
