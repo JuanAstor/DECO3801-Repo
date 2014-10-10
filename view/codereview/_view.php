@@ -31,6 +31,7 @@ $assignID = $_SESSION["assign"]; //assignmentID
          <?php date_default_timezone_set('Australia/Brisbane'); ?>
          <!-- change this -->
          <script src="/js/commentDB.js" type="text/javascript"></script>
+		
     </head>
     <body>
     <content>
@@ -60,7 +61,7 @@ $assignID = $_SESSION["assign"]; //assignmentID
         </div>
         <!-- file data code added here -->
         <?prettify?>
-        <pre class="prettyprint">Nothing Selected</pre>
+        <pre class="prettyprint linenums">Nothing Selected</pre>
         
         <div id="coms">
             
@@ -94,7 +95,7 @@ jQuery(function ($) {
 				   
 						$("ul#tabs").html("");
 					   //dump the file data into the pre tag
-						$("pre.prettyprint").text(data);
+						$("pre.prettyprint.linenums").text(data);
 						//load google prettify to style text
 						prettyPrint();
 						//load the comment system from commentDB.js											

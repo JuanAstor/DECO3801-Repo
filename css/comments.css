@@ -38,7 +38,7 @@
 #coms{
 	width:20px;
 	float:left;
-	margin-top:15px;
+	margin-top:4.5px;
 	margin-left:3px;
 }
 
@@ -47,7 +47,7 @@
 
 
 .hcbutton{
-
+	background-repeat:no-repeat;
 	display:block;
 	float:left;
 	background-image:url('/img/small.gif');	
@@ -55,7 +55,7 @@
 }
 
 .hcbutton:hover{
-
+	background-repeat:no-repeat;
 	display:block;
 	float:left;
 	background-image:url('/img/smalladd.gif');	
@@ -65,6 +65,7 @@
 /* CSS for buttons that have comments as viewed by the owner */
 
 .hcbuttonown{
+	background-repeat:no-repeat;
 	display:block;
 	float:left;
 	background-image:url('/img/small.gif');	
@@ -72,6 +73,7 @@
 }
 
 .hcbuttonown:hover{
+	background-repeat:no-repeat;
 	opacity:0.4;
 	display:block;
 	float:left;
@@ -82,7 +84,7 @@
 /* CSS for buttons that have comments as viewed by the reviewer */
 
 .hccom{
-
+	background-repeat:no-repeat;
 	display:block;
 	float:left;
 	background-image:url('/img/smallcom.gif');	
@@ -90,7 +92,7 @@
 }
 
 .hccom:hover{
-
+	background-repeat:no-repeat;
 	display:block;
 	float:left;
 	background-image:url('/img/smallcomread.gif');

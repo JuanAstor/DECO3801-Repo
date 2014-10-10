@@ -101,11 +101,10 @@ function loadCommentSystem(uid, fid){
 		var revID = "";
 		var plainText = $('.prettyprint').text();
 		plainText = plainText.split("\n");
-		var lines = $.each(plainText, function(n, elem) {
-						lineNum++;
-						});
 		
-		var lineSpacing = (parseInt($(".prettyprint").css("height"), 10)/ lineNum);
+		lineNum = $(".linenums li").length;
+		console.log(lineNum);
+		var lineSpacing = ($(".prettyprint").css("line-height"));
 		console.log(lineSpacing);
 		
 		
