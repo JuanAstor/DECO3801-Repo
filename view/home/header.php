@@ -55,8 +55,18 @@
             <navgroup class="nav-feedback">
             <?php // Loop through courses and display
 			if(!check_if_admin($user)){ //if not an admin
-                foreach ($courses as $course) {
-                    echo "<div><p><i class='fa fa-angle-right'></i> <a>". $course['CourseID'] . "</a></p></div>";
+                $course = "";
+                $count = 0;
+                foreach ($assessments as $assessment) {
+                    $count++;
+                    echo "<div>";
+                    if ($course != $assessment['CourseID']) {
+                        echo "<p class='iscourse'><span>".$assessment['CourseID']."</span> ";
+                        $course = $assessment['CourseID'];
+                    }
+                    echo "<p><i class='fa fa-angle-right'></i> "
+                       . "<a href='CodeReview.php?assessment=".$count."'>".$assessment['AssignmentName']."</a>"
+                       . "</p></div>";
                 }
 			}
             ?>

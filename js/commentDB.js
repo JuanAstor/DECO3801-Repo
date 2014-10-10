@@ -23,7 +23,7 @@ function loadCommentSystem(uid, fid){
 		$.ajax({
 		
 			type: "POST",
-			url: "/mockup/comments.php",
+			url: "/lib/comments.php",
 			data: {"rtype": "user", "uid" : userID, "fid" : fileID},
 			
 			success: runStep1
@@ -58,7 +58,7 @@ function loadCommentSystem(uid, fid){
 			$.ajax({ 
 				
 				type: "POST",
-				url: "/mockup/comments.php",
+				url: "/lib/comments.php",
 				data: {"rtype": "revUsers", "uid" : userID, "fid" : fileID},
 					
 				success: generateReviewTabs	
@@ -157,7 +157,7 @@ function loadCommentSystem(uid, fid){
 		
 		$.ajax({
 			type: "POST",
-			url: "/mockup/comments.php",
+			url: "/lib/comments.php",
 			data: {"rtype": "fetch", "revNum" : revNum, "uid" : userID,
 					"fid" : fileID, "isOwner" : isOwner},
 			success: function(json){				
@@ -351,7 +351,7 @@ function loadCommentSystem(uid, fid){
 		
 		$.ajax({
 			type: "POST",
-			url: "/mockup/comments.php",
+			url: "/lib/comments.php",
 			data: {"rtype": "add", "uid" : userID, "fid" : fileID,
 					"lineNum": lineNum, "lineCom": comment},
 			success: function(){
@@ -380,7 +380,7 @@ function loadCommentSystem(uid, fid){
 		
 		$.ajax({
 			type: "POST",
-			url: "/mockup/comments.php",
+			url: "/lib/comments.php",
 			data: {"rtype": "edit", "uid" : userID, "fid" : fileID,
 					"lineNum": lineNum, "lineCom": comment},
 					
@@ -409,7 +409,7 @@ function loadCommentSystem(uid, fid){
 			$.ajax({
 		
 				type: "POST",
-				url: "/mockup/comments.php",
+				url: "/lib/comments.php",
 				data: {"rtype": "delete", "uid" : userID, "fid" : fileID,
 						"lineNum": lineNum},
 					
