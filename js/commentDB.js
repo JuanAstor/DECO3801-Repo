@@ -104,7 +104,7 @@ function loadCommentSystem(uid, fid){
 		
 		lineNum = $(".linenums li").length;
 		console.log(lineNum);
-		var lineSpacing = ($(".prettyprint").css("line-height"));
+		var lineSpacing = ($(".linenums li").css("line-height"));
 		console.log(lineSpacing);
 		
 		

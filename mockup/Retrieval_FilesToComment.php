@@ -114,7 +114,7 @@ jQuery(function ($) {
 				   
 						$("ul#tabs").html("");
 					   //dump the file data into the pre tag
-						$("pre.prettyprint").text(data);
+						$("pre.prettyprint.linenums").text(data);
 						//load google prettify to style text
 						prettyPrint();
 						//load the comment system from commentDB.js
