@@ -101,16 +101,6 @@ textarea {
     resize: vertical;
 }
 
-/* ==========================================================================
-   Chrome Frame prompt
-   ========================================================================== */
-
-.chromeframe {
-    margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
-    padding: 0.2em 0;
-}
 
 /* ==========================================================================
    Parallax Scroll
@@ -440,6 +430,7 @@ main {
 	padding:11px 21px;
 	text-decoration:none;
 	text-shadow:none;
+    opacity: 0.9;
 }
 .signup:hover {
 	background-color:#7fbad0;
@@ -462,6 +453,7 @@ main {
 	padding:11px 21px;
 	text-decoration:none;
 	text-shadow:none;
+    opacity: 0.9;
 }
 .signin:hover {
 	background-color:#fad9a6;
@@ -472,4 +464,25 @@ main {
 }
 
 
+/* ==========================================================================
+   Page Contents
+   ========================================================================== */
 
+.cont1 {
+    position:absolute;
+    bottom: 5px;
+    left: 20px;
+    right: 20px;
+    text-align: center;
+}
+
+arrow {
+    font-family:'Patua One', cursive;
+    color:white;
+    font-size: 15px;
+}
+
+.txt {
+    color:white;
+    font-size: 15px;
+}
