@@ -35,10 +35,10 @@ function get_user_name($user) {
 	$query = MySQL::getInstance()->prepare($sql);
 	$query->execute(array($user));
 	return $query->fetchAll(PDO::FETCH_ASSOC);
-    $query = MySQL::getInstance()->query("SELECT * 
-					  					FROM `user` 
-					 	 				WHERE UserID = '" . $user . "'");
-    return $query->fetchALL();
+    /*$query = MySQL::getInstance()->query("SELECT * 
+                                          FROM `user` 
+                                          WHERE UserID = '" . $user . "'");
+    return $query->fetchALL();*/
 }
 
 //check if the user that has logged in is an admin
@@ -120,13 +120,13 @@ function delete_submissions($assignID){
 		//if any assignment files have been submitted 
 		//first delete any possible reviews on these files (so no violations in the db)
 		$query2 = MySQL::getInstance()->prepare("DELETE FROM `reviewer`
-												WHERE FileID IN (SELECT FileID
-																	FROM `assignmentfile`
-																	WHERE AssignmentID=?)");
+                                                         WHERE FileID IN (SELECT FileID
+                                                         FROM `assignmentfile`
+                                                         WHERE AssignmentID=?)");
 		$query2->execute(array($assignID));
 		
 		$query3 = MySQL::getInstance()->prepare("DELETE FROM `assignmentfile`
-												WHERE AssignmentID=?");
+                                                         WHERE AssignmentID=?");
 		return $query3->execute(array($assignID));
 	} else { 
 		//no files were submitted, so return that deleting is possible
@@ -230,10 +230,10 @@ function check_semester($courseID, $semester){
 	$query->execute(array($courseID, $semester));
 	$count = $query->rowCount();
 	return $count;
-	$query = MySQL::getInstance()->query("SELECT count(1)
-										FROM `course`
-										WHERE CourseID = '".$courseID."' AND Semester = '".$semester."'");
-	return $query->fetchALL();	
+	/*$query = MySQL::getInstance()->query("SELECT count(1)
+                                                FROM `course`
+                                                WHERE CourseID = '".$courseID."' AND Semester = '".$semester."'");
+	return $query->fetchALL();*/
 }
 
 //deletes any files selected by a user (and comments attached to the file)
@@ -272,6 +272,25 @@ function update_enrolment($uID, $cID, $semesterCode){
 	
 	//return MySQL::getInstance()->query("INSERT INTO `courseenrolment` (`UserID`, `CourseID, `Semester`) 
 	//									VALUES ('".$uID."','".$cID."','".$semesterCode."')");
+}
+
+/* Check if consumerkey exists
+ *
+ * precondition: consumerkey is unique && * admin.consumerkeys != ''
+ */
+function check_if_consumer_key($key) {
+    $sql = "SELECT ConsumerKey FROM `admin` WHERE ConsumerKey=?";
+    $query = MySQL::getInstance()->prepare($sql);
+    $query->execute(array($key));
+    $count = $query->rowCount();
+    return $count ? 1 : 0;
+}
+
+// Using the consumerkey, return the consumer secret
+function get_consumer_secret($key) {
+    $sql = "SELECT ConsumerSecret FROM `admin` WHERE ConsumerKey=?";
+    $query = MySQL::getInstance()->prepare($sql);
+    return $query->execute(array($key));
 }
 
 ?>

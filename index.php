@@ -5,7 +5,14 @@ require("lib/queries.php"); //query functions to get database results
 
 if (!isset($_SESSION['user']) && isset($_POST['user'])) {
     $_SESSION['user'] = $_POST['user'];
+    
+} else { 
+    if (isset($_POST['oauth_consumer_key'])) {
+        $key = $_POST['oauth_consumer_key'];
+        require_once 'lib/authenticate.php';
+    }
 }
+
 
 /**
  *  Show the home dashboard if student has authenticated.
@@ -21,7 +28,7 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
         $courses = get_users_courses($user);
         $assessments = get_users_assessments($user);
         $fullName = get_user_name($user);
-		$submitted = get_user_comments($user);
+	$submitted = get_user_comments($user);
 
 
         // Show home
@@ -34,8 +41,8 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
         $fullName = get_user_name($user);
         $courses = get_admins_courses($user);
 		
-		include("view/home/header.php");
-		include("view/admin/home/_home.php");
+        include("view/home/header.php");
+        include("view/admin/home/_home.php");
     }
 }
 else{
