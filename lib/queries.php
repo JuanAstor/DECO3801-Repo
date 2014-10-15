@@ -1,5 +1,5 @@
 <?php
-//get all courses that a user is enrolled in
+//get all courses that a user is enrolled in. COURSE ID IS NOT UNIQUE
 function get_users_courses($user) {
 	$sql = "SELECT CourseID FROM `courseenrolment` WHERE UserID=?";
 	$query = MySQL::getInstance()->prepare($sql);
@@ -15,7 +15,8 @@ function get_admins_courses($user) {
 }
 //get all assessments that a student has
 function get_users_assessments($user) {
-	$sql = "SELECT * FROM `assignment`, `courseenrolment` WHERE courseenrolment.CourseID=assignment.CourseID AND courseenrolment.UserID=?";
+	$sql = "SELECT * FROM `assignment` as A, `courseenrolment` as B WHERE A.CourseID=B.CourseID AND 
+			A.Semester=B.Semester AND A.ConsumerKey=B.ConsumerKey AND B.UserID=?";
 	$query = MySQL::getInstance()->prepare($sql);
 	$query->execute(array($user));
 	return $query->fetchAll(PDO::FETCH_ASSOC);	
@@ -48,7 +49,7 @@ function check_if_admin($user) { //returns 1 if an admin, 0 if student
 	$query->execute(array($user));
 	$result = $query->fetchAll(PDO::FETCH_ASSOC);
 	foreach($result as $output){
-		if(strcmp($output['Privileges'], 'Admin')==0){ 
+		if((strcmp($output['Privileges'], 'Admin')==0) or (strcmp($output['Privileges'], 'SuperAdmin')==0)){ 
 			return true; //is an admin
 		} else {
 			return false; //is a student
@@ -74,7 +75,7 @@ function get_submitted_info($user, $assignmentID){
 	return $query->fetchAll(PDO::FETCH_ASSOC);
 }
 
-//update the 'assignmnetfile' table in the database
+//update the 'assignmentfile' table in the database
 function update_file_contents($user, $assignmentID, $filename, $content, $dateTime) {
     return MySQL::getInstance()->query("UPDATE `assignmentfile`
 					SET FileData = '" . $content . "', SubmissionTime = '" . $dateTime . "' 
@@ -109,7 +110,7 @@ function get_login_status($user) {
 	}
 }
 
-//if any files have been submitted for a certain courseID, delete them
+//if any files have been submitted for a certain assignmentID, delete them
 function delete_submissions($assignID){
 	$sql = "SELECT * FROM `assignmentfile` WHERE AssignmentID=?";
 	$query1 = MySQL::getInstance()->prepare($sql);
@@ -142,7 +143,7 @@ function find_user_comments($userID, $assignID){
 	return $query->fetchAll(PDO::FETCH_ASSOC);	
 }
 
-//retrieve the file data that has been submitted by a user
+//retrieve the file data that has been submitted by a user NOT A UNIQUE FILE
 function get_file_data($user, $assignmentID, $filename){
 	$sql = "SELECT * FROM `assignmentfile` WHERE UserID=? AND AssignmentID=? AND FileName=?";
 	$query = MySQL::getInstance()->prepare($sql);
@@ -150,7 +151,7 @@ function get_file_data($user, $assignmentID, $filename){
 	return $query->fetchAll(PDO::FETCH_ASSOC);
 }
 
-//from the student reviews pages (admin) will find and return the assignmentID for a course/assignment
+//from the student reviews pages (admin) will find and return the assignmentID(s) for a course/assignment
 function get_assignID($name, $course){
 	$sql = "SELECT * FROM `assignment` WHERE CourseID=? AND AssignmentName=?";
 	$query = MySQL::getInstance()->prepare($sql);
@@ -159,18 +160,18 @@ function get_assignID($name, $course){
 }
 
 //for the edit assessment page: get the assignment names available
-function get_course_assessments($courseID, $semester){
-	$sql = "SELECT AssignmentName FROM `assignment` WHERE CourseID=? AND Semester=?";
+function get_course_assessments($courseID, $semester, $consumerKey = "Institution.A"){
+	$sql = "SELECT AssignmentName FROM `assignment` WHERE CourseID=? AND Semester=? AND ConsumerKey=?";
 	$query = MySQL::getInstance()->prepare($sql);
-	$query->execute(array($courseID, $semester));
+	$query->execute(array($courseID, $semester, $consumerKey));
 	return $query->fetchAll(PDO::FETCH_ASSOC);
 }
 
-//return all the assignmnet info for a given assignment
-function get_assign_info($courseID, $semester, $name){
-	$sql = "SELECT * FROM `assignment` WHERE CourseID=? AND Semester=? AND AssignmentName=?";
+//return all the assignmnet info for a given assignment. NOT A UNIQUE ASSIGNMENT
+function get_assign_info($courseID, $semester, $name, $consumerKey = "Institution.A"){
+	$sql = "SELECT * FROM `assignment` WHERE CourseID=? AND Semester=? AND AssignmentName=? AND ConsumerKey=?";
 	$query = MySQL::getInstance()->prepare($sql);
-	$query->execute(array($courseID, $semester, $name));
+	$query->execute(array($courseID, $semester, $name, $consumerKey));
 	return $query->fetchAll(PDO::FETCH_ASSOC); 
 }
 
@@ -207,27 +208,27 @@ function get_previous_assign_info($assignID){
 }
 
 //find out if an assignment name already exists for a course 
-function find_assignmentName($courseID, $name, $semester){
-	$sql = "SELECT * FROM `assignment` WHERE CourseID=? AND Semester=? AND AssignmentName=?";
+function find_assignmentName($courseID, $name, $semester, $consumerKey = "Institution.A"){
+	$sql = "SELECT * FROM `assignment` WHERE CourseID=? AND Semester=? AND AssignmentName=? AND ConsumerKey=?";
 	$query = MySQL::getInstance()->prepare($sql);
-	$query->execute(array($courseID, $semester, $name));
+	$query->execute(array($courseID, $semester, $name, $consumerKey));
 	$count = $query->rowCount();
 	return $count;
 }
 
 //insert a new row into the assignment folder
-function create_assignment($cID, $sem, $decript, $name, $date, $time){
-	$sql = "INSERT INTO `assignment` (`CourseID`, `Semester`, `AssignmentDescription`, `AssignmentName`, `DueDate`, `DueTime`)
-			VALUES (?,?,?,?,?,?)";
+function create_assignment($cID, $sem, $decript, $name, $date, $time, $consumerKey = "Institution.A"){
+	$sql = "INSERT INTO `assignment` (`CourseID`, `Semester`, `ConsumerKey`, `AssignmentDescription`, `AssignmentName`, `DueDate`, `DueTime`)
+			VALUES (?,?,?,?,?,?,?)";
 	$query = MySQL::getInstance()->prepare($sql);
-	return $query->execute(array($cID, $sem, $decript, $name, $date, $time));
+	return $query->execute(array($cID, $sem, $consumerKey, $decript, $name, $date, $time));
 }
 
 //check that the semester value exists for the selected course
-function check_semester($courseID, $semester){
-	$sql = "SELECT * FROM `course` WHERE CourseID=? AND Semester=?";
+function check_semester($courseID, $semester, $consumerKey = "Institution.A"){
+	$sql = "SELECT * FROM `course` WHERE CourseID=? AND Semester=? AND ConsumerKey=?";
 	$query = MySQL::getInstance()->prepare($sql);
-	$query->execute(array($courseID, $semester));
+	$query->execute(array($courseID, $semester, $consumerKey));
 	$count = $query->rowCount();
 	return $count;
 	/*$query = MySQL::getInstance()->query("SELECT count(1)
@@ -248,14 +249,14 @@ function delete_student_files($fileID){
 }
 
 //adds a new user if none exists and then updates the details of that user
-function update_user($uID, $fName, $sName, $privileges){
+function update_user($uID, $fName, $sName, $privileges, $consumerKey = "Institution.A"){
 	$sql = "INSERT INTO `user` (`UserID`) VALUES (?)";
 	$query = MySQL::getInstance()->prepare($sql); 
 	$query->execute(array($uID));
 	
-	$sql2 = "UPDATE `user` SET `FName=?, SName=?, Privileges=? WHERE UserID=?";
+	$sql2 = "UPDATE `user` SET `FName=?, SName=?, Privileges=?, ConsumerKey=? WHERE UserID=?";
 	$query1 = MySQL::getInstance()->prepare($sql2);
-	return $query1->execute(array($fName, $sName, $privileges, $uID));
+	return $query1->execute(array($fName, $sName, $privileges, $consumerKey, $uID));
 	
 	//MySQL::getInstance()->query("INSERT INTO `user` (`UserID`) 
 	//							VALUES ('".$uID."')");
@@ -265,10 +266,10 @@ function update_user($uID, $fName, $sName, $privileges){
 }
 
 //adds an enrolment record for a specified user and course if it doesn't yet exist.
-function update_enrolment($uID, $cID, $semesterCode){
-	$sql = "INSERT INTO `courseenrolment` (`UserID`, `CourseID`, `Semester`) VALUES (?,?,?)";
+function update_enrolment($uID, $cID, $semesterCode, $consumerKey = "Institution.A"){
+	$sql = "INSERT INTO `courseenrolment` (`UserID`, `CourseID`, `Semester`, `ConsumerKey`) VALUES (?,?,?,?)";
 	$query = MySQL::getInstance()->prepare($sql);
-	return $query->execute(array($uID, $cID, $semesterCode));
+	return $query->execute(array($uID, $cID, $semesterCode, $consumerKey));
 	
 	//return MySQL::getInstance()->query("INSERT INTO `courseenrolment` (`UserID`, `CourseID, `Semester`) 
 	//									VALUES ('".$uID."','".$cID."','".$semesterCode."')");
@@ -279,7 +280,7 @@ function update_enrolment($uID, $cID, $semesterCode){
  * precondition: consumerkey is unique && * admin.consumerkeys != ''
  */
 function check_if_consumer_key($key) {
-    $sql = "SELECT ConsumerKey FROM `admin` WHERE ConsumerKey=?";
+    $sql = "SELECT ConsumerKey FROM `institution` WHERE ConsumerKey=?";
     $query = MySQL::getInstance()->prepare($sql);
     $query->execute(array($key));
     $count = $query->rowCount();
@@ -288,7 +289,7 @@ function check_if_consumer_key($key) {
 
 // Using the consumerkey, return the consumer secret
 function get_consumer_secret($key) {
-    $sql = "SELECT ConsumerSecret FROM `admin` WHERE ConsumerKey=?";
+    $sql = "SELECT Secret FROM `institution` WHERE ConsumerKey=?";
     $query = MySQL::getInstance()->prepare($sql);
     return $query->execute(array($key));
 }

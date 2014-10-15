@@ -9,16 +9,44 @@ CREATE SCHEMA IF NOT EXISTS `PeerReview` DEFAULT CHARACTER SET utf8 COLLATE utf8
 USE `PeerReview` ;
 
 -- -----------------------------------------------------
+-- Table `PeerReview`.`Institution`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `PeerReview`.`Institution` ;
+
+CREATE TABLE IF NOT EXISTS `PeerReview`.`Institution` (
+  `consumerKey` CHAR(45) NOT NULL,
+  `AdminUser` CHAR(24) NULL,
+  `Secret` TINYBLOB NOT NULL,
+  `Timezone` INT NOT NULL,
+  PRIMARY KEY (`consumerKey`),
+  INDEX `UserID_idx` (`AdminUser` ASC),
+  CONSTRAINT `AdminUserID`
+    FOREIGN KEY (`AdminUser`)
+    REFERENCES `PeerReview`.`User` (`UserID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `PeerReview`.`User`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `PeerReview`.`User` ;
 
 CREATE TABLE IF NOT EXISTS `PeerReview`.`User` (
-  `UserID` CHAR(8) NOT NULL,
+  `UserID` CHAR(24) NOT NULL,
   `FName` VARCHAR(45) NULL,
   `SName` VARCHAR(45) NULL,
   `Privileges` TINYTEXT NULL,
-  PRIMARY KEY (`UserID`))
+  `PasswordHash` TINYBLOB NULL,
+  `ConsumerKey` CHAR(45) NOT NULL,
+  PRIMARY KEY (`UserID`),
+  INDEX `InstitutionID_idx` (`ConsumerKey` ASC),
+  CONSTRAINT `UserConsumerKey`
+    FOREIGN KEY (`ConsumerKey`)
+    REFERENCES `PeerReview`.`Institution` (`consumerKey`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -30,14 +58,21 @@ DROP TABLE IF EXISTS `PeerReview`.`Course` ;
 CREATE TABLE IF NOT EXISTS `PeerReview`.`Course` (
   `CourseID` CHAR(8) NOT NULL,
   `Semester` CHAR(5) NOT NULL,
-  `CourseCoordinator` CHAR(8) NULL,
-  PRIMARY KEY (`CourseID`, `Semester`),
+  `ConsumerKey` CHAR(45) NOT NULL,
+  `CourseCoordinator` CHAR(24) NULL,
+  PRIMARY KEY (`CourseID`, `Semester`, `ConsumerKey`),
   INDEX `UserID_idx` (`CourseCoordinator` ASC),
+  INDEX `InstitutionID_idx` (`ConsumerKey` ASC),
   CONSTRAINT `CourseCoordinatorID`
     FOREIGN KEY (`CourseCoordinator`)
     REFERENCES `PeerReview`.`User` (`UserID`)
     ON DELETE SET NULL
-    ON UPDATE CASCADE)
+    ON UPDATE CASCADE,
+  CONSTRAINT `CourseConsumerKey`
+    FOREIGN KEY (`ConsumerKey`)
+    REFERENCES `PeerReview`.`Institution` (`consumerKey`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -50,15 +85,16 @@ CREATE TABLE IF NOT EXISTS `PeerReview`.`Assignment` (
   `AssignmentID` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CourseID` CHAR(8) NOT NULL,
   `Semester` CHAR(5) NOT NULL,
-  `AssignmentDescription` VARCHAR(150) NULL,
+  `ConsumerKey` CHAR(45) NOT NULL,
+  `AssignmentDescription` VARCHAR(45) NULL,
   `AssignmentName` VARCHAR(45) NULL,
   `DueDate` DATE NULL,
   `DueTime` TIME NULL,
   PRIMARY KEY (`AssignmentID`),
-  INDEX `CourseID_idx` (`CourseID` ASC, `Semester` ASC),
+  INDEX `CourseID_idx` (`CourseID` ASC, `Semester` ASC, `ConsumerKey` ASC),
   CONSTRAINT `AssignmentCourseID`
-    FOREIGN KEY (`CourseID` , `Semester`)
-    REFERENCES `PeerReview`.`Course` (`CourseID` , `Semester`)
+    FOREIGN KEY (`CourseID` , `Semester` , `ConsumerKey`)
+    REFERENCES `PeerReview`.`Course` (`CourseID` , `Semester` , `ConsumerKey`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
@@ -71,7 +107,7 @@ DROP TABLE IF EXISTS `PeerReview`.`AssignmentFile` ;
 
 CREATE TABLE IF NOT EXISTS `PeerReview`.`AssignmentFile` (
   `AssignmentID` MEDIUMINT UNSIGNED NOT NULL,
-  `UserID` CHAR(8) NOT NULL,
+  `UserID` CHAR(24) NOT NULL,
   `FileID` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `FileName` TINYTEXT NOT NULL,
   `FileData` BLOB NOT NULL,
@@ -98,19 +134,43 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `PeerReview`.`CourseEnrolment` ;
 
 CREATE TABLE IF NOT EXISTS `PeerReview`.`CourseEnrolment` (
-  `UserID` CHAR(8) NOT NULL,
+  `UserID` CHAR(24) NOT NULL,
   `CourseID` CHAR(8) NOT NULL,
   `Semester` CHAR(5) NOT NULL,
-  INDEX `CourseID_idx` (`CourseID` ASC, `Semester` ASC),
-  PRIMARY KEY (`UserID`, `CourseID`, `Semester`),
+  `ConsumerKey` CHAR(45) NOT NULL,
+  INDEX `CourseID_idx` (`CourseID` ASC, `Semester` ASC, `ConsumerKey` ASC),
+  PRIMARY KEY (`UserID`, `CourseID`, `Semester`, `ConsumerKey`),
   CONSTRAINT `EnrolmentUserID`
     FOREIGN KEY (`UserID`)
     REFERENCES `PeerReview`.`User` (`UserID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `EnrolmentCourseID`
-    FOREIGN KEY (`CourseID` , `Semester`)
-    REFERENCES `PeerReview`.`Course` (`CourseID` , `Semester`)
+    FOREIGN KEY (`CourseID` , `Semester` , `ConsumerKey`)
+    REFERENCES `PeerReview`.`Course` (`CourseID` , `Semester` , `ConsumerKey`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `PeerReview`.`Reviewer`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `PeerReview`.`Reviewer` ;
+
+CREATE TABLE IF NOT EXISTS `PeerReview`.`Reviewer` (
+  `UserID` CHAR(24) NOT NULL,
+  `FileID` MEDIUMINT UNSIGNED NOT NULL,
+  PRIMARY KEY (`UserID`, `FileID`),
+  INDEX `File_idx` (`FileID` ASC),
+  CONSTRAINT `ReviewerUserID`
+    FOREIGN KEY (`UserID`)
+    REFERENCES `PeerReview`.`User` (`UserID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `ReviewerFileID`
+    FOREIGN KEY (`FileID`)
+    REFERENCES `PeerReview`.`AssignmentFile` (`FileID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -123,42 +183,19 @@ DROP TABLE IF EXISTS `PeerReview`.`Comment` ;
 
 CREATE TABLE IF NOT EXISTS `PeerReview`.`Comment` (
   `FileID` MEDIUMINT UNSIGNED NOT NULL,
-  `UserID` CHAR(8) NOT NULL,
+  `UserID` CHAR(24) NOT NULL,
   `LineNumber` INT NOT NULL,
-  `LineComment` MEDIUMTEXT NOT NULL,
+  `Contents` MEDIUMTEXT NOT NULL,
   PRIMARY KEY (`FileID`, `UserID`, `LineNumber`),
   INDEX `CommentUserID_idx` (`UserID` ASC),
-  CONSTRAINT `CommentFileID`
+  CONSTRAINT `CommentFileID0`
     FOREIGN KEY (`FileID`)
     REFERENCES `PeerReview`.`AssignmentFile` (`FileID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  CONSTRAINT `CommentUserID`
+  CONSTRAINT `CommentUserID0`
     FOREIGN KEY (`UserID`)
     REFERENCES `PeerReview`.`User` (`UserID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `PeerReview`.`Reviewer`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `PeerReview`.`Reviewer` ;
-
-CREATE TABLE IF NOT EXISTS `PeerReview`.`Reviewer` (
-  `UserID` CHAR(8) NOT NULL,
-  `FileID` MEDIUMINT UNSIGNED NOT NULL,
-  PRIMARY KEY (`UserID`, `FileID`),
-  INDEX `File_idx` (`FileID` ASC),
-  CONSTRAINT `ReviewerUserID`
-    FOREIGN KEY (`UserID`)
-    REFERENCES `PeerReview`.`User` (`UserID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `ReviewerFileID`
-    FOREIGN KEY (`FileID`)
-    REFERENCES `PeerReview`.`AssignmentFile` (`FileID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
