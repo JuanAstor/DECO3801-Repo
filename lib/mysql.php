@@ -9,7 +9,7 @@ class MySQL {
 	
 	public static function getInstance() {
 		if (!self::$instance) {
-			self::$instance = new PDO("mysql:host=localhost;dbname=peerreview;charset=utf8", "root");
+			self::$instance = new PDO("mysql:host=localhost;dbname=peerreview;charset=utf8", "peerreview", "purplemonkeydishwasher");
 			//self::$instance = new PDO("mysql:host=localhost;dbname=portfolio;charset=utf8", "root", "password");
 			self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		}
