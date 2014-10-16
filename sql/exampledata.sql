@@ -306,45 +306,15 @@ INSERT INTO `institution` (`InstitutionID`, `consumerKey`, `AdminUser`, `Secret`
 -- Table structure for table `reviewer`
 --
 
-DROP TABLE IF EXISTS `reviewer`;
-CREATE TABLE IF NOT EXISTS `reviewer` (
-  `UserID` char(24) NOT NULL,
-  `FileID` mediumint(8) unsigned NOT NULL,
-  PRIMARY KEY (`UserID`,`FileID`),
-  KEY `File_idx` (`FileID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `reviewer`
---
-
-INSERT INTO `reviewer` (`UserID`, `FileID`) VALUES
-('21435465', 1),
-('32654354', 2),
-('35421544', 3),
-('12121454', 4),
-('15478782', 5),
-('44226945', 6),
-('21435465', 7),
-('32654354', 8),
-('35421544', 9),
-('12121454', 10),
-('15478782', 11),
-('11112222', 12),
-('12123434', 13),
-('55446688', 14),
-('44226945', 15),
-('21435465', 16),
-('32654354', 17),
-('35421544', 18),
-('12121454', 19),
-('15478782', 20),
-('11112222', 21),
-('12123434', 22),
-('55446688', 23),
-('44226945', 24);
-
--- --------------------------------------------------------
+DROP TABLE IF EXISTS `Reviewer` ;
+CREATE TABLE IF NOT EXISTS `Reviewer` (
+  `ReviewerID` CHAR(24) NOT NULL,
+  `AssignmentID` MEDIUMINT UNSIGNED NOT NULL,
+  `OwnerID` CHAR(24) NOT NULL,
+  PRIMARY KEY (`ReviewerID`, `AssignmentID`, `OwnerID`),
+  INDEX `ReviewerAssignment_idx` (`AssignmentID` ASC),
+  INDEX `OwnerID_idx` (`OwnerID` ASC))
+ENGINE = InnoDB;
 
 --
 -- Table structure for table `user`
@@ -425,9 +395,21 @@ ALTER TABLE `institution`
 -- Constraints for table `reviewer`
 --
 ALTER TABLE `reviewer`
-  ADD CONSTRAINT `ReviewerUserID` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `ReviewerFileID` FOREIGN KEY (`FileID`) REFERENCES `assignmentfile` (`FileID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
+  ADD CONSTRAINT `ReviewerID`
+    FOREIGN KEY (`ReviewerID`)
+    REFERENCES `User` (`UserID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  ADD CONSTRAINT `ReviewerAssignment`
+    FOREIGN KEY (`AssignmentID`)
+    REFERENCES `Assignment` (`AssignmentID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  ADD CONSTRAINT `OwnerID`
+    FOREIGN KEY (`OwnerID`)
+    REFERENCES `User` (`UserID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION;
 --
 -- Constraints for table `user`
 --

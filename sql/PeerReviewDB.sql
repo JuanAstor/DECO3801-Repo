@@ -162,18 +162,25 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `PeerReview`.`Reviewer` ;
 
 CREATE TABLE IF NOT EXISTS `PeerReview`.`Reviewer` (
-  `UserID` CHAR(24) NOT NULL,
-  `FileID` MEDIUMINT UNSIGNED NOT NULL,
-  PRIMARY KEY (`UserID`, `FileID`),
-  INDEX `File_idx` (`FileID` ASC),
-  CONSTRAINT `ReviewerUserID`
-    FOREIGN KEY (`UserID`)
+  `ReviewerID` CHAR(24) NOT NULL,
+  `AssignmentID` MEDIUMINT UNSIGNED NOT NULL,
+  `OwnerID` CHAR(24) NOT NULL,
+  PRIMARY KEY (`ReviewerID`, `AssignmentID`, `OwnerID`),
+  INDEX `ReviewerAssignment_idx` (`AssignmentID` ASC),
+  INDEX `OwnerID_idx` (`OwnerID` ASC),
+  CONSTRAINT `ReviewerID`
+    FOREIGN KEY (`ReviewerID`)
     REFERENCES `PeerReview`.`User` (`UserID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `ReviewerFileID`
-    FOREIGN KEY (`FileID`)
-    REFERENCES `PeerReview`.`AssignmentFile` (`FileID`)
+  CONSTRAINT `ReviewerAssignment`
+    FOREIGN KEY (`AssignmentID`)
+    REFERENCES `PeerReview`.`Assignment` (`AssignmentID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `OwnerID`
+    FOREIGN KEY (`OwnerID`)
+    REFERENCES `PeerReview`.`User` (`UserID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
