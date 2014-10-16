@@ -14,12 +14,15 @@ USE `PeerReview` ;
 DROP TABLE IF EXISTS `PeerReview`.`Institution` ;
 
 CREATE TABLE IF NOT EXISTS `PeerReview`.`Institution` (
+  `InstitutionID` INT NOT NULL AUTO_INCREMENT,
   `consumerKey` CHAR(45) NOT NULL,
   `AdminUser` CHAR(24) NULL,
   `Secret` TINYBLOB NOT NULL,
   `Timezone` INT NOT NULL,
-  PRIMARY KEY (`consumerKey`),
+  PRIMARY KEY (`InstitutionID`),
   INDEX `UserID_idx` (`AdminUser` ASC),
+  UNIQUE INDEX `consumerKey_UNIQUE` (`consumerKey` ASC),
+  UNIQUE INDEX `InstitutionID_UNIQUE` (`InstitutionID` ASC),
   CONSTRAINT `AdminUserID`
     FOREIGN KEY (`AdminUser`)
     REFERENCES `PeerReview`.`User` (`UserID`)
@@ -39,12 +42,12 @@ CREATE TABLE IF NOT EXISTS `PeerReview`.`User` (
   `SName` VARCHAR(45) NULL,
   `Privileges` TINYTEXT NULL,
   `PasswordHash` TINYBLOB NULL,
-  `ConsumerKey` CHAR(45) NOT NULL,
+  `InstitutionID` INT NOT NULL,
   PRIMARY KEY (`UserID`),
-  INDEX `InstitutionID_idx` (`ConsumerKey` ASC),
-  CONSTRAINT `UserConsumerKey`
-    FOREIGN KEY (`ConsumerKey`)
-    REFERENCES `PeerReview`.`Institution` (`consumerKey`)
+  INDEX `UserInstitutionID_idx` (`InstitutionID` ASC),
+  CONSTRAINT `UserInstitutionID`
+    FOREIGN KEY (`InstitutionID`)
+    REFERENCES `PeerReview`.`Institution` (`InstitutionID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -58,19 +61,19 @@ DROP TABLE IF EXISTS `PeerReview`.`Course` ;
 CREATE TABLE IF NOT EXISTS `PeerReview`.`Course` (
   `CourseID` CHAR(8) NOT NULL,
   `Semester` CHAR(5) NOT NULL,
-  `ConsumerKey` CHAR(45) NOT NULL,
+  `InstitutionID` INT NOT NULL,
   `CourseCoordinator` CHAR(24) NULL,
-  PRIMARY KEY (`CourseID`, `Semester`, `ConsumerKey`),
-  INDEX `UserID_idx` (`CourseCoordinator` ASC),
-  INDEX `InstitutionID_idx` (`ConsumerKey` ASC),
-  CONSTRAINT `CourseCoordinatorID`
+  PRIMARY KEY (`CourseID`, `Semester`, `InstitutionID`),
+  INDEX `CourseCoordinator_idx` (`CourseCoordinator` ASC),
+  INDEX `CourseInstitutionID_idx` (`InstitutionID` ASC),
+  CONSTRAINT `CourseCoordinator`
     FOREIGN KEY (`CourseCoordinator`)
     REFERENCES `PeerReview`.`User` (`UserID`)
-    ON DELETE SET NULL
-    ON UPDATE CASCADE,
-  CONSTRAINT `CourseConsumerKey`
-    FOREIGN KEY (`ConsumerKey`)
-    REFERENCES `PeerReview`.`Institution` (`consumerKey`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `CourseInstitutionID`
+    FOREIGN KEY (`InstitutionID`)
+    REFERENCES `PeerReview`.`Institution` (`InstitutionID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -85,16 +88,16 @@ CREATE TABLE IF NOT EXISTS `PeerReview`.`Assignment` (
   `AssignmentID` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CourseID` CHAR(8) NOT NULL,
   `Semester` CHAR(5) NOT NULL,
-  `ConsumerKey` CHAR(45) NOT NULL,
+  `InstitutionID` INT NOT NULL,
   `AssignmentDescription` VARCHAR(45) NULL,
   `AssignmentName` VARCHAR(45) NULL,
   `DueDate` DATE NULL,
   `DueTime` TIME NULL,
   PRIMARY KEY (`AssignmentID`),
-  INDEX `CourseID_idx` (`CourseID` ASC, `Semester` ASC, `ConsumerKey` ASC),
+  INDEX `CourseID_idx` (`CourseID` ASC, `Semester` ASC, `InstitutionID` ASC),
   CONSTRAINT `AssignmentCourseID`
-    FOREIGN KEY (`CourseID` , `Semester` , `ConsumerKey`)
-    REFERENCES `PeerReview`.`Course` (`CourseID` , `Semester` , `ConsumerKey`)
+    FOREIGN KEY (`CourseID` , `Semester` , `InstitutionID`)
+    REFERENCES `PeerReview`.`Course` (`CourseID` , `Semester` , `InstitutionID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
@@ -137,17 +140,17 @@ CREATE TABLE IF NOT EXISTS `PeerReview`.`CourseEnrolment` (
   `UserID` CHAR(24) NOT NULL,
   `CourseID` CHAR(8) NOT NULL,
   `Semester` CHAR(5) NOT NULL,
-  `ConsumerKey` CHAR(45) NOT NULL,
-  INDEX `CourseID_idx` (`CourseID` ASC, `Semester` ASC, `ConsumerKey` ASC),
-  PRIMARY KEY (`UserID`, `CourseID`, `Semester`, `ConsumerKey`),
+  `InstitutionID` INT NOT NULL,
+  INDEX `CourseID_idx` (`CourseID` ASC, `Semester` ASC, `InstitutionID` ASC),
+  PRIMARY KEY (`UserID`, `CourseID`, `Semester`, `InstitutionID`),
   CONSTRAINT `EnrolmentUserID`
     FOREIGN KEY (`UserID`)
     REFERENCES `PeerReview`.`User` (`UserID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `EnrolmentCourseID`
-    FOREIGN KEY (`CourseID` , `Semester` , `ConsumerKey`)
-    REFERENCES `PeerReview`.`Course` (`CourseID` , `Semester` , `ConsumerKey`)
+    FOREIGN KEY (`CourseID` , `Semester` , `InstitutionID`)
+    REFERENCES `PeerReview`.`Course` (`CourseID` , `Semester` , `InstitutionID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
