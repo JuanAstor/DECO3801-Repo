@@ -15,8 +15,8 @@ DROP TABLE IF EXISTS `PeerReview`.`Institution` ;
 
 CREATE TABLE IF NOT EXISTS `PeerReview`.`Institution` (
   `InstitutionID` INT NOT NULL AUTO_INCREMENT,
-  `consumerKey` CHAR(60) NOT NULL,
-  `AdminUser` CHAR(254) NULL,
+  `consumerKey` CHAR(45) NOT NULL,
+  `AdminUser` CHAR(24) NULL,
   `Secret` TINYBLOB NOT NULL,
   `Timezone` INT NOT NULL,
   PRIMARY KEY (`InstitutionID`),
@@ -37,7 +37,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `PeerReview`.`User` ;
 
 CREATE TABLE IF NOT EXISTS `PeerReview`.`User` (
-  `UserID` CHAR(254) NOT NULL,
+  `UserID` CHAR(24) NOT NULL,
   `FName` VARCHAR(45) NULL,
   `SName` VARCHAR(45) NULL,
   `Privileges` TINYTEXT NULL,
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `PeerReview`.`Course` (
   `CourseID` CHAR(8) NOT NULL,
   `Semester` CHAR(5) NOT NULL,
   `InstitutionID` INT NOT NULL,
-  `CourseCoordinator` CHAR(254) NULL,
+  `CourseCoordinator` CHAR(24) NULL,
   PRIMARY KEY (`CourseID`, `Semester`, `InstitutionID`),
   INDEX `CourseCoordinator_idx` (`CourseCoordinator` ASC),
   INDEX `CourseInstitutionID_idx` (`InstitutionID` ASC),
@@ -110,7 +110,7 @@ DROP TABLE IF EXISTS `PeerReview`.`AssignmentFile` ;
 
 CREATE TABLE IF NOT EXISTS `PeerReview`.`AssignmentFile` (
   `AssignmentID` MEDIUMINT UNSIGNED NOT NULL,
-  `UserID` CHAR(254) NOT NULL,
+  `UserID` CHAR(24) NOT NULL,
   `FileID` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `FileName` TINYTEXT NOT NULL,
   `FileData` BLOB NOT NULL,
@@ -137,7 +137,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `PeerReview`.`CourseEnrolment` ;
 
 CREATE TABLE IF NOT EXISTS `PeerReview`.`CourseEnrolment` (
-  `UserID` CHAR(254) NOT NULL,
+  `UserID` CHAR(24) NOT NULL,
   `CourseID` CHAR(8) NOT NULL,
   `Semester` CHAR(5) NOT NULL,
   `InstitutionID` INT NOT NULL,
@@ -162,9 +162,9 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `PeerReview`.`Reviewer` ;
 
 CREATE TABLE IF NOT EXISTS `PeerReview`.`Reviewer` (
-  `ReviewerID` CHAR(254) NOT NULL,
+  `ReviewerID` CHAR(24) NOT NULL,
   `AssignmentID` MEDIUMINT UNSIGNED NOT NULL,
-  `OwnerID` CHAR(254) NOT NULL,
+  `OwnerID` CHAR(24) NOT NULL,
   PRIMARY KEY (`ReviewerID`, `AssignmentID`, `OwnerID`),
   INDEX `ReviewerAssignment_idx` (`AssignmentID` ASC),
   INDEX `OwnerID_idx` (`OwnerID` ASC),
@@ -193,7 +193,7 @@ DROP TABLE IF EXISTS `PeerReview`.`Comment` ;
 
 CREATE TABLE IF NOT EXISTS `PeerReview`.`Comment` (
   `FileID` MEDIUMINT UNSIGNED NOT NULL,
-  `UserID` CHAR(254) NOT NULL,
+  `UserID` CHAR(24) NOT NULL,
   `LineNumber` INT NOT NULL,
   `Contents` MEDIUMTEXT NOT NULL,
   PRIMARY KEY (`FileID`, `UserID`, `LineNumber`),
