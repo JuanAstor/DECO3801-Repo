@@ -26,12 +26,12 @@ if (isset($key) && check_if_consumer_key($key)) {
         // Values to keep until login is achieved
         $_SESSION['isInstructor']= $context->isInstructor() ? "Admin" : "Student";
         $_SESSION['fullName']    = $context->getUserName();
-        $_SESSION['fName']       = explode(' ',$context->getUserName(), 2);
-        //$_SESSION['sName']       = explode(' ',$context->getUserName(), 2);
+        $_SESSION['fName']       = explode(' ',$context->getUserName(), 2)[0];
+        $_SESSION['sName']       = explode(' ',$context->getUserName(), 2)[1];
         $_SESSION['userEmail']   = $context->getUserEmail();
         $_SESSION['courseName']  = $context->getCourseName();
         
-        header('Location: index.php?user=exists');
+        header('Location: index.php');
         die();
     }
     
@@ -65,14 +65,13 @@ if (isset($_POST['password'])) {
         if (get_login_status($user)) {
             header('Location: ../index.php?error=user');
         }
-        
+
         // Store User
         update_user($user,
                     $_SESSION['fName'],
                     $_SESSION['sName'],
                     $_SESSION['isInstructor'],
-                    $hash,
-                    $_SESSION['consumerKey']);
+                    $hash);
         
         // Remove session variables before redirecting
         session_unset();
@@ -85,26 +84,26 @@ if (isset($_POST['password'])) {
         $user = $_POST['user'];
         // Check if User exists
         if (get_login_status($user)) {
-            error_log('Entered, BITCH!');
+            
             // Get Hash from db
             $hash = get_password_hash($user);
 
             // Check password is correct
-            if(password_verify($password, $hash)){
+            if(password_verify($pass, $hash[0]['Password'])){
                 
                 // Remove session variables before redirecting
                 session_unset();
-                session_destroy();
-                
+
                 // Store user variable for authentication
                 $_SESSION['user'] = $user;
-                header('Location: ../index.php?m=login+success');
+                header('Location: ../index.php');
+                die();
             }
         }
         
         // Redirect when incorrect
         header('Location: ../index.php?error=invalid');
+        die();
     }
-    unset($_POST);
 }
 ?>

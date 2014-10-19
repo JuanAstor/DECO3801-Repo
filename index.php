@@ -5,7 +5,7 @@ require_once("lib/queries.php"); // query functions to get database results
 
 // Redirected from LTI ONLY
 if (isset($_POST['oauth_consumer_key'])) {
-    $_SESSION['oauth_consumer_key'] = $_POST['oauth_consumer_key'];
+    $key = $_POST['oauth_consumer_key'];
     include 'lib/authenticate.php';
 }
 

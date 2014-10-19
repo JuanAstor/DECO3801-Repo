@@ -248,29 +248,31 @@ function delete_student_files($fileID){
 }
 
 //adds a new user if none exists and then updates the details of that user
-function update_user($uID, $fName, $sName, $privileges, $pass, $InstitutionID){
+function update_user($uID, $fName, $sName, $privileges, $pass){
 	$sql = "INSERT INTO `user` (`UserID`) VALUES (?)";
 	$query = MySQL::getInstance()->prepare($sql); 
 	$query->execute(array($uID));
 	
-	$sql2 = "UPDATE `user` SET FName=?, SName=?, Privileges=?, Password=?, InstitutionID=? WHERE UserID=?";
+	$sql2 = "UPDATE `user` SET FName=?, SName=?, Privileges=?, Password=? WHERE UserID=?";
 	$query1 = MySQL::getInstance()->prepare($sql2);
-	return $query1->execute(array($fName, $sName, $privileges, $pass, $InstitutionID, $uID));
+	return $query1->execute(array($fName, $sName, $privileges, $pass, $uID));
 }
 
 //adds an enrolment record for a specified user and course if it doesn't yet exist.
-function update_enrolment($uID, $cID, $semesterCode){
-	$sql = "INSERT INTO `courseenrolment` (`UserID`, `CourseID`, `Semester`) VALUES (?,?,?)";
+function update_enrolment($uID, $cID){
+	$courses = get_users_courses($uID);
+	
+	$sql = "INSERT INTO `courseenrolment` (`UserID`, `CourseID`) VALUES (?,?)";
 	$query = MySQL::getInstance()->prepare($sql);
-	return $query->execute(array($uID, $cID, $semesterCode));
+	return $query->execute(array($uID, $cID));
 }
 
 /* Check if consumerkey exists
  *
- * precondition: consumerkey is unique && * admin.consumerkeys != ''
+ * precondition: consumerkey is unique && * consumerkeys != ''
  */
 function check_if_consumer_key($key) {
-    $sql = "SELECT InstitutionID FROM `institution` WHERE InstitutionID=?";
+    $sql = "SELECT ConsumerKey FROM `institution` WHERE ConsumerKey=?";
     $query = MySQL::getInstance()->prepare($sql);
     $query->execute(array($key));
     $count = $query->rowCount();
@@ -279,7 +281,7 @@ function check_if_consumer_key($key) {
 
 // Using the consumerkey, return the consumer secret
 function get_consumer_secret($key) {
-    $sql = "SELECT * FROM `institution` WHERE ConsumerKey=?";
+    $sql = "SELECT Secret FROM `institution` WHERE ConsumerKey=?";
     $query = MySQL::getInstance()->prepare($sql);
     $query->execute(array($key));
     return $query->fetchAll(PDO::FETCH_ASSOC);
