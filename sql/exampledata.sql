@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2014 at 09:13 AM
+-- Generation Time: Oct 19, 2014 at 10:18 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -26,7 +26,6 @@ SET time_zone = "+00:00";
 -- Table structure for table `assignment`
 --
 
-DROP TABLE IF EXISTS `assignment`;
 CREATE TABLE IF NOT EXISTS `assignment` (
   `AssignmentID` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `CourseID` char(8) NOT NULL,
@@ -64,10 +63,9 @@ INSERT INTO `assignment` (`AssignmentID`, `CourseID`, `Semester`, `InstitutionID
 -- Table structure for table `assignmentfile`
 --
 
-DROP TABLE IF EXISTS `assignmentfile`;
 CREATE TABLE IF NOT EXISTS `assignmentfile` (
   `AssignmentID` mediumint(8) unsigned NOT NULL,
-  `UserID` char(24) NOT NULL,
+  `UserID` char(254) NOT NULL,
   `FileID` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `FileName` tinytext NOT NULL,
   `FileData` blob NOT NULL,
@@ -124,10 +122,9 @@ INSERT INTO `assignmentfile` (`AssignmentID`, `UserID`, `FileID`, `FileName`, `F
 -- Table structure for table `comment`
 --
 
-DROP TABLE IF EXISTS `comment`;
 CREATE TABLE IF NOT EXISTS `comment` (
   `FileID` mediumint(8) unsigned NOT NULL,
-  `UserID` char(24) NOT NULL,
+  `UserID` char(254) NOT NULL,
   `LineNumber` int(11) NOT NULL,
   `Contents` mediumtext NOT NULL,
   PRIMARY KEY (`FileID`,`UserID`,`LineNumber`),
@@ -218,12 +215,11 @@ INSERT INTO `comment` (`FileID`, `UserID`, `LineNumber`, `Contents`) VALUES
 -- Table structure for table `course`
 --
 
-DROP TABLE IF EXISTS `course`;
 CREATE TABLE IF NOT EXISTS `course` (
   `CourseID` char(8) NOT NULL,
   `Semester` char(5) NOT NULL,
   `InstitutionID` int(11) NOT NULL,
-  `CourseCoordinator` char(24) DEFAULT NULL,
+  `CourseCoordinator` char(254) DEFAULT NULL,
   PRIMARY KEY (`CourseID`,`Semester`,`InstitutionID`),
   KEY `CourseCoordinator_idx` (`CourseCoordinator`),
   KEY `CourseInstitutionID_idx` (`InstitutionID`)
@@ -247,9 +243,8 @@ INSERT INTO `course` (`CourseID`, `Semester`, `InstitutionID`, `CourseCoordinato
 -- Table structure for table `courseenrolment`
 --
 
-DROP TABLE IF EXISTS `courseenrolment`;
 CREATE TABLE IF NOT EXISTS `courseenrolment` (
-  `UserID` char(24) NOT NULL,
+  `UserID` char(254) NOT NULL,
   `CourseID` char(8) NOT NULL,
   `Semester` char(5) NOT NULL,
   `InstitutionID` int(11) NOT NULL,
@@ -280,11 +275,10 @@ INSERT INTO `courseenrolment` (`UserID`, `CourseID`, `Semester`, `InstitutionID`
 -- Table structure for table `institution`
 --
 
-DROP TABLE IF EXISTS `institution`;
 CREATE TABLE IF NOT EXISTS `institution` (
   `InstitutionID` int(11) NOT NULL AUTO_INCREMENT,
   `consumerKey` char(45) NOT NULL,
-  `AdminUser` char(24) DEFAULT NULL,
+  `AdminUser` char(254) DEFAULT NULL,
   `Secret` tinyblob NOT NULL,
   `Timezone` int(11) NOT NULL,
   PRIMARY KEY (`InstitutionID`),
@@ -298,7 +292,7 @@ CREATE TABLE IF NOT EXISTS `institution` (
 --
 
 INSERT INTO `institution` (`InstitutionID`, `consumerKey`, `AdminUser`, `Secret`, `Timezone`) VALUES
-(1, 'Institution.A', NULL, 0x3132343348424c333441323146, 10);
+(1, 'Institution.A', NULL, 0x313233313233613934303938316661696a31323132393835, 10);
 
 -- --------------------------------------------------------
 
@@ -306,23 +300,23 @@ INSERT INTO `institution` (`InstitutionID`, `consumerKey`, `AdminUser`, `Secret`
 -- Table structure for table `reviewer`
 --
 
-DROP TABLE IF EXISTS `Reviewer` ;
-CREATE TABLE IF NOT EXISTS `Reviewer` (
-  `ReviewerID` CHAR(24) NOT NULL,
-  `AssignmentID` MEDIUMINT UNSIGNED NOT NULL,
-  `OwnerID` CHAR(24) NOT NULL,
-  PRIMARY KEY (`ReviewerID`, `AssignmentID`, `OwnerID`),
-  INDEX `ReviewerAssignment_idx` (`AssignmentID` ASC),
-  INDEX `OwnerID_idx` (`OwnerID` ASC))
-ENGINE = InnoDB;
+CREATE TABLE IF NOT EXISTS `reviewer` (
+  `ReviewerID` char(254) NOT NULL,
+  `AssignmentID` mediumint(8) unsigned NOT NULL,
+  `OwnerID` char(254) NOT NULL,
+  PRIMARY KEY (`ReviewerID`,`AssignmentID`,`OwnerID`),
+  KEY `ReviewerAssignment_idx` (`AssignmentID`),
+  KEY `OwnerID_idx` (`OwnerID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `user`
 --
 
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
-  `UserID` char(24) NOT NULL,
+  `UserID` char(254) NOT NULL,
   `FName` varchar(45) DEFAULT NULL,
   `SName` varchar(45) DEFAULT NULL,
   `Privileges` tinytext,
@@ -395,21 +389,10 @@ ALTER TABLE `institution`
 -- Constraints for table `reviewer`
 --
 ALTER TABLE `reviewer`
-  ADD CONSTRAINT `ReviewerID`
-    FOREIGN KEY (`ReviewerID`)
-    REFERENCES `User` (`UserID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  ADD CONSTRAINT `ReviewerAssignment`
-    FOREIGN KEY (`AssignmentID`)
-    REFERENCES `Assignment` (`AssignmentID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  ADD CONSTRAINT `OwnerID`
-    FOREIGN KEY (`OwnerID`)
-    REFERENCES `User` (`UserID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION;
+  ADD CONSTRAINT `ReviewerID` FOREIGN KEY (`ReviewerID`) REFERENCES `user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `ReviewerAssignment` FOREIGN KEY (`AssignmentID`) REFERENCES `assignment` (`AssignmentID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `OwnerID` FOREIGN KEY (`OwnerID`) REFERENCES `user` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
 --
 -- Constraints for table `user`
 --

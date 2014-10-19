@@ -36,7 +36,7 @@
 				//open the file and put the contents into '$content'
 				$fp = fopen($tmpName, 'r'); 
 				$content = fread($fp, filesize($tmpName));
-				//$content = mysql_real_escape_string($content);
+				$content = mysql_real_escape_string($content); 
 				fclose($fp);
 				
 				//update the table, add new file content
@@ -57,7 +57,7 @@
 					//open the file and put the contents into '$content'
 					$fp = fopen($tmpName, 'r'); 
 					$content = fread($fp, filesize($tmpName));
-					//$content = mysql_real_escape_string($content); 
+					$content = mysql_real_escape_string($content); 
 					fclose($fp); 
 					//query the database and submit the necessary info
 					insert_file_data($uID, $assignmentID, $fileName, $content, $dateTime);					
@@ -79,5 +79,5 @@
 	} //end of for loop
 	
 	//return to the previous page
-	header('Location: ../Assessment.php');
+	header('Location: ../assessment.php');
 ?>
