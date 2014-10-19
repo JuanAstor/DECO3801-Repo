@@ -75,7 +75,7 @@
 	}
 	
 	
-	//if the delete button was pressed by a student
+/////////if the delete button was pressed by a student. called in _fileUpload.php \\\\\\\\\\\\\\\\\
 	else if(isset($_POST['fileID'])){
 		//delete any potential comments
 		$result = delete_student_files($_POST['fileID']);
@@ -87,6 +87,19 @@
 			echo "Error: file was unable to be deleted";	
 		}
 	}
+	
+	
+//////////the assign critiques select box changed. called by _critiques.php \\\\\\\\\\\\\\\\\
+	if(isset($_POST['make'])){
+		$val = explode(",", $_POST['make']);
+		$cID = $val[0]; //course ID
+		$sem = $val[1]; //semester
+		echo "<option value='".$cID."'>".$cID."</option>";
+		echo "<option value='".$sem."'>".$sem."</option>";
+		echo "<option value='Name'>WALK</option>";	
+	}
+	
+	
 	
 	
 	//check the validity of the entered date
