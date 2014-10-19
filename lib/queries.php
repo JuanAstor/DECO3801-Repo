@@ -294,4 +294,14 @@ function get_consumer_secret($key) {
     return $query->execute(array($key));
 }
 
+/* User password has authentication queries.
+ * 
+ */
+function store_password($user, $pass) {
+    
+}
+
+function verify_password($user, $pass) {
+    
+}
 ?>

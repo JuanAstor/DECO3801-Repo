@@ -16,6 +16,7 @@
     </div>
     <form action="" method="POST"> <!-- LEAVE ACTION BLANK -->
 	    <heading>Please sign in</heading>
+            <input type="hidden" name="form" value="login">
 	    <input type="text" name="user" placeholder="Student number" required autofocus>
 	    <input type="password" name="password" placeholder="Password" required>
 	    <label>

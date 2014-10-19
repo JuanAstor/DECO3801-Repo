@@ -27,4 +27,32 @@ if (check_if_consumer_key($key)) {
         include("view/login/_signup.php");
     }
 }
+else{
+    // Admin Sign up page
+}
 
+if (isset($_POST['password'])) {
+    
+    $user = $_POST['userid'];
+    $pass = $_POST['password'];
+    
+    // Register User from register page
+    if($_POST['form'] == "signup") {
+        $hash = password_hash($pass, PASSWORD_BCRYPT);
+        // Store hash in db
+        
+    }
+    // Authenticate user from login page
+    else if($_POST['form'] == "login") {
+        // Get Hash from db
+        
+        if(!password_verify($password, $hash)){
+            session_unset();
+            session_destroy();
+            header('Location: index.php?attempt=invalid');
+        }
+        
+    }
+    unset($_POST);
+}
+?>
