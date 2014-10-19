@@ -1,13 +1,11 @@
 
-<?php
-	//NOTE: AssignmentID and UserID still need to be obtained (when other pages are complete), hard-coding it into the database at the moment
-?>
 
 <?php //upload a file to the database
 	session_start();
 	require("mysql.php");
 	require("queries.php");
-	$allowedExts = array("txt", "php", "html", "java", "c", "py", "js"); //the array holding all the allowed file extensions
+	 //the array holding all the allowed file extensions
+	$allowedExts = array("txt", "php", "html", "java", "c", "py", "js", "sql", "css", "cpp", "class", "h", "pl");
 	
 	date_default_timezone_set('Australia/Brisbane'); //time zone of the user
 	$dateTime = date('Y-m-d H:i:s'); //the current time and date
@@ -36,7 +34,6 @@
 				//open the file and put the contents into '$content'
 				$fp = fopen($tmpName, 'r'); 
 				$content = fread($fp, filesize($tmpName));
-				$content = mysql_real_escape_string($content); 
 				fclose($fp);
 				
 				//update the table, add new file content
@@ -57,7 +54,6 @@
 					//open the file and put the contents into '$content'
 					$fp = fopen($tmpName, 'r'); 
 					$content = fread($fp, filesize($tmpName));
-					$content = mysql_real_escape_string($content); 
 					fclose($fp); 
 					//query the database and submit the necessary info
 					insert_file_data($uID, $assignmentID, $fileName, $content, $dateTime);					
@@ -78,6 +74,7 @@
 		}
 	} //end of for loop
 	
-	//return to the previous page
-	header('Location: ../assessment.php');
+	//return to the previous page, get the hidden value to know what page to return to
+	$num = $_POST['AssignNum'];
+	header('Location: /Assessment.php?assessment='.$num.'');
 ?>

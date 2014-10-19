@@ -10,6 +10,7 @@
     } else{
         $submissionState = "Resubmit"; //file(s) have been submitted
     }
+
 ?>
 <content>
 <h2>File Upload</h2>
@@ -21,6 +22,7 @@
     	<tr>
             <td>
             	<input type="hidden" name="MAX_FILE_SIZE" value="2048000" />
+               <input type="hidden" name="AssignNum" value="<?php echo $num+1 ?>" />
                 <input name="userfile[]" type="file" id="files" multiple /> <!-- Need to include the '[]' at the end of name! -->
             </td>
         </tr>
