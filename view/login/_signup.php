@@ -14,11 +14,12 @@
     <div>
         <logo>Peer <span>{</span>Code Review<span>}</span></logo>
     </div>
-    <form action="" method="POST" class="validateForm"> <!-- LEAVE ACTION BLANK -->
+    <form action="authentication.php" method="POST" class="validateForm"> <!-- LEAVE ACTION BLANK -->
 	    <heading>Please register</heading>
-            <input type="hidden" name="isinstructor"               value="<?php echo $_SESSION['isInstructor']?>">
+            <input type="hidden" name="form" value="signup">
+            <input type="hidden" name="isinstructor" value="<?php echo $_SESSION['isInstructor']?>">
             <input type="text" name="fullname" disabled="disabled" value="<?php echo $_SESSION['fullName']?>">
-            <input type="text" name="userid" disabled="disabled"   value="<?php echo $_SESSION['userID']?>">
+            <input type="text" name="username" disabled="disabled" value="<?php echo $_SESSION['userID']?>">
 	    <input type="password" name="password" placeholder="Password" required>
 	    <button type="submit">Register</button>
     </form>

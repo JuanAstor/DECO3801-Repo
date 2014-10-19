@@ -1,7 +1,7 @@
 <?php 
 session_start();
 require("lib/mysql.php");
-require("lib/queries.php"); //query functions to get database results
+require("lib/queries.php"); // query functions to get database results
 
 if (!isset($_SESSION['user']) && isset($_POST['user'])) {
     $_SESSION['user'] = $_POST['user'];
@@ -46,7 +46,7 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
     }
 }
 else{
-    $_SESSION = array();
+    session_unset();
     session_destroy();
     
     // Show login
