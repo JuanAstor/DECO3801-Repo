@@ -14,16 +14,14 @@
     <div>
         <logo>Peer <span>{</span>Code Review<span>}</span></logo>
     </div>
-    <form action="" method="POST"> <!-- LEAVE ACTION BLANK -->
+    <form action="lib/authenticate.php" method="POST">
 	    <heading>Please sign in</heading>
             <input type="hidden" name="form" value="login">
-	    <input type="text" name="user" placeholder="Student number" required autofocus>
+	    <input type="email" name="user" placeholder="Email" required autofocus>
 	    <input type="password" name="password" placeholder="Password" required>
-	    <label>
-	        <input type="checkbox" value="remember-me"> Remember me
-	    </label>
 	    <button type="submit">Sign in</button>
+            <!-- ERROR HANDLING -->
     </form>
-	</login>
+    </login>
 </body>
 </html>

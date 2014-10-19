@@ -1,6 +1,6 @@
 <?php
 
-require("OAuth.php");
+require_once 'OAuth.php';
 
 // Returns true if this is a Basic LTI message
 // with minimum values to meet the protocol
@@ -104,6 +104,7 @@ class BLTI {
         // look it up in a database from parameters we are given
         $secret = false;
         $row = false;
+        
         if ( is_string($parm) ) {
             $secret = $parm;
         } else if ( ! is_array($parm) ) {

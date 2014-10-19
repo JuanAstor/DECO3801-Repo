@@ -1,4 +1,14 @@
 <?php
+
+//find out if a user exists in the database
+function get_login_status($user) {
+	$sql = "SELECT * FROM `user` WHERE UserID=?";
+	$query = MySQL::getInstance()->prepare($sql);
+	$query->execute(array($user));
+	$count = $query->rowCount();
+	return $count ? 1 : 0;
+}
+
 //get all courses that a user is enrolled in. COURSE ID IS NOT UNIQUE
 function get_users_courses($user) {
 	$sql = "SELECT CourseID FROM `courseenrolment` WHERE UserID=?";
@@ -6,6 +16,7 @@ function get_users_courses($user) {
 	$query->execute(array($user));
 	return $query->fetchAll(PDO::FETCH_ASSOC);
 }
+
 //get all courses that an admin is in charge of
 function get_admins_courses($user) {
 	$sql = "SELECT * FROM `course` WHERE CourseCoordinator=?";
@@ -13,6 +24,7 @@ function get_admins_courses($user) {
 	$query->execute(array($user));
 	return $query->fetchAll(PDO::FETCH_ASSOC);
 }
+
 //get all assessments that a student has
 function get_users_assessments($user) {
 	$sql = "SELECT * FROM `assignment` as A, `courseenrolment` as B WHERE A.CourseID=B.CourseID AND 
@@ -95,19 +107,6 @@ function get_files_to_comment($user, $assignmentID) {
 	$query->execute(array($user, $assignmentID));
 	return $query->fetchAll(PDO::FETCH_ASSOC);
     
-}
-
-//find out if a user exists in the database
-function get_login_status($user) {
-	$sql = "SELECT * FROM `user` WHERE UserID=?";
-	$query = MySQL::getInstance()->prepare($sql);
-	$query->execute(array($user));
-	$count = $query->rowCount();
-	if($count > 0){
-		return true; //user exists
-	} else {
-		return false; //user doesn't
-	}
 }
 
 //if any files have been submitted for a certain assignmentID, delete them
@@ -249,30 +248,21 @@ function delete_student_files($fileID){
 }
 
 //adds a new user if none exists and then updates the details of that user
-function update_user($uID, $fName, $sName, $privileges, $InstitutionID = 1){
+function update_user($uID, $fName, $sName, $privileges, $pass, $InstitutionID){
 	$sql = "INSERT INTO `user` (`UserID`) VALUES (?)";
 	$query = MySQL::getInstance()->prepare($sql); 
 	$query->execute(array($uID));
 	
-	$sql2 = "UPDATE `user` SET `FName=?, SName=?, Privileges=?, InstitutionID=? WHERE UserID=?";
+	$sql2 = "UPDATE `user` SET FName=?, SName=?, Privileges=?, Password=?, InstitutionID=? WHERE UserID=?";
 	$query1 = MySQL::getInstance()->prepare($sql2);
-	return $query1->execute(array($fName, $sName, $privileges, $InstitutionID, $uID));
-	
-	//MySQL::getInstance()->query("INSERT INTO `user` (`UserID`) 
-	//							VALUES ('".$uID."')");
-	//return MySQL::getInstance()->query("UPDATE `user` 
-	//									SET `FName` = '".$fName."', `SName` = '".$sName."',`Privileges`='".$privileges."' 
-	//									WHERE `UserID` = '".$uID."'");
+	return $query1->execute(array($fName, $sName, $privileges, $pass, $InstitutionID, $uID));
 }
 
 //adds an enrolment record for a specified user and course if it doesn't yet exist.
-function update_enrolment($uID, $cID, $semesterCode, $InstitutionID = 1){
-	$sql = "INSERT INTO `courseenrolment` (`UserID`, `CourseID`, `Semester`, `InstitutionID`) VALUES (?,?,?,?)";
+function update_enrolment($uID, $cID, $semesterCode){
+	$sql = "INSERT INTO `courseenrolment` (`UserID`, `CourseID`, `Semester`) VALUES (?,?,?)";
 	$query = MySQL::getInstance()->prepare($sql);
-	return $query->execute(array($uID, $cID, $semesterCode, $InstitutionID));
-	
-	//return MySQL::getInstance()->query("INSERT INTO `courseenrolment` (`UserID`, `CourseID, `Semester`) 
-	//									VALUES ('".$uID."','".$cID."','".$semesterCode."')");
+	return $query->execute(array($uID, $cID, $semesterCode));
 }
 
 /* Check if consumerkey exists
@@ -280,7 +270,7 @@ function update_enrolment($uID, $cID, $semesterCode, $InstitutionID = 1){
  * precondition: consumerkey is unique && * admin.consumerkeys != ''
  */
 function check_if_consumer_key($key) {
-    $sql = "SELECT ConsumerKey FROM `institution` WHERE ConsumerKey=?";
+    $sql = "SELECT InstitutionID FROM `institution` WHERE InstitutionID=?";
     $query = MySQL::getInstance()->prepare($sql);
     $query->execute(array($key));
     $count = $query->rowCount();
@@ -289,19 +279,17 @@ function check_if_consumer_key($key) {
 
 // Using the consumerkey, return the consumer secret
 function get_consumer_secret($key) {
-    $sql = "SELECT Secret FROM `institution` WHERE ConsumerKey=?";
+    $sql = "SELECT * FROM `institution` WHERE ConsumerKey=?";
     $query = MySQL::getInstance()->prepare($sql);
-    return $query->execute(array($key));
+    $query->execute(array($key));
+    return $query->fetchAll(PDO::FETCH_ASSOC);
 }
 
-/* User password has authentication queries.
- * 
- */
-function store_password($user, $pass) {
-    
-}
-
-function verify_password($user, $pass) {
-    
+// get password encrypted hash
+function get_password_hash($user) {
+    $sql = "SELECT Password FROM `user` WHERE UserID=?";
+    $query = MySQL::getInstance()->prepare($sql);
+    $query->execute(array($user));
+    return $query->fetchAll(PDO::FETCH_ASSOC);
 }
 ?>
