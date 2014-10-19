@@ -1,0 +1,27 @@
+/** This is my assignment file **/
+
+public class Apples{
+
+	public boolean isApple = true;
+	private boolean hasWorms = true;
+	
+	public Apples(){
+		this.isApple = true;
+		this.hasWorms = maybe;	
+	}
+	
+	public isItApple(){
+		return this.isApple;
+	}
+	
+	public doesItHaveWorms(){
+		return this.hasWorms;
+	}
+	
+	public whyApples(){
+		return nobodyKnows;	
+	}
+
+
+
+}

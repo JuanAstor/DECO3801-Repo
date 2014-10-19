@@ -57,16 +57,8 @@
 				<div class="w-heading"><i class="fa fa-wrench"></i>Tools</div>
 
 				<div class="w-body">
-                    <div>
-                    	<img src="img/cass2.png" class="img-circle" width="50px" height="auto" onclick="location.href =
-                        'Assessment.php'">
-                    	<h3>Create Assignment</h3>
-                    </div>
-                    <div>
-                    	<img src="img/cass2.png" class="img-circle" width="50px" height="auto" onClick="location.href = 
-                        'Critiques.php'">
-                        <h3>Assign Critiques</h3>
-                    </div>
+                    <img src="img/cass2.png" class="img-circle" width="50px" height="auto" onclick="location.href = 'Assessment.php'">
+                    <h3>Create Assignment</h3>
 				</div>
 			</panel>
 		</widget>
