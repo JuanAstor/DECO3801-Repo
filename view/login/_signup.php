@@ -17,14 +17,24 @@
     <form action="lib/authenticate.php" method="POST" class="validateForm"> <!-- LEAVE ACTION BLANK -->
 	    <heading>Please register</heading>
             <input type="hidden" name="form" value="signup">
-            <input type="hidden" name="isinstructor" value="<?php echo $_SESSION['isInstructor']?>">
             <input type="text" name="fullname" disabled="disabled" value="<?php echo $_SESSION['fullName']?>">
             <input type="email" name="user" disabled="disabled" value="<?php echo $_SESSION['userEmail']?>">
-            <input type="checkbox" name="disableEmail" checked="checked" 
-                   onclick="input = $('user'); if(this.checked){ input.disabled = false; input.focus();}else{input.disabled=true;};"><span>Use student email</span>
+            <input type="checkbox" id="disableEmail" checked="checked"><span> Use student email</span>
 	    <input type="password" name="password" placeholder="Password" required>
 	    <button type="submit">Register</button>
     </form>
     </login>
 </body>
+
+<script type="text/javascript">
+    $('#disableEmail').change(function() {
+        input = $('input[name="user"]');
+        if ($(this).prop('checked')) {
+            input.prop('disabled', true); 
+        }else{ 
+            input.prop('disabled', false);
+        };
+    })
+</script>
+
 </html>

@@ -11,14 +11,22 @@ $loginMessage = 'Institution not found';
 // Check for existing institution
 if (isset($key) && check_if_consumer_key($key)) {
     
-    // Get Secret from DB
-    $secret = get_consumer_secret($key);
+    // Assume firstrun
+    $firstrun = true;
+
+    // Get row associated to key from DB.Institution
+    $institution = get_institution($key);
     
     // Initialize
-    $context = new BLTI($secret[0]['Secret'], false, false);
+    $context = new BLTI($institution[0]['Secret'], false, false);
+
+    // Check if first user is admin
+    if (!check_if_admin_assigned($key) && $context->isInstructor() == false) {
+        $firstrun = false;
+    }
 
     // Gather LTI Post from linked users
-    if ( $context->valid ) {
+    if ( $context->valid && $firstrun) {
 
         // Place Key into Session
         $_SESSION['consumerKey'] = $key;
@@ -30,6 +38,7 @@ if (isset($key) && check_if_consumer_key($key)) {
         $_SESSION['sName']       = explode(' ',$context->getUserName(), 2)[1];
         $_SESSION['userEmail']   = $context->getUserEmail();
         $_SESSION['courseName']  = $context->getCourseName();
+        $_SESSION['institutionId'] = $institution[0]['InstitutionID'];
         
         header('Location: index.php');
         die();
@@ -58,12 +67,13 @@ if (isset($_POST['password'])) {
         if ( isset($_POST['user'])) {
             $user = $_POST['user'];        
         }
+
         // Save password as encrytped hash
         $hash = password_hash($pass, PASSWORD_BCRYPT);
         
         // Check if User exists
         if (get_login_status($user)) {
-            header('Location: ../index.php?error=user');
+            header('Location: ../index.php?error=exists');
         }
 
         // Store User
@@ -71,8 +81,15 @@ if (isset($_POST['password'])) {
                     $_SESSION['fName'],
                     $_SESSION['sName'],
                     $_SESSION['isInstructor'],
-                    $hash);
+                    $hash,
+                    $_SESSION['institutionId']);
         
+        // Store AdminUser in Institution
+        if (check_if_admin_assigned($_SESSION['consumerKey'])
+                && $_SESSION['isInstructor'] == 'Admin') {
+            insert_adminuser($user, $_SESSION['institutionId']);
+        }
+
         // Remove session variables before redirecting
         session_unset();
         session_destroy();

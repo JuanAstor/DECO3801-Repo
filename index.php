@@ -41,7 +41,7 @@ if (isset($_SESSION["user"])) {
         $courses = get_users_courses($user);
         $assessments = get_users_assessments($user);
         $fullName = get_user_name($user);
-	$submitted = get_user_comments($user);
+	    $submitted = get_user_comments($user);
 
         // Show home
         include("view/home/header.php");

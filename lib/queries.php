@@ -47,11 +47,8 @@ function get_user_name($user) {
 	$sql = "SELECT * FROM `user` WHERE UserID=?";
 	$query = MySQL::getInstance()->prepare($sql);
 	$query->execute(array($user));
-	return $query->fetchAll(PDO::FETCH_ASSOC);
-    /*$query = MySQL::getInstance()->query("SELECT * 
-                                          FROM `user` 
-                                          WHERE UserID = '" . $user . "'");
-    return $query->fetchALL();*/
+	$result = $query->fetchAll(PDO::FETCH_ASSOC);
+	return $result[0]['FName'].' '.$result[0]['SName'];
 }
 
 //check if the user that has logged in is an admin
@@ -248,13 +245,13 @@ function delete_student_files($fileID){
 }
 
 //adds a new user if none exists and then updates the details of that user
-function update_user($uID, $fName, $sName, $privileges, $pass){
-	$sql = "INSERT INTO `user` (`UserID`) VALUES (?)";
+function update_user($uID, $fName, $sName, $privileges, $pass, $institutionID){
+	$sql = "INSERT INTO `user` (`UserID`, `InstitutionID`) VALUES (?,?)";
 	$query = MySQL::getInstance()->prepare($sql); 
-	$query->execute(array($uID));
+	$query->execute(array($uID, $institutionID));
 	
-	$sql2 = "UPDATE `user` SET FName=?, SName=?, Privileges=?, Password=? WHERE UserID=?";
-	$query1 = MySQL::getInstance()->prepare($sql2);
+	$sql1 = "UPDATE `user` SET FName=?, SName=?, Privileges=?, Password=? WHERE UserID=?";
+	$query1 = MySQL::getInstance()->prepare($sql1);
 	return $query1->execute(array($fName, $sName, $privileges, $pass, $uID));
 }
 
@@ -279,9 +276,26 @@ function check_if_consumer_key($key) {
     return $count ? 1 : 0;
 }
 
-// Using the consumerkey, return the consumer secret
-function get_consumer_secret($key) {
-    $sql = "SELECT Secret FROM `institution` WHERE ConsumerKey=?";
+// Return true if AdminUser in institution is null
+function check_if_admin_assigned($key) {
+	$sql = "SELECT AdminUser FROM `institution` WHERE ConsumerKey=?";
+	$query = MySQL::getInstance()->prepare($sql);
+	$query->execute(array($key));
+	$count = $query->rowCount();
+	return !is_null($count[0]['AdminUser']);
+}
+
+// Update AdminUser in institution with UserID on first run
+function insert_adminuser($userID, $institutionID) {
+	$sql = "UPDATE `institution` SET AdminUser=? WHERE InstitutionID=?";
+	$query = MySQL::getInstance()->prepare($sql);
+	$query->execute(array($userID, $institutionID));
+	return;
+}
+
+// Using the consumerkey, return the institution row
+function get_institution($key) {
+    $sql = "SELECT * FROM `institution` WHERE ConsumerKey=?";
     $query = MySQL::getInstance()->prepare($sql);
     $query->execute(array($key));
     return $query->fetchAll(PDO::FETCH_ASSOC);

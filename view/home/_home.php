@@ -43,11 +43,7 @@
 </widget-end>
 
 <content>
-<?php 			
-    foreach ($fullName as $name) {
-        echo "<p> Welcome ".$name['FName']." ".$name['SName']."</p>" ;
-    }
- ?>
+<?php echo "<p> Welcome $fullName</p>";?>
 </content>
 
 <script>
