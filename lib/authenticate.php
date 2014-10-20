@@ -117,19 +117,9 @@ if (isset($_POST['password'])) {
             // Check password is correct
             if(password_verify($pass, $hash[0]['Password'])){
                 
-                if(isset($_SESSION['courseName'])) {
+                // Course to enrol
+                $course = $_SESSION['courseName'];
 
-                    // Course to enrol
-                    $course = $_SESSION['courseName'];
-
-                    // Create course if user is admin & course doesn't exist
-                    if (check_if_admin($user) && check_if_course_exists())
-                        // Add course
-
-                    // ELSE IF
-                    // course exists
-                        // Enrol user in course
-                }
                 // Remove session variables before redirecting
                 session_unset();
 
