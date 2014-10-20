@@ -248,6 +248,7 @@ function delete_student_files($fileID){
 	return $query2->execute(array($fileID));	
 }
 
+
 //adds a new user if none exists and then updates the details of that user
 function update_user($uID, $fName, $sName, $privileges, $InstitutionID = 1){
 	$sql = "INSERT INTO `user` (`UserID`) VALUES (?)";

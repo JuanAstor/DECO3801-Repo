@@ -32,10 +32,7 @@
         <link rel="stylesheet/less" href="/css/main.less">
         <!-- JS -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script src='/js/view.js'></script>
-        <script src="/js/less.js"></script>
-		<!--<script src="../js/moment.js"></script> -->
-        <link rel="stylesheet" type="text/css" href="/css/bootstrap-datetimepicker.min.css">
+        
 		
 		<!-- <script src="../js/bootstrap.min.js"></script>
 		<script src="../js/bootstrap-datetimepicker.min.js"></script> -->
