@@ -5,14 +5,16 @@ require_once("queries.php");
 // Load up the Basic LTI Support code
 require_once 'blti.php';
 
-// Error report
-$loginMessage = 'Institution not found';
-
 // Check for existing institution
-if (isset($key) && check_if_consumer_key($key)) {
+if (isset($key)) {
     
-    // Assume firstrun
-    $firstrun = true;
+    if (!check_if_consumer_key($key)) {
+        // Send to index with error if institution does not exist
+        session_unset();
+        session_destroy();
+        header('Location: index.php?error=institution+missing');
+        die();
+    }
 
     // Get row associated to key from DB.Institution
     $institution = get_institution($key);
@@ -20,13 +22,17 @@ if (isset($key) && check_if_consumer_key($key)) {
     // Initialize
     $context = new BLTI($institution[0]['Secret'], false, false);
 
-    // Check if first user is admin
-    if (!check_if_admin_assigned($key) && $context->isInstructor() == false) {
-        $firstrun = false;
-    }
-
     // Gather LTI Post from linked users
-    if ( $context->valid && $firstrun) {
+    if ( $context->valid) {
+
+        // Determine if student can signup to institution
+        if (!$context->isInstructor() && !check_if_admin_assigned($key)) {
+            // Send to index with error if institution has no admin
+            session_unset();
+            session_destroy();
+            header('Location: index.php?error=admin+missing');
+            die();        
+        }
 
         // Place Key into Session
         $_SESSION['consumerKey'] = $key;
@@ -40,11 +46,14 @@ if (isset($key) && check_if_consumer_key($key)) {
         $_SESSION['courseName']  = $context->getCourseName();
         $_SESSION['institutionId'] = $institution[0]['InstitutionID'];
         
+
         header('Location: index.php');
         die();
     }
     
     // Send to index with error if secret is invalid
+    session_unset();
+    session_destroy();
     header('Location: index.php?error=fatal');
     die();
 }
@@ -85,14 +94,14 @@ if (isset($_POST['password'])) {
                     $_SESSION['institutionId']);
         
         // Store AdminUser in Institution
-        if (check_if_admin_assigned($_SESSION['consumerKey'])
+        if (!check_if_admin_assigned($_SESSION['consumerKey'])
                 && $_SESSION['isInstructor'] == 'Admin') {
+            error_log("ENTERED!");
             insert_adminuser($user, $_SESSION['institutionId']);
         }
 
-        // Remove session variables before redirecting
-        session_unset();
-        session_destroy();
+        // Remove sensitive session variables before redirecting
+        unset($_SESSION['consumerKey']);
         header('Location: ../index.php?m=signup+success');
     }
     
@@ -108,6 +117,19 @@ if (isset($_POST['password'])) {
             // Check password is correct
             if(password_verify($pass, $hash[0]['Password'])){
                 
+                if(isset($_SESSION['courseName'])) {
+
+                    // Course to enrol
+                    $course = $_SESSION['courseName'];
+
+                    // Create course if user is admin & course doesn't exist
+                    if (check_if_admin($user) && check_if_course_exists())
+                        // Add course
+
+                    // ELSE IF
+                    // course exists
+                        // Enrol user in course
+                }
                 // Remove session variables before redirecting
                 session_unset();
 
@@ -123,4 +145,3 @@ if (isset($_POST['password'])) {
         die();
     }
 }
-?>

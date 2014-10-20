@@ -42,13 +42,22 @@ function get_user_comments($user){
 	return $query->fetchAll(PDO::FETCH_ASSOC);
 }
 
-// get all data (names, etc) from the 'user' table about a certain user
+// get User name from User
 function get_user_name($user) {
-	$sql = "SELECT * FROM `user` WHERE UserID=?";
+	$sql = "SELECT FName, SName FROM `user` WHERE UserID=?";
 	$query = MySQL::getInstance()->prepare($sql);
 	$query->execute(array($user));
 	$result = $query->fetchAll(PDO::FETCH_ASSOC);
 	return $result[0]['FName'].' '.$result[0]['SName'];
+}
+
+// get a User's Institution from User
+function get_user_institution($user) {
+	$sql = "SELECT InstitutionID FROM `user` WHERE UserID=?";
+	$query = MySQL::getInstance()->prepare($sql);
+	$query->execute(array($user));
+	$result = $query->fetchAll(PDO::FETCH_ASSOC);
+	return $result[0]['InstitutionID'];
 }
 
 //check if the user that has logged in is an admin
@@ -269,20 +278,20 @@ function update_enrolment($uID, $cID){
  * precondition: consumerkey is unique && * consumerkeys != ''
  */
 function check_if_consumer_key($key) {
-    $sql = "SELECT ConsumerKey FROM `institution` WHERE ConsumerKey=?";
+    $sql = "SELECT consumerKey FROM `institution` WHERE consumerKey=?";
     $query = MySQL::getInstance()->prepare($sql);
     $query->execute(array($key));
     $count = $query->rowCount();
-    return $count ? 1 : 0;
+    return $count > 0 ? true : false;
 }
 
 // Return true if AdminUser in institution is null
 function check_if_admin_assigned($key) {
-	$sql = "SELECT AdminUser FROM `institution` WHERE ConsumerKey=?";
+	$sql = "SELECT AdminUser FROM `institution` WHERE consumerKey=?";
 	$query = MySQL::getInstance()->prepare($sql);
 	$query->execute(array($key));
-	$count = $query->rowCount();
-	return !is_null($count[0]['AdminUser']);
+	$count = $query->fetchAll(PDO::FETCH_ASSOC);
+	return !empty($count[0]['AdminUser']); // returns true if admin assigned
 }
 
 // Update AdminUser in institution with UserID on first run
@@ -307,5 +316,14 @@ function get_password_hash($user) {
     $query = MySQL::getInstance()->prepare($sql);
     $query->execute(array($user));
     return $query->fetchAll(PDO::FETCH_ASSOC);
+}
+
+// Searches list of courses from course using institution ID
+function check_if_course_exists($course, $institutionId) {
+	$sql = "SELECT CourseID from `course` WHERE CourseID=?, InstitutionID=?";
+	$query = MySQL::getInstance()->prepare($sql);
+	$query->execute(array($course, $institutionId));
+	$count = $query->rowCount();
+	return $count > 0 ? true : false;
 }
 ?>
