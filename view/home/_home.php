@@ -42,14 +42,6 @@
     <div><panel-end></panel-end></div>
 </widget-end>
 
-<content>
-<?php 			
-    foreach ($fullName as $name) {
-        echo "<p> Welcome ".$name['FName']." ".$name['SName']."</p>" ;
-    }
- ?>
-</content>
-
 <script>
 	$('navgroup').hide();
 </script>
