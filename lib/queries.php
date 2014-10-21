@@ -305,4 +305,11 @@ function store_password($user, $pass) {
 function verify_password($user, $pass) {
     
 }
+
+function get_users_to_critique($user){
+	$sql = "SELECT * FROM `reviewer` WHERE ReviewerID=?";
+	$query = MySQL::getInstance()->prepare($sql);
+	$query->execute(array($user));
+	return $query->fetchAll(PDO::FETCH_ASSOC);
+}
 ?>

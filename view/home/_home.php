@@ -17,7 +17,32 @@
     <widget title="Tasks">
         <panel>
             <div class="w-heading"><i class="fa fa-list-ol"></i>Tasks</div>
-            <div class="w-body">Panel content goes here..</div>
+            <div class="w-body">
+            	<?php 
+					$arr = array();
+					$i = 0;
+					$result = get_users_to_critique($user);
+					if(count($result) > 0){
+						foreach($result as $critique){
+							$i++;
+							if(in_array($critique['AssignmentID'],$arr)){
+								echo "Critique ".$i."<br />";
+							} else {
+								//get the assignment info
+								$answer = get_previous_assign_info($critique['AssignmentID']);
+								foreach($answer as $assignInfo){
+									echo "<b>".strtoupper($assignInfo['CourseID'])."</b> : ".$assignInfo['AssignmentName']."<br />";
+								}  
+								echo "Critique ".$i."<br />";
+								//push the assignID so this will only occur when a new assignment is found
+								array_push($arr, $critique['AssignmentID']); 
+							}
+						}
+					} else {
+						echo "No critiques have been assigned yet";	
+					}
+				?>
+            </div>
         </panel>
     </widget>
     <!-- End Tasks -->
