@@ -38,7 +38,7 @@
 				fclose($fp);
 				
 				//update the table, add new file content
-				$update = update_file_contents($uID, $assignmentID, $fileName, mysqli_real_escape_string($content), $dateTime);
+				$update = update_file_contents($uID, $assignmentID, $fileName, mysql_real_escape_string($content), $dateTime);
 				//echo "<br>File <i>$fileName</i> updated!</br>";
 				$_SESSION['submit'] = 'submitted';
 			} 			
@@ -58,7 +58,7 @@
 					//$content = mysql_real_escape_string($content);
 					fclose($fp); 
 					//query the database and submit the necessary info
-					insert_file_data($uID, $assignmentID, $fileName, mysqli_real_escape_string($content), $dateTime);					
+					insert_file_data($uID, $assignmentID, $fileName, mysql_real_escape_string($content), $dateTime);					
 					//echo "<br>File <i>$fileName</i> uploaded!</br>";
 					$_SESSION['submit'] = 'submitted';
 				}
