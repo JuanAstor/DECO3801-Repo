@@ -63,7 +63,7 @@
                     	<h3>Create Assignment</h3>
                     </div>
                     <div>
-                    	<img src="img/cass2.png" class="img-circle" width="50px" height="auto" onClick="location.href = 
+                    	<img src="img/crit1.png" class="img-circle" width="50px" height="auto" onClick="location.href = 
                         'Critiques.php'">
                         <h3>Assign Critiques</h3>
                     </div>
