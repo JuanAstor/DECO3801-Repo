@@ -20,22 +20,30 @@
             <div class="w-body">
             	<?php 
 					$arr = array();
-					$i = 0;
+					$i = 0; $today = date("Y-m-d");
+					$today_dt = new DateTime($today);
 					$result = get_users_to_critique($user);
-					if(count($result) > 0){ //if critiques has been assigned
+					if(count($result) > 0){ //if critiques has been assigned					
 						foreach($result as $critique){
-							$i++;
-							if(in_array($critique['AssignmentID'],$arr)){
-								echo "<a href='/CodeCritique.php?aID=".$critique['AssignmentID']."&oID=".$i."'>Critique ".$i."</a><br />";
+							$dd = get_previous_assign_info($critique['AssignmentID']);
+							//if the current date is greater than the date of submission
+							if($today_dt > (new DateTime($dd[0]['DueDate']))){
+								//display the available critiques					
+								$i++;
+								if(in_array($critique['AssignmentID'],$arr)){
+									echo "<a href='/CodeCritique.php?aID=".$critique['AssignmentID']."&oID=".$i."'>Critique ".$i."</a><br />";
+								} else {
+									//get the assignment info
+									$answer = get_previous_assign_info($critique['AssignmentID']);
+									foreach($answer as $assignInfo){
+										echo "<b>".strtoupper($assignInfo['CourseID'])."</b> : ".$assignInfo['AssignmentName']."<br />";
+									}  
+									echo "<a href='/CodeCritique.php?aID=".$critique['AssignmentID']."&oID=".$i."'>Critique ".$i."</a><br />";
+									//push the assignID so this will only occur when a new assignment is found
+									array_push($arr, $critique['AssignmentID']); 
+								}
 							} else {
-								//get the assignment info
-								$answer = get_previous_assign_info($critique['AssignmentID']);
-								foreach($answer as $assignInfo){
-									echo "<b>".strtoupper($assignInfo['CourseID'])."</b> : ".$assignInfo['AssignmentName']."<br />";
-								}  
-								echo "<a href='/CodeCritique.php?aID=".$critique['AssignmentID']."&oID=".$i."'>Critique ".$i."</a><br />";
-								//push the assignID so this will only occur when a new assignment is found
-								array_push($arr, $critique['AssignmentID']); 
+								//critiques are not open to view
 							}
 						}
 					} else {

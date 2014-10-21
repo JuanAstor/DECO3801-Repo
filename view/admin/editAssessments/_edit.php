@@ -72,7 +72,7 @@
  
 				<div class="form-group">
 					<label for="date">Date Due</label>
-					<input class="form-control" id="date" name="date" value="<?php echo $dueDate ?>" placeholder="Format: YYYY/MM/DD">
+					<input class="form-control" id="date" name="date" value="<?php echo $dueDate ?>" placeholder="Format: dd/mm/YYYY">
 				</div>
 				
 				<label>Please make sure that every field has been completed</label>

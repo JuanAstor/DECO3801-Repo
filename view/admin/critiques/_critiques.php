@@ -1,9 +1,10 @@
 <?php
+	$output = NULL;
 	if(isset($_POST['cID']) && isset($_POST['assName']) && isset($_POST['numCrits']) ){
 		//if one of the fields is empty (left on 'select...' option)
 		if((strcmp($_POST['numCrits'],"") == 0) || (strcmp($_POST['assName'],"")== 0) || (strcmp($_POST['numCrits'],"")==0) ){
 			//do nothing
-			
+			$output = "Error: One or more fields were not set, please complete the form";
 		} else {
 			$val = explode(",", $_POST['cID']);
 			$cID = $val[0]; //course ID
@@ -22,14 +23,14 @@
 				array_push($studentArr, $student['UserID']);	
 			}
 			shuffle($studentArr); //randomise the position of all userIDs
-			print_r($studentArr);
+			//print_r($studentArr); //display the array of students
 			$nextCount = 0;
 			$loopCount = 0;
 			
 			//loop over every element in the array and assign critiques
 			while((list($var,$val) = each($studentArr)) && $loopCount < (count($studentArr))){
 				$loopCount++; //keep track of the number of times looped
-				print "Value is: $val <br />";
+				//print "Value is: $val <br />";
 				for($i = 0; $i < $numCrits; $i++){ //assign critiques to this array position
 					//if the first element on the for loop and not the last element in array
 					if($i == 0 && $loopCount < (count($studentArr))){
@@ -44,8 +45,8 @@
 							$nextCount++; //position has changed (from the if check) so increment
 						}
 					}
-					print "next value is: $nextVal <br />";
-					//update table here
+					//print "next value is: $nextVal <br />";
+					//update the reviewer table with the found ownerID
 					add_user_to_critique($val, $assID, $nextVal);
 				}
 				//return the array to the (original + 1) position 
@@ -59,6 +60,8 @@
 				$nextCount = 0; //reset the array pointer counter
 			}//end of while loop
 		}
+		$output = "Success! Critiques have been assigned.<br />
+		These will be made available once the due date for assignment submission has passed";
 	} 
 	//get a list of all students in the selected course
 	function get_all_students_in_course($courseID, $semester){

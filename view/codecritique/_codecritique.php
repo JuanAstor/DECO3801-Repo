@@ -1,5 +1,5 @@
 <?php
-
+//get the ownerID of the person assigned to the user based on the link 'oID' value
 if (isset($_GET['oID'])) {
         $num = $_GET['oID'] - 1;
         if (isset($critique[$num]['OwnerID'])) {
@@ -13,7 +13,7 @@ if (isset($_GET['oID'])) {
 }
 
 //Need a session varibale containing the userID and the assignmentID
-$uID = $_SESSION["revieweeID"]; //ID of the person beig reviewed
+$uID = $_SESSION["revieweeID"]; //ID of the person being reviewed
 $assignID = $assignmentID; //assignmentID
 
 $currAssignmet = get_previous_assign_info($assignID);

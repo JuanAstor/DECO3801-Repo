@@ -21,7 +21,7 @@
 		if(!check_valid_date($dateFormat)){
 			//error, invalid date - return with the orignal info
 			$_SESSION['message'] = 'date error';
-			header('Location: /EditAssessment.php?course='.$previous[0]['CourseID'].'&sem='.$previous[0]['Semester'].'&name='.$previous[0]['AssignmentName']);
+			header('Location: /EditAssessment.php?course='.$previous[0]['CourseID'].'&sem='.$previous[0]['Semester'].'&assignmentName='.$previous[0]['AssignmentName']);
 			
 		} else { //the date is valid 
 				
@@ -34,7 +34,7 @@
 				//assignment name exists and isn't the same as the orignal name, this is an error			
 				$_SESSION['message'] = 'name error';
 				//return with the original info, nothing is updated				
-				header('Location: /EditAssessment.php?course='.$previous[0]['CourseID'].'&sem='.$previous[0]['Semester'].'&name='.$previous[0]['AssignmentName']);
+				header('Location: /EditAssessment.php?course='.$previous[0]['CourseID'].'&sem='.$previous[0]['Semester'].'&assignmentName='.$previous[0]['AssignmentName']);
 			
 			} else { //assignment name doesn't exist or is the same name as the origial
 			
@@ -47,7 +47,7 @@
 					$_SESSION['message'] = 'error'; 
 				 }
 				 //return to the page with the updated information
-				header('Location: /EditAssessment.php?course='.$cID.'&sem='.$sem.'&name='.$aName);
+				header('Location: /EditAssessment.php?course='.$cID.'&sem='.$sem.'&assignmentName='.$aName);
 			}
 		}
 		//else the date was wrong
@@ -106,17 +106,18 @@
 	
 	//check the validity of the entered date
 	function check_valid_date($date){
-		$str = strtotime($date);
-		if(!is_numeric($str) ){
-			return false;	
-		} 
-		//an issue with strtotime is that dd/mm/yyyy becomes mm/dd/yyyy, so switch the day and month values
-		$month = date('d', $str); //is d because of issue with strtotime()
-		$day = date('m', $str); //is m because of issue with strtotime()
-		$year = date('Y', $str);
-		if(checkdate($month, $day, $year)){
-			return true;	
-		} 
+		if(substr_count($date, "/") == 2){
+			$fullDate = explode("/", $date);
+			$day = 	(int)$fullDate[0];
+			$month = (int)$fullDate[1];
+			$year = (int)$fullDate[2];
+			
+			if(checkdate($month, $day, $year)){
+				return true;	
+			}			
+		} else {
+			return false;
+		}
 		return false;
 	}
 ?>
