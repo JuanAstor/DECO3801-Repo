@@ -76,9 +76,6 @@ if(isset($_POST['btnFile'])){ //search for files submitted
         
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
         
-         <script src='/js/view.js'></script>
-        <script src="/js/less.js"></script>
-
         <!-- Load the Prettify script, to use in highlighting our code.-->
         <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>	
 

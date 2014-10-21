@@ -28,13 +28,13 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
 		$count = 0; 
 		//check that the entered href info is correct and that the admin is allowed to be
 		//accessing this assignment info
-        if(isset($_GET['course']) && isset($_GET['sem']) && isset($_GET['name'])){	
+        if(isset($_GET['course']) && isset($_GET['sem']) && isset($_GET['assignmentName'])){	
 			foreach($courses as $list){
 				if($_GET['course'] == $list['CourseID'] && $_GET['sem'] == $list['Semester']){
 					//check if the name relates to these in the database
 					$result = get_course_assessments($_GET['course'], $_GET['sem']);
 					foreach($result as $assignName){
-						if($_GET['name'] == $assignName['AssignmentName']){
+						if($_GET['assignmentName'] == $assignName['AssignmentName']){
 							$count = 1;	
 						}
 					}
@@ -43,7 +43,7 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
 			if($count == 1){ //if they can access this info then display it to them
 				$courseID = $_GET['course'];
 				$semester = $_GET['sem'];
-				$name = $_GET['name'];
+				$assignmentName = $_GET['assignmentName'];
 				
 				include("view/home/header.php");
 				include("view/admin/editAssessments/_edit.php"); 

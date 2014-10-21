@@ -94,9 +94,11 @@
 		$val = explode(",", $_POST['make']);
 		$cID = $val[0]; //course ID
 		$sem = $val[1]; //semester
-		echo "<option value='".$cID."'>".$cID."</option>";
-		echo "<option value='".$sem."'>".$sem."</option>";
-		echo "<option value='Name'>WALK</option>";	
+		echo"<option value='' >Select...</option>";
+		$result = get_course_assessments($cID, $sem);
+		foreach($result as $name){
+				echo "<option value='".$name['AssignmentName']."'>".$name['AssignmentName']."</option>";
+		}	
 	}
 	
 	

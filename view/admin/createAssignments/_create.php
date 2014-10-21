@@ -10,6 +10,7 @@
 		$description = $_POST['desc'];
 		$time = $_POST['time'];
 		$dateFormat = $_POST['date'];
+		
 		//check if the date is valid
 		if(!check_valid_date($dateFormat)){
 			$output = "Error: The date was invalid or not of the correct format (dd/mm/yyyy)";
@@ -38,23 +39,25 @@
 			}
 		}
 		
-	} else {
-		$output = "Error: One or more fields were not completed";
 	}
+	 //else {
+		//$output = "Error: One or more fields were not completed";
+	//}
 	
 	//check the validity of the entered date
 	function check_valid_date($date){
-		$str = strtotime($date);
-		if(!is_numeric($str) ){
-			return false;	
-		} 
-		//an issue with strtotime is that dd/mm/yyyy becomes mm/dd/yyyy, so switch the day and month values
-		$month = date('d', $str); //is d because of issue with strtotime()
-		$day = date('m', $str); //is m because of issue with strtotime()
-		$year = date('Y', $str);
-		if(checkdate($month, $day, $year)){
-			return true;	
-		} 
+		if(substr_count($date, "/") == 2){
+			$fullDate = explode("/", $date);
+			$day = 	(int)$fullDate[0];
+			$month = (int)$fullDate[1];
+			$year = (int)$fullDate[2];
+			
+			if(checkdate($month, $day, $year)){
+				return true;	
+			}			
+		} else {
+			return false;
+		}
 		return false;
 	}
 ?>
@@ -65,17 +68,16 @@
         <link rel="stylesheet/less" href="/css/main.less">
         <!-- JS -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script src='/js/view.js'></script>
-        <script src="/js/less.js"></script>
 		<!--<script src="../js/moment.js"></script> -->
-        <link rel="stylesheet" type="text/css" href="/css/bootstrap-datetimepicker.min.css">
+        
 		
 		<!-- <script src="../js/bootstrap.min.js"></script>
 		<script src="../js/bootstrap-datetimepicker.min.js"></script> -->
     </head>
 	<body>
-    	<h4>Create Assessment</h4>
+        <div class="formtitle"><h3>Create Assessment</h3></div>
 		<widget-container>
+            <div class="formcenter">
 			<form action="/Assessment.php" method="post">
 				<div class="form-group">
 					<label for="cID">Course ID</label>
@@ -130,6 +132,7 @@
 				<label>Please make sure that every field has been completed</label>
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>
+            </div>
 		</widget-container>
         
         <div> 
@@ -139,6 +142,5 @@
 				}
 			?>
         </div>
-        
 	</body>
 </html>
