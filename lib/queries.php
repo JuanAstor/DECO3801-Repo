@@ -346,4 +346,10 @@ function check_if_student_enrolled($user, $course) {
     return $count > 0;
 }
 
+function get_users_to_critique($user){
+	$sql = "SELECT * FROM `reviewer` WHERE ReviewerID=?";
+	$query = MySQL::getInstance()->prepare($sql);
+	$query->execute(array($user));
+	return $query->fetchAll(PDO::FETCH_ASSOC);
+}
 ?>

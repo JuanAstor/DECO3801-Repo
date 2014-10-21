@@ -5,7 +5,7 @@
 $output = NULL; //the message to be displayed upon form submission
 $assignID = NULL; // to hold the assignment ID
 if(isset($_POST['btnFile'])){ //search for files submitted
-	if(isset($_POST['search']) && isset($_POST['AssignName'])){
+	if(isset($_POST['search']) && (strcmp($_POST['search'],"")!==0) && isset($_POST['AssignName']) && (strcmp($_POST['AssignName'],"")!==0)){
 		$search = $_POST['search'];
 		$name = $_POST['AssignName'];
 		 
@@ -17,19 +17,19 @@ if(isset($_POST['btnFile'])){ //search for files submitted
 			$assignID = $id['AssignmentID'];
 			$info = get_submitted_info($search, $id['AssignmentID']);
 		}
-		if($info != NULL){ //if a user has submitted a file for the assigment
+		if(count($info) > 0){ //if a user has submitted a file for the assigment
 			$output = "File(s) submitted by student ".$search.": <br />";
 			
 		} else { //no files submitted
 			$output = "No files have been submitted by student ".$search;	
 		}
 	} else { //not all fields were filled in
-		$output = "All fields must be filled out first";	
+		$output = "Error: All fields must be filled out first";	
 	}
 	
 //search for comments
 } else if (isset($_POST['btnComment'])){ //comments button selected
-	if(isset($_POST['search']) && isset($_POST['AssignName'])){
+	if(isset($_POST['search']) && (strcmp($_POST['search'],"")!==0) && isset($_POST['AssignName']) && (strcmp($_POST['AssignName'],"")!==0)){
 		$search = $_POST['search'];//the student
 		$name = $_POST['AssignName'];// name of the assignment to search
 			
@@ -62,57 +62,47 @@ if(isset($_POST['btnFile'])){ //search for files submitted
 <!DOCTYPE html>
 <html>
     <head>
-    <title>Code Review</title>
-        <!-- CSS/LESS -->
-        <!-- <link rel="stylesheet/less" href="/css/main.less">
-        <link rel="stylesheet" type="text/css" href="/mockup/main.css">
-        <!-- JS -->
-      
-      <title>Code Review</title>
-		<link rel="stylesheet/less" href="/css/main.less">
-        <!--<link rel="stylesheet" type="text/css" href="../mockup/main.css">-->
-		
-       
-        
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
-        
-        <!-- Load the Prettify script, to use in highlighting our code.-->
-        <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>	
+    <title>Code Review</title>            
+     
+    <link rel="stylesheet/less" href="/css/main.less">
+    <!--<link rel="stylesheet" type="text/css" href="../mockup/main.css">-->
+           
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+    
+    <!-- Load the Prettify script, to use in highlighting our code.-->
+    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>	
 
-        <?php date_default_timezone_set('Australia/Brisbane'); ?>
-       
-       		
+    <?php date_default_timezone_set('Australia/Brisbane'); ?>      		
 
     </head>
 	<body>
        
-            <h2>Review Student Submissions for <?php echo $courseID?></h2>
+        <h2>Review Student Submissions for <?php echo $courseID?></h2>
+    
+        <br />
         
+        <form action="/StudentReviews.php?course=<?php echo $courseID ?>&sem=<?php echo $semester ?>" method="post">            
+            <label>Select Assignment</label>
+            <!--<select name="AssignName"> -->
+            <?php 
+                echo "<select name='AssignName'>";
+                echo "<option value=''>Select...</option>";
+                foreach($result as $na) {
+                    $name = $na['AssignmentName'];
+                    echo "<option value='".$name."' >".$name."</option>"; //display all assignment options
+                }
+                echo "</select>";
+            ?>
+            <!--<option value="0">Select...<?//=$options?>
+            </option> 
+            </select> -->
+            <label for="search">Search</label>
+            <input type="text" name="search" placeholder="Enter Student Number">
             <br />
-            
-            <form action="/StudentReviews.php?course=<?php echo $courseID ?>&sem=<?php echo $semester ?>" method="post" >
-            	 
-            	<label>Select Assignment</label>
-                <!--<select name="AssignName"> -->
-                <?php 
-					echo "<select name='AssignName'>";
-					echo "<option value=''>Select...</option>";
-					foreach($result as $na) {
-						$name = $na['AssignmentName'];
-						echo "<option value='".$name."' >".$name."</option>"; //display all assignment options
-					}
-					echo "</select>";
-				?>
-           		<!--<option value="0">Select...<?//=$options?>
-            	</option> 
-            	</select> -->
-                <label for="search">Search</label>
-                <input type="text" name="search" placeholder="Enter Student Number">
-                <br />
-                <label for="btnFile">Search for </label>
-                <input type="submit" name="btnFile" value="Files Submitted" class="btn btn-primary" />
-                <input type="submit" name="btnComment" value="Comments Made" class="btn btn-primary" />
-            </form>
+            <label for="btnFile">Search for </label>
+            <input type="submit" name="btnFile" value="Files Submitted" class="btn btn-primary" />
+            <input type="submit" name="btnComment" value="Comments Made" class="btn btn-primary" />
+        </form>
         
                 
         <div>

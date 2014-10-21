@@ -18,7 +18,7 @@ function loadCommentSystem(uid, fid){
 	
 	function runAll(){
 		
-		console.log("called here");
+		
 			
 		$.ajax({
 		
@@ -34,6 +34,8 @@ function loadCommentSystem(uid, fid){
 	}
 
 	function runStep1(data){
+	
+		
 	
 		var ownBool = false;
 		var editBool = false;
@@ -51,7 +53,11 @@ function loadCommentSystem(uid, fid){
 			editBool = true;
 		}
 		
+		
+		
 		loadCommentSystem(ownBool,editBool, 0);
+		
+		
 				
 		if(ownBool){
 		
@@ -140,12 +146,12 @@ function loadCommentSystem(uid, fid){
 		$(".hcbuttonown").css("height", lineSpacing);
 		
 		
-		if(!isOwner){
-			fetchComments(isOwner, editPriv, revNum);
-		} else {
+	
+		fetchComments(isOwner, editPriv, revNum);
+		
 			
-			fetchComments(isOwner, editPriv, revNum);
-		}
+			
+		
 		
 		
 	
@@ -159,7 +165,8 @@ function loadCommentSystem(uid, fid){
 			url: "/lib/comments.php",
 			data: {"rtype": "fetch", "revNum" : revNum, "uid" : userID,
 					"fid" : fileID, "isOwner" : isOwner},
-			success: function(json){				
+			success: function(json){
+				console.log(json);
 				commentArray = jQuery.parseJSON(json);
 				console.log(commentArray);
 				loadComments(commentArray, isOwner, editPriv);
@@ -183,7 +190,7 @@ function loadCommentSystem(uid, fid){
 				if ($(this).attr('line') == comInfo['LineNumber']){
 				
 					var lineNum = comInfo['LineNumber'];
-					var lineCom = comInfo['LineComment'];
+					var lineCom = comInfo['Contents'];
 						
 				
 					if(!isOwner){$(this).addClass('hccom').removeClass('hcbutton');
@@ -240,7 +247,7 @@ function loadCommentSystem(uid, fid){
 			
 			if (lineNum == comInfo['LineNumber']){		
 			
-				storedCI = comInfo['LineComment'];
+				storedCI = comInfo['Contents'];
 				
 			}		
 			
@@ -341,7 +348,7 @@ function loadCommentSystem(uid, fid){
 		
 		var comment = replaceSpecialChars($("#comtext").val());
 		
-		var jsonStr = '{ "LineNumber" : "' + lineNum + '", "LineComment" : "' + comment +'" }'	
+		var jsonStr = '{ "LineNumber" : "' + lineNum + '", "Contents" : "' + comment +'" }'	
 		console.log(jsonStr);		
 		var jsonObject = JSON.parse(jsonStr);
 		console.log(jsonObject);
@@ -372,7 +379,7 @@ function loadCommentSystem(uid, fid){
 		var comment = replaceSpecialChars($("#comtext").val());
 	
 		
-		var jsonStr = '{ "LineNumber" : "' + lineNum + '", "LineComment" : "' + comment +'" }'	
+		var jsonStr = '{ "LineNumber" : "' + lineNum + '", "Contents" : "' + comment +'" }'	
 		console.log(jsonStr);		
 		var jsonObject = JSON.parse(jsonStr);
 		console.log(jsonObject);
