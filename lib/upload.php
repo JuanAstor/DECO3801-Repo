@@ -34,10 +34,11 @@
 				//open the file and put the contents into '$content'
 				$fp = fopen($tmpName, 'r'); 
 				$content = fread($fp, filesize($tmpName));
+				//$content = mysql_real_escape_string($content);
 				fclose($fp);
 				
 				//update the table, add new file content
-				$update = update_file_contents($uID, $assignmentID, $fileName, $content, $dateTime);
+				$update = update_file_contents($uID, $assignmentID, $fileName, mysqli_real_escape_string($content), $dateTime);
 				//echo "<br>File <i>$fileName</i> updated!</br>";
 				$_SESSION['submit'] = 'submitted';
 			} 			
@@ -54,9 +55,10 @@
 					//open the file and put the contents into '$content'
 					$fp = fopen($tmpName, 'r'); 
 					$content = fread($fp, filesize($tmpName));
+					//$content = mysql_real_escape_string($content);
 					fclose($fp); 
 					//query the database and submit the necessary info
-					insert_file_data($uID, $assignmentID, $fileName, $content, $dateTime);					
+					insert_file_data($uID, $assignmentID, $fileName, mysqli_real_escape_string($content), $dateTime);					
 					//echo "<br>File <i>$fileName</i> uploaded!</br>";
 					$_SESSION['submit'] = 'submitted';
 				}
