@@ -4,12 +4,16 @@
 
 .trans{
 	width:inherit;
-	font-size:inherit;
+	font-size:9px;
 	font-family:inherit;
 	overflow-y:hidden;
 	resize:none;
 	background:transparent;
 	border:none;
+	padding-right:8px;
+	padding-top:2px;
+	text-align: justify;
+    text-justify: inter-word;
 	
 
 }
@@ -42,8 +46,8 @@
 }
 
 #revSelect{
-	top:10px;
-
+	top:11.5px;
+	position:relative;
 }
 
 
@@ -113,17 +117,20 @@
 	overflow-y: auto;
 	font-size:10px;
 	outline:none;
-	width:186px;
+	width:96%;
+	background-color:#EEE;
+	border-style:solid;
+	border-width:1px;
+	border-color:#999;
 
 }
 
 /* CSS for edit priv buttons */
 
 .editpriv{
-	float:right;
 	padding-bottom:3px;
-	padding-right:4px;
-	display:inline;		
+	padding-right:4px;	
+	
 }
 
 #editbut{
@@ -171,11 +178,28 @@ ul#tabs li {
 }
 
 span.tabSpan { 
-	color: #42454a; background-color: #dedbde; border: 1px solid #c9c3ba; border-bottom: none; padding: 0.3em; text-decoration: none; 
+	color: #42454a;
+	background-color: #dedbde;
+	border: 1px solid #c9c3ba; 
+	border-bottom: 1px solid #888;
+	padding: 0.3em;
+	text-decoration: none; 
 }
 	
 span.tabSpan:hover { 
-	background-color: #f1f0ee; 
+	background-color: #F2F2F2; 
+	border-bottom:none;
+	top:1px;
+	position:relative;
+}
+span.selected { 
+	background-color: #F2F2F2; 
+	border: 1px solid #c9c3ba; 
+	border-bottom: none;
+	padding: 0.3em; 
+	text-decoration: none;
+	top:1px;
+	position:relative;
 }
 
 /* CSS for comment box (used in both comment display and add/edit comment display */
@@ -195,9 +219,8 @@ span.tabSpan:hover {
 	box-shadow: 0px 0 3px rgba(0,0,0,0.25); 
 	margin-left:33px;
 	bottom:12px;
-	padding:6px;
+	padding:6px 0px 8px 7px;
 	
-	font-size:12px;
 }
 
 .combox:after {

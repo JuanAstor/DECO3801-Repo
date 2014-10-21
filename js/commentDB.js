@@ -286,6 +286,11 @@ function loadCommentSystem(uid, fid){
 		
 		var revNum = $(this).attr("revnum");
 		
+		($($($($(this).parent()).parent()).children()).children()).addClass('tabSpan').removeClass('selected');
+		
+		$(this).addClass('selected').removeClass('tabSpan');
+		
+		
 		loadCommentSystem(true,false, revNum);
 		
 	
