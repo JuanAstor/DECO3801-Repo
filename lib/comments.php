@@ -26,7 +26,7 @@
 				$userID = $userID["UserID"];
 			} 
 			
-			$query = MySQL::getInstance()->query("SELECT `LineNumber`,`LineComment`
+			$query = MySQL::getInstance()->query("SELECT `LineNumber`,`Contents`
 					FROM `comment`
 					WHERE (`UserID` = '". $userID ." ') AND (`FileID` = '". $fileID." ')
 					ORDER BY `LineNumber` ASC ");								
@@ -45,7 +45,7 @@
 			$lineCom = $_POST['lineCom'];
 			
 			$query =  MySQL::getInstance()->query("INSERT INTO `comment`
-				(`FileID`, `UserID`, `LineNumber`, `LineComment`) 
+				(`FileID`, `UserID`, `LineNumber`, `Contents`) 
 				VALUES ('".$fileID."','".$userID."','".$lineNum."','".$lineCom."')");
 			return $query;
 			break;
@@ -57,7 +57,7 @@
 			$lineCom = $_POST['lineCom'];
 			
 			$query = MySQL::getInstance()->query("UPDATE `comment` 
-				SET `LineComment`= '".$lineCom."' WHERE (`FileID` ='".$fileID."') 
+				SET `Contents`= '".$lineCom."' WHERE (`FileID` ='".$fileID."') 
 				AND (`UserID` = '".$userID."') AND (`LineNumber`='".$lineNum."')");
 			return $query;
 			break;
