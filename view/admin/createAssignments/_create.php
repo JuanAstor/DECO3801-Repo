@@ -108,6 +108,7 @@
                         <option value="3">3</option>
                     </select>
                 </div>
+                </br>
 				<div class="form-group">
 					<label for="aName">Assignment Name</label>
 					<input class="form-control" id="aName" name="AName" placeholder="Enter Assignment name here">
@@ -128,8 +129,9 @@
 					<label for="date">Date Due</label>
 					<input class="form-control" id="date" name="date" placeholder="Format: DD/MM/YYYY">
 				</div>
+                </br>
 				
-				<label>Please make sure that every field has been completed</label>
+                <label>Please make sure that every field has been completed</label></br>
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>
             </div>

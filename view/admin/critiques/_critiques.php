@@ -138,7 +138,9 @@
                 <option value="4">4</option>
             </select>
         </div>
-        <label>Please make sure that every field has been completed</label>
+        </br>
+        
+        <label>Please make sure that every field has been completed</label></br>
 		<button type="submit" class="btn btn-primary">Submit</button>
         </form>
         </div>
