@@ -13,29 +13,26 @@
 
 ?>
 <content>
-<h2>File Upload</h2>
+<h1>File Upload</h1></br>
 <div>
     <!-- On submit contact the upload.php file which will handle everything -->
     <form method="post" action="../lib/upload.php" enctype="multipart/form-data">
-    <div> Attach a File(s): You can select more than one </div> 
+    <div> Attach a File(s): You can select more than one </div></br>
     <table>
     	<tr>
-            <td>
+            <td class="btn btn-default">
             	<input type="hidden" name="MAX_FILE_SIZE" value="2048000" />
                <input type="hidden" name="AssignNum" value="<?php echo $num+1 ?>" />
                 <input name="userfile[]" type="file" id="files" multiple /> <!-- Need to include the '[]' at the end of name! -->
             </td>
         </tr>
-        <tr>
-            <td width="175">
-                <p>
-            	</p>
-            </td>
+        <tr>    
         </tr>
         <tr>
             <td>
-               	<input type="submit" value=<?php echo $submissionState ?>  />
-                <input type="reset" value="Reset"  />
+                </br>
+               	<input type="submit" class="btn btn-primary" value=<?php echo $submissionState ?>  />
+                <input type="reset" class="btn btn-primary" value="Reset"  />
             </td>
         </tr>
     </table> 
@@ -54,7 +51,7 @@
                 echo "<a class='del' href='#' data-value=".$file['FileID']."><span>____(delete?)____</span></a>";
         }
     } else {
-        echo "<span>You have not made any submissions yet</span>";
+        echo "</br>"."<h7>"."<span>You have not made any submissions yet</span>"."</h7>";
     } 
 ?>
 

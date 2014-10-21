@@ -9,7 +9,7 @@
             $row = $assessments[$num];
             echo "<assessment>"
             .    "<div class='a-content'>"
-            .        "<h4>".$row['AssignmentName']."</h4>"
+            .        "<h3>".$row['AssignmentName']."</h3>"
             .        "<p><span class='iscourse'>".$row['CourseID']."</span>, Semester ".substr($row['Semester'], -1)
             .        "<p>Due ".date('g:ia, F jS', strtotime($row['DueTime']." ".$row['DueDate']))." ".substr($row['Semester'], 0, -1)."</p>"
             .    "</div>"
