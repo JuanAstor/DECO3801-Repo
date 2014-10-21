@@ -13,7 +13,6 @@ if (!isset($_SESSION['user']) && isset($_POST['user'])) {
     }
 }
 
-
 /**
  *  Show the home dashboard if student has authenticated.
  *  Otherwise show the login prompt.

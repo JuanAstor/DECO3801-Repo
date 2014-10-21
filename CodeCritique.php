@@ -21,10 +21,24 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
         $courses = get_users_courses($user);
         $assessments = get_users_assessments($user);
         $fullName = get_user_name($user);
-
-        // Show home
-        include("view/home/header.php");
-        include("view/codecritique/_codecritique.php");
+		$critique = get_users_to_critique($user);
+		$count = 0;
+		if(isset($_GET['aID'])){
+			//check that the assignmentID has been changed
+			foreach($critique as $correctID){
+				if($_GET['aID'] == $correctID['AssignmentID']){
+					$count=1;	
+				}
+			}
+			if($count == 1){
+				// Show home
+				$assignmentID = $_GET['aID'];
+				include("view/home/header.php");
+				include("view/codecritique/_codecritique.php");
+			} else {
+				header('Location: /index.php');	
+			}
+		}
         
     }else{ 
         
