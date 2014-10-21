@@ -27,14 +27,14 @@ if (isset($_POST['password'])) {
         $fName = $_SESSION['fName'];
         $sName = $_SESSION['sName'];
         $uniID = $_SESSION['institutionId'];
-        
-        session_unset();
-        session_destroy();
-        
+                
         // Check if User exists
         if (get_login_status($user)) {
             header('Location: ../index.php?error=exists');
         }
+        
+        // Store User
+        update_user($user, $fName, $sName, $admin ? 'Admin' : 'Student', $hash, $uniID);
         
         $adminCheck = mapAdminUser($key, $admin, $user, $uniID);
         
@@ -42,10 +42,7 @@ if (isset($_POST['password'])) {
             header('Location: index.php?error=admin+missing');
             die();
         }
-        
-        // Store User
-        update_user($user, $fName, $sName, $admin ? 'Admin' : 'Student', $hash, $uniID);
-        
+                
         header('Location: ../index.php?m=signup+success');
     }
     
@@ -70,12 +67,13 @@ if (isset($_POST['password'])) {
                 
                 // Enrol
                 if (isset($_SESSION['courseName'])) {
+                    
                     enrolCourse($user, $_SESSION['courseName'], $_SESSION['institutionId'],  $_SESSION['isInstructor']);
                 }
                 
                 // Flush $_SESSION
                 session_unset();
-
+                
                 // Auth $_SESSION
                 $_SESSION['user'] = $user;
                 

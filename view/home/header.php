@@ -2,6 +2,7 @@
 <html>
     <head>
     <title>Code Review</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- CSS/LESS -->
         <link rel="stylesheet/less" href="css/main.less">
         <!-- JS -->

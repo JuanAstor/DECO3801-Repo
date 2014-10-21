@@ -43,7 +43,7 @@ sidebar, sidebar * {
     margin-left:10px;
     margin-top:10px;
     float:left;
-    
+
 }
 
 .comments {
@@ -71,55 +71,13 @@ sidebar, sidebar * {
     background-color:#82DAF5;
 }
 
-/*
- * NEEDS TO HAVE EXCLUSIVE ID/CLASS/TAG REFERENCE 
- * 
-table {
-    font: @font-family-sans-serif @font-size-h3;
-    font-size: 20px;
-    font-weight: 300;
-    color:#6fa1c7;
-    text-align:center;  
-}
-
-td {
-    height:70px;
-    width:500px;
-    text-align:center;
-    padding: 20px;   
-}
-
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    color:white;
-    text-decoration: none;
-    text-align: center;
-}
-
-li {
-    float: left;
-    color:white;
-    text-decoration: none;
-    padding-left: 100px;
-    padding-top: 30px;
-}
-
-a {
-    width: 60px;
-    color:white;
-    text-decoration: none;
-}
-
-*/
-
 /* Remove welcome message on very small devices */
 @media (max-width: 448px) {
     .welcome {
         display:none;
+    }
+    login logo {
+        font-size:24pt !important;
     }
 }
 
@@ -129,11 +87,11 @@ a {
     widget:nth-of-type(2), widget:nth-of-type(3) {
         margin-top:-26px;
     }
-    
+
     widget-end {
         display:none !important;
     }
-    
+
     sidebar nav {
         min-height:40px;
     }
@@ -141,31 +99,31 @@ a {
     nav-handle {
         display: block;
     }
-    
+
     panel {
         margin-bottom:20px !important;
         padding:0px !important;
     }
-    
+
     page {
         padding:2px !important;
     }
-        
+
     /* Widget Border Radius Fixes
-     */
-    
+    */
+
     // WIDGET 1
     widget:nth-of-type(1) panel, 
     widget:nth-of-type(1) panel div[title="heading"] {
         border-radius:4px 4px 0px 0px!important;
     }
-    
+
     // WIDGET 2
     widget:nth-of-type(2) panel, 
     widget:nth-of-type(2) panel div[title="heading"] {
         border-radius:0px 0px 0px 0px!important;
     }
-    
+
     // WIDGET 3
     widget:nth-of-type(3) panel {
         border-radius:0px 0px 4px 4px!important;
@@ -268,8 +226,10 @@ login heading {
 login input[type=email],
 login input[type=text],
 login input[type=password]{
-   .form-control;
-   border:none;
+    .form-control;
+    margin: 5px 0;
+    background:#eee;
+    border-radius: 0;
 }
 
 login label {
@@ -283,6 +243,7 @@ login button {
     .btn-primary;
     .btn-block;
     border:none;
+    border-radius: 0;
 }
 
 
@@ -308,7 +269,7 @@ panel-end{
     height:20px;
     margin-top:-20px;
     display:block;
-	border: 0;
+    border: 0;
 }
 widget {
     .make-xs-column(12);
@@ -325,7 +286,7 @@ panel{
     margin-bottom:-99999px;
     padding-bottom:99999px;
     display:block;
-	border: 0;
+    border: 0;
 }
 
 panel .w-heading {
@@ -374,7 +335,7 @@ sidebar nav h4:first-child .fa {
 sidebar nav h4 span {
     padding-left:15px;
 }
- 
+
 sidebar nav .fa {
     color:#666;
     font-size:120%;
@@ -392,12 +353,12 @@ sidebar nav p {
 sidebar nav .iscourse {
     padding-left:8px !important;
 }
- 
+
 sidebar nav p a{
     margin:0;
     color:#cfe6f7;
 }
- 
+
 sidebar nav p a:hover {
     color:#8db8d9;
     cursor:pointer;
@@ -428,9 +389,9 @@ sidebar nav-handle {
     text-align: center;
     color:#888;
 }
- 
- /* CONTENT STYLES
-  */
+
+/* CONTENT STYLES
+ */
 
 heading {
     padding:0 0 5px;
@@ -461,8 +422,8 @@ page {
     .make-md-column(10);
 }
 
- /* ASSESSMENT */
- 
+/* ASSESSMENT */
+
 assessment {
     .make-xs-column(12);
     .make-sm-column(12);
@@ -473,7 +434,7 @@ assessment {
     padding-right:0px;
     border: none;
 }
- 
+
 assessment .a-content {
     .panel-body;
     padding-top:10px;
@@ -492,7 +453,7 @@ assessment .a-content p:last-child,
 assessment .a-footer p:last-child{
     float:right;
 }
- 
+
 assessment .a-footer {
     .panel-footer;
     padding-bottom:26px;
@@ -503,23 +464,23 @@ assessment .a-footer a:last-child {
 }
 
 .formcenter {
-margin:auto;
-position:relative;
-width:auto;
-height:auto;
-font-size: 14px;
-line-height: 24px;
-font-weight: bold;
-color: #6fa1c7;
-text-decoration: none;
-padding:25px;
-background-color: #dfe8ef;
-line-height: 30px;
+    margin:auto;
+    position:relative;
+    width:auto;
+    height:auto;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: bold;
+    color: #6fa1c7;
+    text-decoration: none;
+    padding:25px;
+    background-color: #dfe8ef;
+    line-height: 30px;
 }
 
 .formtitle {
     margin:30px 0px; padding:0px;
-	text-align:center;
+    text-align:center;
 }
 
 h6 {

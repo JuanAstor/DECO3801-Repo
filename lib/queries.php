@@ -267,8 +267,8 @@ function update_enrolment($user, $course, $institution) {
     $semester = date("Y") . ((date("n") > 6) ? 2 : 1);
     $sql = "INSERT INTO `courseenrolment` (`UserID`, `CourseID`, `Semester`, `InstitutionID`) VALUES (?,?,?,?)";
     $query = MySQL::getInstance()->prepare($sql);
-    $query->execute(array($user, $course, $semester,  $institution));
-    
+    $query->execute(array($user, $course, $semester, $institution));
+
     $sql1 = "UPDATE `courseenrolment` SET CourseID=?, Semester=? WHERE UserID=?";
     $query1 = MySQL::getInstance()->prepare($sql1);
     return $query1->execute(array($course, $semester, $user));
@@ -314,7 +314,7 @@ function insert_adminuser($user, $institution) {
 
 // Using the consumerkey, return the institution row
 function get_institution($key) {
-    $sql = "SELECT * FROM `institution` WHERE ConsumerKey=?";
+    $sql = "SELECT * FROM `institution` WHERE consumerKey=?";
     $query = MySQL::getInstance()->prepare($sql);
     $query->execute(array($key));
     return $query->fetchAll(PDO::FETCH_ASSOC);
@@ -346,10 +346,18 @@ function check_if_student_enrolled($user, $course) {
     return $count > 0;
 }
 
-function get_users_to_critique($user){
-	$sql = "SELECT * FROM `reviewer` WHERE ReviewerID=?";
-	$query = MySQL::getInstance()->prepare($sql);
-	$query->execute(array($user));
-	return $query->fetchAll(PDO::FETCH_ASSOC);
+// Create an institution from signupAdmin in welcome
+function create_institution($key, $secret) {
+    $sql = "INSERT INTO `institution` (`consumerKey`, `Secret`, `Timezone`) VALUES (?,?, 10)";
+    $query = MySQL::getInstance()->prepare($sql);
+    return $query->execute(array($key, $secret));
 }
+
+function get_users_to_critique($user) {
+    $sql = "SELECT * FROM `reviewer` WHERE ReviewerID=?";
+    $query = MySQL::getInstance()->prepare($sql);
+    $query->execute(array($user));
+    return $query->fetchAll(PDO::FETCH_ASSOC);
+}
+
 ?>
