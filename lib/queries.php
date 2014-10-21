@@ -6,7 +6,7 @@ function get_login_status($user) {
 	$query = MySQL::getInstance()->prepare($sql);
 	$query->execute(array($user));
 	$count = $query->rowCount();
-	return $count ? 1 : 0;
+	return $count > 0;
 }
 
 //get all courses that a user is enrolled in. COURSE ID IS NOT UNIQUE
@@ -265,12 +265,17 @@ function update_user($uID, $fName, $sName, $privileges, $pass, $institutionID){
 }
 
 //adds an enrolment record for a specified user and course if it doesn't yet exist.
-function update_enrolment($uID, $cID){
-	$courses = get_users_courses($uID);
-	
+function update_enrolment($user, $course){	
 	$sql = "INSERT INTO `courseenrolment` (`UserID`, `CourseID`) VALUES (?,?)";
 	$query = MySQL::getInstance()->prepare($sql);
-	return $query->execute(array($uID, $cID));
+	return $query->execute(array($user, $course));
+}
+
+// Creates course
+function create_course($user, $course, $institution) {
+    $sql = "INSERT INTO `course` (`CourseCoordinator`, `CourseID`, `InstitutionID`) VALUES (?,?,?)";
+    $query = MySQL::getInstance()->prepare($sql);
+    return $query->execute(array($user, $course, $institution));
 }
 
 /* Check if consumerkey exists
@@ -282,7 +287,7 @@ function check_if_consumer_key($key) {
     $query = MySQL::getInstance()->prepare($sql);
     $query->execute(array($key));
     $count = $query->rowCount();
-    return $count > 0 ? true : false;
+    return $count > 0;
 }
 
 // Return true if AdminUser in institution is null
@@ -295,10 +300,10 @@ function check_if_admin_assigned($key) {
 }
 
 // Update AdminUser in institution with UserID on first run
-function insert_adminuser($userID, $institutionID) {
+function insert_adminuser($user, $institution) {
 	$sql = "UPDATE `institution` SET AdminUser=? WHERE InstitutionID=?";
 	$query = MySQL::getInstance()->prepare($sql);
-	$query->execute(array($userID, $institutionID));
+	$query->execute(array($user, $institution));
 	return;
 }
 
@@ -319,11 +324,20 @@ function get_password_hash($user) {
 }
 
 // Searches list of courses from course using institution ID
-function check_if_course_exists($course, $institutionId) {
-	$sql = "SELECT CourseID from `course` WHERE CourseID=?, InstitutionID=?";
-	$query = MySQL::getInstance()->prepare($sql);
-	$query->execute(array($course, $institutionId));
-	$count = $query->rowCount();
-	return $count > 0 ? true : false;
+function check_if_course_exists($course, $institution) {
+    $sql = "SELECT CourseID FROM `course` WHERE CourseID=? AND InstitutionID=?";
+    $query = MySQL::getInstance()->prepare($sql);
+    $query->execute(array($course, $institution));
+    $count = $query->rowCount();
+    return $count > 0;
+}
+
+// Checks if a student is enrolled
+function check_if_student_enrolled($user, $course){
+    $sql = "SELECT CourseID FROM `courseenrolment` WHERE UserID=? AND CourseID=?";
+    $query = MySQL::getInstance()->prepare($sql);
+    $query->execute(array($user, $course));
+    $count = $query->rowCount();
+    return $count > 0;
 }
 ?>

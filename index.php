@@ -6,25 +6,7 @@ require_once("lib/queries.php"); // query functions to get database results
 // Redirected from LTI ONLY
 if (isset($_POST['oauth_consumer_key'])) {
     $key = $_POST['oauth_consumer_key'];
-    include 'lib/authenticate.php';
-}
-
-// Code to run after LTI Post Parameters have been placed in session data
-if (isset($_SESSION['consumerKey'])) {
-    
-    if (isset($_SESSION['userEmail'])) {
-        
-        if (!get_login_status($_SESSION['userEmail'])) {
-            
-            include('view/login/_signup.php');
-            die();
-        }
-        else {
-            
-            include('view/login/_login.php');
-            die();
-        }
-    }
+    require_once 'lib/ltisession.php';
 }
 
 /**
@@ -41,7 +23,7 @@ if (isset($_SESSION["user"])) {
         $courses = get_users_courses($user);
         $assessments = get_users_assessments($user);
         $fullName = get_user_name($user);
-	    $submitted = get_user_comments($user);
+	$submitted = get_user_comments($user);
 
         // Show home
         include("view/home/header.php");
@@ -56,8 +38,16 @@ if (isset($_SESSION["user"])) {
         include("view/home/header.php");
         include("view/admin/home/_home.php");
     }
-} else {
-    include('view/login/_login.php');
+}else{
+    if (isset($_SESSION['userEmail'])) {
+        if (!get_login_status($_SESSION['userEmail'])) {
+            include('view/login/_signup.php');
+        }else{
+        include('view/login/_login.php');
+        }
+    }else{
+        include('view/login/_login.php');
+    }
 }
 
 //Footer
