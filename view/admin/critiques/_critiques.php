@@ -96,7 +96,9 @@
 		<script src="../js/bootstrap-datetimepicker.min.js"></script> -->
     </head>
 	<body>
-    	<h4>Assign Critiques</h4>
+        <div class="formtitle"><h3>Assign Critiques</h3></div>
+        <widget-container>
+        <div class="formcenter">
         <form action="/Critiques.php" method="post">
         <div>
         	<label for="cID">Course ID</label>
@@ -136,6 +138,8 @@
         <label>Please make sure that every field has been completed</label>
 		<button type="submit" class="btn btn-primary">Submit</button>
         </form>
+        </div>
+        </widget-container>
     </body>
 </html>
 
