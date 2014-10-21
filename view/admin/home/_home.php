@@ -23,8 +23,9 @@
 							echo "<br />"; 
 							$result = get_course_assessments($course['CourseID'], $course['Semester']);
 							foreach($result as $name){	
-								//display the assignment name as a link
-								echo "<a href='/EditAssessment.php?course=".$course['CourseID']."&sem=".$course['Semester']."&name=".$name['AssignmentName']."'>".$name['AssignmentName']."</a>";
+								//echo "<span>--------------</span>";
+								echo $name['AssignmentName'];
+								echo "<a href='/EditAssessment.php?course=".$course['CourseID']."&sem=".$course['Semester']."&name=".$name['AssignmentName']."'><button type='button' class='btn btn-primary'>Go</button></a>";
 								echo "<br />";
 							}
 							echo "<br />";
@@ -42,10 +43,8 @@
 						foreach($courses as $course){
 							//display all courses that the admin is in charge of
 							echo "<span>".strtoupper($course['CourseID'])."   |  </span>";
-							echo "<span>Semester ".substr($course['Semester'], -1)."    ".substr($course['Semester'],0,4)."      </span><br />";
-							echo "<a href='/StudentReviews.php?course=".$course['CourseID']."&sem=".$course['Semester']."'>
-							Review
-							</a>";
+							echo "<span>Sem ".substr($course['Semester'], -1)."    ".substr($course['Semester'],0,4)."      </span>";
+							echo "<a href='/StudentReviews.php?course=".$course['CourseID']."&sem=".$course['Semester']."'><button type='button' class='btn btn-primary'>Go</button></a>";
 							echo "<br /> <br />";
 						}
 					?>
