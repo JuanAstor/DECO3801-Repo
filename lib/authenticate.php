@@ -125,6 +125,6 @@ function enrolCourse($user, $course, $institution, $admin){
     }
     
     if (!$admin && !check_if_student_enrolled($user, $course)) {
-        update_enrolment($user, $course);
+        update_enrolment($user, $course, $institution);
     }
 }
