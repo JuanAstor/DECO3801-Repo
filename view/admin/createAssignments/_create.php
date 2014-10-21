@@ -75,8 +75,9 @@
 		<script src="../js/bootstrap-datetimepicker.min.js"></script> -->
     </head>
 	<body>
-    	<h4>Create Assessment</h4>
+        <div class="formtitle"><h3>Create Assessment</h3></div>
 		<widget-container>
+            <div class="formcenter">
 			<form action="/Assessment.php" method="post">
 				<div class="form-group">
 					<label for="cID">Course ID</label>
@@ -131,6 +132,7 @@
 				<label>Please make sure that every field has been completed</label>
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>
+            </div>
 		</widget-container>
         
         <div> 
@@ -140,6 +142,5 @@
 				}
 			?>
         </div>
-        
 	</body>
 </html>
