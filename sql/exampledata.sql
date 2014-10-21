@@ -279,7 +279,7 @@ CREATE TABLE IF NOT EXISTS `institution` (
   `InstitutionID` int(11) NOT NULL AUTO_INCREMENT,
   `consumerKey` char(45) NOT NULL,
   `AdminUser` char(254) DEFAULT NULL,
-  `Secret` tinyblob NOT NULL,
+  `Secret` char(60) NOT NULL,
   `Timezone` int(11) NOT NULL,
   PRIMARY KEY (`InstitutionID`),
   UNIQUE KEY `consumerKey_UNIQUE` (`consumerKey`),
@@ -320,7 +320,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `FName` varchar(45) DEFAULT NULL,
   `SName` varchar(45) DEFAULT NULL,
   `Privileges` tinytext,
-  `PasswordHash` tinyblob,
+  `Password` char(60),
   `InstitutionID` int(11) NOT NULL,
   PRIMARY KEY (`UserID`),
   KEY `UserInstitutionID_idx` (`InstitutionID`)
@@ -330,7 +330,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`UserID`, `FName`, `SName`, `Privileges`, `PasswordHash`, `InstitutionID`) VALUES
+INSERT INTO `user` (`UserID`, `FName`, `SName`, `Privileges`, `Password`, `InstitutionID`) VALUES
 ('11112222', 'Joe', 'Bloggs', 'SuperAdmin', 0x736166617366, 1),
 ('12121454', 'Chris', 'Jordan', 'Student', 0x64733435, 1),
 ('12123434', 'Frank', 'Goldberg', 'Student', 0x67656473, 1),
