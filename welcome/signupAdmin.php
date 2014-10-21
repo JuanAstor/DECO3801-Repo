@@ -8,7 +8,7 @@
   <body>
     <div class="container">
       <h2>Sign Up - Admin</h2>
-      <form role="form">
+      <form role="form" method="POST" action="../lib/authenticate.php">
         <div class="form-group">
           <label for="email">Username</label>
           <input type="email" class="form-control" id="email" placeholder="Enter email">
