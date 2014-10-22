@@ -13,7 +13,7 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
     
     if(!check_if_admin($user)){ 
 		//is a student
-		header('Location: /index.php');
+		header('Location: index.php');
 		
 	} else {		
 		//is an admin

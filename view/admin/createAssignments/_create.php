@@ -67,10 +67,14 @@
 	}
 	//check that the entered time is valid 
 	function check_valid_time($time){
-		if(preg_match("/(2[0-3]|[01][0-9]):[0-5][0-9]/",$time)){
-			return true;
-		} else {
-			return false;	
+		if(strtotime($time)){
+			if(preg_match("/(2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]/",$time)){
+				return true;
+			} else {
+				return false;	
+			}
+		}else {
+			return false;
 		}
 	}
 ?>
@@ -84,15 +88,12 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 		<!--<script src="../js/moment.js"></script> -->
         
-		
-		<!-- <script src="../js/bootstrap.min.js"></script>
-		<script src="../js/bootstrap-datetimepicker.min.js"></script> -->
     </head>
 	<body>
         <div class="formtitle"><h3>Create Assessment</h3></div>
 		<widget-container>
             <div class="formcenter">
-			<form action="/Assessment.php" method="post">
+			<form action="Assessment.php" method="post">
 				<div class="form-group">
 					<label for="cID">Course ID</label>
 					<?php //display all courseID's that an admin can create an assignment in

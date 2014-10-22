@@ -6,10 +6,10 @@ if (isset($_GET['assessment'])) {
             $row = $assessments[$num];		
             $_SESSION["assign"] = $assessments[$num]['AssignmentID']; //set the assignID to the id of the selected assessment
 		} else{
-			header('Location: /index.php');	
+			header('Location: index.php');	
 		}
 } else {
-	header('Location: /index.php');	
+	header('Location: index.php');	
 }
 
 
@@ -18,9 +18,7 @@ $uID = $_SESSION["user"]; //userID
 $assignID = $_SESSION["assign"]; //assignmentID
 
 
-?>
-
-    <head>
+?><head>
         <link rel="stylesheet" type="text/css" href="/css/comments.css">
         
         <link rel="stylesheet" type="text/css" href="/css/prettyprint/prettify.css" />
@@ -34,6 +32,8 @@ $assignID = $_SESSION["assign"]; //assignmentID
 		
     </head>
     <content>
+    
+
     <h3>Review Feedback On <?php echo $assessments[$num]['AssignmentName'] ?> </h3	>
     
     
@@ -56,8 +56,7 @@ $assignID = $_SESSION["assign"]; //assignmentID
 						
 						$fileNameStr = substr($fileNameStr, 0, 17)."...";
 					
-					}
-					
+					}					
 					//display all filenames as an anchor
 					echo "<li><a class='filelinks' data-fileID=".$fileName['FileID']." data-user=".$uID.">".$fileNameStr. "</a></li>";
 				}
@@ -96,7 +95,7 @@ jQuery(function ($) {
 	console.log(fID);
         $.ajax({
             type:'POST',
-            url:'../lib/retrieve.php',
+            url:'lib/retrieve.php',
             data: {filename : file,
                    user : '<?php echo $uID ?>',
                    assign : '<?php echo $assignID ?>' },

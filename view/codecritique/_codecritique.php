@@ -6,10 +6,10 @@ if (isset($_GET['oID'])) {
             $row = $critique[$num];		
             $_SESSION["revieweeID"] = $critique[$num]['OwnerID']; //set the assignID to the id of the selected assessment
 		} else{
-			header('Location: /index.php');	
+			header('Location: index.php');	
 		}
 } else {
-	header('Location: /index.php');	
+	header('Location: index.php');	
 }
 
 //Need a session varibale containing the userID and the assignmentID
@@ -94,7 +94,7 @@ jQuery(function ($) {
 	console.log(fID);
         $.ajax({
             type:'POST',
-            url:'../lib/retrieve.php',
+            url:'lib/retrieve.php',
             data: {filename : file,
                    user : '<?php echo $uID ?>',
                    assign : '<?php echo $assignID ?>' },

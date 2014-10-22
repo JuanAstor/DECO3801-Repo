@@ -37,16 +37,13 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         
-		
-		<!-- <script src="../js/bootstrap.min.js"></script>
-		<script src="../js/bootstrap-datetimepicker.min.js"></script> -->
     </head>
 	<body>
         <div class="formtitle"><h3>Edit Assessment For <?php echo $courseID. " Semester " .substr($semester, -1) ?> </h3></div>
 		<widget-container>
-        	<!-- '/EditAssessment.php?course="<?php echo $courseID ?>"&sem="<?php echo $semester ?>"&name="<?php echo $assignmentName ?>'-->           
+        	          
             <div class="formcenter">
-			<form action="../lib/_update.php" method="post">
+			<form action="lib/_update.php" method="post">
 				<div class="form-group">
                 	<input type="hidden" name="AssignID" value="<?php echo $assignID ?>" />
                     <input type="hidden" name="cID" value="<?php echo $courseID ?>" />
@@ -64,9 +61,7 @@
 				<div class="form-group">
 					<label for="time">Time Due</label>
 					<input class="form-control" id="time" name="time" value="<?php echo $dueTime ?>" placeholder="Time Format: 24hour - HH:MM">
-				</div>
-				
-				
+				</div>			
  
 				<div class="form-group">
 					<label for="date">Date Due</label>
@@ -102,14 +97,14 @@ jQuery(function ($) {
         // post to the _update.php file the info necessary to delete the assignment
 			$.ajax({
 				type:'POST',
-				url:'../lib/_update.php',
+				url:'lib/_update.php',
 				data: {assignID : <?php echo $assignID ?>,
 					   del : "delete" },
 				success: function(data){
 					//once the assignment has been deleted
 					//alert the user it has been successful and then return to the homepage.
 					alert(data);
-					var url = "/index.php";
+					var url = "index.php";
 					$(location).attr('href',url);				
 					
 				}

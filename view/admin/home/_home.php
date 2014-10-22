@@ -24,7 +24,7 @@
 							$result = get_course_assessments($course['CourseID'], $course['Semester']);
 							foreach($result as $names){	
 								//echo "<span>--------------</span>";
-								echo "<a href='/EditAssessment.php?course=".$course['CourseID']."&sem=".$course['Semester']."&assignmentName=".$names['AssignmentName']."'>".$names['AssignmentName']."</a>";
+								echo "<a href='EditAssessment.php?course=".$course['CourseID']."&sem=".$course['Semester']."&assignmentName=".$names['AssignmentName']."'>".$names['AssignmentName']."</a>";
 								echo "<br />";
 							}
 							echo "<br />";
@@ -43,7 +43,7 @@
 							//display all courses that the admin is in charge of
 							echo "<span>".strtoupper($course['CourseID'])."   |  </span>";
 							echo "<span>Sem ".substr($course['Semester'], -1)."    ".substr($course['Semester'],0,4)."      </span><br />";
-							echo "<a href='/StudentReviews.php?course=".$course['CourseID']."&sem=".$course['Semester']."'>
+							echo "<a href='StudentReviews.php?course=".$course['CourseID']."&sem=".$course['Semester']."'>
 							Reviews
 							</a>";
 							echo "<br /> <br />";

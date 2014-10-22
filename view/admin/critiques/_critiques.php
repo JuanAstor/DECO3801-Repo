@@ -4,7 +4,7 @@
 		//if one of the fields is empty (left on 'select...' option)
 		if((strcmp($_POST['numCrits'],"") == 0) || (strcmp($_POST['assName'],"")== 0) || (strcmp($_POST['numCrits'],"")==0) ){
 			//do nothing
-			$output = "Error: One or more fields were not set, please complete the form";
+			$output = "Error: One or more fields were not set<br />Please complete the form";
 		} else {
 			$val = explode(",", $_POST['cID']);
 			$cID = $val[0]; //course ID
@@ -94,15 +94,12 @@
         <!--<script src="../js/moment.js"></script> -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         
-		
-		<!-- <script src="../js/bootstrap.min.js"></script>
-		<script src="../js/bootstrap-datetimepicker.min.js"></script> -->
     </head>
 	<body>
         <div class="formtitle"><h3>Assign Critiques</h3></div>
         <widget-container>
         <div class="formcenter">
-        <form action="/Critiques.php" method="post">
+        <form action="Critiques.php" method="post">
         <div>
         	<label for="cID">Course ID</label>
             <select id="cID" name="cID">
@@ -158,8 +155,7 @@
     </body>
 </html>
 
-<script>
-	
+<script>	
 	//will popullate the second select tag with data once the first select tag has been set
 	jQuery(function ($) {
 		$('#cID').on('change', function() {
@@ -167,7 +163,7 @@
 			var make = $(this).val();
 			$.ajax({
 				type: 'POST',
-				url: '../lib/_update.php',
+				url: 'lib/_update.php',
 				data: {make : make}, 
 				success: function(data){
 					$('#assName').html(data);	

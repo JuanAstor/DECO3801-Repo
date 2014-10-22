@@ -17,7 +17,6 @@
 					echo "<p><a href='Assessment.php?assessment=".$count."'>".$assessment['AssignmentName']."</a></p>";
 					array_push($arr, $assessment['CourseID']);
 				}
-                //echo "<p><a href='Assessment.php?assessment=".$count."'><b>".strtoupper($assessment['CourseID'])."</b>: ".$assessment['AssignmentName']."</a></p>";
             }
             ?>
             </div>
@@ -41,14 +40,14 @@
 								//display the available critiques					
 								$i++;
 								if(in_array($critique['AssignmentID'],$arr)){
-									echo "<a href='/CodeCritique.php?aID=".$critique['AssignmentID']."&oID=".$i."'>Critique ".$i."</a><br />";
+									echo "<a href='CodeCritique.php?aID=".$critique['AssignmentID']."&oID=".$i."'>Critique ".$i."</a><br />";
 								} else {
 									//get the assignment info
 									$answer = get_previous_assign_info($critique['AssignmentID']);
 									foreach($answer as $assignInfo){
 										echo "<b>".strtoupper($assignInfo['CourseID'])."</b> : ".$assignInfo['AssignmentName']."<br />";
 									}  
-									echo "<a href='/CodeCritique.php?aID=".$critique['AssignmentID']."&oID=".$i."'>Critique ".$i."</a><br />";
+									echo "<a href='CodeCritique.php?aID=".$critique['AssignmentID']."&oID=".$i."'>Critique ".$i."</a><br />";
 									//push the assignID so this will only occur when a new assignment is found
 									array_push($arr, $critique['AssignmentID']); 
 								}

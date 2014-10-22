@@ -51,8 +51,7 @@ if(isset($_POST['btnFile'])){ //search for files submitted
 			} else {
 				$output = "No comments have been made by student ".$search." for the '".$name."' Assignment"; 	
 			}
-		}
-		
+		}		
 	} else { //not all fields were filled in
 		$output = "Error: All fields must be filled out first";	
 	}
@@ -83,7 +82,7 @@ if(isset($_POST['btnFile'])){ //search for files submitted
     
         <br />
         <div class="formcenter">
-        <form action="/StudentReviews.php?course=<?php echo $courseID ?>&sem=<?php echo $semester ?>" method="post">  
+        <form action="StudentReviews.php?course=<?php echo $courseID ?>&sem=<?php echo $semester ?>" method="post">  
             <div class="form-group">
             <label>Select Assignment  </label>
             <!--<select name="AssignName"> -->
@@ -96,9 +95,7 @@ if(isset($_POST['btnFile'])){ //search for files submitted
                 }
                 echo "</select>";
             ?>
-            <!--<option value="0">Select...<?//=$options?>
-            </option> 
-            </select> -->
+            
             </br>
             <label for="search">Student Number  </label>
             <input class="form-control" type="text" name="search" placeholder="Enter Student Number">
@@ -144,7 +141,7 @@ if(isset($_POST['btnFile'])){ //search for files submitted
 				//alert(file);
 				$.ajax({
 					type: 'POST', 
-					url: '../lib/retrieve.php', 
+					url: 'lib/retrieve.php', 
 					data: {filename: file, 
 							user: '<?php echo $search ?>', 
 							assign: '<?php echo $assignID ?>'},

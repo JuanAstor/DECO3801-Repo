@@ -18,7 +18,7 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
     if(!check_if_admin($user)){ 
 
         // Student: Shouldn't have access, so return to homepage
-		header('Location: /index.php');
+		header('Location: index.php');
         
     }else{ 
         
@@ -42,12 +42,12 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
 				include("view/home/header.php");
 				include("view/admin/studentReviews/_studentReview.php");	
 			} else {
-				header('Location: /index.php');	
+				header('Location: index.php');	
 			}
 				
 		} 
 		else { //if no courseID is set, return the user back to the main page
-			header('Location: /index.php');	
+			header('Location: index.php');	
 		}
 
 		
