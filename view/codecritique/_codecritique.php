@@ -118,4 +118,10 @@ jQuery(function ($) {
 <script>
 	//everything but the feedback bar, hide
 	$('navgroup:not(.nav-feedback)').hide();
+	
+	$(".fileselect").on("click", ".filebut", function(){
+		$(".filelist").toggle(300);
+		
+	
+	});
 </script>
