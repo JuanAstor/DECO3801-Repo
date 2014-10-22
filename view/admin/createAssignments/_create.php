@@ -2,10 +2,12 @@
 
 	$output = NULL; //what is to be displayed to the admin on form submit
 	//if all the form values have been set, assign variables, error check and then send to database
-	if(isset($_POST['cID']) && isset($_POST['semester']) && isset($_POST['AName']) && isset($_POST['desc']) && 
-	isset($_POST['time']) && isset($_POST['date'])){
-		$courseID = $_POST['cID'];
-		$sem = $_POST['semester'];
+	if(isset($_POST['cID']) && isset($_POST['AName']) && isset($_POST['desc']) && isset($_POST['time']) 
+	&& isset($_POST['date'])){
+		$val = explode(",", $_POST['cID']);
+		$courseID = $val[0]; //course ID
+		$fullsem = $val[1]; //format = YYYYS eg 20141, semester = 1 of year 2014
+		$sem = substr($fullsem,-1); //get the semester value
 		$name = $_POST['AName'];
 		$description = $_POST['desc'];
 		$time = $_POST['time'];
@@ -20,6 +22,7 @@
 			$finalDate = $newdate->format('Y-m-d');
 			//covert the semester to the yyyy-s format used in the database
 			//check that the assigment name doesn't already exist for that courseID
+			
 			$semester = date('Y').$sem; 
 			$count = find_assignmentName($courseID, $name, $semester);
 			
@@ -32,7 +35,7 @@
 					//the assignment name for the courseID and semester is unique, so continue.
 					//add the values to the database return a success message
 					create_assignment($courseID, $semester, $description, $name, $finalDate, $time);
-					$output = "The Assignment has successfully been created <br />";
+					$output = "The Assignment has successfully been created";
 				} else {
 					$output = "Error: Semester value doesn't match the selected course";	
 				}
@@ -40,9 +43,6 @@
 		}
 		
 	}
-	 //else {
-		//$output = "Error: One or more fields were not completed";
-	//}
 	
 	//check the validity of the entered date
 	function check_valid_date($date){
@@ -83,33 +83,21 @@
 				<div class="form-group">
 					<label for="cID">Course ID</label>
 					<?php //display all courseID's that an admin can create an assignment in
-					$arr = array();
 					echo "<select name='cID' id='cID'>";
 					echo "<option value=''>Select...</option>";
 					foreach($courses as $course){
 						//check that the course to be displayed doesn't already exist
-						$cID = $course['CourseID'];
-						if(!in_array($cID, $arr)){
-							array_push($arr, $cID); 
-							echo "<option value='".$cID."' >".strtoupper($cID)."</option>";
-						} else {
-							//value already in the array so do nothing	
-						}
+						$cID = strtoupper($course['CourseID']);
+						$full = $course['Semester'];
+						$sem = substr($course['Semester'],-1);
+						$year = substr($course['Semester'],0,4);
+						
+						echo "<option value=".$course['CourseID'].",".$course['Semester'].">".$cID." Semester ".$sem." ".$year."</option>";
 					}
 					echo "</select>";
-					$arr = NULL;
 					?>
 				</div>
-                <div> <!-- display all semester choices -->
-                	<label for="sem">Semester</label>
-                    <select name="semester" id="sem">
-                    	<option value="">Select...</option>
-                    	<option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                </div>
-                </br>
+
 				<div class="form-group">
 					<label for="aName">Assignment Name</label>
 					<input class="form-control" id="aName" name="AName" placeholder="Enter Assignment name here">
@@ -133,7 +121,7 @@
                 </br>
 				
                 <label>Please make sure that every field has been completed</label></br>
-				<button type="submit" class="btn btn-primary">Submit</button>
+				<button type="submit" class="btn btn-primary">Submit</button></br></br>
                 
                 <div class="alert alert-warning alert-dismissable"> 
                     <a href="#" class="close" data-dismiss="alert" aria-hidden="true">&times;</a>

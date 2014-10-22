@@ -5,9 +5,19 @@
             <div class="w-body">
             <?php // Loop through courses and display
 			$count=0;
+			$arr = array();
             foreach ($assessments as $assessment) {
 				$count++;
-                echo "<p><a href='Assessment.php?assessment=".$count."'><b>".strtoupper($assessment['CourseID'])."</b>: ".$assessment['AssignmentName']."</a></p>";
+				if(in_array($assessment['CourseID'], $arr)){
+					echo "<p><a href='Assessment.php?assessment=".$count."'>".$assessment['AssignmentName']."</a></p>";	
+				} else {
+					$sem = substr($assessment['Semester'], -1);
+					$year = substr($assessment['Semester'], 0, 4);
+					echo "<b>".strtoupper($assessment['CourseID'])." : Semester ".$sem." ".$year."</b><br />";
+					echo "<p><a href='Assessment.php?assessment=".$count."'>".$assessment['AssignmentName']."</a></p>";
+					array_push($arr, $assessment['CourseID']);
+				}
+                //echo "<p><a href='Assessment.php?assessment=".$count."'><b>".strtoupper($assessment['CourseID'])."</b>: ".$assessment['AssignmentName']."</a></p>";
             }
             ?>
             </div>

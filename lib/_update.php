@@ -55,7 +55,7 @@
 	} 
 	
 	
-	//if the reset button was pressed
+////// if the delete assessment button (in _edit.php) was pressed \\\\\\\\\\\\\\\
 	else if (isset($_POST['assignID']) && isset($_POST['del'])){		
 		//first check that no previous file submissions exist for the to be deleted assignment
 		$del = delete_submissions($_POST['assignID']);

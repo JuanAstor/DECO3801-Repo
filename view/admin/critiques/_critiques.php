@@ -60,8 +60,7 @@
 				$nextCount = 0; //reset the array pointer counter
 			}//end of while loop
 		}
-		$output = "Success! Critiques have been assigned.<br />
-		These will be made available once the due date for assignment submission has passed";
+		$output = "Success! Critiques have been assigned ";
 	} 
 	//get a list of all students in the selected course
 	function get_all_students_in_course($courseID, $semester){
@@ -141,8 +140,8 @@
         </div>
         </br>
         
-        <label>Please make sure that every field has been completed</label></br>
-		<button type="submit" class="btn btn-primary">Submit</button>
+        <label>Please ensure every option is set </label><br />
+		<button type="submit" class="btn btn-primary">Submit</button></br></br>
         
         <div class="alert alert-warning alert-dismissable">  
         <a href="#" class="close" data-dismiss="alert" aria-hidden="true">&times;</a>

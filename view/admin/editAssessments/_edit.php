@@ -14,7 +14,7 @@
 	//session will be set on update 
 	if(isset($_SESSION['message'])){
 		if($_SESSION['message'] == 'completed'){ 
-			$output = 'The assignment has been updated, as can be seen below';
+			$output = 'The assignment has successfully been updated';
 			unset($_SESSION['message']); //unset so the message will dissapear on page return
 		} else if($_SESSION['message'] == 'name error'){
 			$output = 'Error: The name entered already exists, please choose a different name';	
