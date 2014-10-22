@@ -13,33 +13,38 @@
 		$time = $_POST['time'];
 		$dateFormat = $_POST['date'];
 		
-		//check if the date is valid
-		if(!check_valid_date($dateFormat)){
-			$output = "Error: The date was invalid or not of the correct format (dd/mm/yyyy)";
-		} else {
-			//convert the date into the format stored in the database
-			$newdate = DateTime::createFromFormat('d/m/Y', $dateFormat);
-			$finalDate = $newdate->format('Y-m-d');
-			//covert the semester to the yyyy-s format used in the database
-			//check that the assigment name doesn't already exist for that courseID
-			
-			$semester = date('Y').$sem; 
-			$count = find_assignmentName($courseID, $name, $semester);
-			
-			if($count > 0){
-				//then an assigment name already exists for this courseID and semester
-				$output = "Error: The assignment name entered already exists for this course and semester";	
-			} else { 
-				$semCount = check_semester($courseID, $semester); //check that the semester value is correct
-				if($semCount > 0) {
-					//the assignment name for the courseID and semester is unique, so continue.
-					//add the values to the database return a success message
-					create_assignment($courseID, $semester, $description, $name, $finalDate, $time);
-					$output = "The Assignment has successfully been created";
-				} else {
-					$output = "Error: Semester value doesn't match the selected course";	
+		//if the time is valid
+		if(check_valid_time($time)){
+			//check that the date is valid			
+			if(!check_valid_date($dateFormat)){
+						//Please make sure that every field has been completed
+				$output = "Error: The entered date was invalid <br />The format is (dd/mm/yyyy)";
+			} else {
+				//convert the date into the format stored in the database
+				$newdate = DateTime::createFromFormat('d/m/Y', $dateFormat);
+				$finalDate = $newdate->format('Y-m-d');
+				//check that the assigment name doesn't already exist for that courseID
+				$semester = date('Y').$sem; 
+				$count = find_assignmentName($courseID, $name, $semester);
+				
+				if($count > 0){
+					//then an assigment name already exists for this courseID and semester
+					$output = "Error: The assignment name entered already exists <br />for this course and semester";	
+				} else { 
+					$semCount = check_semester($courseID, $semester); //check that the semester value is correct
+					if($semCount > 0) {
+						//the assignment name for the courseID and semester is unique, so continue.
+						//add the values to the database return a success message
+						create_assignment($courseID, $semester, $description, $name, $finalDate, $time);
+						$output = "The Assignment has successfully been created";
+					} else {
+						$output = "Error: Semester value doesn't match the selected course";	
+					}
 				}
 			}
+		} else {
+			//the time isn't valid
+			$output = "Error: The time entered was not valid or <br/>the correct format (HH:mm)";
 		}
 		
 	}
@@ -59,6 +64,14 @@
 			return false;
 		}
 		return false;
+	}
+	//check that the entered time is valid 
+	function check_valid_time($time){
+		if(preg_match("/(2[0-3]|[01][0-9]):[0-5][0-9]/",$time)){
+			return true;
+		} else {
+			return false;	
+		}
 	}
 ?>
 <html>

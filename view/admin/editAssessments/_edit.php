@@ -17,10 +17,13 @@
 			$output = 'The assignment has successfully been updated';
 			unset($_SESSION['message']); //unset so the message will dissapear on page return
 		} else if($_SESSION['message'] == 'name error'){
-			$output = 'Error: The name entered already exists, please choose a different name';	
+			$output = 'Error: The name entered already exists <br />Please choose a different name';	
 			unset($_SESSION['message']);//unset so the message will dissapear on page return
 		} else if($_SESSION['message'] == 'date error'){
-			$output = 'Error: the entered date was invalid, please re-enter it';
+			$output = 'Error: The entered date was invalid <br />The format is (dd/mm/yyyy)';
+			unset($_SESSION['message']);	
+		} else if($_SESSION['message'] == 'time error'){
+			$output = 'Error: The time entered was not valid or <br/>the correct format (HH:mm)';
 			unset($_SESSION['message']);	
 		}
 	}
