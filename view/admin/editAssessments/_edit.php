@@ -39,18 +39,11 @@
 		<script src="../js/bootstrap-datetimepicker.min.js"></script> -->
     </head>
 	<body>
-    	<h2>Edit Assessment For <?php echo $courseID. " Semester " .substr($semester, -1) ?> </h2>
+        <div class="formtitle"><h3>Edit Assessment For <?php echo $courseID. " Semester " .substr($semester, -1) ?> </h3></div>
 		<widget-container>
-        	<!-- '/EditAssessment.php?course="<?php echo $courseID ?>"&sem="<?php echo $semester ?>"&name="<?php echo $assignmentName ?>'-->
+        	<!-- '/EditAssessment.php?course="<?php echo $courseID ?>"&sem="<?php echo $semester ?>"&name="<?php echo $assignmentName ?>'-->           
+            <div class="formcenter">
 			<form action="../lib/_update.php" method="post">
-            	<div class="alert alert-warning alert-dismissable"> 
-                    <a href="#" class="close" data-dismiss="alert" aria-hidden="true">&times;</a>
-        	           <?php //display the error or success messages after form submit
-				            if($output != NULL){
-					           print($output);	
-				            }
-			             ?>
-                </div>
 				<div class="form-group">
                 	<input type="hidden" name="AssignID" value="<?php echo $assignID ?>" />
                     <input type="hidden" name="cID" value="<?php echo $courseID ?>" />
@@ -77,10 +70,20 @@
 					<input class="form-control" id="date" name="date" value="<?php echo $dueDate ?>" placeholder="Format: dd/mm/YYYY">
 				</div>
 				
-				<label>Please make sure that every field has been completed</label>
+                <label>Please make sure that every field has been completed</label></br>
 				<button type="submit" class="btn btn-primary" >Update</button>
-                <button type="reset" id="delete" class="btn btn-primary">Delete</button>
+                <button type="reset" id="delete" class="btn btn-primary">Delete</button></br></br>
+                
+                <div class="alert alert-warning alert-dismissable"> 
+                    <a href="#" class="close" data-dismiss="alert" aria-hidden="true">&times;</a>
+        	           <?php //display the error or success messages after form submit
+				            if($output != NULL){
+					           print($output);	
+				            }
+			             ?>
+                </div>
 			</form>
+        </div>
 		</widget-container>
         <div class="delMessage">
         	

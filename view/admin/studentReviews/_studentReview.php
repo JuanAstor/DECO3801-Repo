@@ -66,6 +66,8 @@ if(isset($_POST['btnFile'])){ //search for files submitted
      
     <link rel="stylesheet/less" href="/css/main.less">
     <!--<link rel="stylesheet" type="text/css" href="../mockup/main.css">-->
+        
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
            
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
     
@@ -77,12 +79,13 @@ if(isset($_POST['btnFile'])){ //search for files submitted
     </head>
 	<body>
        
-        <h2>Review Student Submissions for <?php echo $courseID?></h2>
+        <div class="formtitle"><h3>Review Submisssions for <?php echo $courseID?></h3></div>
     
         <br />
-        
-        <form action="/StudentReviews.php?course=<?php echo $courseID ?>&sem=<?php echo $semester ?>" method="post">            
-            <label>Select Assignment</label>
+        <div class="formcenter">
+        <form action="/StudentReviews.php?course=<?php echo $courseID ?>&sem=<?php echo $semester ?>" method="post">  
+            <div class="form-group">
+            <label>Select Assignment  </label>
             <!--<select name="AssignName"> -->
             <?php 
                 echo "<select name='AssignName'>";
@@ -96,16 +99,20 @@ if(isset($_POST['btnFile'])){ //search for files submitted
             <!--<option value="0">Select...<?//=$options?>
             </option> 
             </select> -->
-            <label for="search">Search</label>
-            <input type="text" name="search" placeholder="Enter Student Number">
+            </br>
+            <label for="search">Student Number  </label>
+            <input class="form-control" type="text" name="search" placeholder="Enter Student Number">
             <br />
-            <label for="btnFile">Search for </label>
+            </br>
+            <label for="btnFile">Search for  </label>
             <input type="submit" name="btnFile" value="Files Submitted" class="btn btn-primary" />
             <input type="submit" name="btnComment" value="Comments Made" class="btn btn-primary" />
         </form>
-        
+        </br>
+        </br>
                 
-        <div>
+        <div class="alert alert-warning alert-dismissable"> 
+            <a href="#" class="close" data-dismiss="alert" aria-hidden="true">&times;</a>
 				<?php 
 					if($output == NULL){
 						echo "No Files Found";
@@ -120,9 +127,12 @@ if(isset($_POST['btnFile'])){ //search for files submitted
 					
                 ?>
         </div>
-        <div >
-            <pre class="prettyprint">Nothing selected</pre>
+            </br>
+            <div >
+                <pre class="prettyprint">Nothing selected</pre>
+            </div>
         </div>
+    </div>
 	</body>
 	<script>
 			
