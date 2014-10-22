@@ -36,23 +36,34 @@ $currAssignmet = get_previous_assign_info($assignID);
 
     <h3>Review Feedback On <?php echo $currAssignmet[0]['AssignmentName'] ?></h3	>
     
-    <div class = "fileselect">
+    
+    <!-- this is where the file data and comments will appear -->
+    
+    <div class="code">
+       <div class = "fileselect">
         <?php
 			$files = get_files_to_comment($uID, $assignID); //query the database
 			if(sizeof($files) == 0){
 				echo "No files found";	
 			} else {
-				foreach($files as $fileName){ 
+				echo "<span class=\"filebut\">File Select</span><ul class =\"filelist\">";
+				foreach($files as $fileName){
+
+					$fileNameStr = $fileName['FileName'];
+					
+					if (strlen($fileNameStr) > 25){
+						
+						$fileNameStr = substr($fileNameStr, 0, 23)."...";
+					
+					}
+					
 					//display all filenames as an anchor
-					echo "<a class='filelinks' data-fileID=".$fileName['FileID']." data-user=".$uID.">".$fileName['FileName']. "</a><br>";
+					echo "<li><a class='filelinks' data-fileID=".$fileName['FileID']." data-user=".$uID.">".$fileNameStr. "</a></li>";
 				}
+				echo "</ul>";
 			}
         ?>
-	</div>
-    <!-- this is where the file data and comments will appear -->
-    
-    <div class="code">
-        
+	</div>   
         <div id="revSelect">
             <ul id="tabs">
                 
