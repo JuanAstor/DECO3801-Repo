@@ -49,9 +49,40 @@
             <navgroup class="nav-review">
             <?php // Loop through courses and display
 			if(!check_if_admin($user)){ //if not an admin
-                foreach ($assessments as $assessment) {
-                    echo "<div><p><i class='fa fa-angle-right'></i> <a>".$assessment['AssignmentID'] . "</a></p></div>";
-                }
+                $arr = array();
+				$x = 0; $today = date("Y-m-d");
+				$today_dt = new DateTime($today);
+				$res = get_users_to_critique($user);
+				if(count($res) > 0){ //if critiques has been assigned
+					foreach($res as $crit){
+						$dd = get_previous_assign_info($crit['AssignmentID']);
+						//if the current date is greater than the date of submission
+						if($today_dt > (new DateTime($dd[0]['DueDate']))){
+							//display the available critiques					
+							$x++;
+							if(in_array($crit['AssignmentID'],$arr)){
+								//diplay the critique link
+								echo "<p><i class='fa fa-angle-right'></i>"
+								."<a href='CodeCritique.php?aID=".$crit['AssignmentID']."&oID=".$x."'>Critique ".$x."</a></p>";
+							} else { //not in array so
+								foreach($dd as $assInfo){
+									//display Course ID and Assignment Name
+									echo "<p class='iscourse'><span>" 
+									."<b>".strtoupper($assInfo['CourseID'])."</b> : ".$assInfo['AssignmentName']."</span></p>";
+								}  
+								//display the critique link
+								echo "<p><i class='fa fa-angle-right'></i>"
+								."<a href='CodeCritique.php?aID=".$crit['AssignmentID']."&oID=".$x."'>Critique ".$x."</a></p>";
+								//push the assignID so this will only occur when a new assignment is found
+								array_push($arr, $crit['AssignmentID']); 
+							}
+							} else {
+								//critiques are not open yet but have been assigned
+							}
+						}
+					} else {
+						echo "<p><span>No critiques found</span></p>";	
+					}
 			}
             ?>
             </navgroup>
