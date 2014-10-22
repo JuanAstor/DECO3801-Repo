@@ -32,6 +32,7 @@
         <link rel="stylesheet/less" href="/css/main.less">
         <!-- JS -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         
 		
 		<!-- <script src="../js/bootstrap.min.js"></script>
@@ -42,12 +43,13 @@
 		<widget-container>
         	<!-- '/EditAssessment.php?course="<?php echo $courseID ?>"&sem="<?php echo $semester ?>"&name="<?php echo $assignmentName ?>'-->
 			<form action="../lib/_update.php" method="post">
-            	<div>
-                	<?php 
-						if($output != NULL){
-							print($output);	
-						}
-					?>
+            	<div class="alert alert-warning alert-dismissable"> 
+                    <a href="#" class="close" data-dismiss="alert" aria-hidden="true">&times;</a>
+        	           <?php //display the error or success messages after form submit
+				            if($output != NULL){
+					           print($output);	
+				            }
+			             ?>
                 </div>
 				<div class="form-group">
                 	<input type="hidden" name="AssignID" value="<?php echo $assignID ?>" />
