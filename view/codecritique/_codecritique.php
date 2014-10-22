@@ -99,7 +99,7 @@ jQuery(function ($) {
                    user : '<?php echo $uID ?>',
                    assign : '<?php echo $assignID ?>' },
 				   success: function(data){
-				   
+						$('.prettyprinted').removeClass('prettyprinted');
 						$("ul#tabs").html("");
 					   //dump the file data into the pre tag
 						$("pre.prettyprint.linenums").text(data);
