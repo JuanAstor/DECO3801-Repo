@@ -278,7 +278,6 @@ function loadCommentSystem(uid, fid){
 	
 	runAll();
 	
-	//$(".fileselect").ajaxComplete(runAll());
 	
 	$("#tabs").unbind();
 	

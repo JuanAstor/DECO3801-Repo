@@ -36,23 +36,36 @@ $assignID = $_SESSION["assign"]; //assignmentID
     <content>
     <h3>Review Feedback On <?php echo $assessments[$num]['AssignmentName'] ?> </h3	>
     
-    <div class = "fileselect">
+    
+    <!-- this is where the file data and comments will appear -->
+    
+    <div class="code">
+	
+     <div class = "fileselect">
         <?php
 			$files = get_files_to_comment($uID, $assignID); //query the database
 			if(sizeof($files) == 0){
 				echo "No files found";	
 			} else {
-				foreach($files as $fileName){ 
+				echo "<span class=\"filebut\">File Select</span><ul class =\"filelist\">";
+				foreach($files as $fileName){
+
+					$fileNameStr = $fileName['FileName'];
+					
+					if (strlen($fileNameStr) > 20){
+						
+						$fileNameStr = substr($fileNameStr, 0, 17)."...";
+					
+					}
+					
 					//display all filenames as an anchor
-					echo "<a class='filelinks' data-fileID=".$fileName['FileID']." data-user=".$uID.">".$fileName['FileName']. "</a><br>";
+					echo "<li><a class='filelinks' data-fileID=".$fileName['FileID']." data-user=".$uID.">".$fileNameStr. "</a></li>";
 				}
+				echo "</ul>";
 			}
         ?>
-	</div>
-    <!-- this is where the file data and comments will appear -->
-    
-    <div class="code">
-        
+	</div>  
+	
         <div id="revSelect">
             <ul id="tabs">
                 
@@ -107,4 +120,10 @@ jQuery(function ($) {
 <script>
 	//everything but the feedback bar, hide
 	$('navgroup:not(.nav-feedback)').hide();
+	
+	$(".fileselect").on("click", ".filebut", function(){
+		$(".filelist").toggle(300);
+		
+	
+	});
 </script>

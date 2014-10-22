@@ -20,11 +20,10 @@
 
 /* Main div CSS */
 .code {
-	margin-left:50px;
 	padding: 0px 10px 10px;	
 	margin-top:10px;
 	float:left;
-	width:1100px;
+	width:134%;
 
 }
 
@@ -33,7 +32,7 @@
 	word-break:normal;
 	word-wrap:normal;
 	float:left;
-	width:66%;
+	width:56%;
 	overflow-x:scroll;
 }
 
@@ -152,18 +151,6 @@
 	height:20px;
 }
 
-/* CSS for fileselect and links */
-
-.fileselect {
-	margin-top:10px;
-	float:left;
-	width:150px;
-	background-color:#82DAF5;
-}
-
-.filelinks {
-	cursor:pointer;	
-}
 
 /* CSS for tabs displayed for file owner */
 
@@ -236,6 +223,71 @@ span.selected {
 	z-index: 1
 }
 
+.filelist{
+	display:none;
+	list-style-type: none;
+	padding-left:2px;
+	position:relative;
+	overflow-x:hidden;
+	border-top: 1px solid rgba(173, 173, 173, 1);
+	
+}
 
+.filelist li{
+	padding: 2px 2px 0px 3px;
+}
+
+
+.filebut{
+	margin-left:3%;
+	font-size:17px;
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.filebut:after {
+	content: "";
+	position: absolute;
+	top: 8px;	
+	left: 86%;
+	border-style: solid;
+	border-width: 10px 15px 10px 0px;
+	border-color: transparent rgba(110, 108, 108, 1);
+	display: block;
+	z-index: 1;
+	-ms-transform: rotate(-90deg) scale(0.5);
+	-webkit-transform: rotate(-90deg) scale(0.5);
+	transform: rotate(-90deg) scale(0.5);
+}
+
+.filebut:hover{
+	cursor:pointer;
+}
+
+
+/* CSS for fileselect and links */
+
+.fileselect {
+	margin-top:10px;
+	float:left;
+	border: 1px solid rgba(173, 173, 173, 1); 
+	border-radius:3px;
+	background-color:rgba(251, 251, 251, 1);
+	top:16px;
+	right:17px;
+	padding:4px;
+	position:relative;
+	width:12.9%;
+}
+
+
+
+.filelinks {
+	cursor:pointer;	
+}
 
 
