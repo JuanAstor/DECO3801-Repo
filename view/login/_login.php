@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <title>Code Review</title>
+        <title>Code Review</title>
         <!-- CSS/LESS -->
         <link rel="stylesheet/less" href="css/main.less">
         <!-- JS -->
@@ -9,21 +9,22 @@
         <script src='js/view.js'></script>
         <script src="js/less.js"></script>
     </head>
-<body>
+    <body>
+    <div class="login-bg"></div>
     <login>
-    <div>
-        <logo>Peer <span>{</span>Code Review<span>}</span></logo>
-    </div>
-    <form action="" method="POST"> <!-- LEAVE ACTION BLANK -->
-	    <heading>Please sign in</heading>
+        <div>
+            <logo>Peer <span>{</span>Code Review<span>}</span></logo>
+        </div>
+        <form action="" method="POST"> <!-- LEAVE ACTION BLANK -->
+            <heading>Please sign in</heading>
             <input type="hidden" name="form" value="login">
-	    <input type="text" name="user" placeholder="Student number" required autofocus>
-	    <input type="password" name="password" placeholder="Password" required>
-	    <label>
-	        <input type="checkbox" value="remember-me"> Remember me
-	    </label>
-	    <button type="submit">Sign in</button>
-    </form>
-	</login>
+            <input type="text" name="user" placeholder="Student number" required autofocus>
+            <input type="password" name="password" placeholder="Password" required>
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+            <button type="submit">Sign in</button>
+        </form>
+    </login>
 </body>
 </html>
