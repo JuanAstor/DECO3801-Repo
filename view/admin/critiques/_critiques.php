@@ -93,6 +93,7 @@
         <!-- JS -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <!--<script src="../js/moment.js"></script> -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         
 		
 		<!-- <script src="../js/bootstrap.min.js"></script>
@@ -143,7 +144,7 @@
         <label>Please make sure that every field has been completed</label></br>
 		<button type="submit" class="btn btn-primary">Submit</button>
         
-        <div class="alert alert-warning alert-dismissable"> 
+        <div class="alert alert-warning alert-dismissable">  
         <a href="#" class="close" data-dismiss="alert" aria-hidden="true">&times;</a>
             <?php //display the error or success messages after form submit
                 if($output != NULL){
