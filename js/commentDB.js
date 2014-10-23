@@ -208,8 +208,8 @@ function loadCommentSystem(uid, fid){
 
 						$(this).html("<span class=\"combox\">  <b>Line " +
 						lineNum + "</b> <br /><textarea class=\"trans\" readonly>" + lineCom
-						+ "</textarea ><div class=\"editpriv\"><button id=\"editbut\" ></button>" +
-						"<button id=\"delbut\" ></button></div></span>");
+						+ "</textarea ><div class=\"editpriv\"><button id=\"editbut\" title=\"Edit\"></button>" +
+						"<button id=\"delbut\" title=\"Delete\"></button></div></span>");
 					
 					}
 					var txtArea = $(this).find(".trans");

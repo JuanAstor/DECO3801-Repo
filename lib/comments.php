@@ -1,6 +1,6 @@
 <?php
-	require("../lib/mysql.php");
-	require("../lib/queries.php");
+	require("mysql.php");
+	require("queries.php");
 	
 	$reqType = $_POST['rtype'];
 	$userID = $_POST['uid'];
