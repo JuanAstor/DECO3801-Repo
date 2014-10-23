@@ -7,28 +7,34 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link type="text/css" rel="Stylesheet" href="<?php echo CaptchaUrls::LayoutStylesheetUrl() ?>" />
+        <link href='../css/main.less' rel='stylesheet' type='text/css'>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     </head>
 
     <body>
+        <login>
         <div class="container">
-            <h2>Sign Up - Admin</h2>
+            <div class="formtitle"><h1>Sign Up - Admin</h1></div>
+            </br>
             <form role="form" method="POST" action="">
                 <div class="form-group">
-                    <input type="text" name="key" value="Institution name" required>
+                    <h6>Institution name</h6>
+                    <input class="form-control" type="text" name="key" placeholder="e.g. University of Queensland" required /></br></br>
                     <?php
                     // Adding BotDetect Captcha to the page 
                     $SampleCaptcha = new Captcha("SampleCaptcha");
                     $SampleCaptcha->UserInputID = "CaptchaCode";
                     echo $SampleCaptcha->Html();
                     ?>
-                    <input name="CaptchaCode" id="CaptchaCode" type="text" />
+                    </br></br>
+                    <h6>Please enter code above</h6>
+                    <input class="form-control" name="CaptchaCode" id="CaptchaCode" type="text" />
                     <input type="hidden" name="form" value="admin">
 
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-                <button type="submit" class="btn btn-default" onClick="parent.location = 'welcomeAdmin.html'">Cancel</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-warning" onClick="parent.location = 'welcomeAdmin.html'">Cancel</button>
             </form>
         </div>
         <?php
@@ -45,5 +51,6 @@
             }
         }
         ?>
+    </login>
     </body>
 </html>
