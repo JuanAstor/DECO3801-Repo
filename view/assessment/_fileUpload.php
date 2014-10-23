@@ -17,7 +17,7 @@
 <div>
     <!-- On submit contact the upload.php file which will handle everything -->
     <form method="post" action="lib/upload.php" enctype="multipart/form-data">
-    <div> Attach a File(s): You can select more than one </div></br>
+    <h7> Attach a File(s): You can select more than one </h7></br></br>
     <table>
     	<tr>
             <td class="btn btn-default">
