@@ -24,11 +24,9 @@
             <h4><i class="fa fa-tachometer"></i><span>Dashboard</span></h4>
             <h4><i class="fa fa-clipboard"></i><span>Edit Assessment</span></h4>
             <navgroup class="nav-assessment">
-                <div>
-                    <p><a href='Assessment.php'>Show All</a></p>
-                </div>
+               
             <?php // Loop through courses and display
-			
+				
             ?>
             </navgroup>
             <h4><i class="fa fa-file-code-o"></i><span>Review Students</span></h4>

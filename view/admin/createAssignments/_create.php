@@ -67,14 +67,22 @@
 	}
 	//check that the entered time is valid 
 	function check_valid_time($time){
-		if(strtotime($time)){
+		echo $time;
+		if(substr_count($time, ":") == 2){
 			if(preg_match("/(2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]/",$time)){
 				return true;
 			} else {
 				return false;	
 			}
-		}else {
-			return false;
+		}
+		else if(substr_count($time, ":") == 1){
+			if(preg_match("/(2[0-3]|[01][0-9]):[0-5][0-9]/",$time)){
+				return true;	
+			} else {
+				return false;	
+			}
+		} else {
+			return false;	
 		}
 	}
 ?>
