@@ -60,7 +60,7 @@
                     <div class="toolpanel1">
                     	<img src="img/cass2.png" class="img-circle" width="50px" height="auto" onclick="location.href =
                         'Assessment.php'">
-                    	<h6>Create Assignment</h6>
+                    	<h6>Create Assessment</h6>
                     </div>
                     <div class="toolpanel2">
                     	<img src="img/crit1.png" class="img-circle" width="50px" height="auto" onClick="location.href = 
