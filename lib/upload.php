@@ -78,5 +78,5 @@
 	
 	//return to the previous page, get the hidden value to know what page to return to
 	$num = $_POST['AssignNum'];
-	header('Location: /Assessment.php?assessment='.$num.'');
+	header('Location: ../Assessment.php?assessment='.$num.'');
 ?>

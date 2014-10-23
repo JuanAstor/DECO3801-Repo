@@ -116,8 +116,8 @@ jQuery(function ($) {
 </script>
 
 <script>
-	//everything but the feedback bar, hide
-	$('navgroup:not(.nav-feedback)').hide();
+	//everything but the review bar, hide
+	$('navgroup:not(.nav-review)').hide();
 	
 	$(".fileselect").on("click", ".filebut", function(){
 		$(".filelist").toggle(300);
