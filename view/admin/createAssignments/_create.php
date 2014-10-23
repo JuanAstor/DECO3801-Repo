@@ -67,7 +67,6 @@
 	}
 	//check that the entered time is valid 
 	function check_valid_time($time){
-		echo $time;
 		if(substr_count($time, ":") == 2){
 			if(preg_match("/(2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]/",$time)){
 				return true;
