@@ -59,12 +59,12 @@
 				<div class="w-body">
                     <div class="toolpanel1">
                     	<img src="img/cass2.png" class="img-circle" width="50px" height="auto" onclick="location.href =
-                        'Assessment.php'">
+                        'Assessment.php'" >
                     	<h6>Create Assessment</h6>
                     </div>
                     <div class="toolpanel2">
                     	<img src="img/crit1.png" class="img-circle" width="50px" height="auto" onClick="location.href = 
-                        'Critiques.php'">
+                        'Critiques.php'" >
                         <h6>Assign Critiques</h6>
                     </div>
 				</div>

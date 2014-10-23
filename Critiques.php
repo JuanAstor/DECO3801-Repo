@@ -20,7 +20,7 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
 		$fullName = get_user_name($user);
         $courses = get_admins_courses($user);
 		
-		include("view/home/header.php");
+		include("view/admin/home/header.php");
 		include("view/admin/critiques/_critiques.php");	
 	}
 		

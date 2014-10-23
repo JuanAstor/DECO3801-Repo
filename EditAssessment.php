@@ -45,7 +45,7 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
 				$semester = $_GET['sem'];
 				$assignmentName = $_GET['assignmentName'];
 				
-				include("view/home/header.php");
+				include("view/admin/home/header.php");
 				include("view/admin/editAssessments/_edit.php"); 
 				
 			} else { //they are not allowed to access this info so return to the homepage
