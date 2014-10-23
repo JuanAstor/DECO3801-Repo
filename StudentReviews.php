@@ -39,7 +39,7 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
 			if($count == 1){ //the courseID matches a courseID the admin is in charge of
 				$courseID = $_GET['course'];
 				$semester = $_GET['sem'];
-				include("view/admin/home/header.php");
+				include("view/home/adminheader.php");
 				include("view/admin/studentReviews/_studentReview.php");	
 			} else {
 				header('Location: index.php');	

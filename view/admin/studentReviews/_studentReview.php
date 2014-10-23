@@ -63,7 +63,7 @@ if(isset($_POST['btnFile'])){ //search for files submitted
     <head>
     <title>Code Review</title>            
      
-    <link rel="stylesheet/less" href="/css/main.less">
+    <link rel="stylesheet/less" href="css/main.less">
     <!--<link rel="stylesheet" type="text/css" href="../mockup/main.css">-->
         
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -143,7 +143,8 @@ if(isset($_POST['btnFile'])){ //search for files submitted
 					type: 'POST', 
 					url: 'lib/retrieve.php', 
 					data: {filename: file, 
-							user: '<?php echo $search ?>', 
+							user: '<?php //if search exists then echo, else don't 
+										echo $search ?>', 
 							assign: '<?php echo $assignID ?>'},
 					success: function(data){
 						$("pre").text(data);
@@ -153,6 +154,8 @@ if(isset($_POST['btnFile'])){ //search for files submitted
 			});
 		});
 	</script>
-    
+    <script>
+		$('navgroup:not(.nav-reviewStudents)').hide();
+	</script>
 
 </html>

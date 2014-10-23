@@ -89,7 +89,8 @@
     <head>
     <title>Code Review</title>
         <!-- CSS/LESS -->
-        <link rel="stylesheet/less" href="/css/main.less">
+        <link rel="stylesheet/less" href="css/main.less">
+        <!--<link rel="stylesheet" href="css/sidebarChange.css">
         <!-- JS -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -159,3 +160,6 @@
         
 	</body>
 </html>
+<script>
+	$('navgroup:not(.nav-tools)').hide();
+</script>

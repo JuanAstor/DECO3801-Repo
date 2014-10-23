@@ -23,7 +23,7 @@
         <nav>
             <h4><i class="fa fa-tachometer"></i><span>Dashboard</span></h4>
             <h4><i class="fa fa-clipboard"></i><span>Edit Assessment</span></h4>
-            <navgroup class="nav-assessment">
+            <navgroup class="nav-editAssessment">
                
             <?php // Loop through courses and display
 				foreach($courses as $course){
@@ -41,7 +41,7 @@
             ?>
             </navgroup>
             <h4><i class="fa fa-file-code-o"></i><span>Review Students</span></h4>
-            <navgroup class="nav-review">
+            <navgroup class="nav-reviewStudents">
             <?php 
 			foreach($courses as $course){
 				//display all courses that the admin is in charge of
@@ -54,7 +54,7 @@
             ?>
             </navgroup>
             <h4><i class="fa fa-wrench"></i><span>Tools</span></h4>
-            <navgroup class="nav-feedback">
+            <navgroup class="nav-tools">
             <?php // Loop through courses and display
 				echo "<p><i class='fa fa-angle-right'></i>"
 				."<a href='Assessment.php'>Create Assessment</a></p>";

@@ -42,9 +42,9 @@
 						foreach($courses as $course){
 							//display all courses that the admin is in charge of
 							echo "<span>".strtoupper($course['CourseID'])."   |  </span>";
-							echo "<span>Sem ".substr($course['Semester'], -1)."    ".substr($course['Semester'],0,4)."      </span><br />";
+							echo "<span>Semester ".substr($course['Semester'], -1)."    ".substr($course['Semester'],0,4)."      </span><br />";
 							echo "<a href='StudentReviews.php?course=".$course['CourseID']."&sem=".$course['Semester']."'>
-							Reviews
+							Review
 							</a>";
 							echo "<br /> <br />";
 						}
@@ -79,4 +79,8 @@
     	
 	</body>
 </html>
+
+<script>
+	$('navgroup').hide();
+</script>
 
