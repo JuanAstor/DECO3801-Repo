@@ -53,8 +53,7 @@ if(isset($_POST['btnFile'])){
 					//use the fileid to get the files commented on
 					$fileIn = get_file_info($comments['FileID']);
 					if(!in_array($fileIn,$info2)){
-						array_push($info2, $fileIn);
-						
+						array_push($info2, $fileIn);						
 					}
 					$fileIn = NULL;
 				} 
