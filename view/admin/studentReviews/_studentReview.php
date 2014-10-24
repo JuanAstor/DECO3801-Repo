@@ -248,5 +248,9 @@ if(isset($_POST['btnFile'])){
     <script>
 		$('navgroup:not(.nav-reviewStudents)').hide();
 	</script>
+	
+	<style>
+	.prettyprint { width:inherit; float:none; }
+	</style>
 
 </html>
