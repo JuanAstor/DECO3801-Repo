@@ -17,7 +17,11 @@
 	
 
 }
+.trans:focus{
+	outline:none;
+	-moz-appearance:  none;
 
+}
 /* Main div CSS */
 .code {
 	padding: 0px 10px 10px;	

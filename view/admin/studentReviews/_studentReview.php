@@ -158,7 +158,7 @@ if(isset($_POST['btnFile'])){
 						} else if(isset($info2)){
 							foreach($info2 as $fileName){
 								echo "<a class='commentlist' data-fileID=".$fileName[0]['FileID']." data-user="
-								.$fileName[0]['UserID'].">".$fileName[0]['FileName']. "</a><br/>";	
+								.$fileName[0]['UserID']." data-comUser=".$search.">".$fileName[0]['FileName']. "</a><br/>";	
 							}
 						} else if(isset($info3)){
 							foreach($info3 as $crit){
@@ -222,7 +222,7 @@ if(isset($_POST['btnFile'])){
 				var file = $(this).text();
 				var fID = $(this).data("fileid"); //file id of the commented file
 				var uID = $(this).data("user"); //user id of the owner of the file
-				
+				var comUID = $(this).data("comuser"); //user id of the owner of the file
 				$.ajax({
 					type: 'POST',
 					url: 'lib/retrieve.php',
@@ -239,8 +239,9 @@ if(isset($_POST['btnFile'])){
 						$("pre.prettyprint.linenums").text(data);
 						//load google prettify to style text
 						prettyPrint();
+						
 						//load the comment system from commentDB.js											
-						loadCommentSystem(uID, fID);	
+						loadCommentSystem(comUID, fID, true);	
 					}
 				});
 			});

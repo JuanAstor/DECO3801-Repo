@@ -1,6 +1,6 @@
 
 
-function loadCommentSystem(uid, fid){
+function loadCommentSystem(uid, fid, admin){
 	$.ajaxSetup({ cache: false });
 	
 	
@@ -14,6 +14,8 @@ function loadCommentSystem(uid, fid){
 	var fileID = fid;
 	// User ID of reviewer
 	
+	// Is the user an admin
+	var adminBool = admin;
 		
 	
 	function runAll(){
@@ -42,7 +44,7 @@ function loadCommentSystem(uid, fid){
 	
 		var privInfo = jQuery.parseJSON(data);	
 
-		var adminResult = privInfo["Admin"];
+		
 		var ownerResult = (privInfo["0"])["UserID"];
 				
 		if(ownerResult == userID){
@@ -53,6 +55,10 @@ function loadCommentSystem(uid, fid){
 			editBool = true;
 		}
 		
+		if (adminBool){
+			ownBool = false;
+			editBool = false;
+		}
 		
 		
 		loadCommentSystem(ownBool,editBool, 0);

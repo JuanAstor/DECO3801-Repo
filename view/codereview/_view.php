@@ -89,6 +89,7 @@ jQuery(function ($) {
 	var file = $(this).text(); //filename
 	var fID = $(this).data("fileid"); //fileID
 	var uID = $(this).data("user"); //userID
+	
 	//var uID = "15478782"; 
 	
 	console.log(uID);
@@ -107,7 +108,7 @@ jQuery(function ($) {
 						//load google prettify to style text
 						prettyPrint();
 						//load the comment system from commentDB.js											
-						loadCommentSystem(uID, fID);			                
+						loadCommentSystem(uID, fID, false);			                
             }
         });
     });
