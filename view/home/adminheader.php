@@ -28,7 +28,7 @@
             <?php // Loop through courses and display
 				foreach($courses as $course){
 					echo "<p class='iscourse'><span>".$course['CourseID']."   |	   "
-					 	."<span>Semester ".substr($course['Semester'],-1)." ".substr($course['Semester'],0,4)."</span>";
+					 	."<span>Semester ".substr($course['Semester'],-1)." ".substr($course['Semester'],0,4)."</span></p>";
 						 
 					$result = get_course_assessments($course['CourseID'], $course['Semester']);
 					foreach($result as $names){	
@@ -46,7 +46,7 @@
 			foreach($courses as $course){
 				//display all courses that the admin is in charge of
 				echo "<p class='iscourse'><span>".$course['CourseID']."   |  "
-					."Semester ".substr($course['Semester'], -1)."    ".substr($course['Semester'],0,4)."</span>";
+					."Semester ".substr($course['Semester'], -1)."    ".substr($course['Semester'],0,4)."</span></p>";
 				echo "<p><i class='fa fa-angle-right'></i>" 
 				."<a href='StudentReviews.php?course=".$course['CourseID']."&sem=".
 				$course['Semester']."'>Review</a></p>";
