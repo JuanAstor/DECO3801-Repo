@@ -9,7 +9,7 @@ $(document).ready(function(){
     });
 
     $('nav h4').click(function () {
-        $(this).next('navgroup').stop().slideToggle(400);
+        $(this).next('.navgroup').stop().slideToggle(400);
     });
 
     $('nav-handle').click(function () {

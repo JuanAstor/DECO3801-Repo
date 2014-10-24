@@ -30,5 +30,8 @@ if (check_if_consumer_key($key)) {
         $_SESSION['userEmail']   = $context->getUserEmail();
         $_SESSION['courseName']  = $context->getCourseName();
         $_SESSION['institutionId'] = $institution[0]['InstitutionID'];
+        
+        // Default to Login
+        include('view/login/_login.php');
     }
 }
