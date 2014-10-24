@@ -2,8 +2,11 @@
 <html>
     <?php
     if (isset($_POST['oauth_consumer_key'])) {
-        $key = $_POST['oauth_consumer_key'];
+        require_once 'lib/mysql.php';
+        require_once 'lib/queries.php'; // query functions to get database results
         require_once 'lib/ltisession.php';
+        enrolCourse($user, $_SESSION['courseName'], $_SESSION['institutionId'],  $_SESSION['isInstructor']);
+        header('Location: index.php');
     }
     ?>
     <head>

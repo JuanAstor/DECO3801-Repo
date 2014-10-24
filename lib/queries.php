@@ -274,10 +274,6 @@ function update_enrolment($user, $course, $institution) {
     $sql = "INSERT INTO `courseenrolment` (`UserID`, `CourseID`, `Semester`, `InstitutionID`) VALUES (?,?,?,?)";
     $query = MySQL::getInstance()->prepare($sql);
     $query->execute(array($user, $course, $semester, $institution));
-
-    $sql1 = "UPDATE `courseenrolment` SET CourseID=?, Semester=? WHERE UserID=?";
-    $query1 = MySQL::getInstance()->prepare($sql1);
-    return $query1->execute(array($course, $semester, $user));
 }
 
 // Creates course
@@ -371,4 +367,5 @@ function get_users_to_critique($user){
     $query->execute(array($user));
     return $query->fetchAll(PDO::FETCH_ASSOC);
 }
+
 ?>

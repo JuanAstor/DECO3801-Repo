@@ -118,11 +118,12 @@ function mapAdminUser($key, $admin, $user, $uniID) {
 }
 
 function enrolCourse($user, $course, $institution, $admin){
-    if ($admin && !check_if_course_exists($course, $institution)) {
+    
+    if ($admin && check_if_admin($user) &&!check_if_course_exists($course, $institution)) {
         create_course($user, $course, $institution);
     }
     
-    if (!$admin && !check_if_student_enrolled($user, $course)) {
+    if (!$admin && !check_if_admin($user) && !check_if_student_enrolled($user, $course)) {
         update_enrolment($user, $course, $institution);
     }
 }

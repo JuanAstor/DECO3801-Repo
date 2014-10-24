@@ -105,9 +105,9 @@ if (isset($_POST['btnFile'])) {
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
 
-        <link rel="stylesheet" type="text/css" href="/css/prettyprint/prettify.css" />
-        <script type="text/javascript" src="/css/prettyprint/prettify.js"></script>	
-        <script src="/js/commentDB.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="css/prettyprint/prettify.css" />
+        <script type="text/javascript" src="css/prettyprint/prettify.js"></script>	
+        <script src="js/commentDB.js" type="text/javascript"></script>
 
         <?php date_default_timezone_set('Australia/Brisbane'); ?>      		
 
@@ -144,62 +144,55 @@ if (isset($_POST['btnFile'])) {
             </form>
             </br>
             </br>
-            <label for = "btnFile">Search for </label>
-            <input type = "submit" name = "btnFile" value = "Files Submitted" class = "btn btn-primary" />
-            <input type = "submit" name = "btnComment" value = "Comments Made" class = "btn btn-primary" />
-            <input type = "submit" name = "btnCritiques" value = "Assigned Critiques" class = "btn btn-primary" />
-        </form>
-        </br>
-        </br>
 
-        <div class = "alert alert-warning alert-dismissable">
-            <a href = "#" class = "close" data-dismiss = "alert" aria-hidden = "true">&times;
-            </a>
-            <?php
-            if ($output == NULL) {
-                echo "No Files Found";
-            } else {
-                echo $output;
-                if (isset($info)) {
-                    foreach ($info as $fileName) {
-                        echo "<a class='showFile' style='cursor:pointer;'>" . $fileName['FileName'] . "</a><br />";
-                    }
-                } else if (isset($info2)) {
-                    foreach ($info2 as $fileName) {
-                        echo "<a class='commentlist' data-fileID=" . $fileName[0]['FileID'] . " data-user="
-                        . $fileName[0]['UserID'] . " data-comUser=" . $search . ">" . $fileName[0]['FileName'] . "</a><br/>";
-                    }
-                } else if (isset($info3)) {
-                    foreach ($info3 as $crit) {
-                        echo $crit['OwnerID'] . "<br />";
+            <div class = "alert alert-warning alert-dismissable">
+                <a href = "#" class = "close" data-dismiss = "alert" aria-hidden = "true">&times;
+                </a>
+                <?php
+                if ($output == NULL) {
+                    echo "No Files Found";
+                } else {
+                    echo $output;
+                    if (isset($info)) {
+                        foreach ($info as $fileName) {
+                            echo "<a class='showFile' style='cursor:pointer;'>" . $fileName['FileName'] . "</a><br />";
+                        }
+                    } else if (isset($info2)) {
+                        foreach ($info2 as $fileName) {
+                            echo "<a class='commentlist' data-fileID=" . $fileName[0]['FileID'] . " data-user="
+                            . $fileName[0]['UserID'] . " data-comUser=" . $search . ">" . $fileName[0]['FileName'] . "</a><br/>";
+                        }
+                    } else if (isset($info3)) {
+                        foreach ($info3 as $crit) {
+                            echo $crit['OwnerID'] . "<br />";
+                        }
                     }
                 }
-            }
-            ?>
-        </div>
-        <?php
-        //if set to true then display the code viewing window, else none of the html below will be visible 
-        if ($showThis) :
-            ?>
-            </br>
-            <div id="comSys">
-                <div id="revSelect">
-                    <ul id="tabs">
-
-                    </ul>
-                </div>
-                <!-- file data code added here -->
-                <?prettify?>
-                <pre class="prettyprint linenums">Nothing Selected</pre>
-
-                <div id="coms">
-
-                </div>
-                <div id="clearComs"></div>
+                ?>
             </div>
-        <?php endif; ?>
+            <?php
+            //if set to true then display the code viewing window, else none of the html below will be visible 
+            if ($showThis) :
+                ?>
+                </br>
+                <div id="comSys">
+                    <div id="revSelect">
+                        <ul id="tabs">
+
+                        </ul>
+                    </div>
+                    <!-- file data code added here -->
+                    <?prettify?>
+                    <pre class="prettyprint linenums">Nothing Selected</pre>
+
+                    <div id="coms">
+
+                    </div>
+                    <div id="clearComs"></div>
+                </div>
+            <?php endif; ?>
+        </div>
     </div>
-</div>
 </body>
 <script>
 
@@ -212,15 +205,15 @@ if (isset($_POST['btnFile'])) {
                 url: 'lib/retrieve.php',
                 data: {filename: file,
                     user: '<?php
-        if (isset($search)) {
-            echo $search;
-        }
-        ?>',
+            if (isset($search)) {
+                echo $search;
+            }
+            ?>',
                     assign: '<?php
-        if (isset($assignID)) {
-            echo $assignID;
-        }
-        ?>'},
+            if (isset($assignID)) {
+                echo $assignID;
+            }
+            ?>'},
                 success: function (data) {
                     $('.prettyprinted').removeClass('prettyprinted');
                     $("ul#tabs").html("");
@@ -243,10 +236,10 @@ if (isset($_POST['btnFile'])) {
                 data: {filename: file,
                     user: uID,
                     assign: '<?php
-        if (isset($assignID)) {
-            echo $assignID;
-        }
-        ?>'},
+            if (isset($assignID)) {
+                echo $assignID;
+            }
+            ?>'},
                 success: function (data) {
                     //$("pre").text(data);
                     //$("head")
