@@ -18,7 +18,7 @@
                 <div class="w-body">
                     <?php
                     foreach ($courses as $course) {
-                        echo "<span>" . strtoupper($course['CourseID']) . "   |	   </span>";
+                        echo "<span>" . strtoupper($course['CourseID']) . " | </span>";
                         echo "<span>Semester " . substr($course['Semester'], -1) . " " . substr($course['Semester'], 0, 4) . "    </span>";
                         echo "<br />";
                         $result = get_course_assessments($course['CourseID'], $course['Semester'], $institution);

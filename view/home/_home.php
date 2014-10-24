@@ -84,10 +84,6 @@
     <div><panel-end></panel-end></div>
 </widget-end>
 
-<content>
-<?php echo "<p> Welcome $fullName</p>";?>
-</content>
-
 <script>
 	$('navgroup').hide();
 </script>

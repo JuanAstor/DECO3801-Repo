@@ -365,4 +365,10 @@ function get_single_assignment_critiques($user, $assignment){
     $query->execute(array($user, $assignment));
     return $query->fetchAll(PDO::FETCH_ASSOC);	
 }
+function get_users_to_critique($user){
+    $sql = "SELECT * FROM `reviewer` WHERE ReviewerID=?";
+    $query = MySQL::getInstance()->prepare($sql);
+    $query->execute(array($user));
+    return $query->fetchAll(PDO::FETCH_ASSOC);
+}
 ?>
