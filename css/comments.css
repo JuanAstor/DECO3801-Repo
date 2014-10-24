@@ -290,4 +290,12 @@ span.selected {
 	cursor:pointer;	
 }
 
+#comSys {width:inherit; 
+	font-weight:initial; 
+	font-size:initial;
+	 color:initial;
+	 line-height:initial;}
+
+#clearComs {clear:both;}
+
 

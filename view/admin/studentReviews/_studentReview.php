@@ -173,6 +173,7 @@ if(isset($_POST['btnFile'])){
         <?php //if set to true then display the code viewing window, else none of the html below will be visible 
 			if($showThis) : ?>
         </br>
+			<div id="comSys">
             <div id="revSelect">
             <ul id="tabs">
                 
@@ -185,6 +186,8 @@ if(isset($_POST['btnFile'])){
             <div id="coms">
                 
             </div>
+			<div id="clearComs"></div>
+			</div>
         <?php endif; ?>
         </div>
     </div>
@@ -250,7 +253,8 @@ if(isset($_POST['btnFile'])){
 	</script>
 	
 	<style>
-	.prettyprint { width:inherit; float:none; }
+	.prettyprint { width:95%;  }
+	
 	</style>
 
 </html>
