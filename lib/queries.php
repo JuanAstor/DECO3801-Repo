@@ -85,11 +85,19 @@ function check_if_file_exists($user, $assignmentID, $filename) {
 }
 
 //get all info on submitted assignment files
-function get_submitted_info($user, $assignmentID) {
+function get_submitted_info($user, $assignmentID){
     $sql = "SELECT * FROM `assignmentfile` WHERE UserID=? AND AssignmentID=?";
     $query = MySQL::getInstance()->prepare($sql);
     $query->execute(array($user, $assignmentID));
     return $query->fetchAll(PDO::FETCH_ASSOC);
+} 
+
+//get all info on submitted assignment files, given a fileID
+function get_file_info($fileID){
+    $sql = "SELECT * FROM `assignmentfile` WHERE FileID=?";
+    $query = MySQL::getInstance()->prepare($sql);
+    $query->execute(array($fileID));
+    return $query->fetchALL(PDO::FETCH_ASSOC);
 }
 
 //update the 'assignmentfile' table in the database
@@ -114,17 +122,17 @@ function get_files_to_comment($user, $assignmentID) {
 }
 
 //if any files have been submitted for a certain assignmentID, delete them
-function delete_submissions($assignID) {
-    $sql = "SELECT * FROM `assignmentfile` WHERE AssignmentID=?";
-    $query1 = MySQL::getInstance()->prepare($sql);
-    $query1->execute(array($assignID));
-    $count = $query1->rowCount();
-
-    if ($count > 0) {
-        //if any assignment files have been submitted 
-        //first delete any possible reviews on these files (so no violations in the db)
-        $query2 = MySQL::getInstance()->prepare("DELETE FROM `reviewer`
-                                                         WHERE FileID IN (SELECT FileID
+function delete_submissions($assignID){
+	$sql = "SELECT * FROM `assignmentfile` WHERE AssignmentID=?";
+	$query1 = MySQL::getInstance()->prepare($sql);
+	$query1->execute(array($assignID));
+	$count = $query1->rowCount();
+	
+	if($count > 0){ 
+		//if any assignment files have been submitted 
+		//first delete any possible reviews on these files (so no violations in the db)
+		$query2 = MySQL::getInstance()->prepare("DELETE FROM `reviewer`
+                                                         WHERE AssignmentID IN (SELECT AssignmentID
                                                          FROM `assignmentfile`
                                                          WHERE AssignmentID=?)");
         $query2->execute(array($assignID));
@@ -353,11 +361,10 @@ function create_institution($key, $secret) {
     return $query->execute(array($key, $secret));
 }
 
-function get_users_to_critique($user) {
-    $sql = "SELECT * FROM `reviewer` WHERE ReviewerID=?";
+function get_single_assignment_critiques($user, $assignment){
+    $sql = "SELECT * FROM `reviewer` WHERE ReviewerID=? AND AssignmentID=?";
     $query = MySQL::getInstance()->prepare($sql);
-    $query->execute(array($user));
-    return $query->fetchAll(PDO::FETCH_ASSOC);
+    $query->execute(array($user, $assignment));
+    return $query->fetchAll(PDO::FETCH_ASSOC);	
 }
-
 ?>

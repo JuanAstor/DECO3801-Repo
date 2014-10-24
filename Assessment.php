@@ -32,7 +32,7 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
         $fullName = get_user_name($user);
         $courses = get_admins_courses($user);
 		
-		include("view/home/header.php");
+		include("view/home/adminheader.php");
 		include("view/admin/createAssignments/_create.php");
     }
 }

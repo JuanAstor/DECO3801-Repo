@@ -1,19 +1,19 @@
 <?php
-
+//get the ownerID of the person assigned to the user based on the link 'oID' value
 if (isset($_GET['oID'])) {
         $num = $_GET['oID'] - 1;
         if (isset($critique[$num]['OwnerID'])) {
             $row = $critique[$num];		
             $_SESSION["revieweeID"] = $critique[$num]['OwnerID']; //set the assignID to the id of the selected assessment
 		} else{
-			header('Location: /index.php');	
+			header('Location: index.php');	
 		}
 } else {
-	header('Location: /index.php');	
+	header('Location: index.php');	
 }
 
 //Need a session varibale containing the userID and the assignmentID
-$uID = $_SESSION["revieweeID"]; //ID of the person beig reviewed
+$uID = $_SESSION["revieweeID"]; //ID of the person being reviewed
 $assignID = $assignmentID; //assignmentID
 
 $currAssignmet = get_previous_assign_info($assignID);
@@ -36,23 +36,34 @@ $currAssignmet = get_previous_assign_info($assignID);
 
     <h3>Review Feedback On <?php echo $currAssignmet[0]['AssignmentName'] ?></h3	>
     
-    <div class = "fileselect">
+    
+    <!-- this is where the file data and comments will appear -->
+    
+    <div class="code">
+       <div class = "fileselect">
         <?php
 			$files = get_files_to_comment($uID, $assignID); //query the database
 			if(sizeof($files) == 0){
 				echo "No files found";	
 			} else {
-				foreach($files as $fileName){ 
+				echo "<span class=\"filebut\">File Select</span><ul class =\"filelist\">";
+				foreach($files as $fileName){
+
+					$fileNameStr = $fileName['FileName'];
+					
+					if (strlen($fileNameStr) > 25){
+						
+						$fileNameStr = substr($fileNameStr, 0, 23)."...";
+					
+					}
+					
 					//display all filenames as an anchor
-					echo "<a class='filelinks' data-fileID=".$fileName['FileID']." data-user=".$uID.">".$fileName['FileName']. "</a><br>";
+					echo "<li><a class='filelinks' data-fileID=".$fileName['FileID']." data-user=".$uID.">".$fileNameStr. "</a></li>";
 				}
+				echo "</ul>";
 			}
         ?>
-	</div>
-    <!-- this is where the file data and comments will appear -->
-    
-    <div class="code">
-        
+	</div>   
         <div id="revSelect">
             <ul id="tabs">
                 
@@ -83,14 +94,14 @@ jQuery(function ($) {
 	console.log(fID);
         $.ajax({
             type:'POST',
-            url:'../lib/retrieve.php',
+            url:'lib/retrieve.php',
             data: {filename : file,
                    user : '<?php echo $uID ?>',
                    assign : '<?php echo $assignID ?>' },
 				   success: function(data){
-				   
+						$('.prettyprinted').removeClass('prettyprinted');
 						$("ul#tabs").html("");
-					   //dump the file data into the pre tag
+					    //dump the file data into the pre tag
 						$("pre.prettyprint.linenums").text(data);
 						//load google prettify to style text
 						prettyPrint();
@@ -105,6 +116,12 @@ jQuery(function ($) {
 </script>
 
 <script>
-	//everything but the feedback bar, hide
-	$('navgroup:not(.nav-feedback)').hide();
+	//everything but the review bar, hide
+	$('navgroup:not(.nav-review)').hide();
+	
+	$(".fileselect").on("click", ".filebut", function(){
+		$(".filelist").toggle(300);
+		
+	
+	});
 </script>

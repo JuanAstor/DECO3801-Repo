@@ -11,6 +11,7 @@
         <script src="js/less.js"></script>
     </head>
     <body>
+    <div class="login-bg"></div>
     <login>
         <div>
             <logo>Peer <span>{</span>Code Review<span>}</span></logo>

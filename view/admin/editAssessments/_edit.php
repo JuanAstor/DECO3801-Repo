@@ -14,13 +14,16 @@
 	//session will be set on update 
 	if(isset($_SESSION['message'])){
 		if($_SESSION['message'] == 'completed'){ 
-			$output = 'The assignment has been updated, as can be seen below';
+			$output = 'The assignment has successfully been updated';
 			unset($_SESSION['message']); //unset so the message will dissapear on page return
 		} else if($_SESSION['message'] == 'name error'){
-			$output = 'Error: The name entered already exists, please choose a different name';	
+			$output = 'Error: The name entered already exists <br />Please choose a different name';	
 			unset($_SESSION['message']);//unset so the message will dissapear on page return
 		} else if($_SESSION['message'] == 'date error'){
-			$output = 'Error: the entered date was invalid, please re-enter it';
+			$output = 'Error: The entered date was invalid <br />The format is (dd/mm/yyyy)';
+			unset($_SESSION['message']);	
+		} else if($_SESSION['message'] == 'time error'){
+			$output = 'Error: The time entered was not valid or <br/>the correct format (HH:mm)';
 			unset($_SESSION['message']);	
 		}
 	}
@@ -29,26 +32,19 @@
     <head>
     <title>Code Review</title>
         <!-- CSS/LESS -->
-        <link rel="stylesheet/less" href="/css/main.less">
+        <link rel="stylesheet/less" href="css/main.less">
+        <!--<link rel="stylesheet" href="css/sidebarChange.css">
         <!-- JS -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         
-		
-		<!-- <script src="../js/bootstrap.min.js"></script>
-		<script src="../js/bootstrap-datetimepicker.min.js"></script> -->
     </head>
 	<body>
-    	<h2>Edit Assessment For <?php echo $courseID. " Semester " .substr($semester, -1) ?> </h2>
+        <div class="formtitle"><h3>Edit Assessment For <?php echo $courseID. " Semester " .substr($semester, -1) ?> </h3></div>
 		<widget-container>
-        	<!-- '/EditAssessment.php?course="<?php echo $courseID ?>"&sem="<?php echo $semester ?>"&name="<?php echo $assignmentName ?>'-->
-			<form action="../lib/_update.php" method="post">
-            	<div>
-                	<?php 
-						if($output != NULL){
-							print($output);	
-						}
-					?>
-                </div>
+        	          
+            <div class="formcenter">
+			<form action="lib/_update.php" method="post">
 				<div class="form-group">
                 	<input type="hidden" name="AssignID" value="<?php echo $assignID ?>" />
                     <input type="hidden" name="cID" value="<?php echo $courseID ?>" />
@@ -66,19 +62,27 @@
 				<div class="form-group">
 					<label for="time">Time Due</label>
 					<input class="form-control" id="time" name="time" value="<?php echo $dueTime ?>" placeholder="Time Format: 24hour - HH:MM">
-				</div>
-				
-				
+				</div>			
  
 				<div class="form-group">
 					<label for="date">Date Due</label>
-					<input class="form-control" id="date" name="date" value="<?php echo $dueDate ?>" placeholder="Format: YYYY/MM/DD">
+					<input class="form-control" id="date" name="date" value="<?php echo $dueDate ?>" placeholder="Format: dd/mm/YYYY">
 				</div>
 				
-				<label>Please make sure that every field has been completed</label>
+                <label>Please make sure that every field has been completed</label></br>
 				<button type="submit" class="btn btn-primary" >Update</button>
-                <button type="reset" id="delete" class="btn btn-primary">Delete</button>
+                <button type="reset" id="delete" class="btn btn-primary">Delete</button></br></br>
+                
+                <div class="alert alert-warning alert-dismissable"> 
+                    <a href="#" class="close" data-dismiss="alert" aria-hidden="true">&times;</a>
+        	           <?php //display the error or success messages after form submit
+				            if($output != NULL){
+					           print($output);	
+				            }
+			             ?>
+                </div>
 			</form>
+        </div>
 		</widget-container>
         <div class="delMessage">
         	
@@ -94,14 +98,14 @@ jQuery(function ($) {
         // post to the _update.php file the info necessary to delete the assignment
 			$.ajax({
 				type:'POST',
-				url:'../lib/_update.php',
+				url:'lib/_update.php',
 				data: {assignID : <?php echo $assignID ?>,
 					   del : "delete" },
 				success: function(data){
 					//once the assignment has been deleted
 					//alert the user it has been successful and then return to the homepage.
 					alert(data);
-					var url = "/index.php";
+					var url = "index.php";
 					$(location).attr('href',url);				
 					
 				}
@@ -110,4 +114,7 @@ jQuery(function ($) {
     });
 });
                     
+</script>
+<script>
+	$('navgroup:not(.nav-editAssessment)').hide();
 </script>

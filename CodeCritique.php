@@ -36,14 +36,14 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
 				include("view/home/header.php");
 				include("view/codecritique/_codecritique.php");
 			} else {
-				header('Location: /index.php');	
+				header('Location: index.php');	
 			}
 		}
         
     }else{ 
         
         // Admin: shouldn't be here so return home
-        header('Location: /index.php');
+        header('Location: index.php');
     }
 }
 else{

@@ -21,7 +21,7 @@ sidebar, sidebar * {
 .time {
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica,Arial,      "Lucida Grande", sans-serif; 
     font-weight: 300;
-    color:#6fa1c7;
+    color:#009CD2;
     padding-left:25px;
     margin-top:-8px;
     float:left;
@@ -30,26 +30,13 @@ sidebar, sidebar * {
 .commenth{
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica,Arial,      "Lucida Grande", sans-serif; 
     font-weight: 300;
-    color:#6fa1c7;
+    color:#009CD2;
     padding-left:70px;
     margin-top: -1px;
 }
 
 .title {
     padding-top:25px;
-}
-
-.code {
-    margin-left:10px;
-    margin-top:10px;
-    float:left;
-
-}
-
-.comments {
-    float:left;
-    margin-left:10px;
-    margin-top:10px;
 }
 
 .time-display {
@@ -61,14 +48,6 @@ sidebar, sidebar * {
     background-color:#FFFFFF;
     height:100px;
     margin-top:-21px;
-}
-
-.fileselect {
-    margin-top:10px;
-    margin-left:-133px;
-    float:left;
-    width:150px;
-    background-color:#82DAF5;
 }
 
 /* Remove welcome message on very small devices */
@@ -170,7 +149,7 @@ header {
     height:40px;
     width:100%;
     line-height:38px;
-    background-color:#6fa1c7;
+    background-color:#009CD2;
 }
 
 header logo {
@@ -182,7 +161,7 @@ header p {
     .p;
     color: white;
     float: right;
-    margin:22px 15px 0;
+    margin:12px 15px 0;
 }
 
 header p a {
@@ -190,23 +169,37 @@ header p a {
     padding-left:10px;
 }
 
+header p a:hover {
+    color:#b0e0e6;
+}
 
 /*  LOGIN STYLES
  *  @src view/login/_login.php
  */ 
 
 login {
+    background: url("../img/bg.jpg") no-repeat center 0px; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     display:block;
     height:100%;
     width:100%;
-    background-color:#6fa1c7;
 }
 
 login logo {
     display:table;
-    padding:5% 0;
+    width:330px;
+    background: url("../img/login-bg.jpg") no-repeat center 0px; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    text-align: center;
     margin:0 auto;
-    font-size:29pt;
+    padding:5% 0;
+    font-size:24pt;
 }
 
 login form {
@@ -293,7 +286,7 @@ panel .w-heading {
     .panel-heading;
     .h3;
     margin-top:0px;
-    background-color:#6fa1c7;
+    background-color:#009CD2;
     display:block;
     color:white;
 }
@@ -398,9 +391,13 @@ heading {
     margin: 0 0 30px;
 }
 
-page {
-    background-color: #F2F2F2;
-    padding-bottom:~"@{winheight}px";
+page { 
+    background: url("../img/bg.jpg") no-repeat center 0px; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-attachment: scroll;
 }
 
 content
@@ -463,30 +460,55 @@ assessment .a-footer a:last-child {
     padding-left:15px;
 }
 
+/* CREATE FORMS - ADMIN */
+
 .formcenter {
     margin:auto;
     position:relative;
-    width:auto;
+    width:600px;
     height:auto;
     font-size: 14px;
     line-height: 24px;
     font-weight: bold;
-    color: #6fa1c7;
+    color: #6698be;
     text-decoration: none;
     padding:25px;
-    background-color: #dfe8ef;
+    background-color: white;
     line-height: 30px;
 }
 
 .formtitle {
-    margin:30px 0px; padding:0px;
+    margin:10px 0px; 
+    padding:5px;
     text-align:center;
 }
+
+.form-control {
+    text-decoration: none;
+    border:none;
+    background-color: #dfe8ef;
+}
+
+/* Form for sign up pages */
+
+.formsignup {
+    position:absolute;
+    width:500px;
+    height:500px;
+    z-index:15;
+    top:50%;
+    left:50%;
+    margin:-250px 0 0 -250px;
+    background:white;
+}
+
+
+/* ADDITIONAL HEADINGS */
 
 h6 {
     font-family: sans-serif;
     line-height: 10px;
-    color:#6fa1c7;
+    color:#009CD2;
     font-size: 15px;
     padding:10px;
     font-weight:600;
@@ -501,15 +523,26 @@ h7 {
     font-weight:600;
 }
 
+/* TOOL PANEL - ADMIN */
+
 .toolpanel1 {
     width:auto;
     height:auto;
     margin: 5x;
     padding: 20px;
+    cursor: pointer;
 }
 .toolpanel2 {
     width:auto;
     height:auto;
     margin: 5x;
     padding: 20px;
+    cursor: pointer;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    background-color: #b0e0e6;
 }

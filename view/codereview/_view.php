@@ -6,10 +6,10 @@ if (isset($_GET['assessment'])) {
             $row = $assessments[$num];		
             $_SESSION["assign"] = $assessments[$num]['AssignmentID']; //set the assignID to the id of the selected assessment
 		} else{
-			header('Location: /index.php');	
+			header('Location: index.php');	
 		}
 } else {
-	header('Location: /index.php');	
+	header('Location: index.php');	
 }
 
 
@@ -18,9 +18,7 @@ $uID = $_SESSION["user"]; //userID
 $assignID = $_SESSION["assign"]; //assignmentID
 
 
-?>
-
-    <head>
+?><head>
         <link rel="stylesheet" type="text/css" href="/css/comments.css">
         
         <link rel="stylesheet" type="text/css" href="/css/prettyprint/prettify.css" />
@@ -34,25 +32,39 @@ $assignID = $_SESSION["assign"]; //assignmentID
 		
     </head>
     <content>
+    
+
     <h3>Review Feedback On <?php echo $assessments[$num]['AssignmentName'] ?> </h3	>
     
-    <div class = "fileselect">
+    
+    <!-- this is where the file data and comments will appear -->
+    
+    <div class="code">
+	
+     <div class = "fileselect">
         <?php
 			$files = get_files_to_comment($uID, $assignID); //query the database
 			if(sizeof($files) == 0){
 				echo "No files found";	
 			} else {
-				foreach($files as $fileName){ 
+				echo "<span class=\"filebut\">File Select</span><ul class =\"filelist\">";
+				foreach($files as $fileName){
+
+					$fileNameStr = $fileName['FileName'];
+					
+					if (strlen($fileNameStr) > 20){
+						
+						$fileNameStr = substr($fileNameStr, 0, 17)."...";
+					
+					}					
 					//display all filenames as an anchor
-					echo "<a class='filelinks' data-fileID=".$fileName['FileID']." data-user=".$uID.">".$fileName['FileName']. "</a><br>";
+					echo "<li><a class='filelinks' data-fileID=".$fileName['FileID']." data-user=".$uID.">".$fileNameStr. "</a></li>";
 				}
+				echo "</ul>";
 			}
         ?>
-	</div>
-    <!-- this is where the file data and comments will appear -->
-    
-    <div class="code">
-        
+	</div>  
+	
         <div id="revSelect">
             <ul id="tabs">
                 
@@ -83,12 +95,12 @@ jQuery(function ($) {
 	console.log(fID);
         $.ajax({
             type:'POST',
-            url:'../lib/retrieve.php',
+            url:'lib/retrieve.php',
             data: {filename : file,
                    user : '<?php echo $uID ?>',
                    assign : '<?php echo $assignID ?>' },
 				   success: function(data){
-				   
+						$('.prettyprinted').removeClass('prettyprinted');
 						$("ul#tabs").html("");
 					   //dump the file data into the pre tag
 						$("pre.prettyprint.linenums").text(data);
@@ -107,4 +119,10 @@ jQuery(function ($) {
 <script>
 	//everything but the feedback bar, hide
 	$('navgroup:not(.nav-feedback)').hide();
+	
+	$(".fileselect").on("click", ".filebut", function(){
+		$(".filelist").toggle(300);
+		
+	
+	});
 </script>

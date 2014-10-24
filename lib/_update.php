@@ -17,45 +17,48 @@
 		$sem = $_POST['sem'];//semester 
 		//get the previous assignment information (before it is updated)
 		$previous = get_previous_assign_info($assignID);
-		
-		if(!check_valid_date($dateFormat)){
-			//error, invalid date - return with the orignal info
-			$_SESSION['message'] = 'date error';
-			header('Location: /EditAssessment.php?course='.$previous[0]['CourseID'].'&sem='.$previous[0]['Semester'].'&name='.$previous[0]['AssignmentName']);
-			
-		} else { //the date is valid 
+		//if the time is invalid then set the sesssion message to display and return to the page with the old info
+		if(!check_valid_time($time)){
+			$_SESSION['message'] = 'time error';
+			header('Location: /EditAssessment.php?course='.$previous[0]['CourseID'].'&sem='.$previous[0]['Semester'].'&assignmentName='.$previous[0]['AssignmentName']);	
+		} else { //the time is valid so check the date now
+			if(!check_valid_date($dateFormat)){
+				//error, invalid date - return with the orignal info
+				$_SESSION['message'] = 'date error';
+				header('Location: /EditAssessment.php?course='.$previous[0]['CourseID'].'&sem='.$previous[0]['Semester'].'&assignmentName='.$previous[0]['AssignmentName']);
 				
-			$newdate = DateTime::createFromFormat('d/m/Y', $dateFormat);
-			$date = $newdate->format('Y-m-d');					
-			//first check that the update assignment name doesn't already exist
-			$count = find_assignmentName($cID, $aName, $sem); 
-
-			if(($count > 0) && ($aName != $previous[0]['AssignmentName'])){
-				//assignment name exists and isn't the same as the orignal name, this is an error			
-				$_SESSION['message'] = 'name error';
-				//return with the original info, nothing is updated				
-				header('Location: /EditAssessment.php?course='.$previous[0]['CourseID'].'&sem='.$previous[0]['Semester'].'&name='.$previous[0]['AssignmentName']);
-			
-			} else { //assignment name doesn't exist or is the same name as the origial
-			
-				//since this is an edit, we know that the assignment already exists so just update the db
-				//find out if it was a success or failure
-				$result = update_assign_info($assignID, $aName, $desc, $time, $date);
-				 if($result == 'success'){
-					 $_SESSION['message'] = 'completed';
-				 } else {
-					$_SESSION['message'] = 'error'; 
-				 }
-				 //return to the page with the updated information
-				header('Location: /EditAssessment.php?course='.$cID.'&sem='.$sem.'&name='.$aName);
+			} else { //the date is valid 
+					
+				$newdate = DateTime::createFromFormat('d/m/Y', $dateFormat);
+				$date = $newdate->format('Y-m-d');
+				//first check that the update assignment name doesn't already exist
+				$count = find_assignmentName($cID, $aName, $sem); 
+	
+				if(($count > 0) && ($aName != $previous[0]['AssignmentName'])){
+					//assignment name exists and isn't the same as the orignal name, this is an error			
+					$_SESSION['message'] = 'name error';
+					//return with the original info, nothing is updated				
+					header('Location: /EditAssessment.php?course='.$previous[0]['CourseID'].'&sem='.$previous[0]['Semester'].'&assignmentName='.$previous[0]['AssignmentName']);
+				
+				} else { //assignment name doesn't exist or is the same name as the origial
+				
+					//since this is an edit, we know that the assignment already exists so just update the db
+					//find out if it was a success or failure
+					$result = update_assign_info($assignID, $aName, $desc, $time, $date);
+					 if($result == 'success'){
+						 $_SESSION['message'] = 'completed';
+					 } else {
+						$_SESSION['message'] = 'error'; 
+					 }
+					 //return to the page with the updated information
+					header('Location: /EditAssessment.php?course='.$cID.'&sem='.$sem.'&assignmentName='.$aName);
+				}
 			}
 		}
-		//else the date was wrong
-		//header('Location: /EditAssessment.php?course='.$cID.'&sem='.$sem.'&name='.$aName);
 	} 
 	
 	
-	//if the reset button was pressed
+////// if the delete assessment button (in _edit.php) was pressed \\\\\\\\\\\\\\\
 	else if (isset($_POST['assignID']) && isset($_POST['del'])){		
 		//first check that no previous file submissions exist for the to be deleted assignment
 		$del = delete_submissions($_POST['assignID']);
@@ -106,17 +109,26 @@
 	
 	//check the validity of the entered date
 	function check_valid_date($date){
-		$str = strtotime($date);
-		if(!is_numeric($str) ){
-			return false;	
-		} 
-		//an issue with strtotime is that dd/mm/yyyy becomes mm/dd/yyyy, so switch the day and month values
-		$month = date('d', $str); //is d because of issue with strtotime()
-		$day = date('m', $str); //is m because of issue with strtotime()
-		$year = date('Y', $str);
-		if(checkdate($month, $day, $year)){
-			return true;	
-		} 
+		if(substr_count($date, "/") == 2){
+			$fullDate = explode("/", $date);
+			$day = 	(int)$fullDate[0];
+			$month = (int)$fullDate[1];
+			$year = (int)$fullDate[2];
+			
+			if(checkdate($month, $day, $year)){
+				return true;	
+			}			
+		} else {
+			return false;
+		}
 		return false;
+	}
+	//check that the entered time is valid 
+	function check_valid_time($time){
+		if(preg_match("/(2[0-3]|[01][0-9]):[0-5][0-9]/",$time)){
+			return true;
+		} else {
+			return false;	
+		}
 	}
 ?>

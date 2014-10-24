@@ -19,7 +19,7 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
 
         // Student:
 		//students shouldn't have access to this page, is they somehow do then return them to the homepage
-		header('Location: /index.php');
+		header('Location: index.php');
         
     }else{ 
 		// Admin:
@@ -45,11 +45,11 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
 				$semester = $_GET['sem'];
 				$assignmentName = $_GET['assignmentName'];
 				
-				include("view/home/header.php");
+				include("view/home/adminheader.php");
 				include("view/admin/editAssessments/_edit.php"); 
 				
 			} else { //they are not allowed to access this info so return to the homepage
-				header('Location: /index.php');	
+				header('Location: index.php');	
 			}
 		}
     }

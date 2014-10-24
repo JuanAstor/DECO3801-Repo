@@ -1,9 +1,10 @@
 <?php
+	$output = NULL;
 	if(isset($_POST['cID']) && isset($_POST['assName']) && isset($_POST['numCrits']) ){
 		//if one of the fields is empty (left on 'select...' option)
 		if((strcmp($_POST['numCrits'],"") == 0) || (strcmp($_POST['assName'],"")== 0) || (strcmp($_POST['numCrits'],"")==0) ){
 			//do nothing
-			
+			$output = "Error: One or more fields were not set<br />Please complete the form";
 		} else {
 			$val = explode(",", $_POST['cID']);
 			$cID = $val[0]; //course ID
@@ -22,14 +23,14 @@
 				array_push($studentArr, $student['UserID']);	
 			}
 			shuffle($studentArr); //randomise the position of all userIDs
-			print_r($studentArr);
+			//print_r($studentArr); //display the array of students
 			$nextCount = 0;
 			$loopCount = 0;
 			
 			//loop over every element in the array and assign critiques
 			while((list($var,$val) = each($studentArr)) && $loopCount < (count($studentArr))){
 				$loopCount++; //keep track of the number of times looped
-				print "Value is: $val <br />";
+				//print "Value is: $val <br />";
 				for($i = 0; $i < $numCrits; $i++){ //assign critiques to this array position
 					//if the first element on the for loop and not the last element in array
 					if($i == 0 && $loopCount < (count($studentArr))){
@@ -44,8 +45,8 @@
 							$nextCount++; //position has changed (from the if check) so increment
 						}
 					}
-					print "next value is: $nextVal <br />";
-					//update table here
+					//print "next value is: $nextVal <br />";
+					//update the reviewer table with the found ownerID
 					add_user_to_critique($val, $assID, $nextVal);
 				}
 				//return the array to the (original + 1) position 
@@ -59,6 +60,7 @@
 				$nextCount = 0; //reset the array pointer counter
 			}//end of while loop
 		}
+		$output = "Success! Critiques have been assigned ";
 	} 
 	//get a list of all students in the selected course
 	function get_all_students_in_course($courseID, $semester){
@@ -86,20 +88,18 @@
     <head>
     <title>Code Review</title>
         <!-- CSS/LESS -->
-        <link rel="stylesheet/less" href="/css/main.less">
+        <link rel="stylesheet/less" href="css/main.less">
         <!-- JS -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <!--<script src="../js/moment.js"></script> -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         
-		
-		<!-- <script src="../js/bootstrap.min.js"></script>
-		<script src="../js/bootstrap-datetimepicker.min.js"></script> -->
     </head>
 	<body>
         <div class="formtitle"><h3>Assign Critiques</h3></div>
         <widget-container>
         <div class="formcenter">
-        <form action="/Critiques.php" method="post">
+        <form action="Critiques.php" method="post">
         <div>
         	<label for="cID">Course ID</label>
             <select id="cID" name="cID">
@@ -135,16 +135,27 @@
                 <option value="4">4</option>
             </select>
         </div>
-        <label>Please make sure that every field has been completed</label>
-		<button type="submit" class="btn btn-primary">Submit</button>
+        </br>
+        
+        <label>Please ensure every option is set </label><br />
+		<button type="submit" class="btn btn-primary">Submit</button></br></br>
+        
+        <div class="alert alert-warning alert-dismissable">  
+        <a href="#" class="close" data-dismiss="alert" aria-hidden="true">&times;</a>
+            <?php //display the error or success messages after form submit
+                if($output != NULL){
+                print($output);	
+                }
+            ?>
+        </div>
+            
         </form>
         </div>
         </widget-container>
     </body>
 </html>
 
-<script>
-	
+<script>	
 	//will popullate the second select tag with data once the first select tag has been set
 	jQuery(function ($) {
 		$('#cID').on('change', function() {
@@ -152,7 +163,7 @@
 			var make = $(this).val();
 			$.ajax({
 				type: 'POST',
-				url: '../lib/_update.php',
+				url: 'lib/_update.php',
 				data: {make : make}, 
 				success: function(data){
 					$('#assName').html(data);	
@@ -160,4 +171,7 @@
 			});
 		});
 	});
+</script>
+<script>
+	$('navgroup:not(.nav-tools)').hide();
 </script>

@@ -16,8 +16,8 @@
 <h1>File Upload</h1></br>
 <div>
     <!-- On submit contact the upload.php file which will handle everything -->
-    <form method="post" action="../lib/upload.php" enctype="multipart/form-data">
-    <div> Attach a File(s): You can select more than one </div></br>
+    <form method="post" action="lib/upload.php" enctype="multipart/form-data">
+    <h7> Attach a File(s): You can select more than one </h7></br></br>
     <table>
     	<tr>
             <td class="btn btn-default">
@@ -64,7 +64,7 @@ $("a.del").click(function() {
         if(confirm("Are you sure you want to delete this file?")){ 
             $.ajax({
                 type:'POST',
-                url: '../lib/_update.php',
+                url: 'lib/_update.php',
                 data:{fileID : id }, 
                 success: function(data){
                     //display the message from the delete query then reload the page

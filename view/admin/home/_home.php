@@ -24,7 +24,7 @@
 							$result = get_course_assessments($course['CourseID'], $course['Semester']);
 							foreach($result as $names){	
 								//echo "<span>--------------</span>";
-								echo "<a href='/EditAssessment.php?course=".$course['CourseID']."&sem=".$course['Semester']."&assignmentName=".$names['AssignmentName']."'>".$names['AssignmentName']."</a>";
+								echo "<a href='EditAssessment.php?course=".$course['CourseID']."&sem=".$course['Semester']."&assignmentName=".$names['AssignmentName']."'>".$names['AssignmentName']."</a>";
 								echo "<br />";
 							}
 							echo "<br />";
@@ -42,9 +42,9 @@
 						foreach($courses as $course){
 							//display all courses that the admin is in charge of
 							echo "<span>".strtoupper($course['CourseID'])."   |  </span>";
-							echo "<span>Sem ".substr($course['Semester'], -1)."    ".substr($course['Semester'],0,4)."      </span><br />";
-							echo "<a href='/StudentReviews.php?course=".$course['CourseID']."&sem=".$course['Semester']."'>
-							Reviews
+							echo "<span>Semester ".substr($course['Semester'], -1)."    ".substr($course['Semester'],0,4)."      </span><br />";
+							echo "<a href='StudentReviews.php?course=".$course['CourseID']."&sem=".$course['Semester']."'>
+							Review
 							</a>";
 							echo "<br /> <br />";
 						}
@@ -59,12 +59,12 @@
 				<div class="w-body">
                     <div class="toolpanel1">
                     	<img src="img/cass2.png" class="img-circle" width="50px" height="auto" onclick="location.href =
-                        'Assessment.php'">
-                    	<h6>Create Assignment</h6>
+                        'Assessment.php'" >
+                    	<h6>Create Assessment</h6>
                     </div>
                     <div class="toolpanel2">
                     	<img src="img/crit1.png" class="img-circle" width="50px" height="auto" onClick="location.href = 
-                        'Critiques.php'">
+                        'Critiques.php'" >
                         <h6>Assign Critiques</h6>
                     </div>
 				</div>
@@ -79,4 +79,8 @@
     	
 	</body>
 </html>
+
+<script>
+	$('navgroup').hide();
+</script>
 

@@ -7,22 +7,27 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link type="text/css" rel="Stylesheet" href="<?php echo CaptchaUrls::LayoutStylesheetUrl() ?>" />
+        <link href='../css/main.less' rel='stylesheet' type='text/css'>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     </head>
 
     <body>
+    <login>
         <div class="container">
             <h2>Sign Up - Admin</h2>
             <form role="form" method="POST" action="">
                 <div class="form-group">
-                    <input type="text" name="key" value="Institution name" required>
+                    <h6>Institution name</h6>
+                    <input class="form-control" type="text" name="key" placeholder="Institution name" required></br></br>
                     <?php
                     // Adding BotDetect Captcha to the page 
                     $SampleCaptcha = new Captcha("SampleCaptcha");
                     $SampleCaptcha->UserInputID = "CaptchaCode";
                     echo $SampleCaptcha->Html();
                     ?>
+                    </br></br>
+                    <h6>Please enter code above</h6>
                     <input name="CaptchaCode" id="CaptchaCode" type="text" />
                     <input type="hidden" name="form" value="admin">
 
@@ -45,5 +50,6 @@
             }
         }
         ?>
-    </body>
+    </login>
+</body>
 </html>

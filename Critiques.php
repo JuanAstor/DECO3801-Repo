@@ -13,14 +13,14 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
     
     if(!check_if_admin($user)){ 
 		//is a student
-		header('Location: /index.php');
+		header('Location: index.php');
 		
 	} else {		
 		//is an admin
 		$fullName = get_user_name($user);
         $courses = get_admins_courses($user);
 		
-		include("view/home/header.php");
+		include("view/home/adminheader.php");
 		include("view/admin/critiques/_critiques.php");	
 	}
 		

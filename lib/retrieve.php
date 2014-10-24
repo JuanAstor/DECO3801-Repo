@@ -1,6 +1,6 @@
 <?php 
-    require("../lib/mysql.php");
-    require("../lib/queries.php");
+    require("mysql.php");
+    require("queries.php");
 	
     $filename = $_POST['filename'];
     $uID = $_POST['user'];

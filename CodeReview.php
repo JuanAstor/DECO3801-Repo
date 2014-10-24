@@ -25,7 +25,7 @@ if (!isset($_SESSION['user']) && isset($_POST['user'])) {
 			
 		} else {
 			//Admin:
-			header('Location: /index.php');	
+			header('Location: index.php');	
 		} 
 		
 	}else{

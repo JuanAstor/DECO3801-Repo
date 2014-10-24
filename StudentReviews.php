@@ -1,4 +1,5 @@
 <?php
+session_cache_limiter('none');
 session_start();
 require("lib/mysql.php");
 require("lib/queries.php"); //query functions to get database results
@@ -18,7 +19,7 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
     if(!check_if_admin($user)){ 
 
         // Student: Shouldn't have access, so return to homepage
-		header('Location: /index.php');
+		header('Location: index.php');
         
     }else{ 
         
@@ -39,15 +40,15 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
 			if($count == 1){ //the courseID matches a courseID the admin is in charge of
 				$courseID = $_GET['course'];
 				$semester = $_GET['sem'];
-				include("view/home/header.php");
+				include("view/home/adminheader.php");
 				include("view/admin/studentReviews/_studentReview.php");	
 			} else {
-				header('Location: /index.php');	
+				header('Location: index.php');	
 			}
 				
 		} 
 		else { //if no courseID is set, return the user back to the main page
-			header('Location: /index.php');	
+			header('Location: index.php');	
 		}
 
 		

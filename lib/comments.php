@@ -1,6 +1,6 @@
 <?php
-	require("../lib/mysql.php");
-	require("../lib/queries.php");
+	require("mysql.php");
+	require("queries.php");
 	
 	$reqType = $_POST['rtype'];
 	$userID = $_POST['uid'];
@@ -16,25 +16,22 @@
 			
 			if ($ownerBool == "true"){
 			
-				$idArrayQuery = MySQL::getInstance()->query("SELECT DISTINCT `UserID`
-							FROM `comment`
-							WHERE (`FileID` = '". $fileID. "')");							
-							
-				$results = 	$idArrayQuery->fetchAll();
+				$idArraySql = "SELECT DISTINCT `UserID`	FROM `comment`WHERE (`FileID` = ?)";							
+				$query = MySQL::getInstance()->prepare($idArraySql);
+				$query->execute(array($fileID));			
+				$results = 	$query->fetchAll(PDO::FETCH_ASSOC);
 				
 				$userID = $results[$revNum];
 				$userID = $userID["UserID"];
 			} 
 			
-			$query = MySQL::getInstance()->query("SELECT `LineNumber`,`Contents`
-					FROM `comment`
-					WHERE (`UserID` = '". $userID ." ') AND (`FileID` = '". $fileID." ')
-					ORDER BY `LineNumber` ASC ");								
+			$sql = "SELECT `LineNumber`,`Contents` FROM `comment` WHERE (`UserID` = ?) AND (`FileID` = ?)
+					ORDER BY `LineNumber` ASC ";
+			$query = MySQL::getInstance()->prepare($sql);
+			$query->execute(array($userID, $fileID));			
+			$results = 	$query->fetchAll(PDO::FETCH_ASSOC);								
 
-			echo json_encode($query->fetchAll());
-			
-				
-		
+			echo json_encode($results);		
 		
 			break;
 		
@@ -44,10 +41,10 @@
 			$lineNum = $_POST['lineNum'];
 			$lineCom = $_POST['lineCom'];
 			
-			$query =  MySQL::getInstance()->query("INSERT INTO `comment`
-				(`FileID`, `UserID`, `LineNumber`, `Contents`) 
-				VALUES ('".$fileID."','".$userID."','".$lineNum."','".$lineCom."')");
-			return $query;
+			$sql =  "INSERT INTO `comment`(`FileID`, `UserID`, `LineNumber`, `Contents`) 
+				VALUES (?,?,?,?)";
+			$query = MySQL::getInstance()->prepare($sql);
+			return $query->execute(array($fileID, $userID, $lineNum, $lineCom));
 			break;
 			
 		// Edits a comment for the review	
@@ -56,10 +53,10 @@
 			$lineNum = $_POST['lineNum'];
 			$lineCom = $_POST['lineCom'];
 			
-			$query = MySQL::getInstance()->query("UPDATE `comment` 
-				SET `Contents`= '".$lineCom."' WHERE (`FileID` ='".$fileID."') 
-				AND (`UserID` = '".$userID."') AND (`LineNumber`='".$lineNum."')");
-			return $query;
+			$sql = "UPDATE `comment` 
+				SET `Contents`= ? WHERE (`FileID` =?) AND (`UserID` = ?) AND (`LineNumber`=?)";
+			$query = MySQL::getInstance()->prepare($sql);
+			return $query->execute(array($lineCom, $fileID, $userID, $lineNum));
 			break;
 			
 		// Deletes a comment from the review	
@@ -67,21 +64,20 @@
 		
 			$lineNum = $_POST['lineNum'];
 			
-			$query = MySQL::getInstance()->query("DELETE FROM `comment`
-							WHERE (`UserID` = '". $userID . "') AND (`FileID` = '". $fileID. "')
-							AND (`LineNumber` = '".$lineNum."')");
-			return $query;
+			$sql = "DELETE FROM `comment`WHERE (`UserID` = ?) AND (`FileID` = ?) AND (`LineNumber` = ?)";
+			$query = MySQL::getInstance()->prepare($sql);				
+			return $query->execute(array($userID, $fileID, $lineNum));
 							
 			break;
 		
 		// Returns is the user is an admin/is owner of the file
 		case "user":
 		
-			$query = MySQL::getInstance()->query("SELECT `UserID`
-							FROM `assignmentfile`
-							WHERE (`FileID` = '". $fileID. "')");
-							
-			$results = 	$query->fetchAll();
+			$sql = "SELECT `UserID`	FROM `assignmentfile` WHERE (`FileID` = ?)";
+			$query = MySQL::getInstance()->prepare($sql);
+			$query->execute(array($fileID));	
+			
+			$results = 	$query->fetchAll(PDO::FETCH_ASSOC);								
 			$results['Admin'] = check_if_admin($userID);
 							
 			echo json_encode($results);				
@@ -90,15 +86,12 @@
 		// Returns amount of users that have reviwed file
 		case "revUsers":
 			
-			$query = MySQL::getInstance()->query("SELECT COUNT(DISTINCT `UserID`)
-					AS `ReviewerAmount`
-					FROM `comment`
-					WHERE (`FileID` = '".$fileID."')");
-							
-							
-			$results = 	$query->fetchAll();
+			$sql = "SELECT COUNT(DISTINCT `UserID`)	AS `ReviewerAmount`	FROM `comment` WHERE (`FileID` = ?)";
+			$query = MySQL::getInstance()->prepare($sql);
+			$query->execute(array($fileID));	
 			
-									
+			$results = 	$query->fetchAll(PDO::FETCH_ASSOC);
+								
 			echo json_encode($results);				
 			break;
 							

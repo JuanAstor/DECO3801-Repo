@@ -20,7 +20,8 @@
             .    "</assessment>";
 			
             $_SESSION["assign"] = $assessments[$num]['AssignmentID']; //set the assignID to the id of the selected assessment
-            include("view/assessment/_fileUpload.php"); //display the file upload option
+            
+			include("view/assessment/_fileUpload.php"); //display the file upload option
 			
         }else{
             header("Location: Assessment.php");

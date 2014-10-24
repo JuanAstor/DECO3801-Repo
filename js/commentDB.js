@@ -208,8 +208,8 @@ function loadCommentSystem(uid, fid){
 
 						$(this).html("<span class=\"combox\">  <b>Line " +
 						lineNum + "</b> <br /><textarea class=\"trans\" readonly>" + lineCom
-						+ "</textarea ><div class=\"editpriv\"><button id=\"editbut\" ></button>" +
-						"<button id=\"delbut\" ></button></div></span>");
+						+ "</textarea ><div class=\"editpriv\"><button id=\"editbut\" title=\"Edit\"></button>" +
+						"<button id=\"delbut\" title=\"Delete\"></button></div></span>");
 					
 					}
 					var txtArea = $(this).find(".trans");
@@ -278,13 +278,17 @@ function loadCommentSystem(uid, fid){
 	
 	runAll();
 	
-	//$(".fileselect").ajaxComplete(runAll());
 	
 	$("#tabs").unbind();
 	
 	$("#tabs").on("click", ".tabSpan", function(){
 		
 		var revNum = $(this).attr("revnum");
+		
+		($($($($(this).parent()).parent()).children()).children()).addClass('tabSpan').removeClass('selected');
+		
+		$(this).addClass('selected').removeClass('tabSpan');
+		
 		
 		loadCommentSystem(true,false, revNum);
 		
