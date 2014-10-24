@@ -101,7 +101,7 @@ jQuery(function ($) {
 				   success: function(data){
 						$('.prettyprinted').removeClass('prettyprinted');
 						$("ul#tabs").html("");
-					   //dump the file data into the pre tag
+					    //dump the file data into the pre tag
 						$("pre.prettyprint.linenums").text(data);
 						//load google prettify to style text
 						prettyPrint();

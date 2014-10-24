@@ -73,6 +73,14 @@ function get_submitted_info($user, $assignmentID){
 	$query = MySQL::getInstance()->prepare($sql);
 	$query->execute(array($user, $assignmentID));
 	return $query->fetchAll(PDO::FETCH_ASSOC);
+} 
+
+//get all info on submitted assignment files, given a fileID
+function get_file_info($fileID){
+	$sql = "SELECT * FROM `assignmentfile` WHERE FileID=?";
+	$query = MySQL::getInstance()->prepare($sql);
+	$query->execute(array($fileID));
+	return $query->fetchALL(PDO::FETCH_ASSOC);	
 }
 
 //update the 'assignmentfile' table in the database
@@ -121,7 +129,7 @@ function delete_submissions($assignID){
 		//if any assignment files have been submitted 
 		//first delete any possible reviews on these files (so no violations in the db)
 		$query2 = MySQL::getInstance()->prepare("DELETE FROM `reviewer`
-                                                         WHERE FileID IN (SELECT FileID
+                                                         WHERE AssignmentID IN (SELECT AssignmentID
                                                          FROM `assignmentfile`
                                                          WHERE AssignmentID=?)");
 		$query2->execute(array($assignID));
@@ -311,5 +319,12 @@ function get_users_to_critique($user){
 	$query = MySQL::getInstance()->prepare($sql);
 	$query->execute(array($user));
 	return $query->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function get_single_assignment_critiques($user, $assignment){
+	$sql = "SELECT * FROM `reviewer` WHERE ReviewerID=? AND AssignmentID=?";
+	$query = MySQL::getInstance()->prepare($sql);
+	$query->execute(array($user, $assignment));
+	return $query->fetchAll(PDO::FETCH_ASSOC);	
 }
 ?>
