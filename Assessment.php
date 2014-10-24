@@ -14,26 +14,25 @@ if (!isset($_SESSION['user']) && isset($_POST['user'])) {
 if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
     
     $user = $_SESSION["user"];
+    $institution = get_user_institution($user);
+    $fullName = get_user_name($user);
+    $courses = get_admins_courses($user);
     
     if(!check_if_admin($user)){ 
 
         // Student: allow students to submit assessments
-        $courses = get_users_courses($user);
         $assessments = get_users_assessments($user);
-        $fullName = get_user_name($user);
-
+	$submitted = get_user_comments($user);
+        
         // Show home
         include("view/home/header.php");
         include("view/assessment/_assessment.php");
         
     }else{ 
         
-        // Admin: allow an admin to create an assignment
-        $fullName = get_user_name($user);
-        $courses = get_admins_courses($user);
-		
-		include("view/home/adminheader.php");
-		include("view/admin/createAssignments/_create.php");
+        // Admin: allow an admin to create an assignment		
+	include("view/home/adminheader.php");
+        include("view/admin/createAssignments/_create.php");
     }
 }
 else{

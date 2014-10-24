@@ -33,9 +33,9 @@
                     echo "<p class='iscourse'><span>" . $course['CourseID'] . " | "
                     . "<span>Semester " . substr($course['Semester'], -1) . " " . substr($course['Semester'], 0, 4) . "</span></p>";
 
-                    $result = get_course_assessments($course['CourseID'], $course['Semester']);
+                    $result = get_course_assessments($course['CourseID'], $course['Semester'], $institution);
                     foreach ($result as $names) {
-                        echo "<p><i class='fa fa-angle-right'></i>"
+                        echo "<p><i class='fa fa-angle-right'></i> "
                         . "<a href='EditAssessment.php?course=" . $course['CourseID'] . "&sem="
                         . $course['Semester'] . "&assignmentName=" . $names['AssignmentName'] . "'>"
                         . $names['AssignmentName'] . "</a></p>";
@@ -50,7 +50,7 @@
                     //display all courses that the admin is in charge of
                     echo "<p class='iscourse'><span>" . $course['CourseID'] . "   |  "
                     . "Semester " . substr($course['Semester'], -1) . "    " . substr($course['Semester'], 0, 4) . "</span></p>";
-                    echo "<p><i class='fa fa-angle-right'></i>"
+                    echo "<p><i class='fa fa-angle-right'></i> "
                     . "<a href='StudentReviews.php?course=" . $course['CourseID'] . "&sem=" .
                     $course['Semester'] . "'>Review</a></p>";
                 }
@@ -60,9 +60,9 @@
             <div class="navgroup nav-tools">
                 <?php
                 // Loop through courses and display
-                echo "<p><i class='fa fa-angle-right'></i>"
+                echo "<p><i class='fa fa-angle-right'></i> "
                 . "<a href='Assessment.php'>Create Assessment</a></p>";
-                echo "<p><i class='fa fa-angle-right'></i>"
+                echo "<p><i class='fa fa-angle-right'></i> "
                 . "<a href='Critiques.php'>Assign Critiques</a></p>";
                 ?>
             </div>

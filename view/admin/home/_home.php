@@ -21,7 +21,7 @@
                         echo "<span>" . strtoupper($course['CourseID']) . "   |	   </span>";
                         echo "<span>Semester " . substr($course['Semester'], -1) . " " . substr($course['Semester'], 0, 4) . "    </span>";
                         echo "<br />";
-                        $result = get_course_assessments($course['CourseID'], $course['Semester']);
+                        $result = get_course_assessments($course['CourseID'], $course['Semester'], $institution);
                         foreach ($result as $names) {
                             //echo "<span>--------------</span>";
                             echo "<a href='EditAssessment.php?course=" . $course['CourseID'] . "&sem=" . $course['Semester'] . "&assignmentName=" . $names['AssignmentName'] . "'>" . $names['AssignmentName'] . "</a>";

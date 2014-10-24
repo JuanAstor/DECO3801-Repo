@@ -129,19 +129,17 @@ function delete_submissions($assignID){
 	$count = $query1->rowCount();
 	
 	if($count > 0){ 
-		//if any assignment files have been submitted 
-		//first delete any possible reviews on these files (so no violations in the db)
-		$query2 = MySQL::getInstance()->prepare("DELETE FROM `reviewer`
-                                                         WHERE AssignmentID IN (SELECT AssignmentID
-                                                         FROM `assignmentfile`
-                                                         WHERE AssignmentID=?)");
-        $query2->execute(array($assignID));
-
-        $query3 = MySQL::getInstance()->prepare("DELETE FROM `assignmentfile`
+	$query3 = MySQL::getInstance()->prepare("DELETE FROM `assignmentfile`
                                                          WHERE AssignmentID=?");
         return $query3->execute(array($assignID));
     } else {
-        //no files were submitted, so return that deleting is possible
+        //if any assignment files have been submitted 
+        //first delete any possible reviews on these files (so no violations in the db)
+        $query2 = MySQL::getInstance()->prepare("DELETE FROM `reviewer`
+                                                 WHERE AssignmentID IN (SELECT AssignmentID
+                                                 FROM `assignmentfile`
+                                                 WHERE AssignmentID=?)");
+        $query2->execute(array($assignID));
         return true;
     }
 }
@@ -171,7 +169,7 @@ function get_assignID($name, $course) {
 }
 
 //for the edit assessment page: get the assignment names available
-function get_course_assessments($courseID, $semester, $InstitutionID = 1) {
+function get_course_assessments($courseID, $semester, $InstitutionID) {
     $sql = "SELECT AssignmentName FROM `assignment` WHERE CourseID=? AND Semester=? AND InstitutionID=?";
     $query = MySQL::getInstance()->prepare($sql);
     $query->execute(array($courseID, $semester, $InstitutionID));
@@ -179,7 +177,7 @@ function get_course_assessments($courseID, $semester, $InstitutionID = 1) {
 }
 
 //return all the assignmnet info for a given assignment. NOT A UNIQUE ASSIGNMENT
-function get_assign_info($courseID, $semester, $name, $InstitutionID = 1) {
+function get_assign_info($courseID, $semester, $name, $InstitutionID) {
     $sql = "SELECT * FROM `assignment` WHERE CourseID=? AND Semester=? AND AssignmentName=? AND InstitutionID=?";
     $query = MySQL::getInstance()->prepare($sql);
     $query->execute(array($courseID, $semester, $name, $InstitutionID));
@@ -219,7 +217,7 @@ function get_previous_assign_info($assignID) {
 }
 
 //find out if an assignment name already exists for a course 
-function find_assignmentName($courseID, $name, $semester, $InstitutionID = 1) {
+function find_assignmentName($courseID, $name, $semester, $InstitutionID) {
     $sql = "SELECT * FROM `assignment` WHERE CourseID=? AND Semester=? AND AssignmentName=? AND InstitutionID=?";
     $query = MySQL::getInstance()->prepare($sql);
     $query->execute(array($courseID, $semester, $name, $InstitutionID));
@@ -228,7 +226,7 @@ function find_assignmentName($courseID, $name, $semester, $InstitutionID = 1) {
 }
 
 //insert a new row into the assignment folder
-function create_assignment($cID, $sem, $decript, $name, $date, $time, $InstitutionID = 1) {
+function create_assignment($cID, $sem, $decript, $name, $date, $time, $InstitutionID) {
     $sql = "INSERT INTO `assignment` (`CourseID`, `Semester`, `InstitutionID`, `AssignmentDescription`, `AssignmentName`, `DueDate`, `DueTime`)
 			VALUES (?,?,?,?,?,?,?)";
     $query = MySQL::getInstance()->prepare($sql);
@@ -236,7 +234,7 @@ function create_assignment($cID, $sem, $decript, $name, $date, $time, $Instituti
 }
 
 //check that the semester value exists for the selected course
-function check_semester($courseID, $semester, $InstitutionID = 1) {
+function check_semester($courseID, $semester, $InstitutionID) {
     $sql = "SELECT * FROM `course` WHERE CourseID=? AND Semester=? AND InstitutionID=?";
     $query = MySQL::getInstance()->prepare($sql);
     $query->execute(array($courseID, $semester, $InstitutionID));

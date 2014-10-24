@@ -16,13 +16,14 @@ if (isset($_POST['oauth_consumer_key'])) {
 if (isset($_SESSION["user"])) {
     
     $user = $_SESSION["user"];
+    $institution = get_user_institution($user);
+    $fullName = get_user_name($user);
+    $courses = get_admins_courses($user);
     
-    if(!check_if_admin($user)){ 
+    if(!check_if_admin($user)){
 
-        // Student:
-        $courses = get_users_courses($user);
+        // Student
         $assessments = get_users_assessments($user);
-        $fullName = get_user_name($user);
 	$submitted = get_user_comments($user);
 
         // Show home
@@ -30,11 +31,7 @@ if (isset($_SESSION["user"])) {
         include("view/home/_home.php");
         
     }else{ 
-        
-        // Admin:
-        $fullName = get_user_name($user);
-        $courses = get_admins_courses($user);
-		
+        // Show Admin
         include("view/home/adminheader.php");
         include("view/admin/home/_home.php");
     }
