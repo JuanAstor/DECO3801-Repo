@@ -87,6 +87,7 @@ jQuery(function ($) {
     //get the filename from the anchor tag clicked
 	var file = $(this).text(); //filename
 	var fID = $(this).data("fileid"); //fileID
+	
 	//var uID = $(this).data("user"); //file owner
 	var uID = <?php echo $user ?> //user reviewing the file
 	
@@ -106,7 +107,7 @@ jQuery(function ($) {
 						//load google prettify to style text
 						prettyPrint();
 						//load the comment system from commentDB.js											
-						loadCommentSystem(uID, fID);			                
+						loadCommentSystem(uID, fID, false);			                
             }
         });
     });
