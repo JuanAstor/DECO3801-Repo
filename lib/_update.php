@@ -1,5 +1,5 @@
 <?php
-
+session_cache_limiter('none');
 session_start();
 require("mysql.php");
 require("queries.php"); //query functions to get database results

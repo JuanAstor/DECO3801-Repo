@@ -1,3 +1,7 @@
+<?php
+	session_cache_limiter('none');
+?>
+
 <!DOCTYPE html>
 <html>
     <?php

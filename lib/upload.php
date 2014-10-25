@@ -1,6 +1,7 @@
 
 
 <?php //upload a file to the database
+	session_cache_limiter('none');
 	session_start();
 	require("mysql.php");
 	require("queries.php");
