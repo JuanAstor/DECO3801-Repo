@@ -96,7 +96,7 @@ if (isset($_POST['make']) && isset($_POST['instit'])) {
     $cID = $val[0]; //course ID
     $sem = $val[1]; //semester
 	$instit = $_POST['instit']; //institution
-    echo"<option value='' >Select...</option>";
+    echo"<option value=''>Select...</option>";
     $result = get_course_assessments($cID, $sem, $instit);
     foreach ($result as $name) {
         echo "<option value='" . $name['AssignmentName'] . "'>" . $name['AssignmentName'] . "</option>";

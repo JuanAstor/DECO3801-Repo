@@ -129,19 +129,21 @@ function delete_submissions($assignID){
 	$count = $query1->rowCount();
 	
 	if($count > 0){ 
-	$query3 = MySQL::getInstance()->prepare("DELETE FROM `assignmentfile`
+		//if any assignment files have been submitted 
+		//first delete any possible reviews on these files (so no violations in the db)
+		$query2 = MySQL::getInstance()->prepare("DELETE FROM `reviewer`
                                                          WHERE AssignmentID=?");
-        return $query3->execute(array($assignID));
-    } else {
-        //if any assignment files have been submitted 
-        //first delete any possible reviews on these files (so no violations in the db)
-        $query2 = MySQL::getInstance()->prepare("DELETE FROM `reviewer`
-                                                 WHERE AssignmentID IN (SELECT AssignmentID
-                                                 FROM `assignmentfile`
-                                                 WHERE AssignmentID=?)");
-        $query2->execute(array($assignID));
-        return true;
-    }
+		$query2->execute(array($assignID));		
+		$query3 = MySQL::getInstance()->prepare("DELETE FROM `assignmentfile`
+                                                         WHERE AssignmentID=?");
+		return $query3->execute(array($assignID));
+	} else { 
+		//no assignment files have been submitted, so delete any assigned critiques then return
+		$query2 = MySQL::getInstance()->prepare("DELETE FROM `reviewer`
+                                                         WHERE AssignmentID=?");
+		$query2->execute(array($assignID));	
+		return true;
+	}
 }
 
 //find out if a user has commented on any files for an assignment

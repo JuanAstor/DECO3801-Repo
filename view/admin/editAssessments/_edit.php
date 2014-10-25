@@ -98,7 +98,7 @@ if (isset($_SESSION['message'])) {
                 $.ajax({
                     type: 'POST',
                     url: 'lib/_update.php',
-                    data: {assignID: <?php echo $assignID ?>, 
+                    data: {assignID: '<?php if(isset($assignID)){echo $assignID;} ?>', 
                            del: "delete"},
                     success: function (data) {
                         //once the assignment has been deleted

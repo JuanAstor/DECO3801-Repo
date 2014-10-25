@@ -1,6 +1,11 @@
 <?php
 	$InstitValue = $institution;
 	$output = NULL;
+	if(isset($_POST['btnSubmit'])){
+		//if the submit button was pressed, set the default message to be an error
+		//if nothing is set, then this will be the only message to display, otherwise something else will
+		$output = "Error: One or more fields were not set<br />Please complete the form";	
+	}
 	if(isset($_POST['cID']) && isset($_POST['assName']) && isset($_POST['numCrits']) ){
 		//if one of the fields is empty (left on 'select...' option)
 		if((strcmp($_POST['numCrits'],"") == 0) || (strcmp($_POST['assName'],"")== 0) || (strcmp($_POST['numCrits'],"")==0) ){
@@ -60,8 +65,9 @@
 				}
 				$nextCount = 0; //reset the array pointer counter
 			}//end of while loop
+			$output = "Success! Critiques have been assigned ";
 		}
-		$output = "Success! Critiques have been assigned ";
+		
 	} 
 	//get a list of all students in the selected course
 	function get_all_students_in_course($courseID, $semester){
@@ -138,8 +144,7 @@
         </div>
         </br>
         
-        <label>Please ensure every option is set </label><br />
-		<button type="submit" class="btn btn-primary">Submit</button></br></br>
+		<input type="submit" name="btnSubmit" value="Submit" class="btn btn-primary" /></br></br>
         
         
 		<?php //display the error or success messages after form submit
