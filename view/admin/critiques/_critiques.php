@@ -180,3 +180,7 @@
 <script>
 	$('navgroup:not(.nav-tools)').hide();
 </script>
+
+<style>
+	.formcenter {width:auto;}
+</style>
