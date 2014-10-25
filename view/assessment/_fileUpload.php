@@ -1,4 +1,6 @@
 <?php 
+	date_default_timezone_set('Australia/Brisbane');
+	
     //destroy the session variable on the start of a new upload
     if(isset($_SESSION['submitted'])){
         unset($_SESSION['submitted']);	
@@ -15,6 +17,8 @@
 	 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 <content>
+
+
 
 <h1>File Upload</h1></br>
 <div>
@@ -46,7 +50,7 @@
 		echo "<div class='alert alert-warning alert-dismissable'>"
                 . " <a href='#' class='close' data-dismiss='alert' aria-hidden='true'>&times;</a>";
         		
-			//let the user know what has happened to the files submitted
+		//let the user know what has happened to the files submitted
 		if(isset($_SESSION['submit'])){
 			if(strcmp($_SESSION['submit'], 'submitted') == 0){ //has been submitted
 				echo "<p>The file(s) have been submitted successfully </p>";
@@ -66,17 +70,27 @@
 			unset($_SESSION['submit']); //unset so the message doesn't reappear
 			echo "<br />";
 		} 
+		//if files have been submitted then a list of info will be displayed about the files
 		if($result != NULL){
 			echo "<p>File(s) currently submitted: </p>";
 			foreach($result as $file){
 				$val = $file['SubmissionTime'];
 				$dateTime = new DateTime($val);
-				$date = $dateTime->format('d/m/Y');
-				$time = $dateTime->format('H:i:s');
-				echo "<span>-<i>".$file['FileName']."</i> submitted on ".$date." at ".$time."</span>";
+				$subDate = $dateTime->format('d/m/Y');
+				$subTime = $dateTime->format('H:i:s');
+				echo "<span>-<i>".$file['FileName']."</i> submitted on ".$subDate." at ".$subTime."</span>";
 				
-				//if the current date/time < assignment due date and time then show else don't
-				echo "<a class='del' href='#' data-value=".$file['FileID']."><span>_(delete?)_</span></a><br />";
+				$today = date("Y-m-d"); //current date 
+				$currTime = date("H:i:s"); //current time
+                $today_dt = new DateTime($today); //convert to proper format
+				
+				//if the current date/time is less than the due date and time then show it, else don't	
+				$info1 = get_previous_assign_info($file['AssignmentID']);
+				if($today_dt <= (new DateTime($info1[0]['DueDate']))){
+					if(strtotime($currTime) < (strtotime($info1[0]['DueTime']))){
+						echo "<a class='del' href='#' data-value=".$file['FileID']."><span> (delete?) </span></a><br />";
+					}
+				}
 			}
 		}		
 		echo "</div>"; //close the div of the viewing window
