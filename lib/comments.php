@@ -21,8 +21,10 @@
 				$query->execute(array($fileID));			
 				$results = 	$query->fetchAll(PDO::FETCH_ASSOC);
 				
-				$userID = $results[$revNum];
-				$userID = $userID["UserID"];
+				if(!(empty($results))){
+					$userID = $results[$revNum];
+					$userID = $userID["UserID"];
+				}
 			} 
 			
 			$sql = "SELECT `LineNumber`,`Contents` FROM `comment` WHERE (`UserID` = ?) AND (`FileID` = ?)
