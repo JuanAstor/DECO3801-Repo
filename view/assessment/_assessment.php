@@ -42,26 +42,6 @@
         }
     } 
 ?>
-<content>
-<?php //let the user know what has happened to the files submitted
-    if(isset($_SESSION['submit'])){
-        if(strcmp($_SESSION['submit'], 'submitted') == 0){ //has been submitted
-            echo "<span> The file(s) have been submitted successfully </span>";
-        }		
-        else if(strcmp($_SESSION['submit'], 'error') == 0){ //file has size 0 or not allowed extension
-            echo "<span> Error uploading previous files: File type (extension) is not supported or the File size is zero </span>";
-			echo "<span> File upload has been canceled </span>";	
-        }
-		else { //some other file error has occured so display the file 
-			echo "<span> Error uploading files: '".$_SESSION['submit']."' </span>";	
-			echo "<span> File upload has been canceled </span>";
-		}
-		unset($_SESSION['submit']); //unset so the message doesn't reappear
-    } else {
-        //no files have been submitted this session
-    }
-?>
-</content>
 
 <script>
 	$('navgroup:not(.nav-assessment)').hide();

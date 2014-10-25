@@ -1,4 +1,5 @@
 <?php
+	$InstitValue = $institution;
 	$output = NULL;
 	if(isset($_POST['cID']) && isset($_POST['assName']) && isset($_POST['numCrits']) ){
 		//if one of the fields is empty (left on 'select...' option)
@@ -166,9 +167,11 @@
 			$.ajax({
 				type: 'POST',
 				url: 'lib/_update.php',
-				data: {make : make}, 
+				data: {make : make,
+						instit: '<?php if(isset($InstitValue)){echo $InstitValue;} ?>'
+					}, 
 				success: function(data){
-					$('#assName').html(data);	
+					$('#assName').html(data);
 				}
 			});
 		});

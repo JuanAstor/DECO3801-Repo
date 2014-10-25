@@ -90,16 +90,19 @@ else if (isset($_POST['fileID'])) {
 
 
 //////////the assign critiques select box changed. called by _critiques.php \\\\\\\\\\\\\\\\\
-if (isset($_POST['make'])) {
+
+if (isset($_POST['make']) && isset($_POST['instit'])) {
     $val = explode(",", $_POST['make']);
     $cID = $val[0]; //course ID
     $sem = $val[1]; //semester
+	$instit = $_POST['instit']; //institution
     echo"<option value='' >Select...</option>";
-    $result = get_course_assessments($cID, $sem, $institution);
+    $result = get_course_assessments($cID, $sem, $instit);
     foreach ($result as $name) {
         echo "<option value='" . $name['AssignmentName'] . "'>" . $name['AssignmentName'] . "</option>";
     }
 }
+
 
 //check the validity of the entered date
 function check_valid_date($date) {
