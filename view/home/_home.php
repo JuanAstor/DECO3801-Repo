@@ -14,7 +14,7 @@
                     } else {
                         $sem = substr($assessment['Semester'], -1);
                         $year = substr($assessment['Semester'], 0, 4);
-                        echo "<b>" . strtoupper($assessment['CourseID']) . " : Semester " . $sem . " " . $year . "</b><br />";
+                        echo "<b>" . strtoupper($assessment['CourseID']) . " | Semester " . $sem . " " . $year . "</b><br />";
                         echo "<p><a href='Assessment.php?assessment=" . $count . "'>" . $assessment['AssignmentName'] . "</a></p>";
                         array_push($arr, $assessment['CourseID']);
                     }
@@ -26,7 +26,7 @@
     <!-- End Upcoming Assessments -->
     <widget title="Tasks">
         <panel>
-            <div class="w-heading"><i class="fa fa-list-ol"></i>Tasks</div>
+            <div class="w-heading"><i class="fa fa-bullhorn"></i>Provide Feedback</div>
             <div class="w-body">
                 <?php
                 $arr = array();
@@ -47,7 +47,7 @@
                                 //get the assignment info
                                 $answer = get_previous_assign_info($critique['AssignmentID']);
                                 foreach ($answer as $assignInfo) {
-                                    echo "<b>" . strtoupper($assignInfo['CourseID']) . "</b> : " . $assignInfo['AssignmentName'] . "<br />";
+                                    echo "<b>" . strtoupper($assignInfo['CourseID']) . "</b> | " . $assignInfo['AssignmentName'] . "<br />";
                                 }
                                 echo "<a href='CodeCritique.php?aID=" . $critique['AssignmentID'] . "&oID=" . $i . "'>Critique " . $i . "</a><br />";
                                 //push the assignID so this will only occur when a new assignment is found
@@ -58,7 +58,7 @@
                         }
                     }
                 } else {
-                    echo "No critiques have been assigned yet";
+                    echo "<p>No critiques have been assigned yet</p>";
                 }
                 ?>
             </div>
@@ -67,13 +67,31 @@
     <!-- End Tasks -->
     <widget title="Reviews Received">
         <panel>
-            <div class="w-heading"><i class="fa fa-comment"></i>Reviews Received</div>
+            <div class="w-heading"><i class="fa fa-comments"></i>Reviews Received</div>
             <div class="w-body">
                 <?php
-                foreach ($submitted as $file) {
-                    echo $file['AssignmentID'] . " : '" . $file['FileName'] . "' new feedback";
-                    echo "<br>";
-                }
+                $uniqueArr = array(); //hold file id's
+					$assignCount = 0;
+					foreach ($assessments as $assessment) {
+						$assignCount++;
+						foreach($submitted as $file){
+							if($file['AssignmentID'] == $assessment['AssignmentID']){
+								//the assignment id's match then the current assessment is correct
+								if(!(in_array($file['FileID'],$uniqueArr))){
+									//not in array so hasn't been listed yet
+									echo "<p><b>".strtoupper($assessment['CourseID'])."</b>  |  ".$assessment['AssignmentName']."</p>";
+									//display the file and a link to the feedback page
+									echo "<p><a href='CodeReview.php?assessment=".$assignCount."'>"
+									.$file['FileName']."</a> has received new feedback </p>";
+										
+									array_push($uniqueArr, $file['FileID']);
+								}
+							}
+						}
+					}
+					if(count($uniqueArr) == 0){
+						echo "<p>No feedback has been provided yet</p>";	
+					}
                 ?>
             </div>
         </panel>

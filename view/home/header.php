@@ -19,7 +19,7 @@
     <sidebar>
         <nav>
             <h4><i class="fa fa-tachometer"></i><span>Dashboard</span></h4>
-            <h4><i class="fa fa-pencil"></i><span>Assessment</span></h4>
+            <h4><i class="fa fa-clipboard"></i><span>Assessment</span></h4>
             <div class="navgroup nav-assessment">
                 <div>
                     <p><a href='Assessment.php'>Show All</a></p>
@@ -43,7 +43,7 @@
                 }
                 ?>
             </div>
-            <h4><i class="fa fa-comments"></i><span>Review</span></h4>
+            <h4><i class="fa fa-bullhorn"></i><span>Feedback</span></h4>
             <div class="navgroup nav-review">
                 <?php
                 // Loop through courses and display
@@ -86,7 +86,7 @@
                 }
                 ?>
             </div>
-            <h4><i class="fa fa-bullhorn"></i><span>Feedback</span></h4>
+            <h4><i class="fa fa-comments"></i><span>Review</span></h4>
             <div class="navgroup nav-feedback">
                 <?php
                 // Loop through courses and display
