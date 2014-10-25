@@ -109,6 +109,7 @@ function loadCommentSystem(uid, fid, admin){
 		document.getElementById("coms").innerHTML = "";
 		
 		
+		
 		var lineNum = 0;
 		var revID = "";
 		var plainText = $('.prettyprint').text();
@@ -150,7 +151,16 @@ function loadCommentSystem(uid, fid, admin){
 		$(".hccom").css("height", lineSpacing);
 		$(".hcbuttonown").css("width", lineSpacing);
 		$(".hcbuttonown").css("height", lineSpacing);
-		
+	
+		var display = $("#coms").css("display");
+		console.log(display);
+	
+		if(display == "none"){
+			$("#coms").toggle(500);
+		} else {
+			$("#coms").toggle(500);
+			$("#coms").toggle(500);
+		}
 		
 	
 		fetchComments(isOwner, editPriv, revNum);
