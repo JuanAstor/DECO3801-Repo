@@ -4,19 +4,18 @@ $result = get_course_assessments($courseID, $semester, $institution);
 $showThis = false; //display the file viewer and comment system		
 $output = NULL; //the message to be displayed upon form submission
 $assignID = NULL; // to hold the assignment ID
-if (isset($_POST['btnFile'])) {
-
 
 /////// search for files submitted \\\\\\\\\\\\\\\\
+if (isset($_POST['btnFile'])) {
     if (isset($_POST['search']) && (strcmp($_POST['search'], "") !== 0) && isset($_POST['AssignName']) && (strcmp($_POST['AssignName'], "") !== 0)) {
         $search = $_POST['search'];
         $name = $_POST['AssignName'];
 
-//get the AssignmentID for the Selected Assignment
+		//get the AssignmentID for the Selected Assignment
         $ans = get_assignID($name, $courseID);
         foreach ($ans as $id) {
-//only one assign id should ever be returned (since AssignID's are unique in the DB)
-//now search for all submissions by a student for that assignmentid
+		//only one assign id should ever be returned (since AssignID's are unique in the DB)
+		//now search for all submissions by a student for that assignmentid
             $assignID = $id['AssignmentID'];
             $info = get_submitted_info($search, $id['AssignmentID']);
         }
@@ -145,38 +144,34 @@ if (isset($_POST['btnFile'])) {
             </br>
             </br>
 
-            <!--<div class = "alert alert-warning alert-dismissable">
-                <a href = "#" class = "close" data-dismiss = "alert" aria-hidden = "true">&times;
-                </a> -->
-                <?php
-                if ($output == NULL) {
-                   	//display nothing
-                } else {
-                     echo "<div class='alert alert-warning alert-dismissable'>"
-                    . " <a href='#' class='close' data-dismiss='alert' aria-hidden='true'>&times;</a>"
-                    . $output;
-                    if (isset($info)) { //files submitted search
-                        foreach ($info as $fileName) {
-                            echo "<a class='showFile' style='cursor:pointer;'>" . $fileName['FileName'] . "</a><br />";
-                        }
-                    } else if (isset($info2)) { //comments made search
-                        foreach ($info2 as $fileName) {
-                            echo "<a class='commentlist' data-fileID=" . $fileName[0]['FileID'] . " data-user="
-                            . $fileName[0]['UserID'] . " data-comUser=" . $search . ">" . $fileName[0]['FileName'] . "</a><br/>";
-                        }
-                    } else if (isset($info3)) { //critique assignment search
-                        foreach ($info3 as $crit) {
-                            echo $crit['OwnerID'] . "<br />";
-                        }
+			<?php
+            if ($output == NULL) {
+                //display nothing
+            } else {
+                 echo "<div class='alert alert-warning alert-dismissable'>"
+                . " <a href='#' class='close' data-dismiss='alert' aria-hidden='true'>&times;</a>"
+                . $output;
+                if (isset($info)) { //files submitted search
+                    foreach ($info as $fileName) {
+                        echo "<a class='showFile' style='cursor:pointer;'>" . $fileName['FileName'] . "</a><br />";
                     }
-					echo "</div>";
+                } else if (isset($info2)) { //comments made search
+                    foreach ($info2 as $fileName) {
+                        echo "<a class='commentlist' data-fileID=" . $fileName[0]['FileID'] . " data-user="
+                        . $fileName[0]['UserID'] . " data-comUser=" . $search . ">" . $fileName[0]['FileName'] . "</a><br/>";
+                    }
+                } else if (isset($info3)) { //critique assignment search
+                    foreach ($info3 as $crit) {
+                        echo $crit['OwnerID'] . "<br />";
+                    }
                 }
-                ?>
-            </div>
+                echo "</div>";
+            }
+            ?>
             <?php
             //if set to true then display the code viewing window, else none of the html below will be visible 
-            if ($showThis) :
-                ?>
+            	if ($showThis) :
+            ?>
                 </br>
                 <div id="comSys">
                     <div id="revSelect">
