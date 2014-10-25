@@ -368,4 +368,12 @@ function get_users_to_critique($user){
     return $query->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function check_if_critiques_assigned($assignment){
+	$sql = "SELECT * FROM `reviewer` WHERE AssignmentID=?";
+	$query = MySQL::getInstance()->prepare($sql);
+	$query->execute(array($assignment));
+	$count = $query->rowCount();
+	return $count;
+}
+
 ?>

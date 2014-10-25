@@ -80,13 +80,27 @@ if (isset($_POST['btnFile'])) {
         $showThis = false; //don't need to display the file viewing window if searching for critique assigns
 
         $ans = get_assignID($AssignName, $courseID); //get the assignment id
-        foreach ($ans as $id) {
-//should only be one assignmentID returned
-            $assignID = $id['AssignmentID'];
-//find all critiques that the searched student must critique
-            $info3 = get_single_assignment_critiques($search, $assignID);
-            $output = "The Students that " . $search . " will be critiquing is :<br />";
-        }
+     
+		foreach ($ans as $id) {
+			//should only be one assignmentID returned
+			$assignID = $id['AssignmentID'];
+			
+			//find the number of ciritiques assigned to the assignment
+			$count = check_if_critiques_assigned($assignID);
+			
+			//find all critiques that the searched student must critique
+			$info3 = get_single_assignment_critiques($search, $assignID);
+			
+			if($count > 0){			
+				if(!empty($info3)){
+					$output = "The Students that " . $search . " will be critiquing is :<br />";
+				} else {
+					$output = "No critiques have been assigned to student <i>".$search."</i>";
+				}
+			} else {
+				$output = "No critiques have been assigned to ".$_POST['AssignName'];	
+			}
+		}
     }
 }
 ?>
@@ -123,7 +137,7 @@ if (isset($_POST['btnFile'])) {
                     <!--<select name="AssignName"> -->
                     <?php
                     echo "<select name='AssignName'>";
-                    echo "<option value=''>Select...</option>";
+                    echo "<option >Select...</option>";
                     foreach ($result as $na) {
                         $name = $na['AssignmentName'];
                         echo "<option value='" . $name . "' >" . $name . "</option>"; //display all assignment options
@@ -132,14 +146,17 @@ if (isset($_POST['btnFile'])) {
                     ?>
 
                     </br>
-                    <label for="search">Student Number  </label>
-                    <input class="form-control" type="text" name="search" placeholder="Enter Student Number">
+                    <label for="search">Student Search</label>
+                    <input class="form-control" type="text" name="search" placeholder="Enter Student email" required>
                     <br />
                     </br>
                     <label for="btnFile">Search for  </label>
-                    <input type="submit" name="btnFile" value="Files Submitted" class="btn btn-primary" />
-                    <input type="submit" name="btnComment" value="Comments Made" class="btn btn-primary" />
-                    <input type="submit" name="btnCritiques" value="Assigned Critiques" class="btn btn-primary" />
+                    <input type="submit" name="btnFile" value="Files Submitted" class="btn btn-primary" 
+                    	title="View all files submitted by this student"/>
+                    <input type="submit" name="btnComment" value="Comments Made" class="btn btn-primary" 
+                    	title="View all comments made by this student" />
+                    <input type="submit" name="btnCritiques" value="Assigned Critiques" class="btn btn-primary" 
+                    	title="View all students to be critiqued by this student" />
             </form>
             </br>
             </br>
