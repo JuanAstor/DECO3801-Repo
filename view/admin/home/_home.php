@@ -18,12 +18,13 @@
                 <div class="w-body">
                     <?php
                     foreach ($courses as $course) {
+						//display the course id, semester and year
                         echo "<span>" . strtoupper($course['CourseID']) . " | </span>";
-                        echo "<span>Semester " . substr($course['Semester'], -1) . " " . substr($course['Semester'], 0, 4) . "    </span>";
+                        echo "<span>Semester " . substr($course['Semester'], -1) . " " . substr($course['Semester'], 0, 4) ."</span>";
                         echo "<br />";
                         $result = get_course_assessments($course['CourseID'], $course['Semester'], $institution);
                         foreach ($result as $names) {
-                            //echo "<span>--------------</span>";
+							//display each assignment related to the above course id
                             echo "<a href='EditAssessment.php?course=" . $course['CourseID'] . "&sem=" . $course['Semester'] . "&assignmentName=" . $names['AssignmentName'] . "'>" . $names['AssignmentName'] . "</a>";
                             echo "<br />";
                         }
@@ -60,12 +61,12 @@
                     <div class="toolpanel1">
                         <img src="img/cass2.png" class="img-circle" width="50px" height="auto" onclick="location.href =
                                         'Assessment.php'" >
-                        <h6>Create Assessment</h6>
+                        <h6><a href="Assessment.php">Create Assessment</a></h6>
                     </div>
                     <div class="toolpanel2">
                         <img src="img/crit1.png" class="img-circle" width="50px" height="auto" onClick="location.href =
                                         'Critiques.php'" >
-                        <h6>Assign Critiques</h6>
+                        <h6><a href="Critiques.php">Assign Critiques</a></h6>
                     </div>
                 </div>
             </panel>

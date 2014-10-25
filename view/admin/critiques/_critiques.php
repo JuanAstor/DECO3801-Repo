@@ -140,14 +140,16 @@
         <label>Please ensure every option is set </label><br />
 		<button type="submit" class="btn btn-primary">Submit</button></br></br>
         
-        <div class="alert alert-warning alert-dismissable">  
-        <a href="#" class="close" data-dismiss="alert" aria-hidden="true">&times;</a>
-            <?php //display the error or success messages after form submit
-                if($output != NULL){
-                print($output);	
-                }
-            ?>
-        </div>
+        
+		<?php //display the error or success messages after form submit
+            if(!empty($output)){
+				 echo "<div class='alert alert-warning alert-dismissable'>"
+                    . " <a href='#' class='close' data-dismiss='alert' aria-hidden='true'>&times;</a>"
+                    . $output
+                    . "</div>";
+            }
+        ?>
+    
             
         </form>
         </div>

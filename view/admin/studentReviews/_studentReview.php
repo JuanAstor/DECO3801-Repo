@@ -145,28 +145,31 @@ if (isset($_POST['btnFile'])) {
             </br>
             </br>
 
-            <div class = "alert alert-warning alert-dismissable">
+            <!--<div class = "alert alert-warning alert-dismissable">
                 <a href = "#" class = "close" data-dismiss = "alert" aria-hidden = "true">&times;
-                </a>
+                </a> -->
                 <?php
                 if ($output == NULL) {
-                    echo "No Files Found";
+                   	//display nothing
                 } else {
-                    echo $output;
-                    if (isset($info)) {
+                     echo "<div class='alert alert-warning alert-dismissable'>"
+                    . " <a href='#' class='close' data-dismiss='alert' aria-hidden='true'>&times;</a>"
+                    . $output;
+                    if (isset($info)) { //files submitted search
                         foreach ($info as $fileName) {
                             echo "<a class='showFile' style='cursor:pointer;'>" . $fileName['FileName'] . "</a><br />";
                         }
-                    } else if (isset($info2)) {
+                    } else if (isset($info2)) { //comments made search
                         foreach ($info2 as $fileName) {
                             echo "<a class='commentlist' data-fileID=" . $fileName[0]['FileID'] . " data-user="
                             . $fileName[0]['UserID'] . " data-comUser=" . $search . ">" . $fileName[0]['FileName'] . "</a><br/>";
                         }
-                    } else if (isset($info3)) {
+                    } else if (isset($info3)) { //critique assignment search
                         foreach ($info3 as $crit) {
                             echo $crit['OwnerID'] . "<br />";
                         }
                     }
+					echo "</div>";
                 }
                 ?>
             </div>

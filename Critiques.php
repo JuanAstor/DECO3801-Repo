@@ -20,6 +20,7 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
 		//is an admin
 		$fullName = get_user_name($user);
         $courses = get_admins_courses($user);
+		$institution = get_user_institution($user);
 		
 		include("view/home/adminheader.php");
 		include("view/admin/critiques/_critiques.php");	
