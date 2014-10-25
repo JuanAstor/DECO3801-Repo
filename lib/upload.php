@@ -12,6 +12,7 @@
 	$dateTime = date('Y-m-d H:i:s'); //the current time and date
 	$uID = $_SESSION["user"]; //the userID, to be replaced with the session var 
 	$assignmentID = $_SESSION["assign"]; //the assignmentID, to be replaced with a session var
+	$maxSize = 1048576; //1MB
 	
 	//loop over each submitted file
 	for($i=0; $i < count($_FILES['userfile']['name']); $i++)
@@ -22,7 +23,8 @@
 		$fileName = str_replace(' ', '', $fileName); //get rid of spaces
 		
 		//check that the file being uploaded has content and is of the allowed type
-		if($_FILES["userfile"]["size"][$i] > 0 && in_array($extension, $allowedExts) ){
+		if($_FILES["userfile"]["size"][$i] > 0 && $_FILES["userfile"]["size"][$i] <= $maxSize 
+			&& in_array($extension, $allowedExts) ){
 			//echo 'Upload start <br>';			
 			//check if a file is already in the database
 			$count =  check_if_file_exists($uID, $assignmentID, $fileName); //returns the count		
@@ -70,8 +72,14 @@
 			if($_FILES["userfile"]["error"][$i] > 0) {
 				$_SESSION['submit'] = $_FILES["userfile"]["error"][$i];
 			}
+			//file size was too large
+			else if($_FILES["userfile"]["size"][$i] > $maxSize){
+				$_SESSION['submit'] = 'size error';	
+			}
 			//file has size 0 or not allowed extension so the file will not be uploaded
-			$_SESSION['submit'] = 'error'; 
+			else {
+				$_SESSION['submit'] = 'error'; 
+			}
 			//return to the previous page if an error has been found
 			break;
 		}

@@ -11,11 +11,11 @@
         $submissionState = "Resubmit"; //file(s) have been submitted
     }
 
-?>
-<head>
+?><head>
 	 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 <content>
+
 <h1>File Upload</h1></br>
 <div>
     <!-- On submit contact the upload.php file which will handle everything -->
@@ -24,7 +24,6 @@
     <table>
     	<tr>
             <td class="btn btn-default">
-            	<input type="hidden" name="MAX_FILE_SIZE" value="2048000" />
                <input type="hidden" name="AssignNum" value="<?php echo $num+1 ?>" />
                 <input name="userfile[]" type="file" id="files" /> <!-- Need to include the '[]' at the end of name! -->
             </td>
@@ -56,6 +55,10 @@
 				echo "<p>Error uploading file: File type (extension) is not supported or the File size is zero </p>";
 				echo "<p>File upload has been canceled </p>";	
 			}
+			else if(strcmp($_SESSION['submit'], 'size error') == 0){//file size is too large
+				echo "<p>Error uploading file: The File size is too large, max size is 1MB </p>";
+				echo "<p>File upload has been canceled </p>";
+			}
 			else { //some other file error has occured so display the file 
 				echo "<p>Error uploading files: '".$_SESSION['submit']."'</p>";	
 				echo "<p>File upload has been canceled </p>";
@@ -73,7 +76,7 @@
 				echo "<span>-<i>".$file['FileName']."</i> submitted on ".$date." at ".$time."</span>";
 				
 				//if the current date/time < assignment due date and time then show else don't
-				echo "<a class='del' href='#' data-value=".$file['FileID']."><span>_(delete?)_</span></a>";
+				echo "<a class='del' href='#' data-value=".$file['FileID']."><span>_(delete?)_</span></a><br />";
 			}
 		}		
 		echo "</div>"; //close the div of the viewing window
