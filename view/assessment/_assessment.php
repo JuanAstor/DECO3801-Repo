@@ -50,6 +50,8 @@
 
 <style>
 #noChaos{float:none;}
+.lackSub{margin-top:2%;
+		}
 </style>
 
 <script>

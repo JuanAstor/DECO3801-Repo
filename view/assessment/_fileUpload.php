@@ -79,6 +79,7 @@
 
 .lackSub{margin-left:2%;
 		}
+
 		
 
 </style>
@@ -140,7 +141,7 @@
 		}		
 		echo "</div>";
     } else {
-        echo "</br>"."<br/><br/><b class='lackSub'>You have not made any submissions yet</b>";
+        echo "<br/><br/><b class='lackSub'>You have not made any submissions yet</b><br/><br/><br/>";
     } 
 ?>
 
