@@ -11,6 +11,7 @@ if (isset($_POST['AName']) && isset($_POST['desc']) && isset($_POST['time']) && 
 	$aName = preg_replace("/[^a-zA-Z0-9]/", "", $aName);
 	
     $desc = $_POST['desc'];
+	$desc = preg_replace("/[^a-zA-Z0-9]/", " ", $desc);
     $time = $_POST['time'];
     //conver the date into the format required by the database
     $dateFormat = $_POST['date'];

@@ -13,8 +13,8 @@ if (isset($_POST['AName']) && isset($_POST['desc']) && isset($_POST['time']) && 
         $name = $_POST['AName'];
 		//preg_replace $name 
 		$name = preg_replace("/[^a-zA-Z0-9]/", "", $name);
-		
-        $description = $_POST['desc'];
+		$description = $_POST['desc'];
+		$description = preg_replace("/[^a-zA-Z0-9]/", " ", $description);
         $time = $_POST['time'];
         $dateFormat = $_POST['date'];
 
