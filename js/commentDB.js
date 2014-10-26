@@ -80,9 +80,7 @@ function loadCommentSystem(uid, fid, admin){
 			});
 				
 		}
-				
-		console.log(ownBool);
-		console.log(editBool);
+		
 			
 	
 	}
@@ -116,9 +114,9 @@ function loadCommentSystem(uid, fid, admin){
 		plainText = plainText.split("\n");
 		
 		lineNum = $(".linenums li").length;
-		console.log(lineNum);
+	
 		var lineSpacing = ($(".linenums li").css("line-height"));
-		console.log(lineSpacing);
+	
 		
 		
 		
@@ -153,7 +151,7 @@ function loadCommentSystem(uid, fid, admin){
 		$(".hcbuttonown").css("height", lineSpacing);
 	
 		var display = $("#coms").css("display");
-		console.log(display);
+		
 	
 		if(display == "none"){
 			$("#coms").show();
@@ -182,9 +180,9 @@ function loadCommentSystem(uid, fid, admin){
 			data: {"rtype": "fetch", "revNum" : revNum, "uid" : userID,
 					"fid" : fileID, "isOwner" : isOwner},
 			success: function(json){
-				console.log(json);
+				
 				commentArray = jQuery.parseJSON(json);
-				console.log(commentArray);
+				
 				loadComments(commentArray, isOwner, editPriv);
 							
 			}		
@@ -196,8 +194,7 @@ function loadCommentSystem(uid, fid, admin){
 	
 	function loadComments(commentArray, isOwner, editPriv){
 	
-		console.log(editPriv);
-		
+				
 	
 		$.each(commentArray, function(index, comInfo){
 					
@@ -375,9 +372,9 @@ function loadCommentSystem(uid, fid, admin){
 		var comment = replaceSpecialChars($("#comtext").val());
 		
 		var jsonStr = '{ "LineNumber" : "' + lineNum + '", "Contents" : "' + comment +'" }'	
-		console.log(jsonStr);		
+		
 		var jsonObject = JSON.parse(jsonStr);
-		console.log(jsonObject);
+	
 		
 		
 		
@@ -406,9 +403,9 @@ function loadCommentSystem(uid, fid, admin){
 	
 		
 		var jsonStr = '{ "LineNumber" : "' + lineNum + '", "Contents" : "' + comment +'" }'	
-		console.log(jsonStr);		
+	
 		var jsonObject = JSON.parse(jsonStr);
-		console.log(jsonObject);
+		
 		
 		$.ajax({
 			type: "POST",
