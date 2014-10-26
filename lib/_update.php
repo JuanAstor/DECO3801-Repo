@@ -8,7 +8,7 @@ if (isset($_POST['AName']) && isset($_POST['desc']) && isset($_POST['time']) && 
     $assignID = $_POST['AssignID']; //hidden assignmentID passed through the form
     $institution = $_POST['institution'];
     $aName = $_POST['AName'];
-	$aName = preg_replace("/[^a-zA-Z0-9]/", " ", $aName);
+	$aName = preg_replace("/[^a-zA-Z0-9]/", "", $aName);
 	
     $desc = $_POST['desc'];
     $time = $_POST['time'];

@@ -12,7 +12,7 @@ if (isset($_POST['AName']) && isset($_POST['desc']) && isset($_POST['time']) && 
         $sem = substr($fullsem, -1); //get the semester value
         $name = $_POST['AName'];
 		//preg_replace $name 
-		$name = preg_replace("/[^a-zA-Z0-9]/", " ", $name);
+		$name = preg_replace("/[^a-zA-Z0-9]/", "", $name);
 		
         $description = $_POST['desc'];
         $time = $_POST['time'];
