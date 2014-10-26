@@ -47,7 +47,7 @@
                 ?>
             </div>
             <h4><i class="fa fa-bullhorn"></i><span>Feedback</span></h4>
-            <div class="navgroup nav-review">
+            <div class="navgroup nav-feedback">
                 <?php
                 // Loop through courses and display
                 if (!check_if_admin($user)) { //if not an admin
@@ -90,7 +90,7 @@
                 ?>
             </div>
             <h4><i class="fa fa-comments"></i><span>Review</span></h4>
-            <div class="navgroup nav-feedback">
+            <div class="navgroup nav-review">
                 <?php
                 // Loop through courses and display
                 if (!check_if_admin($user)) { //if not an admin

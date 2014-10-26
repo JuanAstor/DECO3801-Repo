@@ -78,7 +78,7 @@
 				$dateTime = new DateTime($val);
 				$subDate = $dateTime->format('d/m/Y');
 				$subTime = $dateTime->format('H:i:s');
-				echo "<span>-<i>".$file['FileName']."</i> submitted on ".$subDate." at ".$subTime."</span><br />";
+				echo "<span>-<i>".$file['FileName']."</i> submitted on ".$subDate." at ".$subTime."</span>";
 				
 				$today = date("Y-m-d"); //current date 
 				$currTime = date("H:i:s"); //current time
@@ -88,9 +88,10 @@
 				$info1 = get_previous_assign_info($file['AssignmentID']);
 				if($today_dt <= (new DateTime($info1[0]['DueDate']))){
 					if(strtotime($currTime) < (strtotime($info1[0]['DueTime']))){
-						echo "<a class='del' href='#' data-value=".$file['FileID']."><span> (delete?) </span></a><br />";
+						echo "<a class='del' href='#' data-value=".$file['FileID']."><span> (delete?) </span></a>";
 					}
 				}
+				echo "<br />";
 			}
 		}		
 		echo "</div>"; //close the div of the viewing window
