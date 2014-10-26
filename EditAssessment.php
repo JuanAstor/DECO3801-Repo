@@ -53,7 +53,7 @@ if (isset($_SESSION["user"]) && (get_login_status($_SESSION["user"]) == true)) {
                 include("view/home/adminheader.php");
                 include("view/admin/editAssessments/_edit.php");
             } else { //they are not allowed to access this info so return to the homepage
-                //header('Location: index.php');
+                header('Location: index.php');
             }
         }
     }
