@@ -24,7 +24,7 @@
         </panel>
     </widget>
     <!-- End Upcoming Assessments -->
-    <widget title="Tasks">
+    <widget title="Critique another student's work">
         <panel>
             <div class="w-heading"><i class="fa fa-bullhorn"></i>Provide Feedback</div>
             <div class="w-body">
@@ -65,7 +65,7 @@
         </panel>
     </widget>
     <!-- End Tasks -->
-    <widget title="Reviews Received">
+    <widget title="Review received comments on submitted work">
         <panel>
             <div class="w-heading"><i class="fa fa-comments"></i>Reviews Received</div>
             <div class="w-body">
@@ -78,12 +78,15 @@
 							if($file['AssignmentID'] == $assessment['AssignmentID']){
 								//the assignment id's match then the current assessment is correct
 								if(!(in_array($file['FileID'],$uniqueArr))){
-									//not in array so hasn't been listed yet
-									echo "<p><b>".strtoupper($assessment['CourseID'])."</b>  |  ".$assessment['AssignmentName']."</p>";
+									//check that the assignment hasn't already been listed
+									if(!(in_array($assessment['AssignmentName'],$uniqueArr))){
+										echo "<p><b>".strtoupper($assessment['CourseID'])."</b>  |  "
+											.$assessment['AssignmentName']."</p>";
+										array_push($uniqueArr, $assessment['AssignmentName']);
+									}
 									//display the file and a link to the feedback page
 									echo "<p><a href='CodeReview.php?assessment=".$assignCount."'>"
-									.$file['FileName']."</a> has received new feedback </p>";
-										
+									.$file['FileName']."</a> has received new feedback </p>";										
 									array_push($uniqueArr, $file['FileID']);
 								}
 							}

@@ -173,9 +173,15 @@ if (isset($_POST['btnFile'])) {
                         echo "<a class='showFile' style='cursor:pointer;'>" . $fileName['FileName'] . "</a><br />";
                     }
                 } else if (isset($info2)) { //comments made search
+					$userArr = array();
                     foreach ($info2 as $fileName) {
-                        echo "<a class='commentlist' data-fileID=" . $fileName[0]['FileID'] . " data-user="
-                        . $fileName[0]['UserID'] . " data-comUser=" . $search . ">" . $fileName[0]['FileName'] . "</a><br/>";
+						if(!(in_array($fileName[0]['UserID'],$userArr))){
+							echo $fileName[0]['UserID']." : <br />";
+							array_push($userArr, $fileName[0]['UserID']);
+						}
+                        echo "-<a class='commentlist' data-fileID=" . $fileName[0]['FileID'] . " data-user="
+                        . $fileName[0]['UserID'] . " data-comUser=" . $search . " style='cursor:pointer;'>" 
+						. $fileName[0]['FileName'] . "</a><br/>";
                     }
                 } else if (isset($info3)) { //critique assignment search
                     foreach ($info3 as $crit) {
