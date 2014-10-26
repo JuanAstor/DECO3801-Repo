@@ -17,22 +17,20 @@
 	$today = date("Y-m-d"); //current date 
 	$currTime = date("H:i:s"); //current time
     $today_dt = new DateTime($today); //convert to proper format
-	foreach($result as $res){
-		$subInfo = 	get_previous_assign_info($res['AssignmentID']);
-		if($today_dt >= (new DateTime($subInfo[0]['DueDate']))){
-			if(strtotime($currTime) > (strtotime($subInfo[0]['DueTime']))){
-				$showThis = false; //time and date is greater than the submit, set to disable
-			}
-		}
+
+	$subInfo = 	get_previous_assign_info($_SESSION["assign"]);
+	if($today_dt > (new DateTime($subInfo[0]['DueDate']))){
+		$showThis = false;
+	} else if($today_dt == (new DateTIme($subInfo[0]['DueDate']))){
+		if(strtotime($currTime) > (strtotime($subInfo[0]['DueTime']))){
+			$showThis = false; //time and date is greater than the submit, set to disable
+		}	
 	}
 
 ?><head>
 	 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 <content>
-
-
-
 
 <div id ="formID">
 <?php if($showThis) : ?>
@@ -61,7 +59,7 @@
         </tr>
     </table> 
     </form>
-     <?php endif; ?>
+ <?php endif; ?>
 </div> 
 <?php
     //if a submission has been made	
