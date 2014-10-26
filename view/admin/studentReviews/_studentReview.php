@@ -8,6 +8,10 @@ $assignID = NULL; // to hold the assignment ID
 /////// search for files submitted \\\\\\\\\\\\\\\\
 if (isset($_POST['btnFile'])) {
     if (isset($_POST['search']) && (strcmp($_POST['search'], "") !== 0) && isset($_POST['AssignName']) && (strcmp($_POST['AssignName'], "") !== 0)) {
+	if(strcmp($_POST['AssignName'], "Select...")==0){
+		$info = 0;
+		$output = "Error: Please select an Assignment";
+	} else{
         $search = $_POST['search'];
 		$search = strip_tags($search);
         $name = $_POST['AssignName'];
@@ -33,14 +37,17 @@ if (isset($_POST['btnFile'])) {
 			$output = "Select an assignment first";
 			$showThis = false;	
 		}
-    } else { //not all fields were filled in
-        $output = "Error: All fields must be filled out first";
-    }
-
+	}
+} 
 
 /////////// search for comments \\\\\\\\\\\\\
 } else if (isset($_POST['btnComment'])) { //comments button selected
     if (isset($_POST['search']) && (strcmp($_POST['search'], "") !== 0) && isset($_POST['AssignName']) && (strcmp($_POST['AssignName'], "") !== 0)) {
+		
+	if(strcmp($_POST['AssignName'], "Select...")==0){
+		$info2 = 0;
+		$output = "Error: Please select an Assignment";	
+	} else {
         $search = $_POST['search']; //the student
 		$search = strip_tags($search);
         $name = $_POST['AssignName']; // name of the assignment to search
@@ -72,16 +79,18 @@ if (isset($_POST['btnFile'])) {
                 $showThis = false; //don't display the file viewing window	
             }
         }
-    } else { //not all fields were filled in
-        $output = "Error: All fields must be filled out first";
-    }
-
+	}
+	}
 
 ///////// Search for Assigned Critiques \\\\\\\\\\\\\\\\\		
 } else if (isset($_POST['btnCritiques'])) {
 
     if (isset($_POST['search']) && (strcmp($_POST['search'], "") !== 0) && isset($_POST['AssignName']) && (strcmp($_POST['AssignName'], "") !== 0)) {
-
+	if(strcmp($_POST['AssignName'], "Select...")==0){
+		$info3 = 0;
+		$output = "Error: Please select an Assignment";	
+	} else {
+		
         $search = $_POST['search']; //searched student
 		$search = strip_tags($search);
         $AssignName = $_POST['AssignName'];
@@ -101,7 +110,7 @@ if (isset($_POST['btnFile'])) {
 			
 			if($count > 0){			
 				if(!empty($info3)){
-					$output = "The Students that " . $search . " will be critiquing is :<br />";
+					$output = "The Students that <i>" . $search . "</i> will be critiquing is :<br />";
 				} else {
 					$output = "No critiques have been assigned to student <i>".$search."</i>";
 				}
@@ -110,6 +119,7 @@ if (isset($_POST['btnFile'])) {
 			}
 		}
     }
+	}
 }
 ?>
 <!DOCTYPE html>
@@ -177,10 +187,13 @@ if (isset($_POST['btnFile'])) {
                 . " <a href='#' class='close' data-dismiss='alert' aria-hidden='true'>&times;</a>"
                 . $output;
                 if (isset($info)) { //files submitted search
-                    foreach ($info as $fileName) {
-                        echo "<a class='showFile' style='cursor:pointer;'>" . $fileName['FileName'] . "</a><br />";
-                    }
+					if($info != 0){
+						foreach ($info as $fileName) {
+							echo "<a class='showFile' style='cursor:pointer;'>" . $fileName['FileName'] . "</a><br />";
+						}
+					}
                 } else if (isset($info2)) { //comments made search
+					if($info2 != 0){
 					$userArr = array();
                     foreach ($info2 as $fileName) {
 						if(!(in_array($fileName[0]['UserID'],$userArr))){
@@ -191,10 +204,13 @@ if (isset($_POST['btnFile'])) {
                         . $fileName[0]['UserID'] . " data-comUser=" . $search . " style='cursor:pointer;'>" 
 						. $fileName[0]['FileName'] . "</a><br/>";
                     }
+					}
                 } else if (isset($info3)) { //critique assignment search
-                    foreach ($info3 as $crit) {
-                        echo $crit['OwnerID'] . "<br />";
-                    }
+					if($info3 != 0){ //will be 0 if the assignment name wasn't set
+                    	foreach ($info3 as $crit) {
+                        	echo $crit['OwnerID'] . "<br />";
+                    	}
+					}
                 }
                 echo "</div>";
             }
