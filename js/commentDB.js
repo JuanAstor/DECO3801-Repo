@@ -204,7 +204,7 @@ function loadCommentSystem(uid, fid, admin){
 				
 					var lineNum = comInfo['LineNumber'];
 					var lineCom = comInfo['Contents'];
-					lineCom = replaceForEnters(lineCom);
+					
 				
 					if(!isOwner){$(this).addClass('hccom').removeClass('hcbutton');
 								 $(this).attr('hascom', 'true');}
@@ -272,11 +272,11 @@ function loadCommentSystem(uid, fid, admin){
 	
 	function replaceSpecialChars(string){
 		
-		var comment = string.replace(/[\\]/g, '\\\\')
+		var comment = string.replace(/[\\]/g, '&#92;')
 							.replace(/[\/]/g, '\\/')
 							.replace(/[\b]/g, '\\b')
 							.replace(/[\f]/g, '\\f')
-							.replace(/[\n]/g, '\\n')
+							.replace(/[\n]/g, '&#10;&#13')
 							.replace(/[\r]/g, '\\r')
 							.replace(/[\t]/g, '\\t')
 							.replace(/\r\'|\r|\'/g,"&#39;")
@@ -285,12 +285,7 @@ function loadCommentSystem(uid, fid, admin){
 		return comment;
 	}
 
-	function replaceForEnters(string){
 	
-		var comment = string.replace(/[\\n]/g, '\n');
-		return comment;
-	
-	}
 	//-------------------------------------------------------
 	
 	
