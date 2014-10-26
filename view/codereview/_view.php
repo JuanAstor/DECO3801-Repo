@@ -81,9 +81,9 @@ if (sizeof($files) == 0) {
             //get the filename from the anchor tag clicked
             var file = $(this).attr("title"); //filename
             var fID = $(this).data("fileid"); //fileID
-            //var uID = $(this).data("user"); //userID 
+            var uID = $(this).data("user"); //userID 
 
-			 var uID = "28349299@lms.edu.au"
+			//var uID = "28349299@lms.edu.au"
 			
             
             $.ajax({
