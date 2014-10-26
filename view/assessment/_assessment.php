@@ -1,5 +1,5 @@
 <heading>
-    <h1>Assessment</h1>
+    <h1>Assessment Submission</h1>
 </heading>
 <?php
     

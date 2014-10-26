@@ -31,7 +31,7 @@ $assignID = $_SESSION["assign"]; //assignmentID
 <content>
 
 
-    <h3>Review Feedback On <?php echo $assessments[$num]['AssignmentName'] ?> </h3	>
+    <h3>View Feedback On <?php echo $assessments[$num]['AssignmentName'] ?> Submissions</h3	>
 
 
     <!-- this is where the file data and comments will appear -->
@@ -81,9 +81,9 @@ if (sizeof($files) == 0) {
             //get the filename from the anchor tag clicked
             var file = $(this).attr("title"); //filename
             var fID = $(this).data("fileid"); //fileID
-            var uID = $(this).data("user"); //userID 
+            //var uID = $(this).data("user"); //userID 
 
-			//var uID = "28349299@lms.edu.au"
+			 var uID = "28349299@lms.edu.au"
 			
             
             $.ajax({

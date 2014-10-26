@@ -87,6 +87,9 @@
 
 <?php
     //if a submission has been made	
+	if($showThis == false){
+		echo "<br/><b class='lackSub'>File submission has been closed</b><br/><br/>";	
+	}
     if( isset($_SESSION['submit']) || $result != NULL){
 		 echo "<div id='filesec'>";     		
 		//let the user know what has happened to the files submitted
@@ -141,7 +144,7 @@
 		}		
 		echo "</div>";
     } else {
-        echo "<br/><br/><b class='lackSub'>You have not made any submissions yet</b><br/><br/><br/>";
+        echo "<br/><b class='lackSub'>You have not made any submissions</b><br/><br/><br/>";
     } 
 ?>
 

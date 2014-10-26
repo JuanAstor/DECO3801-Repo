@@ -34,7 +34,7 @@ $currAssignmet = get_previous_assign_info($assignID);
     <content>
     
 
-    <h3>Provide Feedback On <?php echo $currAssignmet[0]['AssignmentName'] ?></h3	>
+    <h3>Review Other Students For <?php echo $currAssignmet[0]['AssignmentName'] ?></h3	>
     
     
     <!-- this is where the file data and comments will appear -->
