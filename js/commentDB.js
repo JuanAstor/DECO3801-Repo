@@ -273,10 +273,10 @@ function loadCommentSystem(uid, fid, admin){
 	function replaceSpecialChars(string){
 		
 		var comment = string.replace(/[\\]/g, '&#92;')
-							.replace(/[\/]/g, '\\/')
+							.replace(/[\/]/g, '&#47;')
 							.replace(/[\b]/g, '\\b')
 							.replace(/[\f]/g, '\\f')
-							.replace(/[\n]/g, '&#10;&#13')
+							.replace(/[\n]/g, '&#10;')
 							.replace(/[\r]/g, '\\r')
 							.replace(/[\t]/g, '\\t')
 							.replace(/\r\'|\r|\'/g,"&#39;")
