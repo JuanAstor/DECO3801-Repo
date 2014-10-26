@@ -256,6 +256,9 @@ span.selected {
 
 .filelist li{
 	padding: 2px 2px 0px 3px;
+		overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
 }
 
 
@@ -303,12 +306,13 @@ span.selected {
 	padding:4px;
 	position:relative;
 	width:12.9%;
+	
 }
 
 
 
 .filelinks {
-	cursor:pointer;	
+	cursor:pointer;
 }
 
 #comSys {width:inherit; 

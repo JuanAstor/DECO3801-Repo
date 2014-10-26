@@ -49,10 +49,7 @@ if (sizeof($files) == 0) {
 
         $fileNameStr = $fileName['FileName'];
 
-        if (strlen($fileNameStr) > 20) {
-
-            $fileNameStr = substr($fileNameStr, 0, 17) . "...";
-        }
+        
         //display all filenames as an anchor
         echo "<li><a class='filelinks' data-fileID=" . $fileName['FileID'] . " data-user=" . $uID . " title=".$fileName['FileName'].">" . $fileNameStr . "</a></li>";
     }
@@ -84,10 +81,11 @@ if (sizeof($files) == 0) {
             //get the filename from the anchor tag clicked
             var file = $(this).attr("title"); //filename
             var fID = $(this).data("fileid"); //fileID
-            var uID = $(this).data("user"); //userID 
+            //var uID = $(this).data("user"); //userID 
 
-            console.log(uID);
-            console.log(fID);
+			 var uID = "28349299@lms.edu.au"
+			
+            
             $.ajax({
                 type: 'POST',
                 url: 'lib/retrieve.php',

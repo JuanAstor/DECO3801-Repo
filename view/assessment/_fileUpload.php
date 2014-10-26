@@ -30,18 +30,19 @@
 ?><head>
 	 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
-<content>
+<content id="fileUp">
 
-<div id ="formID">
+
 <?php if($showThis) : ?>
-	<h3> File Upload </h3>
+<div id ="formID">
+	<h3 style="color:black"> File Upload </h3>
     <!-- On submit contact the upload.php file which will handle everything -->
     <form method="post" action="lib/upload.php" enctype="multipart/form-data">
-	</br></br>
+	
     <table>
     	<tr>
             <td class="btn btn-default">
-               <input type="hidden" name="AssignNum" value="<?php echo $num+1 ?>" />
+               <input  type="hidden" name="AssignNum" value="<?php echo $num+1 ?>" />
                 <input name="userfile[]" type="file" id="files" /> <!-- Need to include the '[]' at the end of name! -->
             </td>
         </tr>
@@ -59,12 +60,34 @@
         </tr>
     </table> 
     </form>
- <?php endif; ?>
 </div> 
+
+<style>
+
+#formID{float: left;
+		border-right: 1px solid #DDD;
+		padding-right: 15px;
+		padding-bottom: 27px;}
+		
+#filesec{float: left;
+	width: 64%;
+    padding-left: 17px;
+    padding-top: 29px;
+	padding-bottom: 15px;}
+	
+#fileUp{width:100%;}
+
+.lackSub{margin-left:2%;
+		}
+		
+
+</style>
+ <?php endif; ?>
+
 <?php
     //if a submission has been made	
     if( isset($_SESSION['submit']) || $result != NULL){
-		        		
+		 echo "<div id='filesec'>";     		
 		//let the user know what has happened to the files submitted
 		if(isset($_SESSION['submit'])){
 			echo "<div class='alert alert-warning alert-dismissable'>"
@@ -92,7 +115,7 @@
 		
 		//if files have been submitted then a list of info will be displayed about the files
 		if($result != NULL){
-			echo "<p>File(s) currently submitted: </p><br />";
+			echo "<b>File(s) currently submitted: </b><br />";
 			foreach($result as $file){
 				$val = $file['SubmissionTime'];
 				$dateTime = new DateTime($val);
@@ -113,10 +136,11 @@
 				}
 				echo "<br />";
 			}
+			echo "</div>";
 		}		
-		
+		echo "</div>";
     } else {
-        echo "</br>"."<h7>"."<span>You have not made any submissions yet</span>"."</h7>";
+        echo "</br>"."<br/><br/><b class='lackSub'>You have not made any submissions yet</b>";
     } 
 ?>
 

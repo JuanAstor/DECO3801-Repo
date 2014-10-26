@@ -14,7 +14,7 @@
             .        "<p>Due ".date('g:ia, F jS', strtotime($row['DueTime']." ".$row['DueDate']))." ".substr($row['Semester'], 0, -1)."</p>"
             .    "</div>"
             .    "<div class='a-footer'>"
-            .        "<p>".$row['AssignmentDescription']."</p>"
+            .        "<p id='noChaos'>".$row['AssignmentDescription']."</p>"
             .    "</div>"
             .    "</assessment>";
 			
@@ -41,12 +41,16 @@
             .        "<p>Due ".date('g:ia, F jS', strtotime($row['DueTime']." ".$row['DueDate']))." ".substr($row['Semester'], 0, -1)."</p>"
             .    "</div>"
             .    "<div class='a-footer'>"
-            .        "<p>".$row['AssignmentDescription']."</p>"
+            .        "<p id='noChaos'>".$row['AssignmentDescription']."</p>"
             .    "</div>"
             .    "</assessment>";
         }
     } 
 ?>
+
+<style>
+#noChaos{float:none;}
+</style>
 
 <script>
 	$('navgroup:not(.nav-assessment)').hide();

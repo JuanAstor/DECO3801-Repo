@@ -51,11 +51,7 @@ $currAssignmet = get_previous_assign_info($assignID);
 
 					$fileNameStr = $fileName['FileName'];
 					
-					if (strlen($fileNameStr) > 25){
-						
-						$fileNameStr = substr($fileNameStr, 0, 23)."...";
-					
-					}
+			
 					
 					//display all filenames as an anchor
 					echo "<li><a class='filelinks' data-fileID=".$fileName['FileID']." data-user=".$rID." title= ".$fileName['FileName'].
