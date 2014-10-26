@@ -35,6 +35,7 @@
 
 
 <div id ="formID">
+<?php if($showThis) : ?>
 	<h3> File Upload </h3>
     <!-- On submit contact the upload.php file which will handle everything -->
     <form method="post" action="lib/upload.php" enctype="multipart/form-data">
@@ -51,26 +52,26 @@
         <tr>
             <td>
                 </br>
-                <?php 
-					if($showThis) :
-				?>
+               
                	<input type="submit" class="btn btn-primary" value=<?php echo $submissionState ?>  />
-                <?php endif; ?>
+               
                                 
                 <input type="reset" class="btn btn-primary" value="Reset"  />
             </td>
         </tr>
     </table> 
     </form>
+     <?php endif; ?>
 </div> 
 <?php
     //if a submission has been made	
     if( isset($_SESSION['submit']) || $result != NULL){
-		echo "<div class='alert alert-warning alert-dismissable'>"
-                . " <a href='#' class='close' data-dismiss='alert' aria-hidden='true'>&times;</a>";
-        		
+		        		
 		//let the user know what has happened to the files submitted
 		if(isset($_SESSION['submit'])){
+			echo "<div class='alert alert-warning alert-dismissable'>"
+                . " <a href='#' class='close' data-dismiss='alert' aria-hidden='true'>&times;</a>";
+				
 			if(strcmp($_SESSION['submit'], 'submitted') == 0){ //has been submitted
 				echo "<p>The file(s) have been submitted successfully </p>";
 			}		
@@ -88,10 +89,12 @@
 			}
 			unset($_SESSION['submit']); //unset so the message doesn't reappear
 			echo "<br />";
+			echo "</div>"; //close the div of the viewing window
 		} 
+		
 		//if files have been submitted then a list of info will be displayed about the files
 		if($result != NULL){
-			echo "<p>File(s) currently submitted: </p>";
+			echo "<p>File(s) currently submitted: </p><br />";
 			foreach($result as $file){
 				$val = $file['SubmissionTime'];
 				$dateTime = new DateTime($val);
@@ -113,7 +116,7 @@
 				echo "<br />";
 			}
 		}		
-		echo "</div>"; //close the div of the viewing window
+		
     } else {
         echo "</br>"."<h7>"."<span>You have not made any submissions yet</span>"."</h7>";
     } 
