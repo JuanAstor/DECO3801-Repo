@@ -12,6 +12,19 @@
     } else{
         $submissionState = "Resubmit"; //file(s) have been submitted
     }
+	//set if a user can submit (enable/diable the submit option)
+	$showThis = true; //default to enable	
+	$today = date("Y-m-d"); //current date 
+	$currTime = date("H:i:s"); //current time
+    $today_dt = new DateTime($today); //convert to proper format
+	foreach($result as $res){
+		$subInfo = 	get_previous_assign_info($res['AssignmentID']);
+		if($today_dt >= (new DateTime($subInfo[0]['DueDate']))){
+			if(strtotime($currTime) > (strtotime($subInfo[0]['DueTime']))){
+				$showThis = false; //time and date is greater than the submit, set to disable
+			}
+		}
+	}
 
 ?><head>
 	 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -37,7 +50,12 @@
         <tr>
             <td>
                 </br>
+                <?php 
+					if($showThis) :
+				?>
                	<input type="submit" class="btn btn-primary" value=<?php echo $submissionState ?>  />
+                <?php endif; ?>
+                                
                 <input type="reset" class="btn btn-primary" value="Reset"  />
             </td>
         </tr>
@@ -80,9 +98,9 @@
 				$subTime = $dateTime->format('H:i:s');
 				echo "<span>-<i>".$file['FileName']."</i> submitted on ".$subDate." at ".$subTime."</span>";
 				
-				$today = date("Y-m-d"); //current date 
-				$currTime = date("H:i:s"); //current time
-                $today_dt = new DateTime($today); //convert to proper format
+				//$today = date("Y-m-d"); //current date 
+				//$currTime = date("H:i:s"); //current time
+                //$today_dt = new DateTime($today); //convert to proper format
 				
 				//if the current date/time is less than the due date and time then show it, else don't	
 				$info1 = get_previous_assign_info($file['AssignmentID']);

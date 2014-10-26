@@ -26,7 +26,7 @@
     <!-- End Upcoming Assessments -->
     <widget title="Critique another student's work">
         <panel>
-            <div class="w-heading"><i class="fa fa-bullhorn"></i>Provide Feedback</div>
+            <div class="w-heading"><i class="fa fa-comments"></i>Review Others</div>
             <div class="w-body">
                 <?php
                 $arr = array();
@@ -67,7 +67,7 @@
     <!-- End Tasks -->
     <widget title="Review received comments on submitted work">
         <panel>
-            <div class="w-heading"><i class="fa fa-comments"></i>Reviews Received</div>
+            <div class="w-heading"><i class="fa fa-bullhorn"></i>Feedback Received</div>
             <div class="w-body">
                 <?php
                 $uniqueArr = array(); //hold file id's
