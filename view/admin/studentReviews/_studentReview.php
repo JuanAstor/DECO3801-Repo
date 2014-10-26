@@ -9,6 +9,7 @@ $assignID = NULL; // to hold the assignment ID
 if (isset($_POST['btnFile'])) {
     if (isset($_POST['search']) && (strcmp($_POST['search'], "") !== 0) && isset($_POST['AssignName']) && (strcmp($_POST['AssignName'], "") !== 0)) {
         $search = $_POST['search'];
+		$search = strip_tags($search);
         $name = $_POST['AssignName'];
 
 		//get the AssignmentID for the Selected Assignment
@@ -19,13 +20,19 @@ if (isset($_POST['btnFile'])) {
             $assignID = $id['AssignmentID'];
             $info = get_submitted_info($search, $id['AssignmentID']);
         }
-        if (count($info) > 0) { //if a user has submitted a file for the assigment
-            $output = "File(s) submitted by student " . $search . " for " . $name . " : <br />";
-            $showThis = true;
-        } else { //no files submitted
-            $output = "No files have been submitted by student " . $search . " for " . $name;
-            $showThis = false;
-        }
+		if(isset($info)){
+			if (count($info) > 0) { //if a user has submitted a file for the assigment
+				$output = "File(s) submitted by student " . $search . " for " . $name . " : <br />";
+				$showThis = true;
+			} else { //no files submitted
+				$output = "No files have been submitted by student " . $search . " for " . $name;
+				$showThis = false;
+			}
+		} else {
+			//info is null
+			$output = "Select an assignment first";
+			$showThis = false;	
+		}
     } else { //not all fields were filled in
         $output = "Error: All fields must be filled out first";
     }
@@ -35,6 +42,7 @@ if (isset($_POST['btnFile'])) {
 } else if (isset($_POST['btnComment'])) { //comments button selected
     if (isset($_POST['search']) && (strcmp($_POST['search'], "") !== 0) && isset($_POST['AssignName']) && (strcmp($_POST['AssignName'], "") !== 0)) {
         $search = $_POST['search']; //the student
+		$search = strip_tags($search);
         $name = $_POST['AssignName']; // name of the assignment to search
 		//get the AssignmentID for the Selected Assignment
         $ans = get_assignID($name, $courseID);
@@ -75,6 +83,7 @@ if (isset($_POST['btnFile'])) {
     if (isset($_POST['search']) && (strcmp($_POST['search'], "") !== 0) && isset($_POST['AssignName']) && (strcmp($_POST['AssignName'], "") !== 0)) {
 
         $search = $_POST['search']; //searched student
+		$search = strip_tags($search);
         $AssignName = $_POST['AssignName'];
         $showThis = false; //don't need to display the file viewing window if searching for critique assigns
 
