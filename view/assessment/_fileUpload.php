@@ -33,11 +33,12 @@
 
 
 
-<h1>File Upload</h1></br>
-<div>
+
+<div id ="formID">
+	<h3> File Upload </h3>
     <!-- On submit contact the upload.php file which will handle everything -->
     <form method="post" action="lib/upload.php" enctype="multipart/form-data">
-    <h7> Attach a File to be uploaded for this assessment: </h7></br></br>
+	</br></br>
     <table>
     	<tr>
             <td class="btn btn-default">

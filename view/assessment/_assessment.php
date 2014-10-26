@@ -13,15 +13,21 @@
             .        "<p><span class='iscourse'>".$row['CourseID']."</span>, Semester ".substr($row['Semester'], -1)
             .        "<p>Due ".date('g:ia, F jS', strtotime($row['DueTime']." ".$row['DueDate']))." ".substr($row['Semester'], 0, -1)."</p>"
             .    "</div>"
-            .    "<div class='a-footer'"
+            .    "<div class='a-footer'>"
             .        "<p>".$row['AssignmentDescription']."</p>"
-            .        "<p><a>Submit</a><a>View Feedback</a></p>"
             .    "</div>"
             .    "</assessment>";
 			
             $_SESSION["assign"] = $assessments[$num]['AssignmentID']; //set the assignID to the id of the selected assessment
             
-			include("view/assessment/_fileUpload.php"); //display the file upload option
+			echo "<assessment>"
+			.	 "<div class='a-content'>";
+			
+			include("view/assessment/_fileUpload.php");
+			
+			echo	 "</div>"	
+			.	 "</assessment>";
+			; //display the file upload option
 			
         }else{
             header("Location: Assessment.php");
@@ -34,9 +40,8 @@
             .        "<p>".$row['CourseID'].", Semester ".substr($row['Semester'], -1)
             .        "<p>Due ".date('g:ia, F jS', strtotime($row['DueTime']." ".$row['DueDate']))." ".substr($row['Semester'], 0, -1)."</p>"
             .    "</div>"
-            .    "<div class='a-footer'"
+            .    "<div class='a-footer'>"
             .        "<p>".$row['AssignmentDescription']."</p>"
-            .        "<p><a>Submit</a><a>View Feedback</a></p>"
             .    "</div>"
             .    "</assessment>";
         }
