@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2014 at 06:42 PM
+-- Generation Time: Oct 26, 2014 at 03:14 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -44,9 +44,9 @@ CREATE TABLE IF NOT EXISTS `assignment` (
 INSERT INTO `assignment` (`AssignmentID`, `CourseID`, `Semester`, `InstitutionID`, `AssignmentDescription`, `AssignmentName`, `DueDate`, `DueTime`) VALUES
 (514637, 'CSSE1004', '20142', 2, 'Please use the LMS for the course materials.', 'Assignment 1 - Java', '2014-10-26', '23:59:00'),
 (514638, 'ENGI3000', '20142', 2, 'Please submit the template file I placed in the BB course materials', 'Quiz 1 - Python in the Large', '2014-10-26', '23:59:00'),
-(514639, 'DECO4000', '20142', 2, 'Submit files individually.', 'Checkpoint #2', '2014-10-10', '23:59:00'),
+(514639, 'DECO4000', '20142', 2, 'Submit files individually.', 'Checkpoint 2', '2014-10-10', '23:59:00'),
 (514640, 'DECO3400', '20142', 2, 'Portfolio guidelines on BB. Please use the assignment templates as well.', 'HTML Assignment', '2014-10-12', '23:59:00'),
-(514641, 'DECO2300', '20142', 2, 'Due date pushed back one week because I''m new to Peer Code Review :(', 'SQL Assignment #1', '2014-12-01', '23:59:00');
+(514641, 'DECO2300', '20142', 2, 'Due date pushed back one week because I''m new to Peer Code Review :(', 'SQL Assignment 1', '2014-12-01', '23:59:00');
 
 -- --------------------------------------------------------
 
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `assignmentfile` (
   `FileName` tinytext NOT NULL,
   `FileData` blob NOT NULL,
   `SubmissionTime` datetime NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=27 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -281,7 +281,7 @@ MODIFY `AssignmentID` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREME
 -- AUTO_INCREMENT for table `assignmentfile`
 --
 ALTER TABLE `assignmentfile`
-MODIFY `FileID` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
+MODIFY `FileID` mediumint(8) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `institution`
 --
