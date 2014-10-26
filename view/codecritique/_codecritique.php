@@ -58,7 +58,8 @@ $currAssignmet = get_previous_assign_info($assignID);
 					}
 					
 					//display all filenames as an anchor
-					echo "<li><a class='filelinks' data-fileID=".$fileName['FileID']." data-user=".$rID.">".$fileNameStr. "</a></li>";
+					echo "<li><a class='filelinks' data-fileID=".$fileName['FileID']." data-user=".$rID."title=".$fileName['FileName'].
+					">".$fileNameStr. "</a></li>";
 				}
 				echo "</ul>";
 			}
@@ -85,7 +86,7 @@ $currAssignmet = get_previous_assign_info($assignID);
 jQuery(function ($) {
     $(".filelinks").click(function() {
     //get the filename from the anchor tag clicked
-	var file = $(this).text(); //filename
+	var file = $(this).attr("title"); //filename
 	var fID = $(this).data("fileid"); //fileID
 	
 	var uID = '<?php if(isset($user)){echo $user;} ?>'; //user reviewing the file
@@ -120,8 +121,6 @@ jQuery(function ($) {
 	$('navgroup:not(.nav-review)').hide();
 	
 	$(".fileselect").on("click", ".filebut", function(){
-		$(".filelist").toggle(300);
-		
-	
+		$(".filelist").toggle(300);	
 	});
 </script>

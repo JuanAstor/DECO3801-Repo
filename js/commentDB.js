@@ -156,10 +156,10 @@ function loadCommentSystem(uid, fid, admin){
 		console.log(display);
 	
 		if(display == "none"){
-			$("#coms").toggle(500);
+			$("#coms").show();
 		} else {
-			$("#coms").toggle(500);
-			$("#coms").toggle(500);
+			$("#coms").hide();
+			$("#coms").show();
 		}
 		
 	
