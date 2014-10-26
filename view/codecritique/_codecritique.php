@@ -58,7 +58,7 @@ $currAssignmet = get_previous_assign_info($assignID);
 					}
 					
 					//display all filenames as an anchor
-					echo "<li><a class='filelinks' data-fileID=".$fileName['FileID']." data-user=".$rID."title=".$fileName['FileName'].
+					echo "<li><a class='filelinks' data-fileID=".$fileName['FileID']." data-user=".$rID." title= ".$fileName['FileName'].
 					">".$fileNameStr. "</a></li>";
 				}
 				echo "</ul>";

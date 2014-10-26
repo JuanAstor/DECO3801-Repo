@@ -54,8 +54,7 @@ if (sizeof($files) == 0) {
             $fileNameStr = substr($fileNameStr, 0, 17) . "...";
         }
         //display all filenames as an anchor
-        echo "<li><a class='filelinks' data-fileID=" . $fileName['FileID'] . " data-user=" . $uID . " 
-				title=".$fileName['FileName'].">" . $fileNameStr . "</a></li>";
+        echo "<li><a class='filelinks' data-fileID=" . $fileName['FileID'] . " data-user=" . $uID . " title=".$fileName['FileName'].">" . $fileNameStr . "</a></li>";
     }
     echo "</ul>";
 }
