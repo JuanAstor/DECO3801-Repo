@@ -36,22 +36,21 @@ if (isset($_POST['btnFile'])) {
     if (isset($_POST['search']) && (strcmp($_POST['search'], "") !== 0) && isset($_POST['AssignName']) && (strcmp($_POST['AssignName'], "") !== 0)) {
         $search = $_POST['search']; //the student
         $name = $_POST['AssignName']; // name of the assignment to search
-//get the AssignmentID for the Selected Assignment
+		//get the AssignmentID for the Selected Assignment
         $ans = get_assignID($name, $courseID);
         foreach ($ans as $id) {
-//only one AssignID should be returned, now search for any
-//comments made by the searched user on the assignmentID
+			//only one AssignID should be returned, now search for any
+			//comments made by the searched user on the assignmentID
             $assignID = $id['AssignmentID'];
             $comment = find_user_comments($search, $id['AssignmentID']);
 
-//if a comment was made
+			//if a comment was made
             if ($comment != NULL) {
                 $output = "Comments made by student " . $search . " for <i>" . $name . "</i> : <br />";
                 $showThis = true; //display the file viewing window
                 $info2 = array();
                 foreach ($comment as $comments) {
-//$output.= "A comment was made on File ".$comments['FileID']."<br />";
-//use the fileid to get the files commented on
+					//use the fileid to get the files commented on
                     $fileIn = get_file_info($comments['FileID']);
                     if (!in_array($fileIn, $info2)) {
                         array_push($info2, $fileIn);
@@ -59,7 +58,7 @@ if (isset($_POST['btnFile'])) {
                     $fileIn = NULL;
                 }
 
-//no comments found
+			//no comments found
             } else {
                 $output = "No comments have been made by student " . $search . " for <i>" . $name . "</i>";
                 $showThis = false; //don't display the file viewing window	

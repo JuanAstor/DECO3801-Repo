@@ -23,7 +23,7 @@ if (isset($_POST['AName']) && isset($_POST['desc']) && isset($_POST['time']) && 
             //check that the date is valid			
             if (!check_valid_date($dateFormat)) {
                 //Please make sure that every field has been completed
-                $output = "Error: The entered date was invalid <br />The format is (dd/mm/yyyy)";
+                $output = "Error: The entered date was invalid. The format is (dd/mm/yyyy)";
             } else {
                 //convert the date into the format stored in the database
                 $newdate = DateTime::createFromFormat('d/m/Y', $dateFormat);
@@ -34,7 +34,7 @@ if (isset($_POST['AName']) && isset($_POST['desc']) && isset($_POST['time']) && 
 
                 if ($count > 0) {
                     //then an assigment name already exists for this courseID and semester
-                    $output = "Error: The assignment name entered already exists <br />for this course and semester";
+                    $output = "Error: The assignment name entered already exists for this course and semester";
                 } else {
                     $semCount = check_semester($courseID, $semester, $institution); //check that the semester value is correct
                     if ($semCount > 0) {
@@ -49,7 +49,7 @@ if (isset($_POST['AName']) && isset($_POST['desc']) && isset($_POST['time']) && 
             }
         } else {
             //the time isn't valid
-            $output = "Error: The time entered was not valid or <br/>the correct format (HH:mm)";
+            $output = "Error: The time entered was not valid. The correct format is (HH:mm)";
         }
     }
 }
