@@ -84,9 +84,7 @@ if (sizeof($files) == 0) {
             //get the filename from the anchor tag clicked
             var file = $(this).text(); //filename
             var fID = $(this).data("fileid"); //fileID
-            var uID = $(this).data("user"); //userID
-
-            //var uID = "15478782"; 
+            var uID = $(this).data("user"); //userID 
 
             console.log(uID);
             console.log(fID);

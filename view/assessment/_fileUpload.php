@@ -78,7 +78,7 @@
 				$dateTime = new DateTime($val);
 				$subDate = $dateTime->format('d/m/Y');
 				$subTime = $dateTime->format('H:i:s');
-				echo "<span>-<i>".$file['FileName']."</i> submitted on ".$subDate." at ".$subTime."</span>";
+				echo "<span>-<i>".$file['FileName']."</i> submitted on ".$subDate." at ".$subTime."</span><br />";
 				
 				$today = date("Y-m-d"); //current date 
 				$currTime = date("H:i:s"); //current time

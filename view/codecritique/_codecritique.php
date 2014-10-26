@@ -13,7 +13,7 @@ if (isset($_GET['oID'])) {
 }
 
 //Need a session varibale containing the userID and the assignmentID
-$uID = $_SESSION["revieweeID"]; //ID of the person being reviewed
+$rID = $_SESSION["revieweeID"]; //ID of the person being reviewed
 $assignID = $assignmentID; //assignmentID
 
 $currAssignmet = get_previous_assign_info($assignID);
@@ -42,7 +42,7 @@ $currAssignmet = get_previous_assign_info($assignID);
     <div class="code">
        <div class = "fileselect">
         <?php
-			$files = get_files_to_comment($uID, $assignID); //query the database
+			$files = get_files_to_comment($rID, $assignID); //query the database
 			if(sizeof($files) == 0){
 				echo "No files found";	
 			} else {
@@ -58,7 +58,7 @@ $currAssignmet = get_previous_assign_info($assignID);
 					}
 					
 					//display all filenames as an anchor
-					echo "<li><a class='filelinks' data-fileID=".$fileName['FileID']." data-user=".$uID.">".$fileNameStr. "</a></li>";
+					echo "<li><a class='filelinks' data-fileID=".$fileName['FileID']." data-user=".$rID.">".$fileNameStr. "</a></li>";
 				}
 				echo "</ul>";
 			}
@@ -88,8 +88,7 @@ jQuery(function ($) {
 	var file = $(this).text(); //filename
 	var fID = $(this).data("fileid"); //fileID
 	
-	//var uID = $(this).data("user"); //file owner
-	var uID = <?php echo $user ?> //user reviewing the file
+	var uID = '<?php if(isset($user)){echo $user;} ?>'; //user reviewing the file
 	
 	console.log(uID);
 	console.log(fID);
@@ -97,8 +96,8 @@ jQuery(function ($) {
             type:'POST',
             url:'lib/retrieve.php',
             data: {filename : file,
-                   user : '<?php echo $uID ?>',
-                   assign : '<?php echo $assignID ?>' },
+                   user : '<?php if(isset($rID)){ echo $rID;} ?>',
+                   assign : '<?php if(isset($assignID)){ echo $assignID;} ?>' },
 				   success: function(data){
 						$('.prettyprinted').removeClass('prettyprinted');
 						$("ul#tabs").html("");
