@@ -122,28 +122,7 @@ if (isset($_POST['btnFile'])) {
 	}
 }
 ?>
-<!DOCTYPE html>
-<html><head>
-        <title>Code Review</title>            
-
-        <link rel="stylesheet/less" href="css/main.less">
-        <link rel="stylesheet" href="css/comments.css">
-
-        <!--<link rel="stylesheet" type="text/css" href="../mockup/main.css">-->
-
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
-
-        <link rel="stylesheet" type="text/css" href="css/prettyprint/prettify.css" />
-        <script type="text/javascript" src="css/prettyprint/prettify.js"></script>	
-        <script src="js/commentDB.js" type="text/javascript"></script>
-
-        <?php date_default_timezone_set('Australia/Brisbane'); ?>      		
-
-    </head>
-    <body>
+<?php date_default_timezone_set('Australia/Brisbane'); ?>
 
         <div class="formtitle"><h3>Review Submisssions for <?php echo strtoupper($courseID) ?></h3></div>
 
@@ -238,7 +217,6 @@ if (isset($_POST['btnFile'])) {
             <?php endif; ?>
         </div>
     </div>
-</body>
 <script>
 
     jQuery(function ($) {
@@ -310,5 +288,3 @@ if (isset($_POST['btnFile'])) {
     .prettyprint { width:95%;  }
 
 </style>
-
-</html>

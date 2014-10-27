@@ -18,19 +18,8 @@ $assignID = $assignmentID; //assignmentID
 
 $currAssignmet = get_previous_assign_info($assignID);
 
-?><head>
-        <link rel="stylesheet" type="text/css" href="/css/comments.css">
-        
-        <link rel="stylesheet" type="text/css" href="/css/prettyprint/prettify.css" />
-		<script type="text/javascript" src="/css/prettyprint/prettify.js"></script>
-        
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        
-         <?php date_default_timezone_set('Australia/Brisbane'); ?>
-         
-         <script src="/js/commentDB.js" type="text/javascript"></script>
-		
-    </head>
+?><?php date_default_timezone_set('Australia/Brisbane'); ?>
+
     <content>
     
 

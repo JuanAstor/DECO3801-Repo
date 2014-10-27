@@ -14,11 +14,18 @@
     }
     ?>
     <head>
-        <title>Code Review</title>
+        <title>Peer Code Review</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- CSS/LESS -->
         <link rel="stylesheet/less" href="css/main.less">
+        <link rel="stylesheet" href="css/comments.css">
+        <link rel="stylesheet" href="css/prettify.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
         <!-- JS -->
-        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="js/jquery-1.11.1.min.js"></script>
+        <script src="js/commentDB.js"></script>
+        <script src="js/prettyprint/prettify.js"></script>
+        <script src="js/bootstrap.min.js"></script>
         <script src="js/view.js"></script>
         <script src="js/less.js"></script>
     </head>

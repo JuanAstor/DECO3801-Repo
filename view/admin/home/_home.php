@@ -1,15 +1,3 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Code Review</title>
-        <!-- CSS/LESS -->
-        <link rel="stylesheet/less" href="/css/main.less">
-        <!-- JS -->
-        <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-
-    </head>
-    <body>
-
     <widget-container>
         <widget title="Edit Assessment">
             <panel>
@@ -79,6 +67,4 @@
         <div><panel-end></panel-end></div>
     </widget-end>
 
-</body>
-</html>
 

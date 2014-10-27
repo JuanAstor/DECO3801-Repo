@@ -91,18 +91,6 @@
 
 ?>
 
-<html>
-    <head>
-    <title>Code Review</title>
-        <!-- CSS/LESS -->
-        <link rel="stylesheet/less" href="css/main.less">
-        <!-- JS -->
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <!--<script src="../js/moment.js"></script> -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-        
-    </head>
-	<body>
         <div class="formtitle"><h3>Assign Critiques</h3></div>
         <widget-container>
         <div class="formcenter">
@@ -160,8 +148,6 @@
         </form>
         </div>
         </widget-container>
-    </body>
-</html>
 
 <script>	
 	//will popullate the second select tag with data once the first select tag has been set

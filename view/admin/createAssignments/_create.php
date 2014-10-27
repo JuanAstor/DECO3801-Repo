@@ -91,19 +91,7 @@ function check_valid_time($time) {
     }
 }
 ?>
-<html>
-    <head>
-        <title>Code Review</title>
-        <!-- CSS/LESS -->
-        <link rel="stylesheet/less" href="css/main.less">
-        <!--<link rel="stylesheet" href="css/sidebarChange.css">
-        <!-- JS -->
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-                <!--<script src="../js/moment.js"></script> -->
 
-    </head>
-    <body>
         <div class="formtitle"><h3>Create Assessment</h3></div>
     <widget-container>
         <div class="formcenter">
@@ -168,8 +156,6 @@ function check_valid_time($time) {
         </div>
     </widget-container>
 
-</body>
-</html>
 <script>
     $('navgroup:not(.nav-tools)').hide();
 </script>
