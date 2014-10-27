@@ -20,10 +20,10 @@
 
 	$subInfo = 	get_previous_assign_info($_SESSION["assign"]);
 	if($today_dt > (new DateTime($subInfo[0]['DueDate']))){
-		$showThis = false;
+		$showThis = true;
 	} else if($today_dt == (new DateTIme($subInfo[0]['DueDate']))){
 		if(strtotime($currTime) > (strtotime($subInfo[0]['DueTime']))){
-			$showThis = false; //time and date is greater than the submit, set to disable
+			$showThis = true; //time and date is greater than the submit, set to disable
 		}	
 	}
 
@@ -67,10 +67,11 @@
 #formID{float: left;
 		border-right: 1px solid #DDD;
 		padding-right: 15px;
-		padding-bottom: 27px;}
+		padding-bottom: 27px;
+		width: 42%;}
 		
 #filesec{float: left;
-	width: 64%;
+	width: 58%;
     padding-left: 17px;
     padding-top: 29px;
 	padding-bottom: 15px;}
